@@ -13,6 +13,7 @@
 import {action} from '@storybook/addon-actions';
 import {ActionButton, Button} from '@react-spectrum/button';
 import {ActionGroup, Item} from '@react-spectrum/actiongroup';
+import {ActionMenu} from '@react-spectrum/menu';
 import {Flex} from '@react-spectrum/layout';
 import React, {useState} from 'react';
 import {storiesOf} from '@storybook/react';
@@ -197,7 +198,17 @@ storiesOf('TooltipTrigger', module)
         </Flex>
       </Flex>
     )
-  );
+  )
+  .add('on ActionMenu', () => (
+    <TooltipTrigger>
+      <ActionMenu>
+        <Item key="cut">Cut</Item>
+        <Item key="copy">Copy</Item>
+        <Item key="paste">Paste</Item>
+      </ActionMenu>
+      <Tooltip>Actions</Tooltip>
+    </TooltipTrigger>
+  ));
 
 function render(props = {}) {
   return (
