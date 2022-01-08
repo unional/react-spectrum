@@ -77,7 +77,8 @@ function Form(props: SpectrumFormProps, ref: DOMRef<HTMLFormElement>) {
     labelPosition,
     labelAlign,
     necessityIndicator,
-    newFormLayout
+    newFormLayout,
+    isInForm: true
   };
 
   return (

@@ -41,5 +41,6 @@ export interface SpectrumLabelableProps extends LabelableProps {
    * Whether the label is labeling a required field or group.
    */
   isRequired?: boolean,
-  newFormLayout?: boolean
+  newFormLayout?: boolean,
+  isInForm?: boolean
 }

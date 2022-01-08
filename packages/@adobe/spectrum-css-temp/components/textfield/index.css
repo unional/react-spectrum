@@ -37,6 +37,8 @@ governing permissions and limitations under the License.
 
   &:not(.spectrum-Textfield--quiet).spectrum-Textfield--multiline .spectrum-Textfield-input:not(:disabled) {
     resize: vertical;
+    min-height: inherit;
+    max-height: inherit;
   }
 
   &.spectrum-Textfield--quiet.spectrum-Textfield--multiline .spectrum-Textfield-input {

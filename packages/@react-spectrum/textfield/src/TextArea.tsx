@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import {chain, useLayoutEffect} from '@react-aria/utils';
+import {chain, useLayoutEffect, useResizeObserver} from '@react-aria/utils';
 import React, {RefObject, useCallback, useRef} from 'react';
 import {SpectrumTextFieldProps, TextFieldRef} from '@react-types/textfield';
 import {TextFieldBase} from './TextFieldBase';
@@ -35,13 +35,17 @@ function TextArea(props: SpectrumTextFieldProps, ref: RefObject<TextFieldRef>) {
   let inputRef = useRef<HTMLTextAreaElement>();
 
   let onHeightChange = useCallback(() => {
+    let input = inputRef.current;
     if (isQuiet) {
-      let input = inputRef.current;
       let prevAlignment = input.style.alignSelf;
       input.style.alignSelf = 'start';
       input.style.height = 'auto';
       input.style.height = `${input.scrollHeight}px`;
       input.style.alignSelf = prevAlignment;
+    } else {
+      if (input.style.height) {
+        input.parentElement.style.height = input.style.height;
+      }
     }
   }, [isQuiet, inputRef]);
 
@@ -50,6 +54,12 @@ function TextArea(props: SpectrumTextFieldProps, ref: RefObject<TextFieldRef>) {
       onHeightChange();
     }
   }, [onHeightChange, inputValue, inputRef]);
+
+  // captures drag to resize events user events
+  useResizeObserver({
+    ref: inputRef,
+    onResize: onHeightChange
+  });
 
 
   let {labelProps, inputProps, descriptionProps, errorMessageProps} = useTextField({

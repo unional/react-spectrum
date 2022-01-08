@@ -22,7 +22,8 @@ import {SpectrumFieldProps} from '@react-types/label';
 import {useFormProps} from '@react-spectrum/form';
 
 function Field(props: SpectrumFieldProps, ref: RefObject<HTMLElement>) {
-  props = useFormProps(props);
+  let formProps = useFormProps({isInForm: false});
+  props = {...formProps, ...props};
   let {
     label,
     labelPosition = 'top' as LabelPosition,
@@ -102,6 +103,54 @@ function Field(props: SpectrumFieldProps, ref: RefObject<HTMLElement>) {
           )}
         </>
       );
+    } else if (!formProps.isInForm) {
+      children = React.cloneElement(children, mergeProps(children.props, {
+        ...styleProps,
+        className: classNames(
+          labelStyles,
+          'spectrum-Field-field',
+          {'spectrum-Field--noHelpText': !hasHelpText}
+        ),
+        ref
+      }));
+
+      return (
+        <div
+          className={
+            classNames(
+            labelStyles,
+              'spectrum-Field--newLayout',
+              {
+                'spectrum-Field--positionTop': labelPosition === 'top',
+                'spectrum-Field--positionSide': labelPosition === 'side'
+              }
+            )
+          }>
+          <Label
+            {...labelProps}
+            labelPosition={labelPosition}
+            labelAlign={labelAlign}
+            isRequired={isRequired}
+            necessityIndicator={necessityIndicator}
+            includeNecessityIndicatorInAccessibilityName={includeNecessityIndicatorInAccessibilityName}
+            elementType={elementType}>
+            {label}
+          </Label>
+          {children}
+          {hasHelpText && (
+            <HelpText
+              UNSAFE_className={classNames(labelStyles, 'spectrum-Field-helpText')}
+              descriptionProps={descriptionProps}
+              errorMessageProps={errorMessageProps}
+              description={description}
+              errorMessage={errorMessage}
+              validationState={validationState}
+              isDisabled={isDisabled}
+              showErrorIcon={showErrorIcon} />
+          )}
+        </div>
+      );
+
     } else {
       children = React.cloneElement(children, mergeProps(children.props, {
         className: classNames(
