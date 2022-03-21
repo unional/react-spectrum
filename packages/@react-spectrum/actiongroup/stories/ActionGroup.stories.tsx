@@ -9,7 +9,6 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import {action} from '@storybook/addon-actions';
 import {ActionGroup} from '../';
 import BookIcon from '@spectrum-icons/workflow/Book';
@@ -48,28 +47,72 @@ import ViewGridIcon from '@spectrum-icons/workflow/ViewGrid';
 import ViewListIcon from '@spectrum-icons/workflow/ViewList';
 
 const docItems = [
-  {children: 'Document setup', name: '1'},
-  {children: 'Settings', name: '2'}
+  {
+    children: 'Document setup',
+    name: '1'
+  },
+  {
+    children: 'Settings',
+    name: '2'
+  }
 ];
+
 const editItems = [
-  {children: 'Edit', name: '1'},
-  {children: 'Copy', name: '2'},
-  {children: 'Delete', name: '3'}
+  {
+    children: 'Edit',
+    name: '1'
+  },
+  {
+    children: 'Copy',
+    name: '2'
+  },
+  {
+    children: 'Delete',
+    name: '3'
+  }
 ];
+
 const viewItems2 = [
-  {children: 'Grid view', name: '1'},
-  {children: 'List view', name: '2'}
+  {
+    children: 'Grid view',
+    name: '1'
+  },
+  {
+    children: 'List view',
+    name: '2'
+  }
 ];
+
 const viewItems = [
-  {children: 'Grid view', name: '1'},
-  {children: 'List view', name: '2'},
-  {children: 'Gallery view', name: '3'}
+  {
+    children: 'Grid view',
+    name: '1'
+  },
+  {
+    children: 'List view',
+    name: '2'
+  },
+  {
+    children: 'Gallery view',
+    name: '3'
+  }
 ];
+
 const dataItems = [
-  {children: 'Properties', name: '1'},
-  {children: 'Info', name: '2'},
-  {children: 'Keywords', name: '3'}
+  {
+    children: 'Properties',
+    name: '1'
+  },
+  {
+    children: 'Info',
+    name: '2'
+  },
+  {
+    children: 'Keywords',
+    name: '3'
+  }
 ];
+
 let onSelectionChange = action('onSelectionChange');
 
 let iconMap = {
@@ -88,627 +131,672 @@ let iconMap = {
 
 export default {
   title: 'ActionGroup',
-
   parameters: {
-    providerSwitcher: {status: 'negative'}
+    providerSwitcher: {
+      status: 'negative'
+    }
   }
 };
 
-export const Default = () => (
-  <Flex direction="column" gap="size-200" width="100%" margin="size-100">
-    <ActionGroup onAction={action('onAction')}>
-      {docItems.map((itemProps) => (
-        <Item key={itemProps.name} textValue={itemProps.name} {...itemProps} />
-      ))}
-    </ActionGroup>
-    <ActionGroup onAction={action('onAction')}>
-      {docItems.map((itemProps) => {
-        let IconElement = iconMap[itemProps.children];
-        return (
-          <Item key={itemProps.name} textValue={itemProps.name}>
-            <Text>{itemProps.children}</Text>
-            <IconElement />
-          </Item>
-        );
-      })}
-    </ActionGroup>
-    <ActionGroup onAction={action('onAction')}>
-      {docItems.map((itemProps) => {
-        let IconElement = iconMap[itemProps.children];
-        return (
-          <Item
-            key={itemProps.name}
-            textValue={itemProps.name}
-            aria-label={itemProps.children}>
-            <IconElement />
-          </Item>
-        );
-      })}
-    </ActionGroup>
-  </Flex>
-);
-
-Default.story = {
+export const Default = {
+  render: () => (
+    <Flex direction="column" gap="size-200" width="100%" margin="size-100">
+      <ActionGroup onAction={action('onAction')}>
+        {docItems.map((itemProps) => (
+          <Item key={itemProps.name} textValue={itemProps.name} {...itemProps} />
+        ))}
+      </ActionGroup>
+      <ActionGroup onAction={action('onAction')}>
+        {docItems.map((itemProps) => {
+          let IconElement = iconMap[itemProps.children];
+          return (
+            <Item key={itemProps.name} textValue={itemProps.name}>
+              <Text>{itemProps.children}</Text>
+              <IconElement />
+            </Item>
+          );
+        })}
+      </ActionGroup>
+      <ActionGroup onAction={action('onAction')}>
+        {docItems.map((itemProps) => {
+          let IconElement = iconMap[itemProps.children];
+          return (
+            <Item key={itemProps.name} textValue={itemProps.name} aria-label={itemProps.children}>
+              <IconElement />
+            </Item>
+          );
+        })}
+      </ActionGroup>
+    </Flex>
+  ),
   name: 'default'
 };
 
-export const WithFalsyItemKey = () => (
-  <ActionGroup onAction={action('onAction')}>
-    <Item key="add">Add</Item>
-    <Item key="">Delete</Item>
-    <Item key="edit">Edit</Item>
-  </ActionGroup>
-);
-
-WithFalsyItemKey.story = {
+export const WithFalsyItemKey = {
+  render: () => (
+    <ActionGroup onAction={action('onAction')}>
+      <Item key="add">Add</Item>
+      <Item key="">Delete</Item>
+      <Item key="edit">Edit</Item>
+    </ActionGroup>
+  ),
   name: 'with falsy item key'
 };
 
-export const IsDisabled = () =>
-  render({isDisabled: true, defaultSelectedKeys: ['1']}, docItems);
-
-IsDisabled.story = {
+export const IsDisabled = {
+  render: () =>
+    render(
+      {
+        isDisabled: true,
+        defaultSelectedKeys: ['1']
+      },
+      docItems
+    ),
   name: 'isDisabled'
 };
 
-export const AllKeysDisabled = () =>
-  render({disabledKeys: ['1', '2']}, docItems);
-
-AllKeysDisabled.story = {
+export const AllKeysDisabled = {
+  render: () =>
+    render(
+      {
+        disabledKeys: ['1', '2']
+      },
+      docItems
+    ),
   name: 'all keys disabled'
 };
 
-export const Compact = () =>
-  render({density: 'compact', defaultSelectedKeys: ['1']}, viewItems);
-
-Compact.story = {
+export const Compact = {
+  render: () =>
+    render(
+      {
+        density: 'compact',
+        defaultSelectedKeys: ['1']
+      },
+      viewItems
+    ),
   name: 'compact'
 };
 
-export const IsJustified = () =>
-  render({isJustified: true, defaultSelectedKeys: ['1']}, viewItems2);
-
-IsJustified.story = {
+export const IsJustified = {
+  render: () =>
+    render(
+      {
+        isJustified: true,
+        defaultSelectedKeys: ['1']
+      },
+      viewItems2
+    ),
   name: 'isJustified'
 };
 
-export const CompactIsJustified = () =>
-  render(
-    {density: 'compact', isJustified: true, defaultSelectedKeys: ['1']},
-    viewItems2
-  );
-
-CompactIsJustified.story = {
+export const CompactIsJustified = {
+  render: () =>
+    render(
+      {
+        density: 'compact',
+        isJustified: true,
+        defaultSelectedKeys: ['1']
+      },
+      viewItems2
+    ),
   name: 'compact, isJustified'
 };
 
-export const IsQuiet = () =>
-  render({isQuiet: true, defaultSelectedKeys: ['1']}, editItems);
-
-IsQuiet.story = {
+export const IsQuiet = {
+  render: () =>
+    render(
+      {
+        isQuiet: true,
+        defaultSelectedKeys: ['1']
+      },
+      editItems
+    ),
   name: 'isQuiet'
 };
 
-export const CompactIsQuiet = () =>
-  render(
-    {density: 'compact', isQuiet: true, defaultSelectedKeys: ['1']},
-    editItems
-  );
-
-CompactIsQuiet.story = {
+export const CompactIsQuiet = {
+  render: () =>
+    render(
+      {
+        density: 'compact',
+        isQuiet: true,
+        defaultSelectedKeys: ['1']
+      },
+      editItems
+    ),
   name: 'compact, isQuiet'
 };
 
-export const IsEmphasized = () =>
-  render({isEmphasized: true, defaultSelectedKeys: ['1']}, docItems);
-
-IsEmphasized.story = {
+export const IsEmphasized = {
+  render: () =>
+    render(
+      {
+        isEmphasized: true,
+        defaultSelectedKeys: ['1']
+      },
+      docItems
+    ),
   name: 'isEmphasized'
 };
 
-export const CompactIsEmphasized = () =>
-  render(
-    {isEmphasized: true, density: 'compact', defaultSelectedKeys: ['1']},
-    viewItems
-  );
-
-CompactIsEmphasized.story = {
+export const CompactIsEmphasized = {
+  render: () =>
+    render(
+      {
+        isEmphasized: true,
+        density: 'compact',
+        defaultSelectedKeys: ['1']
+      },
+      viewItems
+    ),
   name: 'compact, isEmphasized'
 };
 
-export const IsQuietIsEmphasized = () =>
-  render(
-    {isEmphasized: true, isQuiet: true, defaultSelectedKeys: ['1']},
-    viewItems
-  );
-
-IsQuietIsEmphasized.story = {
+export const IsQuietIsEmphasized = {
+  render: () =>
+    render(
+      {
+        isEmphasized: true,
+        isQuiet: true,
+        defaultSelectedKeys: ['1']
+      },
+      viewItems
+    ),
   name: 'isQuiet, isEmphasized'
 };
 
-export const StaticColorWhite = () => (
-  <View backgroundColor="static-seafoam-600" padding="size-1000">
-    {render({staticColor: 'white', defaultSelectedKeys: ['1']}, viewItems)}
-  </View>
-);
-
-StaticColorWhite.story = {
+export const StaticColorWhite = {
+  render: () => (
+    <View backgroundColor="static-seafoam-600" padding="size-1000">
+      {render(
+        {
+          staticColor: 'white',
+          defaultSelectedKeys: ['1']
+        },
+        viewItems
+      )}
+    </View>
+  ),
   name: 'staticColor=white'
 };
 
-export const StaticColorWhiteIsQuiet = () => (
-  <View backgroundColor="static-seafoam-600" padding="size-1000">
-    {render(
-      {staticColor: 'white', isQuiet: true, defaultSelectedKeys: ['1']},
-      viewItems
-    )}
-  </View>
-);
-
-StaticColorWhiteIsQuiet.story = {
+export const StaticColorWhiteIsQuiet = {
+  render: () => (
+    <View backgroundColor="static-seafoam-600" padding="size-1000">
+      {render(
+        {
+          staticColor: 'white',
+          isQuiet: true,
+          defaultSelectedKeys: ['1']
+        },
+        viewItems
+      )}
+    </View>
+  ),
   name: 'staticColor=white, isQuiet'
 };
 
-export const StaticColorBlack = () => (
-  <View backgroundColor="static-yellow-400" padding="size-1000">
-    {render({staticColor: 'black', defaultSelectedKeys: ['1']}, viewItems)}
-  </View>
-);
-
-StaticColorBlack.story = {
+export const StaticColorBlack = {
+  render: () => (
+    <View backgroundColor="static-yellow-400" padding="size-1000">
+      {render(
+        {
+          staticColor: 'black',
+          defaultSelectedKeys: ['1']
+        },
+        viewItems
+      )}
+    </View>
+  ),
   name: 'staticColor=black'
 };
 
-export const StaticColorBlackIsQuiet = () => (
-  <View backgroundColor="static-yellow-400" padding="size-1000">
-    {render(
-      {staticColor: 'black', isQuiet: true, defaultSelectedKeys: ['1']},
-      viewItems
-    )}
-  </View>
-);
-
-StaticColorBlackIsQuiet.story = {
+export const StaticColorBlackIsQuiet = {
+  render: () => (
+    <View backgroundColor="static-yellow-400" padding="size-1000">
+      {render(
+        {
+          staticColor: 'black',
+          isQuiet: true,
+          defaultSelectedKeys: ['1']
+        },
+        viewItems
+      )}
+    </View>
+  ),
   name: 'staticColor=black, isQuiet'
 };
 
-export const SelectionModeMultiple = () =>
-  render(
-    {selectionMode: 'multiple', defaultSelectedKeys: ['1', '2']},
-    dataItems
-  );
-
-SelectionModeMultiple.story = {
+export const SelectionModeMultiple = {
+  render: () =>
+    render(
+      {
+        selectionMode: 'multiple',
+        defaultSelectedKeys: ['1', '2']
+      },
+      dataItems
+    ),
   name: 'selectionMode: multiple'
 };
 
-export const SelectionModeSingleDisallowEmptySelection = () =>
-  render(
-    {
-      selectionMode: 'single',
-      disallowEmptySelection: true,
-      defaultSelectedKeys: ['1']
-    },
-    dataItems
-  );
-
-SelectionModeSingleDisallowEmptySelection.story = {
+export const SelectionModeSingleDisallowEmptySelection = {
+  render: () =>
+    render(
+      {
+        selectionMode: 'single',
+        disallowEmptySelection: true,
+        defaultSelectedKeys: ['1']
+      },
+      dataItems
+    ),
   name: 'selectionMode: single, disallowEmptySelection'
 };
 
-export const SelectionModeMultipleIsQuiet = () =>
-  render(
-    {
-      isQuiet: true,
-      selectionMode: 'multiple',
-      defaultSelectedKeys: ['1', '2']
-    },
-    dataItems
-  );
-
-SelectionModeMultipleIsQuiet.story = {
+export const SelectionModeMultipleIsQuiet = {
+  render: () =>
+    render(
+      {
+        isQuiet: true,
+        selectionMode: 'multiple',
+        defaultSelectedKeys: ['1', '2']
+      },
+      dataItems
+    ),
   name: 'selectionMode: multiple, isQuiet'
 };
 
-export const SelectionModeMultipleIsQuietCompact = () =>
-  render(
-    {
-      isQuiet: true,
-      density: 'compact',
-      selectionMode: 'multiple',
-      defaultSelectedKeys: ['1', '2']
-    },
-    dataItems
-  );
-
-SelectionModeMultipleIsQuietCompact.story = {
+export const SelectionModeMultipleIsQuietCompact = {
+  render: () =>
+    render(
+      {
+        isQuiet: true,
+        density: 'compact',
+        selectionMode: 'multiple',
+        defaultSelectedKeys: ['1', '2']
+      },
+      dataItems
+    ),
   name: 'selectionMode: multiple, isQuiet, compact'
 };
 
-export const SelectionModeMultipleIsEmphasized = () =>
-  render(
-    {
-      isEmphasized: true,
-      selectionMode: 'multiple',
-      defaultSelectedKeys: ['1', '2']
-    },
-    dataItems
-  );
-
-SelectionModeMultipleIsEmphasized.story = {
+export const SelectionModeMultipleIsEmphasized = {
+  render: () =>
+    render(
+      {
+        isEmphasized: true,
+        selectionMode: 'multiple',
+        defaultSelectedKeys: ['1', '2']
+      },
+      dataItems
+    ),
   name: 'selectionMode: multiple, isEmphasized'
 };
 
-export const SelectionModeMultipleIsEmphasizedCompact = () =>
-  render(
-    {
-      isEmphasized: true,
-      density: 'compact',
-      selectionMode: 'multiple',
-      defaultSelectedKeys: ['1', '2']
-    },
-    dataItems
-  );
-
-SelectionModeMultipleIsEmphasizedCompact.story = {
+export const SelectionModeMultipleIsEmphasizedCompact = {
+  render: () =>
+    render(
+      {
+        isEmphasized: true,
+        density: 'compact',
+        selectionMode: 'multiple',
+        defaultSelectedKeys: ['1', '2']
+      },
+      dataItems
+    ),
   name: 'selectionMode: multiple, isEmphasized, compact'
 };
 
-export const SelectionModeMultipleIsEmphasizedIsQuiet = () =>
-  render(
-    {
-      isEmphasized: true,
-      isQuiet: true,
-      selectionMode: 'multiple',
-      defaultSelectedKeys: ['1', '2']
-    },
-    dataItems
-  );
-
-SelectionModeMultipleIsEmphasizedIsQuiet.story = {
+export const SelectionModeMultipleIsEmphasizedIsQuiet = {
+  render: () =>
+    render(
+      {
+        isEmphasized: true,
+        isQuiet: true,
+        selectionMode: 'multiple',
+        defaultSelectedKeys: ['1', '2']
+      },
+      dataItems
+    ),
   name: 'selectionMode: multiple, isEmphasized, isQuiet'
 };
 
-export const SelectionModeMultipleIsEmphasizedIsQuietCompact = () =>
-  render(
-    {
-      isEmphasized: true,
-      isQuiet: true,
-      density: 'compact',
-      selectionMode: 'multiple',
-      defaultSelectedKeys: ['1', '2']
-    },
-    dataItems
-  );
-
-SelectionModeMultipleIsEmphasizedIsQuietCompact.story = {
+export const SelectionModeMultipleIsEmphasizedIsQuietCompact = {
+  render: () =>
+    render(
+      {
+        isEmphasized: true,
+        isQuiet: true,
+        density: 'compact',
+        selectionMode: 'multiple',
+        defaultSelectedKeys: ['1', '2']
+      },
+      dataItems
+    ),
   name: 'selectionMode: multiple, isEmphasized, isQuiet, compact'
 };
 
-export const Vertical = () =>
-  render({orientation: 'vertical', defaultSelectedKeys: ['1']}, docItems);
-
-Vertical.story = {
+export const Vertical = {
+  render: () =>
+    render(
+      {
+        orientation: 'vertical',
+        defaultSelectedKeys: ['1']
+      },
+      docItems
+    ),
   name: 'vertical'
 };
 
-export const VerticalIsJustified = () =>
-  render(
-    {isJustified: true, orientation: 'vertical', defaultSelectedKeys: ['1']},
-    docItems
-  );
-
-VerticalIsJustified.story = {
+export const VerticalIsJustified = {
+  render: () =>
+    render(
+      {
+        isJustified: true,
+        orientation: 'vertical',
+        defaultSelectedKeys: ['1']
+      },
+      docItems
+    ),
   name: 'vertical, isJustified'
 };
 
-export const VerticalCompact = () =>
-  render(
-    {density: 'compact', orientation: 'vertical', defaultSelectedKeys: ['1']},
-    viewItems
-  );
-
-VerticalCompact.story = {
+export const VerticalCompact = {
+  render: () =>
+    render(
+      {
+        density: 'compact',
+        orientation: 'vertical',
+        defaultSelectedKeys: ['1']
+      },
+      viewItems
+    ),
   name: 'vertical, compact'
 };
 
-export const VerticalIsJustifiedCompact = () =>
-  render(
-    {
-      isJustified: true,
-      density: 'compact',
-      orientation: 'vertical',
-      defaultSelectedKeys: ['1']
-    },
-    viewItems
-  );
-
-VerticalIsJustifiedCompact.story = {
+export const VerticalIsJustifiedCompact = {
+  render: () =>
+    render(
+      {
+        isJustified: true,
+        density: 'compact',
+        orientation: 'vertical',
+        defaultSelectedKeys: ['1']
+      },
+      viewItems
+    ),
   name: 'vertical, isJustified, compact'
 };
 
-export const VerticalIsQuiet = () =>
-  render(
-    {isQuiet: true, orientation: 'vertical', defaultSelectedKeys: ['1']},
-    editItems
-  );
-
-VerticalIsQuiet.story = {
+export const VerticalIsQuiet = {
+  render: () =>
+    render(
+      {
+        isQuiet: true,
+        orientation: 'vertical',
+        defaultSelectedKeys: ['1']
+      },
+      editItems
+    ),
   name: 'vertical, isQuiet'
 };
 
-export const VerticalIsQuietCompact = () =>
-  render(
-    {
-      isQuiet: true,
-      density: 'compact',
-      orientation: 'vertical',
-      defaultSelectedKeys: ['1']
-    },
-    viewItems
-  );
-
-VerticalIsQuietCompact.story = {
+export const VerticalIsQuietCompact = {
+  render: () =>
+    render(
+      {
+        isQuiet: true,
+        density: 'compact',
+        orientation: 'vertical',
+        defaultSelectedKeys: ['1']
+      },
+      viewItems
+    ),
   name: 'vertical, isQuiet, compact'
 };
 
-export const DisabledKeys = () =>
-  render({disabledKeys: ['1', '2'], selectionMode: 'multiple'}, dataItems);
-
-DisabledKeys.story = {
+export const DisabledKeys = {
+  render: () =>
+    render(
+      {
+        disabledKeys: ['1', '2'],
+        selectionMode: 'multiple'
+      },
+      dataItems
+    ),
   name: 'disabledKeys'
 };
 
-export const DynamicDefault = () => (
-  <ActionGroup onAction={action('onAction')} items={viewItems}>
-    {(item) => (
-      <Item key={item.name} textValue={item.name}>
-        {item.children}
-      </Item>
-    )}
-  </ActionGroup>
-);
-
-DynamicDefault.story = {
+export const DynamicDefault = {
+  render: () => (
+    <ActionGroup onAction={action('onAction')} items={viewItems}>
+      {(item) => (
+        <Item key={item.name} textValue={item.name}>
+          {item.children}
+        </Item>
+      )}
+    </ActionGroup>
+  ),
   name: 'dynamic default'
 };
 
-export const DynamicSingleSelection = () => (
-  <ActionGroup
-    selectionMode="single"
-    onSelectionChange={(s) => onSelectionChange([...s])}
-    items={viewItems}>
-    {(item) => (
-      <Item key={item.name} textValue={item.name}>
-        {item.children}
-      </Item>
-    )}
-  </ActionGroup>
-);
-
-DynamicSingleSelection.story = {
+export const DynamicSingleSelection = {
+  render: () => (
+    <ActionGroup
+      selectionMode="single"
+      onSelectionChange={(s) => onSelectionChange([...s])}
+      items={viewItems}>
+      {(item) => (
+        <Item key={item.name} textValue={item.name}>
+          {item.children}
+        </Item>
+      )}
+    </ActionGroup>
+  ),
   name: 'dynamic single selection'
 };
 
-export const WithTooltips = () => renderTooltips({});
-
-WithTooltips.story = {
+export const WithTooltips = {
+  render: () => renderTooltips({}),
   name: 'with tooltips'
 };
 
-export const OverflowModeWrap = () => (
-  <div
-    style={{
-      padding: '10px',
-      resize: 'horizontal',
-      overflow: 'auto',
-      width: 250,
-      backgroundColor: 'var(--spectrum-global-color-gray-50)'
-    }}>
-    <ActionGroup overflowMode="wrap" onAction={action('onAction')}>
-      <Item>
-        <DrawIcon />
-        <Text>Edit</Text>
-      </Item>
-      <Item>
-        <CopyIcon />
-        <Text>Copy</Text>
-      </Item>
-      <Item>
-        <DeleteIcon />
-        <Text>Delete</Text>
-      </Item>
-      <Item>
-        <MoveIcon />
-        <Text>Move</Text>
-      </Item>
-      <Item>
-        <DuplicateIcon />
-        <Text>Duplicate</Text>
-      </Item>
-    </ActionGroup>
-  </div>
-);
-
-OverflowModeWrap.story = {
+export const OverflowModeWrap = {
+  render: () => (
+    <div
+      style={{
+        padding: '10px',
+        resize: 'horizontal',
+        overflow: 'auto',
+        width: 250,
+        backgroundColor: 'var(--spectrum-global-color-gray-50)'
+      }}>
+      <ActionGroup overflowMode="wrap" onAction={action('onAction')}>
+        <Item>
+          <DrawIcon />
+          <Text>Edit</Text>
+        </Item>
+        <Item>
+          <CopyIcon />
+          <Text>Copy</Text>
+        </Item>
+        <Item>
+          <DeleteIcon />
+          <Text>Delete</Text>
+        </Item>
+        <Item>
+          <MoveIcon />
+          <Text>Move</Text>
+        </Item>
+        <Item>
+          <DuplicateIcon />
+          <Text>Duplicate</Text>
+        </Item>
+      </ActionGroup>
+    </div>
+  ),
   name: 'overflowMode: wrap'
 };
 
-export const OverflowModeCollapse = () => (
-  <div
-    style={{
-      padding: '10px',
-      resize: 'horizontal',
-      overflow: 'auto',
-      width: 250,
-      backgroundColor: 'var(--spectrum-global-color-gray-50)'
-    }}>
-    {renderCollapsible()}
-    {renderCollapsible({density: 'compact'})}
-    {renderCollapsible({density: 'compact', isJustified: true})}
-    {renderCollapsible({isQuiet: true})}
-  </div>
-);
-
-OverflowModeCollapse.story = {
+export const OverflowModeCollapse = {
+  render: () => (
+    <div
+      style={{
+        padding: '10px',
+        resize: 'horizontal',
+        overflow: 'auto',
+        width: 250,
+        backgroundColor: 'var(--spectrum-global-color-gray-50)'
+      }}>
+      {renderCollapsible()}
+      {renderCollapsible({
+        density: 'compact'
+      })}
+      {renderCollapsible({
+        density: 'compact',
+        isJustified: true
+      })}
+      {renderCollapsible({
+        isQuiet: true
+      })}
+    </div>
+  ),
   name: 'overflowMode: collapse'
 };
 
-export const ButtonLabelBehaviorHide = () => (
-  <div
-    style={{
-      padding: '10px',
-      resize: 'horizontal',
-      overflow: 'auto',
-      width: 250,
-      backgroundColor: 'var(--spectrum-global-color-gray-50)'
-    }}>
-    {renderCollapsible({buttonLabelBehavior: 'hide'})}
-    {renderCollapsibleText({buttonLabelBehavior: 'hide'})}
-  </div>
-);
-
-ButtonLabelBehaviorHide.story = {
+export const ButtonLabelBehaviorHide = {
+  render: () => (
+    <div
+      style={{
+        padding: '10px',
+        resize: 'horizontal',
+        overflow: 'auto',
+        width: 250,
+        backgroundColor: 'var(--spectrum-global-color-gray-50)'
+      }}>
+      {renderCollapsible({
+        buttonLabelBehavior: 'hide'
+      })}
+      {renderCollapsibleText({
+        buttonLabelBehavior: 'hide'
+      })}
+    </div>
+  ),
   name: 'buttonLabelBehavior: hide'
 };
 
-export const ButtonLabelBehaviorCollapse = () => (
-  <div
-    style={{
-      padding: '10px',
-      resize: 'horizontal',
-      overflow: 'auto',
-      width: 500,
-      backgroundColor: 'var(--spectrum-global-color-gray-50)'
-    }}>
-    {renderCollapsible({buttonLabelBehavior: 'collapse'})}
-    {renderCollapsibleText({buttonLabelBehavior: 'collapse'})}
-  </div>
-);
-
-ButtonLabelBehaviorCollapse.story = {
+export const ButtonLabelBehaviorCollapse = {
+  render: () => (
+    <div
+      style={{
+        padding: '10px',
+        resize: 'horizontal',
+        overflow: 'auto',
+        width: 500,
+        backgroundColor: 'var(--spectrum-global-color-gray-50)'
+      }}>
+      {renderCollapsible({
+        buttonLabelBehavior: 'collapse'
+      })}
+      {renderCollapsibleText({
+        buttonLabelBehavior: 'collapse'
+      })}
+    </div>
+  ),
   name: 'buttonLabelBehavior: collapse'
 };
 
-export const OverflowModeCollapseSelection = () => (
-  <div
-    style={{
-      padding: '10px',
-      resize: 'horizontal',
-      overflow: 'auto',
-      display: 'flex',
-      gap: 10,
-      width: 300,
-      backgroundColor: 'var(--spectrum-global-color-gray-50)'
-    }}>
-    {renderCollapsibleFormatting({
-      density: 'compact',
-      maxWidth: '50%',
-      isEmphasized: true
-    })}
-    {renderCollapsibleAlignment({
-      density: 'compact',
-      maxWidth: '50%',
-      isEmphasized: true
-    })}
-  </div>
-);
-
-OverflowModeCollapseSelection.story = {
+export const OverflowModeCollapseSelection = {
+  render: () => (
+    <div
+      style={{
+        padding: '10px',
+        resize: 'horizontal',
+        overflow: 'auto',
+        display: 'flex',
+        gap: 10,
+        width: 300,
+        backgroundColor: 'var(--spectrum-global-color-gray-50)'
+      }}>
+      {renderCollapsibleFormatting({
+        density: 'compact',
+        maxWidth: '50%',
+        isEmphasized: true
+      })}
+      {renderCollapsibleAlignment({
+        density: 'compact',
+        maxWidth: '50%',
+        isEmphasized: true
+      })}
+    </div>
+  ),
   name: 'overflowMode: collapse, selection'
 };
 
-export const OverflowModeCollapseSummaryIcon = () => (
-  <div
-    style={{
-      padding: '10px',
-      resize: 'horizontal',
-      overflow: 'auto',
-      display: 'flex',
-      gap: 10,
-      width: 300,
-      backgroundColor: 'var(--spectrum-global-color-gray-50)'
-    }}>
-    {renderCollapsibleFormatting({
-      density: 'compact',
-      overflowMode: 'collapse',
-      summaryIcon: <TextStyle />,
-      isEmphasized: true
-    })}
-    {renderCollapsibleAlignment({
-      density: 'compact',
-      overflowMode: 'collapse',
-      isEmphasized: true
-    })}
-  </div>
-);
-
-OverflowModeCollapseSummaryIcon.story = {
+export const OverflowModeCollapseSummaryIcon = {
+  render: () => (
+    <div
+      style={{
+        padding: '10px',
+        resize: 'horizontal',
+        overflow: 'auto',
+        display: 'flex',
+        gap: 10,
+        width: 300,
+        backgroundColor: 'var(--spectrum-global-color-gray-50)'
+      }}>
+      {renderCollapsibleFormatting({
+        density: 'compact',
+        overflowMode: 'collapse',
+        summaryIcon: <TextStyle />,
+        isEmphasized: true
+      })}
+      {renderCollapsibleAlignment({
+        density: 'compact',
+        overflowMode: 'collapse',
+        isEmphasized: true
+      })}
+    </div>
+  ),
   name: 'overflowMode: collapse, summaryIcon'
 };
 
-export const OverflowModeCollapseSingleSelection = () => (
-  <div
-    style={{
-      padding: '10px',
-      resize: 'horizontal',
-      overflow: 'auto',
-      display: 'flex',
-      gap: 10,
-      width: 300,
-      backgroundColor: 'var(--spectrum-global-color-gray-50)'
-    }}>
-    {renderCollapsibleAlignment({
-      density: 'compact',
-      maxWidth: '50%',
-      isEmphasized: true
-    })}
-    {renderCollapsibleAlignment({
-      density: 'compact',
-      maxWidth: '50%',
-      isEmphasized: true,
-      buttonLabelBehavior: 'show'
-    })}
-    {renderCollapsibleAlignmentNoIcons({
-      density: 'compact',
-      maxWidth: '50%',
-      isEmphasized: true,
-      buttonLabelBehavior: 'show'
-    })}
-  </div>
-);
-
-OverflowModeCollapseSingleSelection.story = {
+export const OverflowModeCollapseSingleSelection = {
+  render: () => (
+    <div
+      style={{
+        padding: '10px',
+        resize: 'horizontal',
+        overflow: 'auto',
+        display: 'flex',
+        gap: 10,
+        width: 300,
+        backgroundColor: 'var(--spectrum-global-color-gray-50)'
+      }}>
+      {renderCollapsibleAlignment({
+        density: 'compact',
+        maxWidth: '50%',
+        isEmphasized: true
+      })}
+      {renderCollapsibleAlignment({
+        density: 'compact',
+        maxWidth: '50%',
+        isEmphasized: true,
+        buttonLabelBehavior: 'show'
+      })}
+      {renderCollapsibleAlignmentNoIcons({
+        density: 'compact',
+        maxWidth: '50%',
+        isEmphasized: true,
+        buttonLabelBehavior: 'show'
+      })}
+    </div>
+  ),
   name: 'overflowMode: collapse, single selection'
 };
 
-export const OrientationVerticalOverflowModeCollapse = () => (
-  <div
-    style={{
-      padding: '10px',
-      resize: 'vertical',
-      overflow: 'auto',
-      width: 32,
-      backgroundColor: 'var(--spectrum-global-color-gray-50)'
-    }}>
-    {renderCollapsible({
-      orientation: 'vertical',
-      buttonLabelBehavior: 'hide',
-      maxHeight: '100%',
-      marginBottom: 0
-    })}
-  </div>
-);
-
-OrientationVerticalOverflowModeCollapse.story = {
-  name: 'orientation: vertical, overflowMode: collapse'
-};
-
-export const OrientationVerticalOverflowModeCollapseSelection = () => (
-  <Flex direction="column">
-    <p>
-      Note: this is currently unsupported by Spectrum. Container should scroll.
-    </p>
+export const OrientationVerticalOverflowModeCollapse = {
+  render: () => (
     <div
       style={{
         padding: '10px',
@@ -717,16 +805,37 @@ export const OrientationVerticalOverflowModeCollapseSelection = () => (
         width: 32,
         backgroundColor: 'var(--spectrum-global-color-gray-50)'
       }}>
-      {renderTools({
+      {renderCollapsible({
         orientation: 'vertical',
         buttonLabelBehavior: 'hide',
-        maxHeight: '100%'
+        maxHeight: '100%',
+        marginBottom: 0
       })}
     </div>
-  </Flex>
-);
+  ),
+  name: 'orientation: vertical, overflowMode: collapse'
+};
 
-OrientationVerticalOverflowModeCollapseSelection.story = {
+export const OrientationVerticalOverflowModeCollapseSelection = {
+  render: () => (
+    <Flex direction="column">
+      <p>Note: this is currently unsupported by Spectrum. Container should scroll.</p>
+      <div
+        style={{
+          padding: '10px',
+          resize: 'vertical',
+          overflow: 'auto',
+          width: 32,
+          backgroundColor: 'var(--spectrum-global-color-gray-50)'
+        }}>
+        {renderTools({
+          orientation: 'vertical',
+          buttonLabelBehavior: 'hide',
+          maxHeight: '100%'
+        })}
+      </div>
+    </Flex>
+  ),
   name: 'orientation: vertical, overflowMode: collapse, selection'
 };
 
@@ -762,10 +871,7 @@ function renderBoth(props, items: any = docItems) {
       {items.map((itemProps) => {
         let IconElement = iconMap[itemProps.children];
         return (
-          <Item
-            key={itemProps.name}
-            textValue={itemProps.name}
-            aria-label={itemProps.children}>
+          <Item key={itemProps.name} textValue={itemProps.name} aria-label={itemProps.children}>
             <Text>{itemProps.children}</Text>
             <IconElement />
           </Item>
@@ -784,10 +890,7 @@ function renderIcons(props, items: any = docItems) {
       {items.map((itemProps) => {
         let IconElement = iconMap[itemProps.children];
         return (
-          <Item
-            key={itemProps.name}
-            textValue={itemProps.name}
-            aria-label={itemProps.children}>
+          <Item key={itemProps.name} textValue={itemProps.name} aria-label={itemProps.children}>
             <IconElement />
           </Item>
         );

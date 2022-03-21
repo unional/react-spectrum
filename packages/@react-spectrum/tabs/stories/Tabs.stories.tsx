@@ -9,7 +9,6 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import {action} from '@storybook/addon-actions';
 import {ActionGroup, Flex, Heading, Text} from '@adobe/react-spectrum';
 import Bookmark from '@spectrum-icons/workflow/Bookmark';
@@ -27,278 +26,259 @@ export default {
 };
 
 export const Default = () => render();
-export const WithFalsyItemKey = () => renderWithFalsyKey();
-
-WithFalsyItemKey.story = {
+export const WithFalsyItemKey = {
+  render: () => renderWithFalsyKey(),
   name: 'with falsy item key'
 };
 
-export const DefaultSelectedKeyVal2 = () =>
-  render({defaultSelectedKey: 'val2'});
-
-DefaultSelectedKeyVal2.story = {
+export const DefaultSelectedKeyVal2 = {
+  render: () =>
+    render({
+      defaultSelectedKey: 'val2'
+    }),
   name: 'defaultSelectedKey: val2'
 };
 
-export const ControlledSelectedKeyVal3 = () => render({selectedKey: 'val3'});
-
-ControlledSelectedKeyVal3.story = {
+export const ControlledSelectedKeyVal3 = {
+  render: () =>
+    render({
+      selectedKey: 'val3'
+    }),
   name: 'controlled: selectedKey: val3'
 };
 
-export const OrientationVertical = () => render({orientation: 'vertical'});
-
-OrientationVertical.story = {
+export const OrientationVertical = {
+  render: () =>
+    render({
+      orientation: 'vertical'
+    }),
   name: 'orientation: vertical'
 };
 
-export const DensityCompact = () => render({density: 'compact'});
-
-DensityCompact.story = {
+export const DensityCompact = {
+  render: () =>
+    render({
+      density: 'compact'
+    }),
   name: 'density: compact'
 };
 
-export const IsQuiet = () => render({isQuiet: true});
-
-IsQuiet.story = {
+export const IsQuiet = {
+  render: () =>
+    render({
+      isQuiet: true
+    }),
   name: 'isQuiet'
 };
 
-export const IsQuietDensityCompact = () =>
-  render({isQuiet: true, density: 'compact'});
-
-IsQuietDensityCompact.story = {
+export const IsQuietDensityCompact = {
+  render: () =>
+    render({
+      isQuiet: true,
+      density: 'compact'
+    }),
   name: 'isQuiet, density: compact'
 };
 
-export const DensityCompactOrientationVertical = () =>
-  render({density: 'compact', orientation: 'vertical'});
-
-DensityCompactOrientationVertical.story = {
+export const DensityCompactOrientationVertical = {
+  render: () =>
+    render({
+      density: 'compact',
+      orientation: 'vertical'
+    }),
   name: 'density: compact, orientation: vertical'
 };
 
-export const Icons = () => renderWithIcons();
-
-Icons.story = {
+export const Icons = {
+  render: () => renderWithIcons(),
   name: 'icons'
 };
 
-export const IconsDensityCompact = () =>
-  renderWithIcons({density: 'compact'});
-
-IconsDensityCompact.story = {
+export const IconsDensityCompact = {
+  render: () =>
+    renderWithIcons({
+      density: 'compact'
+    }),
   name: 'icons, density: compact'
 };
 
-export const IconsOrientationVertical = () =>
-  renderWithIcons({orientation: 'vertical'});
-
-IconsOrientationVertical.story = {
+export const IconsOrientationVertical = {
+  render: () =>
+    renderWithIcons({
+      orientation: 'vertical'
+    }),
   name: 'icons, orientation: vertical'
 };
 
-export const IconsDensityCompactOrientationVertical = () =>
-  renderWithIcons({orientation: 'vertical', density: 'compact'});
-
-IconsDensityCompactOrientationVertical.story = {
+export const IconsDensityCompactOrientationVertical = {
+  render: () =>
+    renderWithIcons({
+      orientation: 'vertical',
+      density: 'compact'
+    }),
   name: 'icons, density: compact, orientation: vertical'
 };
 
-export const DisableAllTabs = () => render({isDisabled: true});
-
-DisableAllTabs.story = {
+export const DisableAllTabs = {
+  render: () =>
+    render({
+      isDisabled: true
+    }),
   name: 'disable all tabs'
 };
 
-export const KeyboardActivationManual = () =>
-  render({keyboardActivation: 'manual'});
-
-KeyboardActivationManual.story = {
+export const KeyboardActivationManual = {
+  render: () =>
+    render({
+      keyboardActivation: 'manual'
+    }),
   name: 'keyboardActivation: manual'
 };
 
-export const MiddleDisabled = () => render({disabledKeys: ['val2']});
-
-MiddleDisabled.story = {
+export const MiddleDisabled = {
+  render: () =>
+    render({
+      disabledKeys: ['val2']
+    }),
   name: 'middle disabled'
 };
 
-export const AllDisabled = () =>
-  render({disabledKeys: ['val1', 'val2', 'val3', 'val4', 'val5']});
-
-AllDisabled.story = {
+export const AllDisabled = {
+  render: () =>
+    render({
+      disabledKeys: ['val1', 'val2', 'val3', 'val4', 'val5']
+    }),
   name: 'all disabled'
 };
 
-export const Resizeable = () => (
-  <div
-    style={{
-      minWidth: '100px',
-      width: '300px',
-      height: '400px',
-      padding: '10px',
-      resize: 'horizontal',
-      overflow: 'auto',
-      backgroundColor: 'var(--spectrum-global-color-gray-50)'
-    }}>
-    {render()}
-  </div>
-);
-
-Resizeable.story = {
+export const Resizeable = {
+  render: () => (
+    <div
+      style={{
+        minWidth: '100px',
+        width: '300px',
+        height: '400px',
+        padding: '10px',
+        resize: 'horizontal',
+        overflow: 'auto',
+        backgroundColor: 'var(--spectrum-global-color-gray-50)'
+      }}>
+      {render()}
+    </div>
+  ),
   name: 'resizeable'
 };
 
-export const CollapseBehavior = () => <DynamicTabs />;
-
-CollapseBehavior.story = {
+export const CollapseBehavior = {
+  render: () => <DynamicTabs />,
   name: 'collapse behavior'
 };
 
-export const CollapseBehaviorIsQuiet = () => <DynamicTabs isQuiet />;
-
-CollapseBehaviorIsQuiet.story = {
+export const CollapseBehaviorIsQuiet = {
+  render: () => <DynamicTabs isQuiet />,
   name: 'collapse behavior, isQuiet'
 };
 
-export const CollapseBehaviorDensityCompact = () => (
-  <DynamicTabs density="compact" />
-);
-
-CollapseBehaviorDensityCompact.story = {
+export const CollapseBehaviorDensityCompact = {
+  render: () => <DynamicTabs density="compact" />,
   name: 'collapse behavior, density: compact'
 };
 
-export const CollapseBehaviorDensityCompactIsQuiet = () => (
-  <DynamicTabs isQuiet density="compact" />
-);
-
-CollapseBehaviorDensityCompactIsQuiet.story = {
+export const CollapseBehaviorDensityCompactIsQuiet = {
+  render: () => <DynamicTabs isQuiet density="compact" />,
   name: 'collapse behavior, density: compact, isQuiet'
 };
 
-export const _OrientationFlip = () => <OrientationFlip />;
-
-_OrientationFlip.story = {
+export const _OrientationFlip = {
+  render: () => <OrientationFlip />,
   name: 'orientation flip'
 };
 
-export const TestingTabsInFlex = () => (
-  <Flex
-    minHeight={400}
-    minWidth={400}
-    UNSAFE_style={{
-      borderWidth: 1,
-      borderStyle: 'solid',
-      borderColor: 'var(--spectrum-global-color-gray-800)',
-      padding: '10px'
-    }}>
-    <Tabs>
+export const TestingTabsInFlex = {
+  render: () => (
+    <Flex
+      minHeight={400}
+      minWidth={400}
+      UNSAFE_style={{
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: 'var(--spectrum-global-color-gray-800)',
+        padding: '10px'
+      }}>
+      <Tabs>
+        <TabList>
+          <Item>Tab 1</Item>
+          <Item>Tab 2</Item>
+        </TabList>
+        <TabPanels>
+          <Item>Hello World</Item>
+          <Item>Goodbye World</Item>
+        </TabPanels>
+      </Tabs>
+    </Flex>
+  ),
+  name: 'testing: tabs in flex'
+};
+
+export const TransitionBetweenTabSizes = {
+  render: () => (
+    <Tabs maxWidth={500}>
+      <TabList>
+        <Item>
+          <Text>Tab 1 long long long name</Text>
+        </Item>
+        <Item>
+          <Text>Tab 2</Text>
+        </Item>
+      </TabList>
+      <TabPanels>
+        <Item>Text</Item>
+        <Item>Text 2</Item>
+      </TabPanels>
+    </Tabs>
+  ),
+  name: 'transition between tab sizes'
+};
+
+export const TabWithFlexContainerInBetween = {
+  render: () => <DynamicTabsWithDecoration />,
+  name: 'Tab with flex container in between'
+};
+
+export const TabsAtTheBottom = {
+  render: () => (
+    <Tabs maxWidth={500}>
+      <TabPanels height="size-1000">
+        <Item>Text 1</Item>
+        <Item>Text 2</Item>
+      </TabPanels>
       <TabList>
         <Item>Tab 1</Item>
         <Item>Tab 2</Item>
       </TabList>
-      <TabPanels>
-        <Item>Hello World</Item>
-        <Item>Goodbye World</Item>
-      </TabPanels>
     </Tabs>
-  </Flex>
-);
-
-TestingTabsInFlex.story = {
-  name: 'testing: tabs in flex'
-};
-
-export const TransitionBetweenTabSizes = () => (
-  <Tabs maxWidth={500}>
-    <TabList>
-      <Item>
-        <Text>Tab 1 long long long name</Text>
-      </Item>
-      <Item>
-        <Text>Tab 2</Text>
-      </Item>
-    </TabList>
-    <TabPanels>
-      <Item>Text</Item>
-      <Item>Text 2</Item>
-    </TabPanels>
-  </Tabs>
-);
-
-TransitionBetweenTabSizes.story = {
-  name: 'transition between tab sizes'
-};
-
-export const TabWithFlexContainerInBetween = () => (
-  <DynamicTabsWithDecoration />
-);
-
-TabWithFlexContainerInBetween.story = {
-  name: 'Tab with flex container in between'
-};
-
-export const TabsAtTheBottom = () => (
-  <Tabs maxWidth={500}>
-    <TabPanels height="size-1000">
-      <Item>Text 1</Item>
-      <Item>Text 2</Item>
-    </TabPanels>
-    <TabList>
-      <Item>Tab 1</Item>
-      <Item>Tab 2</Item>
-    </TabList>
-  </Tabs>
-);
-
-TabsAtTheBottom.story = {
+  ),
   name: 'tabs at the bottom'
 };
 
-export const TabsOnTheRight = () => (
-  <Tabs maxWidth={500} orientation="vertical">
-    <TabPanels>
-      <Item>Text 1</Item>
-      <Item>Text 2</Item>
-    </TabPanels>
-    <TabList>
-      <Item>Tab 1</Item>
-      <Item>Tab 2</Item>
-    </TabList>
-  </Tabs>
-);
-
-TabsOnTheRight.story = {
+export const TabsOnTheRight = {
+  render: () => (
+    <Tabs maxWidth={500} orientation="vertical">
+      <TabPanels>
+        <Item>Text 1</Item>
+        <Item>Text 2</Item>
+      </TabPanels>
+      <TabList>
+        <Item>Tab 1</Item>
+        <Item>Tab 2</Item>
+      </TabList>
+    </Tabs>
+  ),
   name: 'tabs on the right'
 };
 
-export const FocusableElementInTabPanel = () => (
-  <Tabs maxWidth={500}>
-    <TabList>
-      <Item>Tab 1</Item>
-      <Item>Tab 2</Item>
-    </TabList>
-    <TabPanels>
-      <Item>
-        <TextField label="Tab 1" />
-      </Item>
-      <Item>
-        <TextField label="Tab 2" isDisabled />
-      </Item>
-    </TabPanels>
-  </Tabs>
-);
-
-FocusableElementInTabPanel.story = {
-  name: 'focusable element in tab panel'
-};
-
-export const Tab1ControlledChild = () => {
-  let [tab1Text, setTab1Text] = useState('');
-
-  return (
+export const FocusableElementInTabPanel = {
+  render: () => (
     <Tabs maxWidth={500}>
       <TabList>
         <Item>Tab 1</Item>
@@ -306,17 +286,37 @@ export const Tab1ControlledChild = () => {
       </TabList>
       <TabPanels>
         <Item>
-          <TextField label="Tab 1" value={tab1Text} onChange={setTab1Text} />
+          <TextField label="Tab 1" />
         </Item>
         <Item>
-          <TextField label="Tab 2" />
+          <TextField label="Tab 2" isDisabled />
         </Item>
       </TabPanels>
     </Tabs>
-  );
+  ),
+  name: 'focusable element in tab panel'
 };
 
-Tab1ControlledChild.story = {
+export const Tab1ControlledChild = {
+  render: () => {
+    let [tab1Text, setTab1Text] = useState('');
+    return (
+      <Tabs maxWidth={500}>
+        <TabList>
+          <Item>Tab 1</Item>
+          <Item>Tab 2</Item>
+        </TabList>
+        <TabPanels>
+          <Item>
+            <TextField label="Tab 1" value={tab1Text} onChange={setTab1Text} />
+          </Item>
+          <Item>
+            <TextField label="Tab 2" />
+          </Item>
+        </TabPanels>
+      </Tabs>
+    );
+  },
   name: 'Tab 1 controlled child'
 };
 
@@ -338,101 +338,86 @@ function render(props = {}) {
         <Item key="val1">
           <Heading>Tab Body 1</Heading>
           <Text>
-            Dolore ex esse laboris elit magna esse sunt. Pariatur in veniam
-            Lorem est occaecat do magna nisi mollit ipsum sit adipisicing fugiat
-            ex. Pariatur ullamco exercitation ea qui adipisicing. Id cupidatat
-            aute id ut excepteur exercitation magna pariatur. Mollit irure irure
-            reprehenderit pariatur eiusmod proident Lorem deserunt duis cillum
-            mollit. Do reprehenderit sit cupidatat quis laborum in do culpa nisi
-            ipsum. Velit aliquip commodo ea ipsum incididunt culpa nostrud
-            deserunt incididunt exercitation. In quis proident sit ad dolore
-            tempor. Eiusmod pariatur quis commodo labore cupidatat cillum enim
-            eiusmod voluptate laborum culpa. Laborum cupidatat incididunt velit
-            voluptate incididunt occaecat quis do. Consequat adipisicing irure
-            Lorem commodo officia sint id. Velit sit magna aliquip eiusmod non
-            id deserunt. Magna veniam ad consequat dolor cupidatat esse enim
-            Lorem ullamco. Anim excepteur consectetur id in. Mollit laboris duis
-            labore enim duis esse reprehenderit.
+            Dolore ex esse laboris elit magna esse sunt. Pariatur in veniam Lorem est occaecat do
+            magna nisi mollit ipsum sit adipisicing fugiat ex. Pariatur ullamco exercitation ea qui
+            adipisicing. Id cupidatat aute id ut excepteur exercitation magna pariatur. Mollit irure
+            irure reprehenderit pariatur eiusmod proident Lorem deserunt duis cillum mollit. Do
+            reprehenderit sit cupidatat quis laborum in do culpa nisi ipsum. Velit aliquip commodo
+            ea ipsum incididunt culpa nostrud deserunt incididunt exercitation. In quis proident sit
+            ad dolore tempor. Eiusmod pariatur quis commodo labore cupidatat cillum enim eiusmod
+            voluptate laborum culpa. Laborum cupidatat incididunt velit voluptate incididunt
+            occaecat quis do. Consequat adipisicing irure Lorem commodo officia sint id. Velit sit
+            magna aliquip eiusmod non id deserunt. Magna veniam ad consequat dolor cupidatat esse
+            enim Lorem ullamco. Anim excepteur consectetur id in. Mollit laboris duis labore enim
+            duis esse reprehenderit.
           </Text>
         </Item>
         <Item key="val2">
           <Heading>Tab Body 2</Heading>
           <Text>
-            Dolore ex esse laboris elit magna esse sunt. Pariatur in veniam
-            Lorem est occaecat do magna nisi mollit ipsum sit adipisicing fugiat
-            ex. Pariatur ullamco exercitation ea qui adipisicing. Id cupidatat
-            aute id ut excepteur exercitation magna pariatur. Mollit irure irure
-            reprehenderit pariatur eiusmod proident Lorem deserunt duis cillum
-            mollit. Do reprehenderit sit cupidatat quis laborum in do culpa nisi
-            ipsum. Velit aliquip commodo ea ipsum incididunt culpa nostrud
-            deserunt incididunt exercitation. In quis proident sit ad dolore
-            tempor. Eiusmod pariatur quis commodo labore cupidatat cillum enim
-            eiusmod voluptate laborum culpa. Laborum cupidatat incididunt velit
-            voluptate incididunt occaecat quis do. Consequat adipisicing irure
-            Lorem commodo officia sint id. Velit sit magna aliquip eiusmod non
-            id deserunt. Magna veniam ad consequat dolor cupidatat esse enim
-            Lorem ullamco. Anim excepteur consectetur id in. Mollit laboris duis
-            labore enim duis esse reprehenderit.
+            Dolore ex esse laboris elit magna esse sunt. Pariatur in veniam Lorem est occaecat do
+            magna nisi mollit ipsum sit adipisicing fugiat ex. Pariatur ullamco exercitation ea qui
+            adipisicing. Id cupidatat aute id ut excepteur exercitation magna pariatur. Mollit irure
+            irure reprehenderit pariatur eiusmod proident Lorem deserunt duis cillum mollit. Do
+            reprehenderit sit cupidatat quis laborum in do culpa nisi ipsum. Velit aliquip commodo
+            ea ipsum incididunt culpa nostrud deserunt incididunt exercitation. In quis proident sit
+            ad dolore tempor. Eiusmod pariatur quis commodo labore cupidatat cillum enim eiusmod
+            voluptate laborum culpa. Laborum cupidatat incididunt velit voluptate incididunt
+            occaecat quis do. Consequat adipisicing irure Lorem commodo officia sint id. Velit sit
+            magna aliquip eiusmod non id deserunt. Magna veniam ad consequat dolor cupidatat esse
+            enim Lorem ullamco. Anim excepteur consectetur id in. Mollit laboris duis labore enim
+            duis esse reprehenderit.
           </Text>
         </Item>
         <Item key="val3">
           <Heading>Tab Body 3</Heading>
           <Text>
-            Dolore ex esse laboris elit magna esse sunt. Pariatur in veniam
-            Lorem est occaecat do magna nisi mollit ipsum sit adipisicing fugiat
-            ex. Pariatur ullamco exercitation ea qui adipisicing. Id cupidatat
-            aute id ut excepteur exercitation magna pariatur. Mollit irure irure
-            reprehenderit pariatur eiusmod proident Lorem deserunt duis cillum
-            mollit. Do reprehenderit sit cupidatat quis laborum in do culpa nisi
-            ipsum. Velit aliquip commodo ea ipsum incididunt culpa nostrud
-            deserunt incididunt exercitation. In quis proident sit ad dolore
-            tempor. Eiusmod pariatur quis commodo labore cupidatat cillum enim
-            eiusmod voluptate laborum culpa. Laborum cupidatat incididunt velit
-            voluptate incididunt occaecat quis do. Consequat adipisicing irure
-            Lorem commodo officia sint id. Velit sit magna aliquip eiusmod non
-            id deserunt. Magna veniam ad consequat dolor cupidatat esse enim
-            Lorem ullamco. Anim excepteur consectetur id in. Mollit laboris duis
-            labore enim duis esse reprehenderit.
+            Dolore ex esse laboris elit magna esse sunt. Pariatur in veniam Lorem est occaecat do
+            magna nisi mollit ipsum sit adipisicing fugiat ex. Pariatur ullamco exercitation ea qui
+            adipisicing. Id cupidatat aute id ut excepteur exercitation magna pariatur. Mollit irure
+            irure reprehenderit pariatur eiusmod proident Lorem deserunt duis cillum mollit. Do
+            reprehenderit sit cupidatat quis laborum in do culpa nisi ipsum. Velit aliquip commodo
+            ea ipsum incididunt culpa nostrud deserunt incididunt exercitation. In quis proident sit
+            ad dolore tempor. Eiusmod pariatur quis commodo labore cupidatat cillum enim eiusmod
+            voluptate laborum culpa. Laborum cupidatat incididunt velit voluptate incididunt
+            occaecat quis do. Consequat adipisicing irure Lorem commodo officia sint id. Velit sit
+            magna aliquip eiusmod non id deserunt. Magna veniam ad consequat dolor cupidatat esse
+            enim Lorem ullamco. Anim excepteur consectetur id in. Mollit laboris duis labore enim
+            duis esse reprehenderit.
           </Text>
         </Item>
         <Item key="val4">
           <Heading>Tab Body 4</Heading>
           <Text>
-            Dolore ex esse laboris elit magna esse sunt. Pariatur in veniam
-            Lorem est occaecat do magna nisi mollit ipsum sit adipisicing fugiat
-            ex. Pariatur ullamco exercitation ea qui adipisicing. Id cupidatat
-            aute id ut excepteur exercitation magna pariatur. Mollit irure irure
-            reprehenderit pariatur eiusmod proident Lorem deserunt duis cillum
-            mollit. Do reprehenderit sit cupidatat quis laborum in do culpa nisi
-            ipsum. Velit aliquip commodo ea ipsum incididunt culpa nostrud
-            deserunt incididunt exercitation. In quis proident sit ad dolore
-            tempor. Eiusmod pariatur quis commodo labore cupidatat cillum enim
-            eiusmod voluptate laborum culpa. Laborum cupidatat incididunt velit
-            voluptate incididunt occaecat quis do. Consequat adipisicing irure
-            Lorem commodo officia sint id. Velit sit magna aliquip eiusmod non
-            id deserunt. Magna veniam ad consequat dolor cupidatat esse enim
-            Lorem ullamco. Anim excepteur consectetur id in. Mollit laboris duis
-            labore enim duis esse reprehenderit.
+            Dolore ex esse laboris elit magna esse sunt. Pariatur in veniam Lorem est occaecat do
+            magna nisi mollit ipsum sit adipisicing fugiat ex. Pariatur ullamco exercitation ea qui
+            adipisicing. Id cupidatat aute id ut excepteur exercitation magna pariatur. Mollit irure
+            irure reprehenderit pariatur eiusmod proident Lorem deserunt duis cillum mollit. Do
+            reprehenderit sit cupidatat quis laborum in do culpa nisi ipsum. Velit aliquip commodo
+            ea ipsum incididunt culpa nostrud deserunt incididunt exercitation. In quis proident sit
+            ad dolore tempor. Eiusmod pariatur quis commodo labore cupidatat cillum enim eiusmod
+            voluptate laborum culpa. Laborum cupidatat incididunt velit voluptate incididunt
+            occaecat quis do. Consequat adipisicing irure Lorem commodo officia sint id. Velit sit
+            magna aliquip eiusmod non id deserunt. Magna veniam ad consequat dolor cupidatat esse
+            enim Lorem ullamco. Anim excepteur consectetur id in. Mollit laboris duis labore enim
+            duis esse reprehenderit.
           </Text>
         </Item>
         <Item key="val5">
           <Heading>Tab Body 5</Heading>
           <Text>
-            Dolore ex esse laboris elit magna esse sunt. Pariatur in veniam
-            Lorem est occaecat do magna nisi mollit ipsum sit adipisicing fugiat
-            ex. Pariatur ullamco exercitation ea qui adipisicing. Id cupidatat
-            aute id ut excepteur exercitation magna pariatur. Mollit irure irure
-            reprehenderit pariatur eiusmod proident Lorem deserunt duis cillum
-            mollit. Do reprehenderit sit cupidatat quis laborum in do culpa nisi
-            ipsum. Velit aliquip commodo ea ipsum incididunt culpa nostrud
-            deserunt incididunt exercitation. In quis proident sit ad dolore
-            tempor. Eiusmod pariatur quis commodo labore cupidatat cillum enim
-            eiusmod voluptate laborum culpa. Laborum cupidatat incididunt velit
-            voluptate incididunt occaecat quis do. Consequat adipisicing irure
-            Lorem commodo officia sint id. Velit sit magna aliquip eiusmod non
-            id deserunt. Magna veniam ad consequat dolor cupidatat esse enim
-            Lorem ullamco. Anim excepteur consectetur id in. Mollit laboris duis
-            labore enim duis esse reprehenderit.
+            Dolore ex esse laboris elit magna esse sunt. Pariatur in veniam Lorem est occaecat do
+            magna nisi mollit ipsum sit adipisicing fugiat ex. Pariatur ullamco exercitation ea qui
+            adipisicing. Id cupidatat aute id ut excepteur exercitation magna pariatur. Mollit irure
+            irure reprehenderit pariatur eiusmod proident Lorem deserunt duis cillum mollit. Do
+            reprehenderit sit cupidatat quis laborum in do culpa nisi ipsum. Velit aliquip commodo
+            ea ipsum incididunt culpa nostrud deserunt incididunt exercitation. In quis proident sit
+            ad dolore tempor. Eiusmod pariatur quis commodo labore cupidatat cillum enim eiusmod
+            voluptate laborum culpa. Laborum cupidatat incididunt velit voluptate incididunt
+            occaecat quis do. Consequat adipisicing irure Lorem commodo officia sint id. Velit sit
+            magna aliquip eiusmod non id deserunt. Magna veniam ad consequat dolor cupidatat esse
+            enim Lorem ullamco. Anim excepteur consectetur id in. Mollit laboris duis labore enim
+            duis esse reprehenderit.
           </Text>
         </Item>
       </TabPanels>
@@ -465,61 +450,52 @@ function renderWithIcons(props = {}) {
         <Item key="dashboard">
           <Heading>Dashboard</Heading>
           <Text>
-            Dolore ex esse laboris elit magna esse sunt. Pariatur in veniam
-            Lorem est occaecat do magna nisi mollit ipsum sit adipisicing fugiat
-            ex. Pariatur ullamco exercitation ea qui adipisicing. Id cupidatat
-            aute id ut excepteur exercitation magna pariatur. Mollit irure irure
-            reprehenderit pariatur eiusmod proident Lorem deserunt duis cillum
-            mollit. Do reprehenderit sit cupidatat quis laborum in do culpa nisi
-            ipsum. Velit aliquip commodo ea ipsum incididunt culpa nostrud
-            deserunt incididunt exercitation. In quis proident sit ad dolore
-            tempor. Eiusmod pariatur quis commodo labore cupidatat cillum enim
-            eiusmod voluptate laborum culpa. Laborum cupidatat incididunt velit
-            voluptate incididunt occaecat quis do. Consequat adipisicing irure
-            Lorem commodo officia sint id. Velit sit magna aliquip eiusmod non
-            id deserunt. Magna veniam ad consequat dolor cupidatat esse enim
-            Lorem ullamco. Anim excepteur consectetur id in. Mollit laboris duis
-            labore enim duis esse reprehenderit.
+            Dolore ex esse laboris elit magna esse sunt. Pariatur in veniam Lorem est occaecat do
+            magna nisi mollit ipsum sit adipisicing fugiat ex. Pariatur ullamco exercitation ea qui
+            adipisicing. Id cupidatat aute id ut excepteur exercitation magna pariatur. Mollit irure
+            irure reprehenderit pariatur eiusmod proident Lorem deserunt duis cillum mollit. Do
+            reprehenderit sit cupidatat quis laborum in do culpa nisi ipsum. Velit aliquip commodo
+            ea ipsum incididunt culpa nostrud deserunt incididunt exercitation. In quis proident sit
+            ad dolore tempor. Eiusmod pariatur quis commodo labore cupidatat cillum enim eiusmod
+            voluptate laborum culpa. Laborum cupidatat incididunt velit voluptate incididunt
+            occaecat quis do. Consequat adipisicing irure Lorem commodo officia sint id. Velit sit
+            magna aliquip eiusmod non id deserunt. Magna veniam ad consequat dolor cupidatat esse
+            enim Lorem ullamco. Anim excepteur consectetur id in. Mollit laboris duis labore enim
+            duis esse reprehenderit.
           </Text>
         </Item>
         <Item key="calendar">
           <Heading>Calendar</Heading>
           <Text>
-            Dolore ex esse laboris elit magna esse sunt. Pariatur in veniam
-            Lorem est occaecat do magna nisi mollit ipsum sit adipisicing fugiat
-            ex. Pariatur ullamco exercitation ea qui adipisicing. Id cupidatat
-            aute id ut excepteur exercitation magna pariatur. Mollit irure irure
-            reprehenderit pariatur eiusmod proident Lorem deserunt duis cillum
-            mollit. Do reprehenderit sit cupidatat quis laborum in do culpa nisi
-            ipsum. Velit aliquip commodo ea ipsum incididunt culpa nostrud
-            deserunt incididunt exercitation. In quis proident sit ad dolore
-            tempor. Eiusmod pariatur quis commodo labore cupidatat cillum enim
-            eiusmod voluptate laborum culpa. Laborum cupidatat incididunt velit
-            voluptate incididunt occaecat quis do. Consequat adipisicing irure
-            Lorem commodo officia sint id. Velit sit magna aliquip eiusmod non
-            id deserunt. Magna veniam ad consequat dolor cupidatat esse enim
-            Lorem ullamco. Anim excepteur consectetur id in. Mollit laboris duis
-            labore enim duis esse reprehenderit.
+            Dolore ex esse laboris elit magna esse sunt. Pariatur in veniam Lorem est occaecat do
+            magna nisi mollit ipsum sit adipisicing fugiat ex. Pariatur ullamco exercitation ea qui
+            adipisicing. Id cupidatat aute id ut excepteur exercitation magna pariatur. Mollit irure
+            irure reprehenderit pariatur eiusmod proident Lorem deserunt duis cillum mollit. Do
+            reprehenderit sit cupidatat quis laborum in do culpa nisi ipsum. Velit aliquip commodo
+            ea ipsum incididunt culpa nostrud deserunt incididunt exercitation. In quis proident sit
+            ad dolore tempor. Eiusmod pariatur quis commodo labore cupidatat cillum enim eiusmod
+            voluptate laborum culpa. Laborum cupidatat incididunt velit voluptate incididunt
+            occaecat quis do. Consequat adipisicing irure Lorem commodo officia sint id. Velit sit
+            magna aliquip eiusmod non id deserunt. Magna veniam ad consequat dolor cupidatat esse
+            enim Lorem ullamco. Anim excepteur consectetur id in. Mollit laboris duis labore enim
+            duis esse reprehenderit.
           </Text>
         </Item>
         <Item key="bookmark">
           <Heading>Bookmark</Heading>
           <Text>
-            Dolore ex esse laboris elit magna esse sunt. Pariatur in veniam
-            Lorem est occaecat do magna nisi mollit ipsum sit adipisicing fugiat
-            ex. Pariatur ullamco exercitation ea qui adipisicing. Id cupidatat
-            aute id ut excepteur exercitation magna pariatur. Mollit irure irure
-            reprehenderit pariatur eiusmod proident Lorem deserunt duis cillum
-            mollit. Do reprehenderit sit cupidatat quis laborum in do culpa nisi
-            ipsum. Velit aliquip commodo ea ipsum incididunt culpa nostrud
-            deserunt incididunt exercitation. In quis proident sit ad dolore
-            tempor. Eiusmod pariatur quis commodo labore cupidatat cillum enim
-            eiusmod voluptate laborum culpa. Laborum cupidatat incididunt velit
-            voluptate incididunt occaecat quis do. Consequat adipisicing irure
-            Lorem commodo officia sint id. Velit sit magna aliquip eiusmod non
-            id deserunt. Magna veniam ad consequat dolor cupidatat esse enim
-            Lorem ullamco. Anim excepteur consectetur id in. Mollit laboris duis
-            labore enim duis esse reprehenderit.
+            Dolore ex esse laboris elit magna esse sunt. Pariatur in veniam Lorem est occaecat do
+            magna nisi mollit ipsum sit adipisicing fugiat ex. Pariatur ullamco exercitation ea qui
+            adipisicing. Id cupidatat aute id ut excepteur exercitation magna pariatur. Mollit irure
+            irure reprehenderit pariatur eiusmod proident Lorem deserunt duis cillum mollit. Do
+            reprehenderit sit cupidatat quis laborum in do culpa nisi ipsum. Velit aliquip commodo
+            ea ipsum incididunt culpa nostrud deserunt incididunt exercitation. In quis proident sit
+            ad dolore tempor. Eiusmod pariatur quis commodo labore cupidatat cillum enim eiusmod
+            voluptate laborum culpa. Laborum cupidatat incididunt velit voluptate incididunt
+            occaecat quis do. Consequat adipisicing irure Lorem commodo officia sint id. Velit sit
+            magna aliquip eiusmod non id deserunt. Magna veniam ad consequat dolor cupidatat esse
+            enim Lorem ullamco. Anim excepteur consectetur id in. Mollit laboris duis labore enim
+            duis esse reprehenderit.
           </Text>
         </Item>
       </TabPanels>
@@ -545,101 +521,86 @@ function renderWithFalsyKey(props = {}) {
         <Item key="">
           <Heading>Tab Body 1</Heading>
           <Text>
-            Dolore ex esse laboris elit magna esse sunt. Pariatur in veniam
-            Lorem est occaecat do magna nisi mollit ipsum sit adipisicing fugiat
-            ex. Pariatur ullamco exercitation ea qui adipisicing. Id cupidatat
-            aute id ut excepteur exercitation magna pariatur. Mollit irure irure
-            reprehenderit pariatur eiusmod proident Lorem deserunt duis cillum
-            mollit. Do reprehenderit sit cupidatat quis laborum in do culpa nisi
-            ipsum. Velit aliquip commodo ea ipsum incididunt culpa nostrud
-            deserunt incididunt exercitation. In quis proident sit ad dolore
-            tempor. Eiusmod pariatur quis commodo labore cupidatat cillum enim
-            eiusmod voluptate laborum culpa. Laborum cupidatat incididunt velit
-            voluptate incididunt occaecat quis do. Consequat adipisicing irure
-            Lorem commodo officia sint id. Velit sit magna aliquip eiusmod non
-            id deserunt. Magna veniam ad consequat dolor cupidatat esse enim
-            Lorem ullamco. Anim excepteur consectetur id in. Mollit laboris duis
-            labore enim duis esse reprehenderit.
+            Dolore ex esse laboris elit magna esse sunt. Pariatur in veniam Lorem est occaecat do
+            magna nisi mollit ipsum sit adipisicing fugiat ex. Pariatur ullamco exercitation ea qui
+            adipisicing. Id cupidatat aute id ut excepteur exercitation magna pariatur. Mollit irure
+            irure reprehenderit pariatur eiusmod proident Lorem deserunt duis cillum mollit. Do
+            reprehenderit sit cupidatat quis laborum in do culpa nisi ipsum. Velit aliquip commodo
+            ea ipsum incididunt culpa nostrud deserunt incididunt exercitation. In quis proident sit
+            ad dolore tempor. Eiusmod pariatur quis commodo labore cupidatat cillum enim eiusmod
+            voluptate laborum culpa. Laborum cupidatat incididunt velit voluptate incididunt
+            occaecat quis do. Consequat adipisicing irure Lorem commodo officia sint id. Velit sit
+            magna aliquip eiusmod non id deserunt. Magna veniam ad consequat dolor cupidatat esse
+            enim Lorem ullamco. Anim excepteur consectetur id in. Mollit laboris duis labore enim
+            duis esse reprehenderit.
           </Text>
         </Item>
         <Item key="val2">
           <Heading>Tab Body 2</Heading>
           <Text>
-            Dolore ex esse laboris elit magna esse sunt. Pariatur in veniam
-            Lorem est occaecat do magna nisi mollit ipsum sit adipisicing fugiat
-            ex. Pariatur ullamco exercitation ea qui adipisicing. Id cupidatat
-            aute id ut excepteur exercitation magna pariatur. Mollit irure irure
-            reprehenderit pariatur eiusmod proident Lorem deserunt duis cillum
-            mollit. Do reprehenderit sit cupidatat quis laborum in do culpa nisi
-            ipsum. Velit aliquip commodo ea ipsum incididunt culpa nostrud
-            deserunt incididunt exercitation. In quis proident sit ad dolore
-            tempor. Eiusmod pariatur quis commodo labore cupidatat cillum enim
-            eiusmod voluptate laborum culpa. Laborum cupidatat incididunt velit
-            voluptate incididunt occaecat quis do. Consequat adipisicing irure
-            Lorem commodo officia sint id. Velit sit magna aliquip eiusmod non
-            id deserunt. Magna veniam ad consequat dolor cupidatat esse enim
-            Lorem ullamco. Anim excepteur consectetur id in. Mollit laboris duis
-            labore enim duis esse reprehenderit.
+            Dolore ex esse laboris elit magna esse sunt. Pariatur in veniam Lorem est occaecat do
+            magna nisi mollit ipsum sit adipisicing fugiat ex. Pariatur ullamco exercitation ea qui
+            adipisicing. Id cupidatat aute id ut excepteur exercitation magna pariatur. Mollit irure
+            irure reprehenderit pariatur eiusmod proident Lorem deserunt duis cillum mollit. Do
+            reprehenderit sit cupidatat quis laborum in do culpa nisi ipsum. Velit aliquip commodo
+            ea ipsum incididunt culpa nostrud deserunt incididunt exercitation. In quis proident sit
+            ad dolore tempor. Eiusmod pariatur quis commodo labore cupidatat cillum enim eiusmod
+            voluptate laborum culpa. Laborum cupidatat incididunt velit voluptate incididunt
+            occaecat quis do. Consequat adipisicing irure Lorem commodo officia sint id. Velit sit
+            magna aliquip eiusmod non id deserunt. Magna veniam ad consequat dolor cupidatat esse
+            enim Lorem ullamco. Anim excepteur consectetur id in. Mollit laboris duis labore enim
+            duis esse reprehenderit.
           </Text>
         </Item>
         <Item key="val3">
           <Heading>Tab Body 3</Heading>
           <Text>
-            Dolore ex esse laboris elit magna esse sunt. Pariatur in veniam
-            Lorem est occaecat do magna nisi mollit ipsum sit adipisicing fugiat
-            ex. Pariatur ullamco exercitation ea qui adipisicing. Id cupidatat
-            aute id ut excepteur exercitation magna pariatur. Mollit irure irure
-            reprehenderit pariatur eiusmod proident Lorem deserunt duis cillum
-            mollit. Do reprehenderit sit cupidatat quis laborum in do culpa nisi
-            ipsum. Velit aliquip commodo ea ipsum incididunt culpa nostrud
-            deserunt incididunt exercitation. In quis proident sit ad dolore
-            tempor. Eiusmod pariatur quis commodo labore cupidatat cillum enim
-            eiusmod voluptate laborum culpa. Laborum cupidatat incididunt velit
-            voluptate incididunt occaecat quis do. Consequat adipisicing irure
-            Lorem commodo officia sint id. Velit sit magna aliquip eiusmod non
-            id deserunt. Magna veniam ad consequat dolor cupidatat esse enim
-            Lorem ullamco. Anim excepteur consectetur id in. Mollit laboris duis
-            labore enim duis esse reprehenderit.
+            Dolore ex esse laboris elit magna esse sunt. Pariatur in veniam Lorem est occaecat do
+            magna nisi mollit ipsum sit adipisicing fugiat ex. Pariatur ullamco exercitation ea qui
+            adipisicing. Id cupidatat aute id ut excepteur exercitation magna pariatur. Mollit irure
+            irure reprehenderit pariatur eiusmod proident Lorem deserunt duis cillum mollit. Do
+            reprehenderit sit cupidatat quis laborum in do culpa nisi ipsum. Velit aliquip commodo
+            ea ipsum incididunt culpa nostrud deserunt incididunt exercitation. In quis proident sit
+            ad dolore tempor. Eiusmod pariatur quis commodo labore cupidatat cillum enim eiusmod
+            voluptate laborum culpa. Laborum cupidatat incididunt velit voluptate incididunt
+            occaecat quis do. Consequat adipisicing irure Lorem commodo officia sint id. Velit sit
+            magna aliquip eiusmod non id deserunt. Magna veniam ad consequat dolor cupidatat esse
+            enim Lorem ullamco. Anim excepteur consectetur id in. Mollit laboris duis labore enim
+            duis esse reprehenderit.
           </Text>
         </Item>
         <Item key="val4">
           <Heading>Tab Body 4</Heading>
           <Text>
-            Dolore ex esse laboris elit magna esse sunt. Pariatur in veniam
-            Lorem est occaecat do magna nisi mollit ipsum sit adipisicing fugiat
-            ex. Pariatur ullamco exercitation ea qui adipisicing. Id cupidatat
-            aute id ut excepteur exercitation magna pariatur. Mollit irure irure
-            reprehenderit pariatur eiusmod proident Lorem deserunt duis cillum
-            mollit. Do reprehenderit sit cupidatat quis laborum in do culpa nisi
-            ipsum. Velit aliquip commodo ea ipsum incididunt culpa nostrud
-            deserunt incididunt exercitation. In quis proident sit ad dolore
-            tempor. Eiusmod pariatur quis commodo labore cupidatat cillum enim
-            eiusmod voluptate laborum culpa. Laborum cupidatat incididunt velit
-            voluptate incididunt occaecat quis do. Consequat adipisicing irure
-            Lorem commodo officia sint id. Velit sit magna aliquip eiusmod non
-            id deserunt. Magna veniam ad consequat dolor cupidatat esse enim
-            Lorem ullamco. Anim excepteur consectetur id in. Mollit laboris duis
-            labore enim duis esse reprehenderit.
+            Dolore ex esse laboris elit magna esse sunt. Pariatur in veniam Lorem est occaecat do
+            magna nisi mollit ipsum sit adipisicing fugiat ex. Pariatur ullamco exercitation ea qui
+            adipisicing. Id cupidatat aute id ut excepteur exercitation magna pariatur. Mollit irure
+            irure reprehenderit pariatur eiusmod proident Lorem deserunt duis cillum mollit. Do
+            reprehenderit sit cupidatat quis laborum in do culpa nisi ipsum. Velit aliquip commodo
+            ea ipsum incididunt culpa nostrud deserunt incididunt exercitation. In quis proident sit
+            ad dolore tempor. Eiusmod pariatur quis commodo labore cupidatat cillum enim eiusmod
+            voluptate laborum culpa. Laborum cupidatat incididunt velit voluptate incididunt
+            occaecat quis do. Consequat adipisicing irure Lorem commodo officia sint id. Velit sit
+            magna aliquip eiusmod non id deserunt. Magna veniam ad consequat dolor cupidatat esse
+            enim Lorem ullamco. Anim excepteur consectetur id in. Mollit laboris duis labore enim
+            duis esse reprehenderit.
           </Text>
         </Item>
         <Item key="val5">
           <Heading>Tab Body 5</Heading>
           <Text>
-            Dolore ex esse laboris elit magna esse sunt. Pariatur in veniam
-            Lorem est occaecat do magna nisi mollit ipsum sit adipisicing fugiat
-            ex. Pariatur ullamco exercitation ea qui adipisicing. Id cupidatat
-            aute id ut excepteur exercitation magna pariatur. Mollit irure irure
-            reprehenderit pariatur eiusmod proident Lorem deserunt duis cillum
-            mollit. Do reprehenderit sit cupidatat quis laborum in do culpa nisi
-            ipsum. Velit aliquip commodo ea ipsum incididunt culpa nostrud
-            deserunt incididunt exercitation. In quis proident sit ad dolore
-            tempor. Eiusmod pariatur quis commodo labore cupidatat cillum enim
-            eiusmod voluptate laborum culpa. Laborum cupidatat incididunt velit
-            voluptate incididunt occaecat quis do. Consequat adipisicing irure
-            Lorem commodo officia sint id. Velit sit magna aliquip eiusmod non
-            id deserunt. Magna veniam ad consequat dolor cupidatat esse enim
-            Lorem ullamco. Anim excepteur consectetur id in. Mollit laboris duis
-            labore enim duis esse reprehenderit.
+            Dolore ex esse laboris elit magna esse sunt. Pariatur in veniam Lorem est occaecat do
+            magna nisi mollit ipsum sit adipisicing fugiat ex. Pariatur ullamco exercitation ea qui
+            adipisicing. Id cupidatat aute id ut excepteur exercitation magna pariatur. Mollit irure
+            irure reprehenderit pariatur eiusmod proident Lorem deserunt duis cillum mollit. Do
+            reprehenderit sit cupidatat quis laborum in do culpa nisi ipsum. Velit aliquip commodo
+            ea ipsum incididunt culpa nostrud deserunt incididunt exercitation. In quis proident sit
+            ad dolore tempor. Eiusmod pariatur quis commodo labore cupidatat cillum enim eiusmod
+            voluptate laborum culpa. Laborum cupidatat incididunt velit voluptate incididunt
+            occaecat quis do. Consequat adipisicing irure Lorem commodo officia sint id. Velit sit
+            magna aliquip eiusmod non id deserunt. Magna veniam ad consequat dolor cupidatat esse
+            enim Lorem ullamco. Anim excepteur consectetur id in. Mollit laboris duis labore enim
+            duis esse reprehenderit.
           </Text>
         </Item>
       </TabPanels>
@@ -652,27 +613,48 @@ interface DynamicTabItem {
   children: ReactNode,
   icon?: ReactNode
 }
-
 let items = [
-  {name: 'Tab 1', children: 'Tab Body 1', icon: <Dashboard size="S" />},
-  {name: 'Tab 2', children: 'Tab Body 2', icon: <Calendar size="S" />},
-  {name: 'Tab 3', children: 'Tab Body 3', icon: <Bookmark size="S" />},
-  {name: 'Tab 4', children: 'Tab Body 4', icon: <Dashboard size="S" />},
-  {name: 'Tab 5', children: 'Tab Body 5', icon: <Calendar size="S" />},
-  {name: 'Tab 6', children: 'Tab Body 6', icon: <Bookmark size="S" />}
+  {
+    name: 'Tab 1',
+    children: 'Tab Body 1',
+    icon: <Dashboard size="S" />
+  },
+  {
+    name: 'Tab 2',
+    children: 'Tab Body 2',
+    icon: <Calendar size="S" />
+  },
+  {
+    name: 'Tab 3',
+    children: 'Tab Body 3',
+    icon: <Bookmark size="S" />
+  },
+  {
+    name: 'Tab 4',
+    children: 'Tab Body 4',
+    icon: <Dashboard size="S" />
+  },
+  {
+    name: 'Tab 5',
+    children: 'Tab Body 5',
+    icon: <Calendar size="S" />
+  },
+  {
+    name: 'Tab 6',
+    children: 'Tab Body 6',
+    icon: <Bookmark size="S" />
+  }
 ] as DynamicTabItem[];
 
-let DynamicTabs = (
-  props: Omit<SpectrumTabsProps<DynamicTabItem>, 'children'>
-) => {
+let DynamicTabs = (props: Omit<SpectrumTabsProps<DynamicTabItem>, 'children'>) => {
   let [tabs, setTabs] = React.useState(items);
+
   let addTab = () => {
     let newTabs = [...tabs];
     newTabs.push({
       name: `Tab ${tabs.length + 1}`,
       children: `Tab Body ${tabs.length + 1}`
     });
-
     setTabs(newTabs);
   };
 
@@ -683,7 +665,10 @@ let DynamicTabs = (
   };
 
   return (
-    <div style={{width: '80%'}}>
+    <div
+      style={{
+        width: '80%'
+      }}>
       <Tabs
         {...props}
         aria-label="Tab example"
@@ -702,22 +687,18 @@ let DynamicTabs = (
             <Item key={item.name}>
               <Heading>{item.children}</Heading>
               <Text>
-                Dolore ex esse laboris elit magna esse sunt. Pariatur in veniam
-                Lorem est occaecat do magna nisi mollit ipsum sit adipisicing
-                fugiat ex. Pariatur ullamco exercitation ea qui adipisicing. Id
-                cupidatat aute id ut excepteur exercitation magna pariatur.
-                Mollit irure irure reprehenderit pariatur eiusmod proident Lorem
-                deserunt duis cillum mollit. Do reprehenderit sit cupidatat quis
-                laborum in do culpa nisi ipsum. Velit aliquip commodo ea ipsum
-                incididunt culpa nostrud deserunt incididunt exercitation. In
-                quis proident sit ad dolore tempor. Eiusmod pariatur quis
-                commodo labore cupidatat cillum enim eiusmod voluptate laborum
-                culpa. Laborum cupidatat incididunt velit voluptate incididunt
-                occaecat quis do. Consequat adipisicing irure Lorem commodo
-                officia sint id. Velit sit magna aliquip eiusmod non id
-                deserunt. Magna veniam ad consequat dolor cupidatat esse enim
-                Lorem ullamco. Anim excepteur consectetur id in. Mollit laboris
-                duis labore enim duis esse reprehenderit.
+                Dolore ex esse laboris elit magna esse sunt. Pariatur in veniam Lorem est occaecat
+                do magna nisi mollit ipsum sit adipisicing fugiat ex. Pariatur ullamco exercitation
+                ea qui adipisicing. Id cupidatat aute id ut excepteur exercitation magna pariatur.
+                Mollit irure irure reprehenderit pariatur eiusmod proident Lorem deserunt duis
+                cillum mollit. Do reprehenderit sit cupidatat quis laborum in do culpa nisi ipsum.
+                Velit aliquip commodo ea ipsum incididunt culpa nostrud deserunt incididunt
+                exercitation. In quis proident sit ad dolore tempor. Eiusmod pariatur quis commodo
+                labore cupidatat cillum enim eiusmod voluptate laborum culpa. Laborum cupidatat
+                incididunt velit voluptate incididunt occaecat quis do. Consequat adipisicing irure
+                Lorem commodo officia sint id. Velit sit magna aliquip eiusmod non id deserunt.
+                Magna veniam ad consequat dolor cupidatat esse enim Lorem ullamco. Anim excepteur
+                consectetur id in. Mollit laboris duis labore enim duis esse reprehenderit.
               </Text>
             </Item>
           )}
@@ -737,9 +718,11 @@ let DynamicTabs = (
 
 let OrientationFlip = (props = {}) => {
   let [flipOrientation, setFlipOrientation] = React.useState(true);
-
   return (
-    <div style={{width: '80%'}}>
+    <div
+      style={{
+        width: '80%'
+      }}>
       <Tabs
         {...props}
         aria-label="Tab example"
@@ -759,30 +742,24 @@ let OrientationFlip = (props = {}) => {
             <Item key={item.name}>
               <Heading>{item.children}</Heading>
               <Text>
-                Dolore ex esse laboris elit magna esse sunt. Pariatur in veniam
-                Lorem est occaecat do magna nisi mollit ipsum sit adipisicing
-                fugiat ex. Pariatur ullamco exercitation ea qui adipisicing. Id
-                cupidatat aute id ut excepteur exercitation magna pariatur.
-                Mollit irure irure reprehenderit pariatur eiusmod proident Lorem
-                deserunt duis cillum mollit. Do reprehenderit sit cupidatat quis
-                laborum in do culpa nisi ipsum. Velit aliquip commodo ea ipsum
-                incididunt culpa nostrud deserunt incididunt exercitation. In
-                quis proident sit ad dolore tempor. Eiusmod pariatur quis
-                commodo labore cupidatat cillum enim eiusmod voluptate laborum
-                culpa. Laborum cupidatat incididunt velit voluptate incididunt
-                occaecat quis do. Consequat adipisicing irure Lorem commodo
-                officia sint id. Velit sit magna aliquip eiusmod non id
-                deserunt. Magna veniam ad consequat dolor cupidatat esse enim
-                Lorem ullamco. Anim excepteur consectetur id in. Mollit laboris
-                duis labore enim duis esse reprehenderit.
+                Dolore ex esse laboris elit magna esse sunt. Pariatur in veniam Lorem est occaecat
+                do magna nisi mollit ipsum sit adipisicing fugiat ex. Pariatur ullamco exercitation
+                ea qui adipisicing. Id cupidatat aute id ut excepteur exercitation magna pariatur.
+                Mollit irure irure reprehenderit pariatur eiusmod proident Lorem deserunt duis
+                cillum mollit. Do reprehenderit sit cupidatat quis laborum in do culpa nisi ipsum.
+                Velit aliquip commodo ea ipsum incididunt culpa nostrud deserunt incididunt
+                exercitation. In quis proident sit ad dolore tempor. Eiusmod pariatur quis commodo
+                labore cupidatat cillum enim eiusmod voluptate laborum culpa. Laborum cupidatat
+                incididunt velit voluptate incididunt occaecat quis do. Consequat adipisicing irure
+                Lorem commodo officia sint id. Velit sit magna aliquip eiusmod non id deserunt.
+                Magna veniam ad consequat dolor cupidatat esse enim Lorem ullamco. Anim excepteur
+                consectetur id in. Mollit laboris duis labore enim duis esse reprehenderit.
               </Text>
             </Item>
           )}
         </TabPanels>
       </Tabs>
-      <Button
-        variant="secondary"
-        onPress={() => setFlipOrientation((state) => !state)}>
+      <Button variant="secondary" onPress={() => setFlipOrientation((state) => !state)}>
         <Text>Flip Orientation</Text>
       </Button>
     </div>
@@ -791,13 +768,13 @@ let OrientationFlip = (props = {}) => {
 
 let DynamicTabsWithDecoration = (props = {}) => {
   let [tabs, setTabs] = React.useState(items);
+
   let addTab = () => {
     let newTabs = [...tabs];
     newTabs.push({
       name: `Tab ${tabs.length + 1}`,
       children: `Tab Body ${tabs.length + 1}`
     });
-
     setTabs(newTabs);
   };
 
@@ -810,14 +787,21 @@ let DynamicTabsWithDecoration = (props = {}) => {
   };
 
   return (
-    <div style={{width: '80%'}}>
+    <div
+      style={{
+        width: '80%'
+      }}>
       <Tabs
         {...props}
         aria-label="Tab example"
         items={tabs}
         onSelectionChange={action('onSelectionChange')}>
         <Flex direction="row" alignItems="center">
-          <TabList flex="1 1 auto" UNSAFE_style={{overflow: 'hidden'}}>
+          <TabList
+            flex="1 1 auto"
+            UNSAFE_style={{
+              overflow: 'hidden'
+            }}>
             {(item: DynamicTabItem) => (
               <Item key={item.name}>
                 {item.icon}
@@ -852,22 +836,18 @@ let DynamicTabsWithDecoration = (props = {}) => {
             <Item key={item.name}>
               <Heading>{item.children}</Heading>
               <Text>
-                Dolore ex esse laboris elit magna esse sunt. Pariatur in veniam
-                Lorem est occaecat do magna nisi mollit ipsum sit adipisicing
-                fugiat ex. Pariatur ullamco exercitation ea qui adipisicing. Id
-                cupidatat aute id ut excepteur exercitation magna pariatur.
-                Mollit irure irure reprehenderit pariatur eiusmod proident Lorem
-                deserunt duis cillum mollit. Do reprehenderit sit cupidatat quis
-                laborum in do culpa nisi ipsum. Velit aliquip commodo ea ipsum
-                incididunt culpa nostrud deserunt incididunt exercitation. In
-                quis proident sit ad dolore tempor. Eiusmod pariatur quis
-                commodo labore cupidatat cillum enim eiusmod voluptate laborum
-                culpa. Laborum cupidatat incididunt velit voluptate incididunt
-                occaecat quis do. Consequat adipisicing irure Lorem commodo
-                officia sint id. Velit sit magna aliquip eiusmod non id
-                deserunt. Magna veniam ad consequat dolor cupidatat esse enim
-                Lorem ullamco. Anim excepteur consectetur id in. Mollit laboris
-                duis labore enim duis esse reprehenderit.
+                Dolore ex esse laboris elit magna esse sunt. Pariatur in veniam Lorem est occaecat
+                do magna nisi mollit ipsum sit adipisicing fugiat ex. Pariatur ullamco exercitation
+                ea qui adipisicing. Id cupidatat aute id ut excepteur exercitation magna pariatur.
+                Mollit irure irure reprehenderit pariatur eiusmod proident Lorem deserunt duis
+                cillum mollit. Do reprehenderit sit cupidatat quis laborum in do culpa nisi ipsum.
+                Velit aliquip commodo ea ipsum incididunt culpa nostrud deserunt incididunt
+                exercitation. In quis proident sit ad dolore tempor. Eiusmod pariatur quis commodo
+                labore cupidatat cillum enim eiusmod voluptate laborum culpa. Laborum cupidatat
+                incididunt velit voluptate incididunt occaecat quis do. Consequat adipisicing irure
+                Lorem commodo officia sint id. Velit sit magna aliquip eiusmod non id deserunt.
+                Magna veniam ad consequat dolor cupidatat esse enim Lorem ullamco. Anim excepteur
+                consectetur id in. Mollit laboris duis labore enim duis esse reprehenderit.
               </Text>
             </Item>
           )}

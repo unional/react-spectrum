@@ -9,7 +9,6 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import {action} from '@storybook/addon-actions';
 import {ActionButton} from '@react-spectrum/button';
 import {ActionGroup} from '@react-spectrum/actiongroup';
@@ -46,8 +45,13 @@ import {useListState} from '@react-stately/list';
 import {VirtualizedListBoxExample} from './VirtualizedListBox';
 
 let manyItems = [];
+
 for (let i = 0; i < 20; i++) {
-  manyItems.push({id: '' + i, type: 'item', text: 'Item ' + i});
+  manyItems.push({
+    id: '' + i,
+    type: 'item',
+    text: 'Item ' + i
+  });
 }
 
 export default {
@@ -64,157 +68,149 @@ export const Default = () => (
     <Droppable />
   </Flex>
 );
-
-export const NestedDropRegions = () => (
-  <Flex direction="column" gap="size-200" alignItems="center">
-    <Draggable />
-    <Droppable actionId="Parent">
-      <Droppable actionId="Child" />
-    </Droppable>
-  </Flex>
-);
-
-NestedDropRegions.story = {
+export const NestedDropRegions = {
+  render: () => (
+    <Flex direction="column" gap="size-200" alignItems="center">
+      <Draggable />
+      <Droppable actionId="Parent">
+        <Droppable actionId="Child" />
+      </Droppable>
+    </Flex>
+  ),
   name: 'nested drop regions'
 };
 
-export const DroppableListbox = () => (
-  <Flex direction="row" gap="size-200" alignItems="center">
-    <Draggable />
-    <DroppableListBox>
-      <Item key="1" textValue="One">
-        <Folder size="S" />
-        <span>One</span>
-      </Item>
-      <Item key="2">Two</Item>
-      <Item key="3" textValue="Three">
-        <Folder size="S" />
-        <span>Three</span>
-      </Item>
-    </DroppableListBox>
-  </Flex>
-);
-
-DroppableListbox.story = {
+export const DroppableListbox = {
+  render: () => (
+    <Flex direction="row" gap="size-200" alignItems="center">
+      <Draggable />
+      <DroppableListBox>
+        <Item key="1" textValue="One">
+          <Folder size="S" />
+          <span>One</span>
+        </Item>
+        <Item key="2">Two</Item>
+        <Item key="3" textValue="Three">
+          <Folder size="S" />
+          <span>Three</span>
+        </Item>
+      </DroppableListBox>
+    </Flex>
+  ),
   name: 'Droppable listbox'
 };
 
-export const InDialog = () => (
-  <Flex direction="column" gap="size-200" alignItems="center">
-    <Draggable />
-    <DialogButton>
-      <Dialog>
-        <Heading>Dialog</Heading>
-        <Content>
-          <Flex direction="column" gap="size-200" alignItems="center">
-            <Draggable />
-            <Droppable />
-            <Droppable />
-          </Flex>
-        </Content>
-      </Dialog>
-    </DialogButton>
-    <Droppable />
-  </Flex>
-);
-
-InDialog.story = {
+export const InDialog = {
+  render: () => (
+    <Flex direction="column" gap="size-200" alignItems="center">
+      <Draggable />
+      <DialogButton>
+        <Dialog>
+          <Heading>Dialog</Heading>
+          <Content>
+            <Flex direction="column" gap="size-200" alignItems="center">
+              <Draggable />
+              <Droppable />
+              <Droppable />
+            </Flex>
+          </Content>
+        </Dialog>
+      </DialogButton>
+      <Droppable />
+    </Flex>
+  ),
   name: 'In dialog'
 };
 
-export const DraggableGridDroppableListbox = () => (
-  <Flex direction="row" gap="size-200" alignItems="center" wrap>
-    <DraggableCollectionExample />
-    <DroppableListBoxExample />
-  </Flex>
-);
-
-DraggableGridDroppableListbox.story = {
+export const DraggableGridDroppableListbox = {
+  render: () => (
+    <Flex direction="row" gap="size-200" alignItems="center" wrap>
+      <DraggableCollectionExample />
+      <DroppableListBoxExample />
+    </Flex>
+  ),
   name: 'Draggable grid, droppable listbox'
 };
 
-export const DroppableGrid = () => (
-  <Flex direction="column" alignItems="start">
-    <ActionGroup
-      onAction={(action) => {
-        switch (action) {
-          case 'copy':
-          case 'cut': {
-            let selected = document.querySelector(
-              '[aria-label="Draggable list"] [aria-selected="true"] [role="gridcell"]'
-            ) as HTMLElement;
-            selected?.focus();
-            document.execCommand(action);
-            break;
-          }
-          case 'paste': {
-            // This only works in Safari...
-            let selected = document.querySelector(
-              '[aria-label="List"] [aria-selected="true"] [role="gridcell"]'
-            ) as HTMLElement;
-            selected?.focus();
-            document.execCommand('paste');
-            break;
-          }
-        }
-      }}>
-      <Item key="copy" aria-label="Copy">
-        <Copy />
-      </Item>
-      <Item key="cut" aria-label="Cut">
-        <Cut />
-      </Item>
-      <Item key="paste" aria-label="Paste">
-        <Paste />
-      </Item>
-    </ActionGroup>
-    <Flex direction="row" gap="size-200" alignItems="center" wrap>
-      <DraggableCollectionExample />
-      <DroppableGridExample
-        onDropEnter={action('onDropEnter')}
-        onDropExit={action('onDropExit')}
-        onDrop={action('onDrop')} />
-    </Flex>
-  </Flex>
-);
+export const DroppableGrid = {
+  render: () => (
+    <Flex direction="column" alignItems="start">
+      <ActionGroup
+        onAction={(action) => {
+          switch (action) {
+            case 'copy':
+            case 'cut': {
+              let selected = document.querySelector(
+                '[aria-label="Draggable list"] [aria-selected="true"] [role="gridcell"]'
+              ) as HTMLElement;
+              selected?.focus();
+              document.execCommand(action);
+              break;
+            }
 
-DroppableGrid.story = {
+            case 'paste': {
+              // This only works in Safari...
+              let selected = document.querySelector(
+                '[aria-label="List"] [aria-selected="true"] [role="gridcell"]'
+              ) as HTMLElement;
+              selected?.focus();
+              document.execCommand('paste');
+              break;
+            }
+          }
+        }}>
+        <Item key="copy" aria-label="Copy">
+          <Copy />
+        </Item>
+        <Item key="cut" aria-label="Cut">
+          <Cut />
+        </Item>
+        <Item key="paste" aria-label="Paste">
+          <Paste />
+        </Item>
+      </ActionGroup>
+      <Flex direction="row" gap="size-200" alignItems="center" wrap>
+        <DraggableCollectionExample />
+        <DroppableGridExample
+          onDropEnter={action('onDropEnter')}
+          onDropExit={action('onDropExit')}
+          onDrop={action('onDrop')} />
+      </Flex>
+    </Flex>
+  ),
   name: 'Droppable grid'
 };
 
-export const DroppableGridWithManyItems = () => (
-  <Flex direction="row" gap="size-200" alignItems="center" wrap>
-    <DraggableCollectionExample />
-    <DroppableGridExample items={manyItems} />
-  </Flex>
-);
-
-DroppableGridWithManyItems.story = {
+export const DroppableGridWithManyItems = {
+  render: () => (
+    <Flex direction="row" gap="size-200" alignItems="center" wrap>
+      <DraggableCollectionExample />
+      <DroppableGridExample items={manyItems} />
+    </Flex>
+  ),
   name: 'Droppable grid with many items'
 };
 
-export const VirtualizedListbox = () => (
-  <Flex direction="row" gap="size-200" alignItems="center" wrap>
-    <DraggableCollectionExample />
-    <VirtualizedListBoxExample items={manyItems} />
-  </Flex>
-);
-
-VirtualizedListbox.story = {
+export const VirtualizedListbox = {
+  render: () => (
+    <Flex direction="row" gap="size-200" alignItems="center" wrap>
+      <DraggableCollectionExample />
+      <VirtualizedListBoxExample items={manyItems} />
+    </Flex>
+  ),
   name: 'Virtualized listbox'
 };
 
-export const MultipleCollectionDropTargets = () => (
-  <Flex direction="row" gap="size-200" alignItems="center" wrap>
-    <DraggableCollectionExample />
-    <VirtualizedListBoxExample
-      items={manyItems.map((item) => ({...item, type: 'folder'}))}
-      accept="folder" />
-    <VirtualizedListBoxExample items={manyItems} accept="item" />
-  </Flex>
-);
-
-MultipleCollectionDropTargets.story = {
+export const MultipleCollectionDropTargets = {
+  render: () => (
+    <Flex direction="row" gap="size-200" alignItems="center" wrap>
+      <DraggableCollectionExample />
+      <VirtualizedListBoxExample
+        items={manyItems.map((item) => ({...item, type: 'folder'}))}
+        accept="folder" />
+      <VirtualizedListBoxExample items={manyItems} accept="item" />
+    </Flex>
+  ),
   name: 'Multiple collection drop targets'
 };
 
@@ -229,14 +225,15 @@ function Draggable() {
         }
       ];
     },
+
     getAllowedDropOperations() {
       return ['copy'];
     },
+
     onDragStart: action('onDragStart'),
     // onDragMove: action('onDragMove'),
     onDragEnd: action('onDragEnd')
   });
-
   let {clipboardProps} = useClipboard({
     getItems() {
       return [
@@ -246,16 +243,16 @@ function Draggable() {
       ];
     }
   });
-
   let ref = React.useRef();
   let {buttonProps} = useButton({...dragButtonProps, elementType: 'div'}, ref);
-
   return (
     <FocusRing focusRingClass={classNames(dndStyles, 'focus-ring')}>
       <div
         ref={ref}
         {...mergeProps(dragProps, buttonProps, clipboardProps)}
-        className={classNames(dndStyles, 'draggable', {'is-dragging': isDragging})}>
+        className={classNames(dndStyles, 'draggable', {
+          'is-dragging': isDragging
+        })}>
         <ShowMenu size="XS" />
         <span>Drag me</span>
       </div>
@@ -272,23 +269,28 @@ function Droppable({type, children, actionId = ''}: any) {
     onDropExit: action(`onDropExit${actionId}`),
     onDropActivate: action(`onDropActivate${actionId}`),
     onDrop: action(`onDrop${actionId}`),
+
     getDropOperation(types, allowedOperations) {
       return !type || types.has(type) ? allowedOperations[0] : 'cancel';
     }
   });
-
   let {clipboardProps} = useClipboard({
     onPaste: action(`onPaste${actionId}`)
   });
-
-  let {buttonProps} = useButton({elementType: 'div'}, ref);
-
+  let {buttonProps} = useButton(
+    {
+      elementType: 'div'
+    },
+    ref
+  );
   return (
     <FocusRing focusRingClass={classNames(dropzoneStyles, 'focus-ring')}>
       <div
         {...mergeProps(dropProps, buttonProps, clipboardProps)}
         ref={ref}
-        className={classNames(dropzoneStyles, 'spectrum-Dropzone', {'is-dragged': isDropTarget})}>
+        className={classNames(dropzoneStyles, 'spectrum-Dropzone', {
+          'is-dragged': isDropTarget
+        })}>
         Drop here
         {children}
       </div>
@@ -301,11 +303,11 @@ function DialogButton({children}) {
   let ref = React.useRef();
   let {dropProps, isDropTarget} = useDrop({
     ref: unwrapDOMRef(ref),
+
     onDropActivate() {
       setOpen(true);
     }
   });
-
   return (
     <DialogTrigger isDismissable isOpen={isOpen} onOpenChange={setOpen}>
       <PressResponder {...dropProps} isPressed={isDropTarget}>
@@ -319,9 +321,21 @@ function DialogButton({children}) {
 function DraggableCollectionExample() {
   let list = useListData({
     initialItems: [
-      {id: 'foo', type: 'folder', text: 'Foo'},
-      {id: 'bar', type: 'folder', text: 'Bar'},
-      {id: 'baz', type: 'item', text: 'Baz'}
+      {
+        id: 'foo',
+        type: 'folder',
+        text: 'Foo'
+      },
+      {
+        id: 'bar',
+        type: 'folder',
+        text: 'Bar'
+      },
+      {
+        id: 'baz',
+        type: 'item',
+        text: 'Baz'
+      }
     ]
   });
 
@@ -378,15 +392,14 @@ function DraggableCollection(props) {
       }))
     })
   });
-
   let provider = useProvider();
   let dragState = useDraggableCollectionState({
     collection: gridState.collection,
     selectionManager: gridState.selectionManager,
+
     getItems(keys) {
       return [...keys].map((key) => {
         let item = gridState.collection.getItem(key);
-
         return {
           // @ts-ignore
           [item.value.type]: item.textValue,
@@ -394,6 +407,7 @@ function DraggableCollection(props) {
         };
       });
     },
+
     renderPreview(selectedKeys, draggedKey) {
       let item = state.collection.getItem(draggedKey);
       return (
@@ -413,20 +427,15 @@ function DraggableCollection(props) {
         </Provider>
       );
     },
+
     onDragStart: action('onDragStart'),
     onDragEnd: chain(action('onDragEnd'), props.onDragEnd)
   });
-
   let {gridProps} = useGrid(
-    {
-      ...props,
-      'aria-label': 'Draggable list',
-      focusMode: 'cell'
-    },
+    {...props, 'aria-label': 'Draggable list', focusMode: 'cell'},
     gridState,
     ref
   );
-
   return (
     <div
       ref={ref}
@@ -452,8 +461,13 @@ function DraggableCollectionItem({item, state, dragState, onCut}) {
   let cellRef = React.useRef();
   let cellNode = [...item.childNodes][0];
   let isSelected = state.selectionManager.isSelected(item.key);
-
-  let {rowProps} = useGridRow({node: item}, state, rowRef);
+  let {rowProps} = useGridRow(
+    {
+      node: item
+    },
+    state,
+    rowRef
+  );
   let {gridCellProps} = useGridCell(
     {
       node: cellNode,
@@ -463,24 +477,19 @@ function DraggableCollectionItem({item, state, dragState, onCut}) {
     state,
     cellRef
   );
-
-  let {dragProps, dragButtonProps} = useDraggableItem({key: item.key}, dragState);
-
+  let {dragProps, dragButtonProps} = useDraggableItem(
+    {
+      key: item.key
+    },
+    dragState
+  );
   let {clipboardProps} = useClipboard({
     getItems: () => dragState.getItems(item.key),
     onCut: () => onCut(dragState.getKeysForDrag(item.key))
   });
-
   let buttonRef = React.useRef();
-  let {buttonProps} = useButton(
-    {
-      ...dragButtonProps,
-      elementType: 'div'
-    },
-    buttonRef
-  );
+  let {buttonProps} = useButton({...dragButtonProps, elementType: 'div'}, buttonRef);
   let id = useId();
-
   return (
     <div {...rowProps} ref={rowRef} aria-labelledby={id}>
       <FocusRing focusRingClass={classNames(dndStyles, 'focus-ring')}>

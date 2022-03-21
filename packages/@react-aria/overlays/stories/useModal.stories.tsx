@@ -9,7 +9,6 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import {ActionButton} from '@react-spectrum/button';
 import {OverlayContainer, OverlayProvider, useModal} from '../src';
 import React, {useState} from 'react';
@@ -18,15 +17,13 @@ export default {
   title: 'useModal'
 };
 
-export const DefaultContainer = () => <App />;
-
-DefaultContainer.story = {
+export const DefaultContainer = {
+  render: () => <App />,
   name: 'default container'
 };
 
-export const DifferentContainer = () => <App useAlternateContainer />;
-
-DifferentContainer.story = {
+export const DifferentContainer = {
+  render: () => <App useAlternateContainer />,
   name: 'different container'
 };
 

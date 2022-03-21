@@ -9,82 +9,95 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import {Label} from '../';
 import React from 'react';
-import {SpectrumLabelProps} from '@react-types/label';
 import {TextField} from '@react-spectrum/textfield';
 
 export default {
   title: 'Label',
-
   parameters: {
-    providerSwitcher: {status: 'positive'}
-  }
-};
-
-export const Default = () => render({});
-export const LabelAlignStart = () =>
-  render({labelAlign: 'start', width: '100%'});
-
-LabelAlignStart.story = {
-  name: 'labelAlign: start'
-};
-
-export const LabelAlignEnd = () => render({labelAlign: 'end', width: '100%'});
-
-LabelAlignEnd.story = {
-  name: 'labelAlign: end'
-};
-
-export const LabelPositionSideLabelAlignStart = () =>
-  render({labelPosition: 'side', labelAlign: 'start', width: 80});
-
-LabelPositionSideLabelAlignStart.story = {
-  name: 'labelPosition: side, labelAlign: start'
-};
-
-export const LabelPositionSideLabelAlignEnd = () =>
-  render({labelPosition: 'side', labelAlign: 'end', width: 80});
-
-LabelPositionSideLabelAlignEnd.story = {
-  name: 'labelPosition: side, labelAlign: end'
-};
-
-export const IsRequired = () => render({isRequired: true});
-
-IsRequired.story = {
-  name: 'isRequired'
-};
-
-export const NecessityIndicatorIcon = () =>
-  render({isRequired: true, necessityIndicator: 'icon'});
-
-NecessityIndicatorIcon.story = {
-  name: 'necessityIndicator: icon'
-};
-
-export const NecessityIndicatorLabel = () =>
-  render({isRequired: true, necessityIndicator: 'label'});
-
-NecessityIndicatorLabel.story = {
-  name: 'necessityIndicator: label'
-};
-
-export const IsRequiredFalseNecessityIndicatorLabel = () =>
-  render({isRequired: false, necessityIndicator: 'label'});
-
-IsRequiredFalseNecessityIndicatorLabel.story = {
-  name: 'isRequired: false, necessityIndicator: label'
-};
-
-function render(props: SpectrumLabelProps = {}) {
-  return (
-    <div style={{whiteSpace: 'nowrap'}}>
+    providerSwitcher: {
+      status: 'positive'
+    }
+  },
+  render: (props) => (
+    <div
+      style={{
+        whiteSpace: 'nowrap'
+      }}>
       <Label {...props} for="test">
         Test
       </Label>
       <TextField placeholder="React" id="test" isRequired={props.isRequired} />
     </div>
-  );
-}
+  )
+};
+
+export const Default = {
+  name: 'default'
+};
+
+export const LabelAlignStart = {
+  name: 'labelAlign: start',
+  args: {
+    labelAlign: 'start',
+    width: '100%'
+  }
+};
+
+export const LabelAlignEnd = {
+  name: 'labelAlign: end',
+  args: {
+    labelAlign: 'end',
+    width: '100%'
+  }
+};
+
+export const LabelPositionSideLabelAlignStart = {
+  name: 'labelPosition: side, labelAlign: start',
+  args: {
+    labelPosition: 'side',
+    labelAlign: 'start',
+    width: 80
+  }
+};
+
+export const LabelPositionSideLabelAlignEnd = {
+  name: 'labelPosition: side, labelAlign: end',
+  args: {
+    labelPosition: 'side',
+    labelAlign: 'end',
+    width: 80
+  }
+};
+
+export const IsRequired = {
+  name: 'isRequired',
+  args: {
+    isRequired: true
+  }
+};
+
+export const NecessityIndicatorIcon = {
+  name: 'necessityIndicator: icon',
+  args: {
+    isRequired: true,
+    necessityIndicator: 'icon'
+  }
+};
+
+export const NecessityIndicatorLabel = {
+  name: 'necessityIndicator: label',
+  args: {
+    isRequired: true,
+    necessityIndicator: 'label'
+  }
+};
+
+export const IsRequiredFalseNecessityIndicatorLabel = {
+  name: 'isRequired: false, necessityIndicator: label',
+  args: {
+    isRequired: false,
+    necessityIndicator: 'label'
+  }
+};

@@ -9,7 +9,6 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import {ActionMenu, Item} from '@react-spectrum/menu';
 import assetStyles from '@adobe/spectrum-css-temp/components/asset/vars.css';
 import {Card} from '..';
@@ -38,27 +37,29 @@ import {Meta, Story} from '@storybook/react';
 import React, {Dispatch, SetStateAction, useState} from 'react';
 import {SpectrumCardProps} from '@react-types/card';
 import styles from '@adobe/spectrum-css-temp/components/card/vars.css';
-import {usePress} from '@react-aria/interactions';
+import {usePress} from '@react-aria/interactions'; // see https://github.com/storybookjs/storybook/issues/8426#issuecomment-669021940
 
-// see https://github.com/storybookjs/storybook/issues/8426#issuecomment-669021940
 const StoryFn = ({storyFn}) => storyFn();
 
 const meta: Meta<SpectrumCardProps> = {
   title: 'Card/quiet',
   component: Card,
-  decorators: [storyFn => <StoryFn storyFn={storyFn} />]
+  decorators: [(storyFn) => <StoryFn storyFn={storyFn} />]
 };
 
 export default meta;
 
 const Template = (): Story<SpectrumCardProps> => (args) => (
-  <div style={{width: '208px'}}>
+  <div
+    style={{
+      width: '208px'
+    }}>
     <Card {...args} />
   </div>
 );
-
 /* This is a bit of a funny template, we can't get selected on a Card through context because
-* if there's context it assumes it's being rendered in a collection. It's just here for a quick check of styles. */
+ * if there's context it assumes it's being rendered in a collection. It's just here for a quick check of styles. */
+
 interface ISelectableCard {
   disabledKeys: Set<any>,
   selectionManager: {
@@ -66,37 +67,53 @@ interface ISelectableCard {
     select: () => Dispatch<SetStateAction<ISelectableCard>>
   }
 }
+
 let SelectableCard = (props) => {
   let [state, setState] = useState<ISelectableCard>({
     disabledKeys: new Set(),
     selectionManager: {
       isSelected: () => true,
-      select: () => setState(prev => ({
+      select: () =>
+        setState((prev) => ({
+          ...prev,
+          selectionManager: {
+            ...prev.selectionManager,
+            isSelected: () => !prev.selectionManager.isSelected()
+          }
+        }))
+    }
+  });
+  let {pressProps} = usePress({
+    onPress: () =>
+      setState((prev) => ({
         ...prev,
         selectionManager: {
           ...prev.selectionManager,
           isSelected: () => !prev.selectionManager.isSelected()
         }
       }))
-    }
   });
-  let {pressProps} = usePress({onPress: () => setState(prev => ({
-    ...prev,
-    selectionManager: {
-      ...prev.selectionManager,
-      isSelected: () => !prev.selectionManager.isSelected()
-    }
-  }))});
   return (
-    <div style={{width: '208px'}} {...pressProps}>
-      <CardViewContext.Provider value={{state}}>
+    <div
+      style={{
+        width: '208px'
+      }}
+      {...pressProps}>
+      <CardViewContext.Provider
+        value={{
+          state
+        }}>
         <CardBase {...props} />
       </CardViewContext.Provider>
     </div>
   );
 };
+
 const TemplateSelected = (): Story<SpectrumCardProps> => (args) => (
-  <div style={{width: '208px'}}>
+  <div
+    style={{
+      width: '208px'
+    }}>
     <SelectableCard {...args} />
   </div>
 );
@@ -104,51 +121,51 @@ const TemplateSelected = (): Story<SpectrumCardProps> => (args) => (
 export const Quiet = Template().bind({});
 Quiet.args = {...Default.args, isQuiet: true};
 
-export const QuietSquare = Template().bind({});
-QuietSquare.args = {...Quiet.args, ...DefaultSquare.args};
+export const QuietSquare = Template().bind({});};
 
-export const QuietTall = Template().bind({});
-QuietTall.args = {...Quiet.args, ...DefaultTall.args};
+exportquare.args = {...Quiet.args, ...DefaultSquare.args};};
 
-export const QuietNoDescription = Template().bind({});
-QuietNoDescription.args = {...Quiet.args, ...NoDescription.args};
+export const QuietTall = Template().bind({});};
 
-export const QuietNoDescriptionSquare = Template().bind({});
-QuietNoDescriptionSquare.args = {...Quiet.args, ...NoDescriptionSquare.args};
+exportall.args = {...Quiet.args, ...DefaultTall.args};};
 
-export const QuietNoActionMenu = Template().bind({});
-QuietNoActionMenu.args = {...Quiet.args, ...NoActionMenu.args};
+export const QuietNoDescription = Template().bind({});};
 
-export const QuietWithIllustration = Template().bind({});
-QuietWithIllustration.args = {...Quiet.args, ...WithIllustration.args};
+exportoDescription.args = {...Quiet.args, ...NoDescription.args};};
 
+export const QuietNoDescriptionSquare = Template().bind({});};
+
+exportoDescriptionSquare.args = {...Quiet.args, ...NoDescriptionSquare.args};};
+
+export const QuietNoActionMenu = Template().bind({});};
+
+exportoActionMenu.args = {...Quiet.args, ...NoActionMenu.args};};
+
+export const QuietWithIllustration = Template().bind({});};
+
+exportithIllustration.args = {...Quiet.args, ...WithIllustration.args};
 export const QuietLongTitle = Template().bind({});
 QuietLongTitle.args = {...Quiet.args, ...LongTitle.args};
-
 export const QuietLongDescription = Template().bind({});
 QuietLongDescription.args = {...Quiet.args, ...LongDescription.args};
-
 export const QuietLongContentPoorWordSize = Template().bind({});
 QuietLongContentPoorWordSize.args = {...Quiet.args, ...LongContentPoorWordSize.args};
-
 export const QuietLongDetail = Template().bind({});
 QuietLongDetail.args = {...Quiet.args, ...LongDetail.args};
-
 export const QuietLongEverything = Template().bind({});
 QuietLongEverything.args = {...Quiet.args, ...LongEverything.args};
-
-export const CardGrid = (props: SpectrumCardProps) => (
-  <div
-    style={{
-      width: '100%',
-      margin: '50px',
-      display: 'grid',
-      gap: '20px',
-      gridTemplateColumns: 'repeat(auto-fit, 208px)',
-      gridAutoRows: '305px'
-    }}>
-    {
-      (new Array(15).fill(0)).map((_, index) => {
+export const CardGrid = {
+  render: (props: SpectrumCardProps) => (
+    <div
+      style={{
+        width: '100%',
+        margin: '50px',
+        display: 'grid',
+        gap: '20px',
+        gridTemplateColumns: 'repeat(auto-fit, 208px)',
+        gridAutoRows: '305px'
+      }}>
+      {new Array(15).fill(0).map((_, index) => {
         let url = getImage(index);
         return (
           <Card {...Quiet.args} {...props} layout="grid" key={`${index}${url}`}>
@@ -162,27 +179,31 @@ export const CardGrid = (props: SpectrumCardProps) => (
             </ActionMenu>
           </Card>
         );
-      })
-    }
-  </div>
-);
+      })}
+    </div>
+  )
+};
 
-export const CardWaterfall = (props: SpectrumCardProps) => (
-  <div
-    style={{
-      width: '100%',
-      height: '150vh',
-      margin: '50px',
-      display: 'flex',
-      flexDirection: 'column',
-      flexWrap: 'wrap',
-      alignItems: 'start'
-    }}>
-    {
-      (new Array(15).fill(0)).map((_, index) => {
+export const CardWaterfall = {
+  render: (props: SpectrumCardProps) => (
+    <div
+      style={{
+        width: '100%',
+        height: '150vh',
+        margin: '50px',
+        display: 'flex',
+        flexDirection: 'column',
+        flexWrap: 'wrap',
+        alignItems: 'start'
+      }}>
+      {new Array(15).fill(0).map((_, index) => {
         let url = getImage(index);
         return (
-          <div style={{width: '208px', margin: '10px'}}>
+          <div
+            style={{
+              width: '208px',
+              margin: '10px'
+            }}>
             <Card {...Quiet.args} {...props} layout="waterfall" key={`${index}${url}`}>
               <Image src={url} />
               <Heading>Title {index}</Heading>
@@ -195,25 +216,29 @@ export const CardWaterfall = (props: SpectrumCardProps) => (
             </Card>
           </div>
         );
-      })
-    }
-  </div>
-);
+      })}
+    </div>
+  )
+};
 
-export const CardGallery = (props: SpectrumCardProps) => (
-  <div
-    style={{
-      width: '100%',
-      margin: '50px',
-      display: 'flex',
-      flexDirection: 'row',
-      flexWrap: 'wrap'
-    }}>
-    {
-      (new Array(15).fill(0)).map((_, index) => {
+export const CardGallery = {
+  render: (props: SpectrumCardProps) => (
+    <div
+      style={{
+        width: '100%',
+        margin: '50px',
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap'
+      }}>
+      {new Array(15).fill(0).map((_, index) => {
         let url = getImage(index);
         return (
-          <div style={{height: '339px', margin: '10px'}}>
+          <div
+            style={{
+              height: '339px',
+              margin: '10px'
+            }}>
             <Card {...Quiet.args} {...props} layout="gallery" key={`${index}${url}`}>
               <Image src={url} />
               <Heading>Title {index}</Heading>
@@ -226,23 +251,26 @@ export const CardGallery = (props: SpectrumCardProps) => (
             </Card>
           </div>
         );
-      })
-    }
-  </div>
-);
+      })}
+    </div>
+  )
+};
 
-
-export const CardFloat = (props: SpectrumCardProps) => (
-  <div
-    style={{
-      width: '100%',
-      margin: '50px'
-    }}>
-    {
-      (new Array(15).fill(0)).map((_, index) => {
+export const CardFloat = {
+  render: (props: SpectrumCardProps) => (
+    <div
+      style={{
+        width: '100%',
+        margin: '50px'
+      }}>
+      {new Array(15).fill(0).map((_, index) => {
         let url = getImage(index);
         return (
-          <div style={{float: 'left', margin: '10px'}}>
+          <div
+            style={{
+              float: 'left',
+              margin: '10px'
+            }}>
             <Card {...Quiet.args} {...props} key={`${index}${url}`}>
               <Image src={url} />
               <Heading>Title {index}</Heading>
@@ -255,24 +283,24 @@ export const CardFloat = (props: SpectrumCardProps) => (
             </Card>
           </div>
         );
-      })
-    }
-  </div>
-);
+      })}
+    </div>
+  )
+};
 
-export const CardGridNoDescription = (props: SpectrumCardProps) => (
-  <div
-    className={classNames(styles, 'spectrum-CardGrid')}
-    style={{
-      width: '100%',
-      margin: '50px',
-      display: 'grid',
-      gap: '20px',
-      gridTemplateColumns: 'repeat(auto-fit, 208px)',
-      gridAutoRows: '274px'
-    }}>
-    {
-      (new Array(15).fill(0)).map((_, index) => {
+export const CardGridNoDescription = {
+  render: (props: SpectrumCardProps) => (
+    <div
+      className={classNames(styles, 'spectrum-CardGrid')}
+      style={{
+        width: '100%',
+        margin: '50px',
+        display: 'grid',
+        gap: '20px',
+        gridTemplateColumns: 'repeat(auto-fit, 208px)',
+        gridAutoRows: '274px'
+      }}>
+      {new Array(15).fill(0).map((_, index) => {
         let url = getImage(index);
         return (
           <Card {...QuietNoDescription.args} {...props} layout="grid" key={`${index}${url}`}>
@@ -285,24 +313,24 @@ export const CardGridNoDescription = (props: SpectrumCardProps) => (
             </ActionMenu>
           </Card>
         );
-      })
-    }
-  </div>
-);
+      })}
+    </div>
+  )
+};
 
-export const CardGridIllustrations = (props: SpectrumCardProps) => (
-  <div
-    className={classNames(styles, 'spectrum-CardGrid')}
-    style={{
-      width: '100%',
-      margin: '50px',
-      display: 'grid',
-      gap: '20px',
-      gridTemplateColumns: 'repeat(auto-fit, 208px)',
-      gridAutoRows: '274px'
-    }}>
-    {
-      (new Array(15).fill(0)).map((_, index) => {
+export const CardGridIllustrations = {
+  render: (props: SpectrumCardProps) => (
+    <div
+      className={classNames(styles, 'spectrum-CardGrid')}
+      style={{
+        width: '100%',
+        margin: '50px',
+        display: 'grid',
+        gap: '20px',
+        gridTemplateColumns: 'repeat(auto-fit, 208px)',
+        gridAutoRows: '274px'
+      }}>
+      {new Array(15).fill(0).map((_, index) => {
         let url = getImage(index);
         return (
           <Card {...QuietNoDescription.args} {...props} layout="grid" key={`${index}${url}`}>
@@ -315,29 +343,32 @@ export const CardGridIllustrations = (props: SpectrumCardProps) => (
             </ActionMenu>
           </Card>
         );
-      })
-    }
-  </div>
-);
+      })}
+    </div>
+  )
+};
 
-export const CardGridLongTitle = (props: SpectrumCardProps) => (
-  <div
-    className={classNames(styles, 'spectrum-CardGrid')}
-    style={{
-      width: '100%',
-      margin: '50px',
-      display: 'grid',
-      gap: '20px',
-      gridTemplateColumns: 'repeat(auto-fit, 208px)',
-      gridAutoRows: '305px'
-    }}>
-    {
-      (new Array(15).fill(0)).map((_, index) => {
+export const CardGridLongTitle = {
+  render: (props: SpectrumCardProps) => (
+    <div
+      className={classNames(styles, 'spectrum-CardGrid')}
+      style={{
+        width: '100%',
+        margin: '50px',
+        display: 'grid',
+        gap: '20px',
+        gridTemplateColumns: 'repeat(auto-fit, 208px)',
+        gridAutoRows: '305px'
+      }}>
+      {new Array(15).fill(0).map((_, index) => {
         let url = getImage(index);
         return (
           <Card {...Quiet.args} {...props} layout="grid" key={`${index}${url}`}>
             <Image src={url} />
-            <Heading>This is a long title about how dinosaurs used to rule the earth before a meteor came and wiped them all out {index}</Heading>
+            <Heading>
+              This is a long title about how dinosaurs used to rule the earth before a meteor came
+              and wiped them all out {index}
+            </Heading>
             <Text slot="detail">PNG</Text>
             <Content>Description</Content>
             <ActionMenu>
@@ -346,25 +377,24 @@ export const CardGridLongTitle = (props: SpectrumCardProps) => (
             </ActionMenu>
           </Card>
         );
-      })
-    }
-  </div>
-);
+      })}
+    </div>
+  )
+};
 
-
-export const CardGridTallRows = (props: SpectrumCardProps) => (
-  <div
-    className={classNames(styles, 'spectrum-CardGrid')}
-    style={{
-      width: '100%',
-      margin: '50px',
-      display: 'grid',
-      gap: '20px',
-      gridTemplateColumns: 'repeat(auto-fit, 208px)',
-      gridAutoRows: '400px'
-    }}>
-    {
-      (new Array(15).fill(0)).map((_, index) => {
+export const CardGridTallRows = {
+  render: (props: SpectrumCardProps) => (
+    <div
+      className={classNames(styles, 'spectrum-CardGrid')}
+      style={{
+        width: '100%',
+        margin: '50px',
+        display: 'grid',
+        gap: '20px',
+        gridTemplateColumns: 'repeat(auto-fit, 208px)',
+        gridAutoRows: '400px'
+      }}>
+      {new Array(15).fill(0).map((_, index) => {
         let url = getImage(index);
         return (
           <Card {...Quiet.args} {...props} layout="grid" key={`${index}${url}`}>
@@ -378,62 +408,84 @@ export const CardGridTallRows = (props: SpectrumCardProps) => (
             </ActionMenu>
           </Card>
         );
-      })
-    }
-  </div>
-);
+      })}
+    </div>
+  )
+};
 
-export const CardGridMessyText = (props: SpectrumCardProps) => (
-  <div
-    style={{
-      width: '100%',
-      margin: '50px',
-      display: 'grid',
-      gap: '20px',
-      gridTemplateColumns: 'repeat(auto-fit, 208px)',
-      gridAutoRows: '305px'
-    }}>
-    {
-      (new Array(15).fill(0)).map((_, index) => {
+export const CardGridMessyText = {
+  render: (props: SpectrumCardProps) => (
+    <div
+      style={{
+        width: '100%',
+        margin: '50px',
+        display: 'grid',
+        gap: '20px',
+        gridTemplateColumns: 'repeat(auto-fit, 208px)',
+        gridAutoRows: '305px'
+      }}>
+      {new Array(15).fill(0).map((_, index) => {
         let url = getImage(index);
         return (
           <Card {...Quiet.args} {...props} layout="grid" key={`${index}${url}`}>
             <Image src={url} />
-            <Heading>{index} Rechtsschutzversicherungsgesellschaften Nahrungsmittelunverträglichkeit Unabhängigkeitserklärungen Freundschaftsbeziehungen</Heading>
-            <Text slot="detail">Rechtsschutzversicherungsgesellschaften Nahrungsmittelunverträglichkeit Unabhängigkeitserklärungen Freundschaftsbeziehungen</Text>
-            <Content>Rechtsschutzversicherungsgesellschaften Nahrungsmittelunverträglichkeit Unabhängigkeitserklärungen Freundschaftsbeziehungen</Content>
+            <Heading>
+              {index} Rechtsschutzversicherungsgesellschaften Nahrungsmittelunverträglichkeit
+              Unabhängigkeitserklärungen Freundschaftsbeziehungen
+            </Heading>
+            <Text slot="detail">
+              Rechtsschutzversicherungsgesellschaften Nahrungsmittelunverträglichkeit
+              Unabhängigkeitserklärungen Freundschaftsbeziehungen
+            </Text>
+            <Content>
+              Rechtsschutzversicherungsgesellschaften Nahrungsmittelunverträglichkeit
+              Unabhängigkeitserklärungen Freundschaftsbeziehungen
+            </Content>
             <ActionMenu>
               <Item>Action 1</Item>
               <Item>Action 2</Item>
             </ActionMenu>
           </Card>
         );
-      })
-    }
-  </div>
-);
+      })}
+    </div>
+  )
+};
 
-export const CardWaterfallMessyText = (props: SpectrumCardProps) => (
-  <div
-    style={{
-      width: '100%',
-      height: '150vh',
-      margin: '50px',
-      display: 'flex',
-      flexDirection: 'column',
-      flexWrap: 'wrap',
-      alignItems: 'start'
-    }}>
-    {
-      (new Array(15).fill(0)).map((_, index) => {
+export const CardWaterfallMessyText = {
+  render: (props: SpectrumCardProps) => (
+    <div
+      style={{
+        width: '100%',
+        height: '150vh',
+        margin: '50px',
+        display: 'flex',
+        flexDirection: 'column',
+        flexWrap: 'wrap',
+        alignItems: 'start'
+      }}>
+      {new Array(15).fill(0).map((_, index) => {
         let url = getImage(index);
         return (
-          <div style={{width: '208px', margin: '10px'}}>
+          <div
+            style={{
+              width: '208px',
+              margin: '10px'
+            }}>
             <Card {...Quiet.args} {...props} layout="waterfall" key={`${index}${url}`}>
               <Image src={url} />
-              <Heading>{index} Rechtsschutzversicherungsgesellschaften Nahrungsmittelunverträglichkeit Unabhängigkeitserklärungen Freundschaftsbeziehungen</Heading>
-              <Text slot="detail">Rechtsschutzversicherungsgesellschaften Nahrungsmittelunverträglichkeit Unabhängigkeitserklärungen Freundschaftsbeziehungen</Text>
-              <Content>Rechtsschutzversicherungsgesellschaften Nahrungsmittelunverträglichkeit Unabhängigkeitserklärungen Freundschaftsbeziehungen</Content>
+              <Heading>
+                {index} Rechtsschutzversicherungsgesellschaften Nahrungsmittelunverträglichkeit
+                Unabhängigkeitserklärungen Freundschaftsbeziehungen
+              </Heading>
+              <Text slot="detail">
+                Rechtsschutzversicherungsgesellschaften Nahrungsmittelunverträglichkeit
+                Unabhängigkeitserklärungen Freundschaftsbeziehungen
+              </Text>
+              <Content>
+                Rechtsschutzversicherungsgesellschaften Nahrungsmittelunverträglichkeit
+                Unabhängigkeitserklärungen Freundschaftsbeziehungen
+              </Content>
               <ActionMenu>
                 <Item>Action 1</Item>
                 <Item>Action 2</Item>
@@ -441,30 +493,43 @@ export const CardWaterfallMessyText = (props: SpectrumCardProps) => (
             </Card>
           </div>
         );
-      })
-    }
-  </div>
-);
+      })}
+    </div>
+  )
+};
 
-export const CardGalleryMessyText = (props: SpectrumCardProps) => (
-  <div
-    style={{
-      width: '100%',
-      margin: '50px',
-      display: 'flex',
-      flexDirection: 'row',
-      flexWrap: 'wrap'
-    }}>
-    {
-      (new Array(15).fill(0)).map((_, index) => {
+export const CardGalleryMessyText = {
+  render: (props: SpectrumCardProps) => (
+    <div
+      style={{
+        width: '100%',
+        margin: '50px',
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap'
+      }}>
+      {new Array(15).fill(0).map((_, index) => {
         let url = getImage(index);
         return (
-          <div style={{height: '339px', margin: '10px'}}>
+          <div
+            style={{
+              height: '339px',
+              margin: '10px'
+            }}>
             <Card {...Quiet.args} {...props} layout="gallery" key={`${index}${url}`}>
               <Image src={url} />
-              <Heading>{index} Rechtsschutzversicherungsgesellschaften Nahrungsmittelunverträglichkeit Unabhängigkeitserklärungen Freundschaftsbeziehungen</Heading>
-              <Text slot="detail">Rechtsschutzversicherungsgesellschaften Nahrungsmittelunverträglichkeit Unabhängigkeitserklärungen Freundschaftsbeziehungen</Text>
-              <Content>Rechtsschutzversicherungsgesellschaften Nahrungsmittelunverträglichkeit Unabhängigkeitserklärungen Freundschaftsbeziehungen</Content>
+              <Heading>
+                {index} Rechtsschutzversicherungsgesellschaften Nahrungsmittelunverträglichkeit
+                Unabhängigkeitserklärungen Freundschaftsbeziehungen
+              </Heading>
+              <Text slot="detail">
+                Rechtsschutzversicherungsgesellschaften Nahrungsmittelunverträglichkeit
+                Unabhängigkeitserklärungen Freundschaftsbeziehungen
+              </Text>
+              <Content>
+                Rechtsschutzversicherungsgesellschaften Nahrungsmittelunverträglichkeit
+                Unabhängigkeitserklärungen Freundschaftsbeziehungen
+              </Content>
               <ActionMenu>
                 <Item>Action 1</Item>
                 <Item>Action 2</Item>
@@ -472,16 +537,24 @@ export const CardGalleryMessyText = (props: SpectrumCardProps) => (
             </Card>
           </div>
         );
-      })
-    }
-  </div>
-);
-CardGalleryMessyText.decorators = [(Story) => (
-  <>
-    <div style={{position: 'absolute', top: '5px'}}>{'ignore extra horizontal space, it will not do this in a real gallery layout'}</div>
-    <Story />
-  </>
-)];
+      })}
+    </div>
+  ),
+  decorators: [
+    (Story) => (
+      <>
+        <div
+          style={{
+            position: 'absolute',
+            top: '5px'
+          }}>
+          {'ignore extra horizontal space, it will not do this in a real gallery layout'}
+        </div>
+        <Story />
+      </>
+    )
+  ]
+};
 
 export const Selected = TemplateSelected().bind({});
 Selected.args = {...Quiet.args};

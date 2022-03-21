@@ -9,26 +9,25 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import {Icon} from '../';
 import React from 'react';
 
 export default {
   title: 'Icons/Custom',
-
   parameters: {
-    providerSwitcher: {status: 'positive'}
+    providerSwitcher: {
+      status: 'positive'
+    }
   }
 };
 
-export const ExcitingSquare = () => (
-  <Icon>
-    <svg viewBox="0 0 25 25">
-      <rect x="0" y="0" width="25" height="25" />
-    </svg>
-  </Icon>
-);
-
-ExcitingSquare.story = {
-  name: 'exciting square'
+export const ExcitingSquare = {
+  name: 'exciting square',
+  render: () => (
+    <Icon>
+      <svg viewBox="0 0 25 25">
+        <rect x="0" y="0" width="25" height="25" />
+      </svg>
+    </Icon>
+  )
 };

@@ -9,7 +9,6 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import {Flex} from '@react-spectrum/layout';
 import React from 'react';
 import {View} from '@react-spectrum/view';
@@ -36,209 +35,143 @@ for (let color of baseColors) {
 }
 
 export default {
-  title: 'Flex'
-};
-
-export const VerticalStackWithGap = () => (
-  <Flex direction="column" width="size-2000" gap="size-100">
-    <View backgroundColor="celery-600" height="size-800" />
-    <View backgroundColor="blue-600" height="size-800" />
-    <View backgroundColor="magenta-600" height="size-800" />
-  </Flex>
-);
-
-VerticalStackWithGap.story = {
-  name: 'Vertical stack with gap'
-};
-
-export const HorizontalStackWithGap = () => (
-  <Flex direction="row" height="size-800" gap="size-100">
-    <View backgroundColor="celery-600" width="size-800" />
-    <View backgroundColor="blue-600" width="size-800" />
-    <View backgroundColor="magenta-600" width="size-800" />
-  </Flex>
-);
-
-HorizontalStackWithGap.story = {
-  name: 'Horizontal stack with gap'
-};
-
-export const WrappingWithGap = () => (
-  <View maxWidth="80%" borderWidth="thin" borderColor="dark">
-    <Flex direction="row" gap="size-100" wrap>
-      {colors.map((color) => (
-        <View
-          key={color}
-          backgroundColor={color}
-          width="size-800"
-          height="size-800" />
-      ))}
-    </Flex>
-  </View>
-);
-
-WrappingWithGap.story = {
-  name: 'Wrapping with gap'
-};
-
-export const NestedFlexWithGap = () => (
-  <Flex direction="column" gap="size-150">
-    <View backgroundColor="celery-600" height="size-800" />
-    <Flex direction="row" height="size-800" gap="size-100">
-      <View backgroundColor="indigo-600" width="size-800" />
-      <View backgroundColor="seafoam-600" width="size-800" />
+  title: 'Flex',
+  component: Flex,
+  render: (props) => (
+    <Flex gap="size-100" direction="row" {...props}>
+      <View backgroundColor="celery-600" width="size-800" />
       <View backgroundColor="blue-600" width="size-800" />
+      <View backgroundColor="magenta-600" width="size-800" />
     </Flex>
-    <View backgroundColor="magenta-600" height="size-800" />
-  </Flex>
-);
-
-NestedFlexWithGap.story = {
-  name: 'Nested flex with gap'
+  ),
 };
 
-export const AlignCenter = () => (
-  <Flex direction="row" gap="size-100" alignItems="center">
-    <View backgroundColor="celery-600" width="size-800" height="size-800" />
-    <View backgroundColor="blue-600" width="size-800" height="size-2000" />
-    <View backgroundColor="magenta-600" width="size-800" height="size-800" />
-  </Flex>
-);
-
-AlignCenter.story = {
-  name: 'Align center'
+export const VerticalStackWithGap = {
+  name: 'Vertical stack with gap',
+  args: {
+    direction: 'column',
+    width: 'size-2000'
+  }
 };
 
-export const AlignEnd = () => (
-  <Flex direction="row" gap="size-100" alignItems="end">
-    <View backgroundColor="celery-600" width="size-800" height="size-800" />
-    <View backgroundColor="blue-600" width="size-800" height="size-2000" />
-    <View backgroundColor="magenta-600" width="size-800" height="size-800" />
-  </Flex>
-);
-
-AlignEnd.story = {
-  name: 'Align end'
+export const HorizontalStackWithGap = {
+  name: 'Horizontal stack with gap',
+  args: {height: 'size-800'}
 };
 
-export const JustifyStart = () => (
-  <Flex direction="row" gap="size-100" justifyContent="start" width="80%">
-    <View backgroundColor="celery-600" width="size-800" height="size-800" />
-    <View backgroundColor="blue-600" width="size-800" height="size-800" />
-    <View backgroundColor="magenta-600" width="size-800" height="size-800" />
-  </Flex>
-);
-
-JustifyStart.story = {
-  name: 'Justify start'
+export const WrappingWithGap = {
+  name: 'Wrapping with gap',
+  render: (props) => (
+    <View maxWidth="80%" borderWidth="thin" borderColor="dark">
+      <Flex direction="row" gap="size-100" wrap {...props}>
+        {colors.map((color) => (
+          <View key={color} backgroundColor={color} width="size-800" height="size-800" />
+        ))}
+      </Flex>
+    </View>
+  )
 };
 
-export const JustifyCenter = () => (
-  <Flex direction="row" gap="size-100" justifyContent="center" width="80%">
-    <View backgroundColor="celery-600" width="size-800" height="size-800" />
-    <View backgroundColor="blue-600" width="size-800" height="size-800" />
-    <View backgroundColor="magenta-600" width="size-800" height="size-800" />
-  </Flex>
-);
-
-JustifyCenter.story = {
-  name: 'Justify center'
+export const NestedFlexWithGap = {
+  name: 'Nested flex with gap',
+  render: () => (
+    <Flex direction="column" gap="size-150">
+      <View backgroundColor="celery-600" height="size-800" />
+      <Flex direction="row" height="size-800" gap="size-100">
+        <View backgroundColor="indigo-600" width="size-800" />
+        <View backgroundColor="seafoam-600" width="size-800" />
+        <View backgroundColor="blue-600" width="size-800" />
+      </Flex>
+      <View backgroundColor="magenta-600" height="size-800" />
+    </Flex>
+  )
 };
 
-export const JustifyEnd = () => (
-  <Flex direction="row" gap="size-100" justifyContent="end" width="80%">
-    <View backgroundColor="celery-600" width="size-800" height="size-800" />
-    <View backgroundColor="blue-600" width="size-800" height="size-800" />
-    <View backgroundColor="magenta-600" width="size-800" height="size-800" />
-  </Flex>
-);
-
-JustifyEnd.story = {
-  name: 'Justify end'
+export const AlignCenter = {
+  name: 'Align center',
+  args: {
+    direction: 'row',
+    alignItems: 'center'
+  }
 };
 
-export const JustifySpaceAround = () => (
-  <Flex
-    direction="row"
-    gap="size-100"
-    justifyContent="space-around"
-    width="80%">
-    <View backgroundColor="celery-600" width="size-800" height="size-800" />
-    <View backgroundColor="blue-600" width="size-800" height="size-800" />
-    <View backgroundColor="magenta-600" width="size-800" height="size-800" />
-  </Flex>
-);
-
-JustifySpaceAround.story = {
-  name: 'Justify space-around'
+export const AlignEnd = {
+  name: 'Align end',
+  args: {alignItems: 'end'}
 };
 
-export const JustifySpaceBetween = () => (
-  <Flex
-    direction="row"
-    gap="size-100"
-    justifyContent="space-between"
-    width="80%">
-    <View backgroundColor="celery-600" width="size-800" height="size-800" />
-    <View backgroundColor="blue-600" width="size-800" height="size-800" />
-    <View backgroundColor="magenta-600" width="size-800" height="size-800" />
-  </Flex>
-);
-
-JustifySpaceBetween.story = {
-  name: 'Justify space-between'
+export const JustifyStart = {
+  name: 'Justify start',
+  args: {
+    justifyContent: 'start',
+    width: '80%'
+  }
 };
 
-export const JustifySpaceEvenly = () => (
-  <Flex
-    direction="row"
-    gap="size-100"
-    justifyContent="space-evenly"
-    width="80%">
-    <View backgroundColor="celery-600" width="size-800" height="size-800" />
-    <View backgroundColor="blue-600" width="size-800" height="size-800" />
-    <View backgroundColor="magenta-600" width="size-800" height="size-800" />
-  </Flex>
-);
-
-JustifySpaceEvenly.story = {
-  name: 'Justify space-evenly'
+export const JustifyCenter = {
+  name: 'Justify center',
+  args: {
+    justifyContent: 'center',
+    width: '80%'
+  }
 };
 
-export const Ordered = () => (
-  <Flex
-    direction="row"
-    gap="size-100"
-    justifyContent="space-evenly"
-    width="80%">
-    <View
-      backgroundColor="celery-600"
-      order={2}
-      width="size-800"
-      height="size-800" />
-    <View backgroundColor="blue-600" width="size-800" height="size-800" />
-    <View
-      backgroundColor="magenta-600"
-      order={1}
-      width="size-800"
-      height="size-800" />
-  </Flex>
-);
-
-Ordered.story = {
-  name: 'ordered'
+export const JustifyEnd = {
+  name: 'Justify end',
+  args: {
+    justifyContent: 'end',
+    width: '80%'
+  }
 };
 
-export const Responsive = () => (
-  <Flex
-    direction={{base: 'column', L: 'row'}}
-    gap={{base: 'size-100', M: 'size-250', L: 'size-350'}}>
-    <View backgroundColor="celery-600" width="size-800" height="size-800" />
-    <View backgroundColor="blue-600" width="size-800" height="size-800" />
-    <View backgroundColor="magenta-600" width="size-800" height="size-800" />
-  </Flex>
-);
+export const JustifySpaceAround = {
+  name: 'Justify space-around',
+  args: {
+    justifyContent: 'space-around',
+    width: '80%'
+  }
+};
 
-Responsive.story = {
-  name: 'responsive'
+export const JustifySpaceBetween = {
+  name: 'Justify space-between',
+  args: {
+    justifyContent: 'space-between',
+    width: '80%'
+  }
+};
+
+export const JustifySpaceEvenly = {
+  name: 'Justify space-evenly',
+  args: {
+    justifyContent: 'space-evenly',
+    width: '80%'
+  }
+};
+
+export const Ordered = {
+  name: 'ordered',
+  args: {
+    justifyContent: 'space-evenly',
+    width: '80%'
+  }
+};
+
+export const Responsive = {
+  name: 'responsive',
+  render: () => (
+    <Flex
+      direction={{
+        base: 'column',
+        L: 'row'
+      }}
+      gap={{
+        base: 'size-100',
+        M: 'size-250',
+        L: 'size-350'
+      }}>
+      <View backgroundColor="celery-600" width="size-800" height="size-800" />
+      <View backgroundColor="blue-600" width="size-800" height="size-800" />
+      <View backgroundColor="magenta-600" width="size-800" height="size-800" />
+    </Flex>
+  )
 };

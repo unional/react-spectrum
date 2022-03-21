@@ -9,91 +9,106 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import {action} from '@storybook/addon-actions';
 import React from 'react';
 import {Switch} from '../';
 
 export default {
   title: 'Switch',
-
   parameters: {
-    providerSwitcher: {status: 'positive'}
+    providerSwitcher: {
+      status: 'positive'
+    }
   }
 };
 
 export const Default = () => render();
-export const DefaultSelectedTrue = () => render({defaultSelected: true});
-
-DefaultSelectedTrue.story = {
+export const DefaultSelectedTrue = {
+  render: () =>
+    render({
+      defaultSelected: true
+    }),
   name: 'defaultSelected: true'
 };
 
-export const IsSelectedTrue = () => render({isSelected: true});
-
-IsSelectedTrue.story = {
+export const IsSelectedTrue = {
+  render: () =>
+    render({
+      isSelected: true
+    }),
   name: 'isSelected: true'
 };
 
-export const IsSelectedFalse = () => render({isSelected: false});
-
-IsSelectedFalse.story = {
+export const IsSelectedFalse = {
+  render: () =>
+    render({
+      isSelected: false
+    }),
   name: 'isSelected: false'
 };
 
-export const IsDisabledTrue = () => render({isDisabled: true});
-
-IsDisabledTrue.story = {
+export const IsDisabledTrue = {
+  render: () =>
+    render({
+      isDisabled: true
+    }),
   name: 'isDisabled: true'
 };
 
-export const IsEmphasizedTrue = () => render({isEmphasized: true});
-
-IsEmphasizedTrue.story = {
+export const IsEmphasizedTrue = {
+  render: () =>
+    render({
+      isEmphasized: true
+    }),
   name: 'isEmphasized: true'
 };
 
-export const IsEmphasizedTrueIsDisabledTrue = () =>
-  render({isEmphasized: true, isDisabled: true});
-
-IsEmphasizedTrueIsDisabledTrue.story = {
+export const IsEmphasizedTrueIsDisabledTrue = {
+  render: () =>
+    render({
+      isEmphasized: true,
+      isDisabled: true
+    }),
   name: 'isEmphasized: true, isDisabled: true'
 };
 
-export const IsReadOnlyTrueIsSelectedTrue = () =>
-  render({isReadOnly: true, isSelected: true});
-
-IsReadOnlyTrueIsSelectedTrue.story = {
+export const IsReadOnlyTrueIsSelectedTrue = {
+  render: () =>
+    render({
+      isReadOnly: true,
+      isSelected: true
+    }),
   name: 'isReadOnly: true, isSelected: true'
 };
 
-export const AutoFocusTrue = () => render({autoFocus: true});
-
-AutoFocusTrue.story = {
+export const AutoFocusTrue = {
+  render: () =>
+    render({
+      autoFocus: true
+    }),
   name: 'autoFocus: true'
 };
 
-export const CustomLabel = () => renderCustomLabel();
-
-CustomLabel.story = {
+export const CustomLabel = {
+  render: () => renderCustomLabel(),
   name: 'custom label'
 };
 
-export const LongLabel = () => (
-  <Switch onChange={action('change')}>
-    Super long checkbox label. Sample text. Arma virumque cano, Troiae qui
-    primus ab oris. Italiam, fato profugus, Laviniaque venit.
-  </Switch>
-);
-
-LongLabel.story = {
+export const LongLabel = {
+  render: () => (
+    <Switch onChange={action('change')}>
+      Super long checkbox label. Sample text. Arma virumque cano, Troiae qui primus ab oris.
+      Italiam, fato profugus, Laviniaque venit.
+    </Switch>
+  ),
   name: 'long label'
 };
 
-export const NoLabel = () =>
-  renderNoLabel({'aria-label': 'This switch has no visible label'});
-
-NoLabel.story = {
+export const NoLabel = {
+  render: () =>
+    renderNoLabel({
+      'aria-label': 'This switch has no visible label'
+    }),
   name: 'no label'
 };
 

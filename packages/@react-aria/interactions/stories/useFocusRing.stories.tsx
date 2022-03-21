@@ -3,15 +3,28 @@ import React, {useState} from 'react';
 import {SearchField} from '@react-spectrum/searchfield';
 
 let manyColumns = [];
+
 for (let i = 0; i < 100; i++) {
   manyColumns.push(
-    i === 0 ? {name: 'Column name', key: 'C0'} : {name: 'Column ' + i, key: 'C' + i}
+    i === 0
+      ? {
+        name: 'Column name',
+        key: 'C0'
+      }
+      : {
+        name: 'Column ' + i,
+        key: 'C' + i
+      }
   );
 }
 
 let manyRows = [];
+
 for (let i = 0; i < 1000; i++) {
-  let row = {key: 'R' + i};
+  let row = {
+    key: 'R' + i
+  };
+
   for (let j = 0; j < 100; j++) {
     row['C' + j] = j === 0 ? `Row ${i}` : `${i}, ${j}`;
   }
@@ -23,15 +36,13 @@ export default {
   title: 'useFocusRing'
 };
 
-export const SearchTableview = () => <SearchExample />;
-
-SearchTableview.story = {
+export const SearchTableview = {
+  render: () => <SearchExample />,
   name: 'search + tableview'
 };
 
 function SearchExample() {
   const [items, setItems] = useState(manyRows);
-
   return (
     <div>
       <SearchField

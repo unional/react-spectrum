@@ -9,7 +9,6 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import {Item} from '@react-stately/collections';
 import {Node} from '@react-types/shared';
 import React, {Key, useMemo, useRef} from 'react';
@@ -23,7 +22,6 @@ export default {
 };
 
 export const KeyboardNavigation = () => <TreeExample />;
-
 
 function TreeExample(props = {}) {
   return (
@@ -52,51 +50,41 @@ function TreeExample(props = {}) {
 function Tree(props) {
   let state = useTreeState(props);
   let ref = useRef();
-
-  let keyboardDelegate = useMemo(() => new TreeKeyboardDelegate(state.collection, state.disabledKeys), [state.collection, state.disabledKeys]);
-
+  let keyboardDelegate = useMemo(
+    () => new TreeKeyboardDelegate(state.collection, state.disabledKeys),
+    [state.collection, state.disabledKeys]
+  );
   let {collectionProps} = useSelectableCollection({
     keyboardDelegate,
     ref,
     selectionManager: state.selectionManager
   });
-
   return (
-    <div
-      {...collectionProps}
-      ref={ref}
-      role="tree">
-      {TreeNodes({nodes: state.collection, state})}
+    <div {...collectionProps} ref={ref} role="tree">
+      {TreeNodes({
+        nodes: state.collection,
+        state
+      })}
     </div>
   );
 }
 
 function TreeNodes({nodes, state}) {
   return Array.from(nodes).map((node: Node<object>) => (
-    <TreeItem
-      node={node}
-      key={node.key}
-      state={state} />
+    <TreeItem node={node} key={node.key} state={state} />
   ));
 }
 
 function TreeItem({node, state}) {
   let ref = useRef();
-
   let {itemProps} = useSelectableItem({
     key: node.key,
     selectionManager: state.selectionManager,
     ref: ref
   });
-
-  let {pressProps} = usePress({
-    ...itemProps,
-    onPress: () => state.toggleKey(node.key)
-  });
-
+  let {pressProps} = usePress({...itemProps, onPress: () => state.toggleKey(node.key)});
   let isExpanded = node.hasChildNodes && state.expandedKeys.has(node.key);
   let isSelected = state.selectionManager.isSelected(node.key);
-
   return (
     <div
       {...pressProps}
@@ -104,14 +92,15 @@ function TreeItem({node, state}) {
       aria-selected={isSelected}
       ref={ref}
       role="treeitem">
-      <div className="title">
-        {node.rendered}
-      </div>
-      {isExpanded &&
+      <div className="title">{node.rendered}</div>
+      {isExpanded && (
         <div className="children" role="group">
-          {TreeNodes({nodes: node.childNodes, state})}
+          {TreeNodes({
+            nodes: node.childNodes,
+            state
+          })}
         </div>
-      }
+      )}
     </div>
   );
 }
@@ -202,7 +191,10 @@ class TreeKeyboardDelegate<T> {
     while (key !== null) {
       let item = collection.getItem(key);
 
-      if (item?.textValue && collator.compare(search, item.textValue.slice(0, search.length)) === 0) {
+      if (
+        item?.textValue &&
+        collator.compare(search, item.textValue.slice(0, search.length)) === 0
+      ) {
         return key;
       }
 

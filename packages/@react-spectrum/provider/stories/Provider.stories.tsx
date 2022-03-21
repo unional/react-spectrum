@@ -9,7 +9,6 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import {Button} from '@react-spectrum/button';
 import {Checkbox, CheckboxGroup} from '@react-spectrum/checkbox';
 import {ComboBox} from '@react-spectrum/combobox';
@@ -37,183 +36,234 @@ const THEME = {
 
 export default {
   title: 'Provider',
-
   parameters: {
-    providerSwitcher: {status: 'positive'}
+    providerSwitcher: {
+      status: 'positive'
+    }
   }
 };
 
-export const ColorSchemeDark = () =>
-  render({
-    colorScheme: 'dark',
-    style: {padding: 50, textAlign: 'center', width: 500}
-  });
-
-ColorSchemeDark.story = {
+export const ColorSchemeDark = {
+  render: () =>
+    render({
+      colorScheme: 'dark',
+      style: {
+        padding: 50,
+        textAlign: 'center',
+        width: 500
+      }
+    }),
   name: 'colorScheme: dark'
 };
 
-export const ScaleLarge = () => render({scale: 'large'});
-
-ScaleLarge.story = {
+export const ScaleLarge = {
+  render: () =>
+    render({
+      scale: 'large'
+    }),
   name: 'scale: large'
 };
 
-export const NestedColorSchemes = () => (
-  <Provider
-    colorScheme="dark"
-    UNSAFE_style={{padding: 50, textAlign: 'center', width: 500}}>
-    <Button variant="primary">I am a dark button</Button>
+export const NestedColorSchemes = {
+  render: () => (
     <Provider
-      colorScheme="light"
-      UNSAFE_style={{padding: 50, margin: 50, textAlign: 'center'}}>
-      <Button variant="primary">I am a light button</Button>
+      colorScheme="dark"
+      UNSAFE_style={{
+        padding: 50,
+        textAlign: 'center',
+        width: 500
+      }}>
+      <Button variant="primary">I am a dark button</Button>
+      <Provider
+        colorScheme="light"
+        UNSAFE_style={{
+          padding: 50,
+          margin: 50,
+          textAlign: 'center'
+        }}>
+        <Button variant="primary">I am a light button</Button>
+      </Provider>
     </Provider>
-  </Provider>
-);
-
-NestedColorSchemes.story = {
+  ),
   name: 'nested color schemes'
 };
 
-export const NestedProps = () => (
-  <Provider isDisabled>
-    <Button variant="primary">I am disabled</Button>
-    <Provider isQuiet>
-      <Button variant="primary">I am disabled and quiet</Button>
+export const NestedProps = {
+  render: () => (
+    <Provider isDisabled>
+      <Button variant="primary">I am disabled</Button>
+      <Provider isQuiet>
+        <Button variant="primary">I am disabled and quiet</Button>
+      </Provider>
     </Provider>
-  </Provider>
-);
-
-NestedProps.story = {
+  ),
   name: 'nested props'
 };
 
-export const IsQuiet = () => render({isQuiet: true});
-
-IsQuiet.story = {
+export const IsQuiet = {
+  render: () =>
+    render({
+      isQuiet: true
+    }),
   name: 'isQuiet'
 };
 
-export const IsEmphasized = () => render({isEmphasized: true});
-
-IsEmphasized.story = {
+export const IsEmphasized = {
+  render: () =>
+    render({
+      isEmphasized: true
+    }),
   name: 'isEmphasized'
 };
 
-export const IsDisabled = () => render({isDisabled: true});
-
-IsDisabled.story = {
+export const IsDisabled = {
+  render: () =>
+    render({
+      isDisabled: true
+    }),
   name: 'isDisabled'
 };
 
-export const IsReadOnly = () => render({isReadOnly: true});
-
-IsReadOnly.story = {
+export const IsReadOnly = {
+  render: () =>
+    render({
+      isReadOnly: true
+    }),
   name: 'isReadOnly'
 };
 
-export const IsRequired = () => render({isRequired: true});
-
-IsRequired.story = {
+export const IsRequired = {
+  render: () =>
+    render({
+      isRequired: true
+    }),
   name: 'isRequired'
 };
 
-export const CustomTheme = () => render({theme: THEME});
-
-CustomTheme.story = {
+export const CustomTheme = {
+  render: () =>
+    render({
+      theme: THEME
+    }),
   name: 'custom theme'
 };
 
-export const ResponsiveStyleProps = () => (
-  <Provider UNSAFE_style={{padding: 50}}>
-    <div>
-      <TextField
-        label="A text field"
-        placeholder="Something"
-        width={{
-          base: 'size-800',
-          S: 'size-1000',
-          M: 'size-2000',
-          L: 'size-3000'
-        }} />
-    </div>
-    <Button
-      isHidden={{base: false, S: false, M: false, L: true}}
-      marginTop={{base: 'size-100', M: 'size-1000'}}
-      variant="primary">
-      This button is hidden in large display.
-    </Button>
-  </Provider>
-);
-
-ResponsiveStyleProps.story = {
+export const ResponsiveStyleProps = {
+  render: () => (
+    <Provider
+      UNSAFE_style={{
+        padding: 50
+      }}>
+      <div>
+        <TextField
+          label="A text field"
+          placeholder="Something"
+          width={{
+            base: 'size-800',
+            S: 'size-1000',
+            M: 'size-2000',
+            L: 'size-3000'
+          }} />
+      </div>
+      <Button
+        isHidden={{
+          base: false,
+          S: false,
+          M: false,
+          L: true
+        }}
+        marginTop={{
+          base: 'size-100',
+          M: 'size-1000'
+        }}
+        variant="primary">
+        This button is hidden in large display.
+      </Button>
+    </Provider>
+  ),
   name: 'responsive styleProps'
 };
 
-export const CustomResponsiveStyleProps = () => {
-  let Breakpoint = () => {
-    let {matchedBreakpoints} = useBreakpoint();
-    let breakpoint = matchedBreakpoints[0];
-    let width = {
-      base: 'size-1600',
-      XS: 'size-2000',
-      S: 'size-2400',
-      M: 'size-3000',
-      L: 'size-3400',
-      XL: 'size-4600',
-      XXL: 'size-6000'
+export const CustomResponsiveStyleProps = {
+  render: () => {
+    let Breakpoint = () => {
+      let {matchedBreakpoints} = useBreakpoint();
+      let breakpoint = matchedBreakpoints[0];
+      let width = {
+        base: 'size-1600',
+        XS: 'size-2000',
+        S: 'size-2400',
+        M: 'size-3000',
+        L: 'size-3400',
+        XL: 'size-4600',
+        XXL: 'size-6000'
+      };
+      return (
+        <>
+          <Button variant="primary" width={width}>
+            Button with {breakpoint} breakpoint.
+          </Button>
+          <div>width: {width[breakpoint]}</div>
+        </>
+      );
     };
-    return (
-      <>
-        <Button variant="primary" width={width}>
-          Button with {breakpoint} breakpoint.
-        </Button>
-        <div>width: {width[breakpoint]}</div>
-      </>
-    );
-  };
-  return (
-    <Provider
-      breakpoints={{S: 480, M: 640, L: 1024}}
-      UNSAFE_style={{padding: 50}}>
-      <Breakpoint />
-    </Provider>
-  );
-};
 
-CustomResponsiveStyleProps.story = {
+    return (
+      <Provider
+        breakpoints={{
+          S: 480,
+          M: 640,
+          L: 1024
+        }}
+        UNSAFE_style={{
+          padding: 50
+        }}>
+        <Breakpoint />
+      </Provider>
+    );
+  },
   name: 'custom responsive styleProps'
 };
 
-export const BreakpointOmitted = () => {
-  let Breakpoint = () => {
-    let {matchedBreakpoints} = useBreakpoint();
-    let breakpoint = matchedBreakpoints[0];
-    let width = {base: 'size-1600', S: 'size-2400', L: 'size-3400'};
-    return (
-      <>
-        <p>button's width will be S: 'size-2400' at M viewport.</p>
-        <Button variant="primary" width={width}>
-          Button with {breakpoint} breakpoint.
-        </Button>
-      </>
-    );
-  };
-  return (
-    <Provider UNSAFE_style={{padding: 50}}>
-      <Breakpoint />
-    </Provider>
-  );
-};
+export const BreakpointOmitted = {
+  render: () => {
+    let Breakpoint = () => {
+      let {matchedBreakpoints} = useBreakpoint();
+      let breakpoint = matchedBreakpoints[0];
+      let width = {
+        base: 'size-1600',
+        S: 'size-2400',
+        L: 'size-3400'
+      };
+      return (
+        <>
+          <p>button's width will be S: 'size-2400' at M viewport.</p>
+          <Button variant="primary" width={width}>
+            Button with {breakpoint} breakpoint.
+          </Button>
+        </>
+      );
+    };
 
-BreakpointOmitted.story = {
+    return (
+      <Provider
+        UNSAFE_style={{
+          padding: 50
+        }}>
+        <Breakpoint />
+      </Provider>
+    );
+  },
   name: 'breakpoint omitted'
 };
 
 function render(props = {}) {
   return (
-    <Provider {...props} UNSAFE_style={{padding: 50}}>
+    <Provider
+      {...props}
+      UNSAFE_style={{
+        padding: 50
+      }}>
       <Form>
         <Flex>
           {' '}

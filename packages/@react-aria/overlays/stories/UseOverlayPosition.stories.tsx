@@ -9,7 +9,6 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import {mergeProps} from '@react-aria/utils';
 import {Placement} from '@react-types/overlays';
 import * as React from 'react';
@@ -39,7 +38,6 @@ function Trigger(props: { withPortal: boolean, placement: Placement }) {
     offset: 10,
     placement
   });
-
   let overlay = (
     <div
       ref={overlayRef}
@@ -68,8 +66,13 @@ function Trigger(props: { withPortal: boolean, placement: Placement }) {
   if (withPortal) {
     overlay = ReactDOM.createPortal(overlay, document.body);
   }
+
   return (
-    <div style={{position: 'relative', margin: 'auto'}}>
+    <div
+      style={{
+        position: 'relative',
+        margin: 'auto'
+      }}>
       <button ref={targetRef} {...triggerProps} onClick={() => state.toggle()}>
         Trigger (open: {`${state.isOpen}`})
       </button>
@@ -82,26 +85,22 @@ export default {
   title: 'UseOverlayPosition'
 };
 
-export const DocumentBodyContainerBottom = () => <Trigger withPortal placement="bottom" />;
-
-DocumentBodyContainerBottom.story = {
+export const DocumentBodyContainerBottom = {
+  render: () => <Trigger withPortal placement="bottom" />,
   name: 'document.body container bottom'
 };
 
-export const DocumentBodyContainerTop = () => <Trigger withPortal placement="top" />;
-
-DocumentBodyContainerTop.story = {
+export const DocumentBodyContainerTop = {
+  render: () => <Trigger withPortal placement="top" />,
   name: 'document.body container top'
 };
 
-export const PositionedContainerBottom = () => <Trigger withPortal={false} placement="bottom" />;
-
-PositionedContainerBottom.story = {
+export const PositionedContainerBottom = {
+  render: () => <Trigger withPortal={false} placement="bottom" />,
   name: 'positioned container bottom'
 };
 
-export const PositionedContainerTop = () => <Trigger withPortal={false} placement="top" />;
-
-PositionedContainerTop.story = {
+export const PositionedContainerTop = {
+  render: () => <Trigger withPortal={false} placement="top" />,
   name: 'positioned container top'
 };

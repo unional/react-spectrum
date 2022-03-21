@@ -9,85 +9,92 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
-import React from 'react';
-import {render} from './DateRangePicker.stories';
-
-const BlockDecorator = storyFn => <div>{storyFn()}</div>;
+import DateRangePickerStories from './DateRangePicker.stories';
 
 export default {
-  title: 'Date and Time/DateRangePicker/styling',
-  decorators: [BlockDecorator]
+  ...DateRangePickerStories,
+  title: 'Date and Time/DateRangePicker/styling'
 };
 
-export const IsQuiet = () => render({isQuiet: true});
-
-IsQuiet.story = {
-  name: 'isQuiet'
+export const IsQuiet = {
+  name: 'isQuiet',
+  args: {isQuiet: true}
 };
 
-export const LabelPositionSide = () => render({labelPosition: 'side'});
-
-LabelPositionSide.story = {
-  name: 'labelPosition: side'
+export const LabelPositionSide = {
+  name: 'labelPosition: side',
+  args: {labelPosition: 'side'}
 };
 
-export const LabelAlignEnd = () => render({labelPosition: 'top', labelAlign: 'end'});
-
-LabelAlignEnd.story = {
-  name: 'labelAlign: end'
+export const LabelAlignEnd = {
+  name: 'labelAlign: end',
+  args: {
+    labelPosition: 'top',
+    labelAlign: 'end'
+  }
 };
 
-export const Required = () => render({isRequired: true});
-
-Required.story = {
-  name: 'required'
+export const Required = {
+  name: 'required',
+  args: {isRequired: true}
 };
 
-export const RequiredWithLabel = () => render({isRequired: true, necessityIndicator: 'label'});
-
-RequiredWithLabel.story = {
-  name: 'required with label'
+export const RequiredWithLabel = {
+  name: 'required with label',
+  args: {
+    isRequired: true,
+    necessityIndicator: 'label'
+  }
 };
 
-export const Optional = () => render({necessityIndicator: 'label'});
-
-Optional.story = {
-  name: 'optional'
+export const Optional = {
+  name: 'optional',
+  args: {necessityIndicator: 'label'}
 };
 
-export const NoVisibleLabel = () => render({'aria-label': 'Date range', label: null});
-
-NoVisibleLabel.story = {
-  name: 'no visible label'
+export const NoVisibleLabel = {
+  name: 'no visible label',
+  args: {
+    'aria-label': 'Date range',
+    label: null
+  }
 };
 
-export const QuietNoVisibleLabel = () => render({isQuiet: true, 'aria-label': 'Date range', label: null});
-
-QuietNoVisibleLabel.story = {
-  name: 'quiet no visible label'
+export const QuietNoVisibleLabel = {
+  name: 'quiet no visible label',
+  args: {
+    isQuiet: true,
+    'aria-label': 'Date range',
+    label: null
+  }
 };
 
-export const CustomWidth = () => render({width: 'size-3600'});
-
-CustomWidth.story = {
-  name: 'custom width'
+export const CustomWidth = {
+  name: 'custom width',
+  args: {width: 'size-3600'}
 };
 
-export const QuietCustomWidth = () => render({isQuiet: true, width: 'size-3600'});
-
-QuietCustomWidth.story = {
-  name: 'quiet custom width'
+export const QuietCustomWidth = {
+  name: 'quiet custom width',
+  args: {
+    isQuiet: true,
+    width: 'size-3600'
+  }
 };
 
-export const CustomWidthNoVisibleLabel = () => render({width: 'size-3600', label: null, 'aria-label': 'Date range'});
-
-CustomWidthNoVisibleLabel.story = {
-  name: 'custom width no visible label'
+export const CustomWidthNoVisibleLabel = {
+  name: 'custom width no visible label',
+  args: {
+    width: 'size-3600',
+    label: null,
+    'aria-label': 'Date range'
+  }
 };
 
-export const CustomWidthLabelPositionSide = () => render({width: 'size-3600', labelPosition: 'side'});
-
-CustomWidthLabelPositionSide.story = {
-  name: 'custom width, labelPosition=side'
+export const CustomWidthLabelPositionSide = {
+  name: 'custom width, labelPosition=side',
+  args: {
+    width: 'size-3600',
+    labelPosition: 'side'
+  }
 };

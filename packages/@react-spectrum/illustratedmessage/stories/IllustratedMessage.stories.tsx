@@ -9,7 +9,6 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import {Content} from '@react-spectrum/view';
 import Error from '@spectrum-icons/illustrations/src/Error';
 import {Heading} from '@react-spectrum/text';
@@ -24,66 +23,68 @@ import Unavailable from '@spectrum-icons/illustrations/Unavailable';
 import Upload from '@spectrum-icons/illustrations/Upload';
 
 export default {
-  title: 'IllustratedMessage'
+  title: 'IllustratedMessage',
+  remder: (props) => <Example {...props} />
 };
 
-export const _NotFound = () =>
-  render({
+export const NotFoundStory = {
+  name: 'Not found',
+  args: {
     heading: 'Error 404: Page not found',
-    description:
-      'This page isn’t available. Try checking the URL or visit a different page.',
+    description: 'This page isn’t available. Try checking the URL or visit a different page.',
     illustration: <NotFound />
-  });
-
-_NotFound.story = {
-  name: 'Not found'
+  }
 };
 
-export const _NoSearchResults = () =>
-  render({
+export const NoSearchResultsStory = {
+  name: 'No search results',
+  args: {
     heading: 'No matching results',
     description: 'Try another search.',
     illustration: <NoSearchResults />
-  });
-
-_NoSearchResults.story = {
-  name: 'No search results'
+  }
 };
 
-export const _Unauthorized = () =>
-  render({
+export const UnauthorizedStory = {
+  name: 'Unauthorized',
+  args: {
     heading: 'Error 401: Unauthorized',
     description:
       'You don’t have access to this page. Try checking the URL or visit a different page.',
     illustration: <Unauthorized />
-  });
+  }
+};
 
-export const _Error = () =>
-  render({
+export const ErrorStory = {
+  name: 'Error',
+  args: {
     heading: 'Error 500: Internal Server Error',
-    description:
-      'This page isn’t available right now. Try visiting this page again later.',
+    description: 'This page isn’t available right now. Try visiting this page again later.',
     illustration: <Error />
-  });
+  }
+};
 
-export const _Unavailable = () =>
-  render({
+export const UnavailableStory = {
+  name: 'Unavailable',
+  args: {
     heading: 'Error 503: Service Unavailable',
-    description:
-      'This page isn’t available right now. Try visiting this page again later.',
+    description: 'This page isn’t available right now. Try visiting this page again later.',
     illustration: <Unavailable />
-  });
+  }
+};
 
-export const _Timeout = () =>
-  render({
+export const TimeoutStory = {
+  name: 'Timeout',
+  args: {
     heading: 'Error 504: Gateway Timeout',
-    description:
-      'This page isn’t available right now. Try visiting this page again later.',
+    description: 'This page isn’t available right now. Try visiting this page again later.',
     illustration: <Timeout />
-  });
+  }
+};
 
-export const _Upload = () =>
-  render({
+export const UploadStory = {
+  name: 'Upload',
+  args: {
     heading: 'Drag and drop your file',
     description: (
       <>
@@ -93,16 +94,15 @@ export const _Upload = () =>
       </>
     ),
     illustration: <Upload />
-  });
-
-export const NoHeadingOrDescription = () =>
-  render({illustration: <NotFound aria-label="No Results" />});
-
-NoHeadingOrDescription.story = {
-  name: 'No heading or description'
+  }
 };
 
-function render(props: any = {}) {
+export const NoHeadingOrDescription = {
+  name: 'No heading or description',
+  args: {illustration: <NotFound aria-label="No Results" />}
+};
+
+function Example(props) {
   let {illustration, heading, description, ...otherProps} = props;
 
   return (

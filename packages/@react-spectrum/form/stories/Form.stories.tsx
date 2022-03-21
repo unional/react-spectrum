@@ -9,7 +9,6 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import {action} from '@storybook/addon-actions';
 import {Button} from '@react-spectrum/button';
 import {ButtonGroup} from '@react-spectrum/buttongroup';
@@ -31,183 +30,182 @@ import {TextArea, TextField} from '@react-spectrum/textfield';
 
 export default {
   title: 'Form',
-
   parameters: {
-    providerSwitcher: {status: 'positive'}
+    providerSwitcher: {
+      status: 'positive'
+    }
+  },
+  render: (props) => <Example {...props} />
+};
+
+export const Default = {
+  name: 'default'
+};
+export const LabelPositionSide = {
+  name: 'labelPosition: side',
+  args: {labelPosition: 'side'}
+};
+
+export const CustomWidth = {
+  name: 'custom width',
+  args: {width: 400}
+};
+
+export const CustomWidthLabelPositionSide = {
+  name: 'custom width, labelPosition: side',
+  args: {
+    width: 400,
+    labelPosition: 'side'
   }
 };
 
-export const Default = () => render({});
-export const LabelPositionSide = () => render({labelPosition: 'side'});
-
-LabelPositionSide.story = {
-  name: 'labelPosition: side'
+export const LabelAlignEnd = {
+  name: 'labelAlign: end',
+  args: {
+    width: 400,
+    labelAlign: 'end'
+  }
 };
 
-export const CustomWidth = () => render({width: 400});
-
-CustomWidth.story = {
-  name: 'custom width'
+export const LabelPositionSideLabelAlignEnd = {
+  name: 'labelPosition: side, labelAlign: end',
+  args: {
+    width: 400,
+    labelPosition: 'side',
+    labelAlign: 'end'
+  }
 };
 
-export const CustomWidthLabelPositionSide = () =>
-  render({width: 400, labelPosition: 'side'});
-
-CustomWidthLabelPositionSide.story = {
-  name: 'custom width, labelPosition: side'
-};
-
-export const LabelAlignEnd = () => render({width: 400, labelAlign: 'end'});
-
-LabelAlignEnd.story = {
-  name: 'labelAlign: end'
-};
-
-export const LabelPositionSideLabelAlignEnd = () =>
-  render({width: 400, labelPosition: 'side', labelAlign: 'end'});
-
-LabelPositionSideLabelAlignEnd.story = {
-  name: 'labelPosition: side, labelAlign: end'
-};
-
-export const FieldsNextToEachOther = () => (
-  <Form>
-    <Flex>
+export const FieldsNextToEachOther = {
+  name: 'fields next to each other',
+  render: (props) => (
+    <Form {...props}>
+      <Flex>
+        <TextField
+          label="First Name"
+          placeholder="John"
+          marginEnd="size-100"
+          flex={1}
+          description="Please enter your first name." />
+        <TextField
+          label="Last Name"
+          placeholder="Smith"
+          flex={1}
+          description="Please enter your last name." />
+      </Flex>
       <TextField
-        label="First Name"
-        placeholder="John"
-        marginEnd="size-100"
-        flex={1}
-        description="Please enter your first name." />
-      <TextField
-        label="Last Name"
-        placeholder="Smith"
-        flex={1}
-        description="Please enter your last name." />
-    </Flex>
-    <TextField
-      label="Street Address"
-      placeholder="123 Any Street"
-      description="Please include apartment or suite number." />
-    <Flex>
-      <TextField
-        label="City"
-        placeholder="San Francisco"
-        marginEnd="size-100"
-        flex={1}
-        description="Please enter the city you live in." />
-      <Picker
-        label="State"
-        placeholder="Select a state"
-        items={states}
-        marginEnd="size-100"
-        flex={1}>
-        {(item) => <Item key={item.abbr}>{item.name}</Item>}
-      </Picker>
-      <TextField
-        label="Zip code"
-        placeholder="12345"
-        flex={1}
-        description="Please enter a five-digit zip code." />
-    </Flex>
-  </Form>
-);
-
-FieldsNextToEachOther.story = {
-  name: 'fields next to each other'
+        label="Street Address"
+        placeholder="123 Any Street"
+        description="Please include apartment or suite number." />
+      <Flex>
+        <TextField
+          label="City"
+          placeholder="San Francisco"
+          marginEnd="size-100"
+          flex={1}
+          description="Please enter the city you live in." />
+        <Picker
+          label="State"
+          placeholder="Select a state"
+          items={states}
+          marginEnd="size-100"
+          flex={1}>
+          {(item) => <Item key={item.abbr}>{item.name}</Item>}
+        </Picker>
+        <TextField
+          label="Zip code"
+          placeholder="12345"
+          flex={1}
+          description="Please enter a five-digit zip code." />
+      </Flex>
+    </Form>
+  )
 };
 
-export const IsRequiredTrue = () => render({isRequired: true});
-
-IsRequiredTrue.story = {
-  name: 'isRequired: true'
+export const IsRequiredTrue = {
+  name: 'isRequired: true',
+  args: {isRequired: true}
 };
 
-export const IsRequiredTrueNecessityIndicatorLabel = () =>
-  render({isRequired: true, necessityIndicator: 'label'});
-
-IsRequiredTrueNecessityIndicatorLabel.story = {
-  name: 'isRequired: true, necessityIndicator: label'
+export const IsRequiredTrueNecessityIndicatorLabel = {
+  name: 'isRequired: true, necessityIndicator: label',
+  args: {
+    isRequired: true,
+    necessityIndicator: 'label'
+  }
 };
 
-export const IsRequiredFalseNecessityIndicatorLabel = () =>
-  render({isRequired: false, necessityIndicator: 'label'});
-
-IsRequiredFalseNecessityIndicatorLabel.story = {
-  name: 'isRequired: false, necessityIndicator: label'
+export const IsRequiredFalseNecessityIndicatorLabel = {
+  name: 'isRequired: false, necessityIndicator: label',
+  args: {
+    isRequired: false,
+    necessityIndicator: 'label'
+  }
 };
 
-export const IsDisabled = () => render({isDisabled: true});
-
-IsDisabled.story = {
-  name: 'isDisabled'
+export const IsDisabled = {
+  name: 'isDisabled',
+  args: {isDisabled: true}
 };
 
-export const IsQuiet = () => render({isQuiet: true});
-
-IsQuiet.story = {
-  name: 'isQuiet'
+export const IsQuiet = {
+  name: 'isQuiet',
+  args: {isQuiet: true}
 };
 
-export const IsQuietLabelPositionSide = () =>
-  render({isQuiet: true, labelPosition: 'side'});
-
-IsQuietLabelPositionSide.story = {
-  name: 'isQuiet, labelPosition: side'
+export const IsQuietLabelPositionSide = {
+  name: 'isQuiet, labelPosition: side',
+  args: {
+    isQuiet: true,
+    labelPosition: 'side'
+  }
 };
 
-export const IsEmphasized = () => render({isEmphasized: true});
-
-IsEmphasized.story = {
-  name: 'isEmphasized'
+export const IsEmphasized = {
+  name: 'isEmphasized',
+  args: {isEmphasized: true}
 };
 
-export const ValidationStateInvalid = () =>
-  render({validationState: 'invalid'});
-
-ValidationStateInvalid.story = {
-  name: 'validationState: invalid'
+export const ValidationStateInvalid = {
+  name: 'validationState: invalid',
+  args: {validationState: 'invalid'}
 };
 
-export const ValidationStateValid = () => render({validationState: 'valid'});
-
-ValidationStateValid.story = {
-  name: 'validationState: valid'
+export const ValidationStateValid = {
+  name: 'validationState: valid',
+  args: {validationState: 'valid'}
 };
 
-export const FormWithReset = () => <FormWithControls />;
-
-FormWithReset.story = {
-  name: 'form with reset'
+export const FormWithReset = {
+  name: 'form with reset',
+  render: (props) => <FormWithControls {...props} />
 };
 
-export const _FormWithSubmit = () => <FormWithSubmit />;
-
-_FormWithSubmit.story = {
+export const _FormWithSubmit = {
+  render: (props) => <FormWithSubmit {...props} />,
   name: 'form with submit'
 };
 
-export const FormWithNumberfieldAndLocaleArAe = () => (
-  <Flex gap="size-100">
-    <NumberField label="Outside form" />
-    <Form>
-      <NumberField label="Inside form" />
-    </Form>
-    <Form>
-      <TextField label="First Name" placeholder="John" />
-    </Form>
-    <Form>
-      <TextField label="First Name" placeholder="John" />
-      <NumberField label="Inside form" />
-    </Form>
-  </Flex>
-);
-
-FormWithNumberfieldAndLocaleArAe.story = {
-  name: 'form with numberfield and locale=ar-AE'
+export const FormWithNumberfieldAndLocaleArAe = {
+  name: 'form with numberfield and locale=ar-AE',
+  render: () => (
+    <Flex gap="size-100">
+      <NumberField label="Outside form" />
+      <Form>
+        <NumberField label="Inside form" />
+      </Form>
+      <Form>
+        <TextField label="First Name" placeholder="John" />
+      </Form>
+      <Form>
+        <TextField label="First Name" placeholder="John" />
+        <NumberField label="Inside form" />
+      </Form>
+    </Flex>
+  )
 };
 
-function render(props: any = {}) {
+function Example(props) {
   return (
     <Form {...props}>
       <CheckboxGroup defaultValue={['dragons']} label="Pets">
@@ -305,10 +303,7 @@ function FormWithControls(props: any = {}) {
           label="Last Name default"
           placeholder="Smith"
           defaultValue="world" />
-        <TextField
-          name="street-address"
-          label="Street Address none"
-          placeholder="123 Any Street" />
+        <TextField name="street-address" label="Street Address none" placeholder="123 Any Street" />
         <Picker
           name="country"
           label="Country none"
@@ -331,10 +326,7 @@ function FormWithControls(props: any = {}) {
           <Radio value="cats">Cats</Radio>
           <Radio value="dragons">Dragons</Radio>
         </RadioGroup>
-        <RadioGroup
-          label="Favorite pet none"
-          name="favorite-pet-group2"
-          defaultValue="cats">
+        <RadioGroup label="Favorite pet none" name="favorite-pet-group2" defaultValue="cats">
           <Radio value="dogs">Dogs</Radio>
           <Radio value="cats">Cats</Radio>
           <Radio value="dragons">Dragons</Radio>
@@ -427,7 +419,11 @@ function FormWithControls(props: any = {}) {
             I am a wizard! default
             <input type="checkbox" defaultChecked />
           </label>
-          <div style={{display: 'flex', flexDirection: 'column'}}>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column'
+            }}>
             Favorite Pet controlled
             <label>
               Dogs
@@ -457,7 +453,11 @@ function FormWithControls(props: any = {}) {
                 onChange={(e) => setFavoritePet2(e.target.value)} />
             </label>
           </div>
-          <div style={{display: 'flex', flexDirection: 'column'}}>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column'
+            }}>
             Favorite Pet uncontrolled
             <label>
               Dogs
@@ -465,11 +465,7 @@ function FormWithControls(props: any = {}) {
             </label>
             <label>
               Cats
-              <input
-                type="radio"
-                name="favorit-pet-group4"
-                value="cats"
-                defaultChecked />
+              <input type="radio" name="favorit-pet-group4" value="cats" defaultChecked />
             </label>
             <label>
               Dragons
@@ -557,18 +553,17 @@ function FormWithSubmit() {
   let [truthDirty, setTruthDirty] = useState(false);
   let [email, setEmail] = useState('');
   let [emailDirty, setEmailDirty] = useState(false);
-
-  let [formStatus, setFormStatus] = useState<
-    'progress' | 'invalid' | 'valid' | 'fixing'
-  >('progress');
+  let [formStatus, setFormStatus] = useState<'progress' | 'invalid' | 'valid' | 'fixing'>(
+    'progress'
+  );
   let [isSubmitted, setSubmitted] = useState(false); // TODO: really should be isSectionInvalid / 'fixing' for each form field. once form is submitted with mistakes, unchecking an unrelated, previously valid field should not make it look invalid.
 
   let getValidationState = (isValid: boolean): 'invalid' | null =>
     ['invalid', 'fixing'].includes(formStatus) && !isValid ? 'invalid' : null;
 
   useEffect(() => {
-    let validate = (): boolean =>
-      policies.length === 3 && pet && truth && email.includes('@');
+    let validate = (): boolean => policies.length === 3 && pet && truth && email.includes('@');
+
     let formDirty = policiesDirty || petDirty || truthDirty || emailDirty;
 
     if (isSubmitted) {
@@ -580,36 +575,26 @@ function FormWithSubmit() {
     } else {
       setFormStatus('progress');
     }
-  }, [
-    policies,
-    policiesDirty,
-    pet,
-    petDirty,
-    truth,
-    truthDirty,
-    email,
-    emailDirty,
-    isSubmitted
-  ]);
+  }, [policies, policiesDirty, pet, petDirty, truth, truthDirty, email, emailDirty, isSubmitted]);
 
   let Status = ({formStatus}) => {
-    let [variant, setVariant] = useState<
-      'info' | 'negative' | 'positive' | 'notice'
-    >('info');
-
+    let [variant, setVariant] = useState<'info' | 'negative' | 'positive' | 'notice'>('info');
     useEffect(() => {
       switch (formStatus) {
         case 'invalid':
           return setVariant('negative');
+
         case 'valid':
           return setVariant('positive');
+
         case 'fixing':
           return setVariant('notice');
+
         default:
           return setVariant('info');
       }
     }, [formStatus]);
-
+    
     return (
       <StatusLight variant={variant}>
         {formStatus === 'progress' && 'In progress'}

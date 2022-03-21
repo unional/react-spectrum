@@ -9,7 +9,6 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import {action} from '@storybook/addon-actions';
 import {ActionButton, Button} from '@react-spectrum/button';
 import Add from '@spectrum-icons/workflow/Add';
@@ -36,13 +35,25 @@ import {useFilter} from '@react-aria/i18n';
 import {View} from '@react-spectrum/view';
 
 let columns = [
-  {name: 'Foo', key: 'foo'},
-  {name: 'Bar', key: 'bar'},
-  {name: 'Baz', key: 'baz'}
+  {
+    name: 'Foo',
+    key: 'foo'
+  },
+  {
+    name: 'Bar',
+    key: 'bar'
+  },
+  {
+    name: 'Baz',
+    key: 'baz'
+  }
 ];
 
 let nestedColumns = [
-  {name: 'Test', key: 'test'},
+  {
+    name: 'Test',
+    key: 'test'
+  },
   {
     name: 'Tiered One Header',
     key: 'tier1',
@@ -51,39 +62,109 @@ let nestedColumns = [
         name: 'Tier Two Header A',
         key: 'tier2a',
         children: [
-          {name: 'Foo', key: 'foo'},
-          {name: 'Bar', key: 'bar'}
+          {
+            name: 'Foo',
+            key: 'foo'
+          },
+          {
+            name: 'Bar',
+            key: 'bar'
+          }
         ]
       },
-      {name: 'Yay', key: 'yay'},
+      {
+        name: 'Yay',
+        key: 'yay'
+      },
       {
         name: 'Tier Two Header B',
         key: 'tier2b',
-        children: [{name: 'Baz', key: 'baz'}]
+        children: [
+          {
+            name: 'Baz',
+            key: 'baz'
+          }
+        ]
       }
     ]
   }
 ];
 
 let items = [
-  {test: 'Test 1', foo: 'Foo 1', bar: 'Bar 1', yay: 'Yay 1', baz: 'Baz 1'},
-  {test: 'Test 2', foo: 'Foo 2', bar: 'Bar 2', yay: 'Yay 2', baz: 'Baz 2'},
-  {test: 'Test 1', foo: 'Foo 3', bar: 'Bar 1', yay: 'Yay 1', baz: 'Baz 1'},
-  {test: 'Test 2', foo: 'Foo 4', bar: 'Bar 2', yay: 'Yay 2', baz: 'Baz 2'},
-  {test: 'Test 1', foo: 'Foo 5', bar: 'Bar 1', yay: 'Yay 1', baz: 'Baz 1'},
-  {test: 'Test 2', foo: 'Foo 6', bar: 'Bar 2', yay: 'Yay 2', baz: 'Baz 2'},
-  {test: 'Test 1', foo: 'Foo 7', bar: 'Bar 1', yay: 'Yay 1', baz: 'Baz 1'},
-  {test: 'Test 2', foo: 'Foo 8', bar: 'Bar 2', yay: 'Yay 2', baz: 'Baz 2'}
+  {
+    test: 'Test 1',
+    foo: 'Foo 1',
+    bar: 'Bar 1',
+    yay: 'Yay 1',
+    baz: 'Baz 1'
+  },
+  {
+    test: 'Test 2',
+    foo: 'Foo 2',
+    bar: 'Bar 2',
+    yay: 'Yay 2',
+    baz: 'Baz 2'
+  },
+  {
+    test: 'Test 1',
+    foo: 'Foo 3',
+    bar: 'Bar 1',
+    yay: 'Yay 1',
+    baz: 'Baz 1'
+  },
+  {
+    test: 'Test 2',
+    foo: 'Foo 4',
+    bar: 'Bar 2',
+    yay: 'Yay 2',
+    baz: 'Baz 2'
+  },
+  {
+    test: 'Test 1',
+    foo: 'Foo 5',
+    bar: 'Bar 1',
+    yay: 'Yay 1',
+    baz: 'Baz 1'
+  },
+  {
+    test: 'Test 2',
+    foo: 'Foo 6',
+    bar: 'Bar 2',
+    yay: 'Yay 2',
+    baz: 'Baz 2'
+  },
+  {
+    test: 'Test 1',
+    foo: 'Foo 7',
+    bar: 'Bar 1',
+    yay: 'Yay 1',
+    baz: 'Baz 1'
+  },
+  {
+    test: 'Test 2',
+    foo: 'Foo 8',
+    bar: 'Bar 2',
+    yay: 'Yay 2',
+    baz: 'Baz 2'
+  }
 ];
 
 let manyColunns = [];
+
 for (let i = 0; i < 100; i++) {
-  manyColunns.push({name: 'Column ' + i, key: 'C' + i});
+  manyColunns.push({
+    name: 'Column ' + i,
+    key: 'C' + i
+  });
 }
 
 let manyRows = [];
+
 for (let i = 0; i < 1000; i++) {
-  let row = {key: 'R' + i};
+  let row = {
+    key: 'R' + i
+  };
+
   for (let j = 0; j < 100; j++) {
     row['C' + j] = `${i}, ${j}`;
   }
@@ -109,1116 +190,1079 @@ export default {
   title: 'TableView'
 };
 
-export const Static = () => (
-  <TableView
-    aria-label="TableView with static contents"
-    width={300}
-    height={200}>
-    <TableHeader>
-      <Column key="foo">Foo</Column>
-      <Column key="bar">Bar</Column>
-      <Column key="baz">Baz</Column>
-    </TableHeader>
-    <TableBody>
-      <Row>
-        <Cell>One</Cell>
-        <Cell>Two</Cell>
-        <Cell>Three</Cell>
-      </Row>
-      <Row>
-        <Cell>One</Cell>
-        <Cell>Two</Cell>
-        <Cell>Three</Cell>
-      </Row>
-    </TableBody>
-  </TableView>
-);
-
-Static.story = {
+export const Static = {
+  render: () => (
+    <TableView aria-label="TableView with static contents" width={300} height={200}>
+      <TableHeader>
+        <Column key="foo">Foo</Column>
+        <Column key="bar">Bar</Column>
+        <Column key="baz">Baz</Column>
+      </TableHeader>
+      <TableBody>
+        <Row>
+          <Cell>One</Cell>
+          <Cell>Two</Cell>
+          <Cell>Three</Cell>
+        </Row>
+        <Row>
+          <Cell>One</Cell>
+          <Cell>Two</Cell>
+          <Cell>Three</Cell>
+        </Row>
+      </TableBody>
+    </TableView>
+  ),
   name: 'static'
 };
 
-export const StaticWithSelection = () => (
-  <TableView
-    aria-label="TableView with static contents"
-    selectionMode="multiple"
-    width={300}
-    height={200}
-    onSelectionChange={(s) => onSelectionChange([...s])}>
-    <TableHeader>
-      <Column key="foo">Foo</Column>
-      <Column key="bar">Bar</Column>
-      <Column key="baz">Baz</Column>
-    </TableHeader>
-    <TableBody>
-      <Row>
-        <Cell>One</Cell>
-        <Cell>Two</Cell>
-        <Cell>Three</Cell>
-      </Row>
-      <Row>
-        <Cell>One</Cell>
-        <Cell>Two</Cell>
-        <Cell>Three</Cell>
-      </Row>
-    </TableBody>
-  </TableView>
-);
-
-StaticWithSelection.story = {
-  name: 'static with selection'
-};
-
-export const Dynamic = () => (
-  <TableView
-    aria-label="TableView with dynamic contents"
-    width={300}
-    height={200}>
-    <TableHeader columns={columns}>
-      {(column) => <Column>{column.name}</Column>}
-    </TableHeader>
-    <TableBody items={items}>
-      {(item) => <Row key={item.foo}>{(key) => <Cell>{item[key]}</Cell>}</Row>}
-    </TableBody>
-  </TableView>
-);
-
-Dynamic.story = {
-  name: 'dynamic'
-};
-
-export const DynamicWithSelection = () => (
-  <TableView
-    aria-label="TableView with dynamic contents"
-    selectionMode="multiple"
-    width={300}
-    height={200}
-    onSelectionChange={(s) => onSelectionChange([...s])}>
-    <TableHeader columns={columns}>
-      {(column) => <Column>{column.name}</Column>}
-    </TableHeader>
-    <TableBody items={items}>
-      {(item) => <Row key={item.foo}>{(key) => <Cell>{item[key]}</Cell>}</Row>}
-    </TableBody>
-  </TableView>
-);
-
-DynamicWithSelection.story = {
-  name: 'dynamic with selection'
-};
-
-export const DynamicWithSingleSelection = () => (
-  <TableView
-    aria-label="TableView with dynamic contents"
-    selectionMode="single"
-    width={300}
-    height={200}
-    onSelectionChange={(s) => onSelectionChange([...s])}>
-    <TableHeader columns={columns}>
-      {(column) => <Column>{column.name}</Column>}
-    </TableHeader>
-    <TableBody items={items}>
-      {(item) => <Row key={item.foo}>{(key) => <Cell>{item[key]}</Cell>}</Row>}
-    </TableBody>
-  </TableView>
-);
-
-DynamicWithSingleSelection.story = {
-  name: 'dynamic with single selection'
-};
-
-export const DynamicWithDisabledSingleSelection = () => (
-  <TableView
-    disabledKeys={['Foo 1', 'Foo 3']}
-    aria-label="TableView with dynamic contents"
-    selectionMode="single"
-    width={300}
-    height={200}
-    onSelectionChange={(s) => onSelectionChange([...s])}>
-    <TableHeader columns={columns}>
-      {(column) => <Column>{column.name}</Column>}
-    </TableHeader>
-    <TableBody items={items}>
-      {(item) => <Row key={item.foo}>{(key) => <Cell>{item[key]}</Cell>}</Row>}
-    </TableBody>
-  </TableView>
-);
-
-DynamicWithDisabledSingleSelection.story = {
-  name: 'dynamic with disabled, single selection'
-};
-
-export const DynamicWithDisabledMultipleSelection = () => (
-  <TableView
-    disabledKeys={['Foo 1', 'Foo 3']}
-    aria-label="TableView with dynamic contents"
-    selectionMode="multiple"
-    width={300}
-    height={200}
-    onSelectionChange={(s) => onSelectionChange([...s])}>
-    <TableHeader columns={columns}>
-      {(column) => <Column>{column.name}</Column>}
-    </TableHeader>
-    <TableBody items={items}>
-      {(item) => <Row key={item.foo}>{(key) => <Cell>{item[key]}</Cell>}</Row>}
-    </TableBody>
-  </TableView>
-);
-
-DynamicWithDisabledMultipleSelection.story = {
-  name: 'dynamic with disabled, multiple selection'
-};
-
-export const DynamicWithDisabledMultipleSelectionQuiet = () => (
-  <TableView
-    isQuiet
-    disabledKeys={['Foo 1', 'Foo 3']}
-    aria-label="TableView with dynamic contents"
-    selectionMode="multiple"
-    width={300}
-    height={200}
-    onSelectionChange={(s) => onSelectionChange([...s])}>
-    <TableHeader columns={columns}>
-      {(column) => <Column>{column.name}</Column>}
-    </TableHeader>
-    <TableBody items={items}>
-      {(item) => <Row key={item.foo}>{(key) => <Cell>{item[key]}</Cell>}</Row>}
-    </TableBody>
-  </TableView>
-);
-
-DynamicWithDisabledMultipleSelectionQuiet.story = {
-  name: 'dynamic with disabled, multiple selection, quiet'
-};
-
-export const DefaultSelectedKeysDynamicMultipleSelectionShowDivider = () => (
-  <TableView
-    defaultSelectedKeys={['Foo 1', 'Foo 3']}
-    onSelectionChange={(s) => onSelectionChange([...s])}
-    selectionMode="multiple"
-    aria-label="TableView with dynamic contents"
-    width={300}
-    height={200}>
-    <TableHeader columns={columns}>
-      {(column) => <Column showDivider>{column.name}</Column>}
-    </TableHeader>
-    <TableBody items={items}>
-      {(item) => <Row key={item.foo}>{(key) => <Cell>{item[key]}</Cell>}</Row>}
-    </TableBody>
-  </TableView>
-);
-
-DefaultSelectedKeysDynamicMultipleSelectionShowDivider.story = {
-  name: 'defaultSelectedKeys, dynamic, multiple selection, showDivider'
-};
-
-export const SelectedKeysDynamicMultipleSelectionQuietShowDider = () => (
-  <TableView
-    isQuiet
-    selectedKeys={['Foo 1', 'Foo 3']}
-    onSelectionChange={(s) => onSelectionChange([...s])}
-    selectionMode="multiple"
-    aria-label="TableView with dynamic contents"
-    width={300}
-    height={200}>
-    <TableHeader columns={columns}>
-      {(column) => <Column showDivider>{column.name}</Column>}
-    </TableHeader>
-    <TableBody items={items}>
-      {(item) => <Row key={item.foo}>{(key) => <Cell>{item[key]}</Cell>}</Row>}
-    </TableBody>
-  </TableView>
-);
-
-SelectedKeysDynamicMultipleSelectionQuietShowDider.story = {
-  name: 'selectedKeys, dynamic, multiple selection, quiet, showDider'
-};
-
-export const SwapSelectionMode = () => <ChangableSelectionMode />;
-
-SwapSelectionMode.story = {
-  name: 'swap selection mode'
-};
-
-export const StaticWithNestedColumns = () => (
-  <TableView
-    aria-label="TableView with nested columns"
-    selectionMode="multiple"
-    width={500}
-    height={200}
-    onSelectionChange={(s) => onSelectionChange([...s])}>
-    <TableHeader>
-      <Column key="test">Test</Column>
-      <Column title="Group 1">
-        <Column key="foo">Foo</Column>
-        <Column key="bar">Bar</Column>
-      </Column>
-      <Column title="Group 2">
-        <Column key="baz">Baz</Column>
-      </Column>
-    </TableHeader>
-    <TableBody>
-      <Row>
-        <Cell>Test1</Cell>
-        <Cell>One</Cell>
-        <Cell>Two</Cell>
-        <Cell>Three</Cell>
-      </Row>
-      <Row>
-        <Cell>Test2</Cell>
-        <Cell>One</Cell>
-        <Cell>Two</Cell>
-        <Cell>Three</Cell>
-      </Row>
-    </TableBody>
-  </TableView>
-);
-
-StaticWithNestedColumns.story = {
-  name: 'static with nested columns'
-};
-
-export const DynamicWithNestedColumns = () => (
-  <TableView
-    aria-label="TableView with nested columns"
-    selectionMode="multiple"
-    width={700}
-    height={300}
-    overflowMode="wrap"
-    onSelectionChange={(s) => onSelectionChange([...s])}>
-    <TableHeader columns={nestedColumns}>
-      {(column) => (
-        <Column childColumns={column.children}>{column.name}</Column>
-      )}
-    </TableHeader>
-    <TableBody items={items}>
-      {(item) => <Row key={item.foo}>{(key) => <Cell>{item[key]}</Cell>}</Row>}
-    </TableBody>
-  </TableView>
-);
-
-DynamicWithNestedColumns.story = {
-  name: 'dynamic with nested columns'
-};
-
-export const FocusableCells = () => (
-  <Flex direction="column">
-    <input aria-label="Focusable before" placeholder="Focusable before" />
+export const StaticWithSelection = {
+  render: () => (
     <TableView
-      aria-label="TableView with focusable cells"
+      aria-label="TableView with static contents"
       selectionMode="multiple"
-      width={450}
+      width={300}
       height={200}
       onSelectionChange={(s) => onSelectionChange([...s])}>
       <TableHeader>
         <Column key="foo">Foo</Column>
         <Column key="bar">Bar</Column>
-        <Column key="baz">baz</Column>
+        <Column key="baz">Baz</Column>
       </TableHeader>
       <TableBody>
         <Row>
-          <Cell>
-            <Switch aria-label="Foo" />
-          </Cell>
-          <Cell>
-            <Link>
-              <a href="https://yahoo.com" target="_blank">
-                Yahoo
-              </a>
-            </Link>
-          </Cell>
+          <Cell>One</Cell>
+          <Cell>Two</Cell>
           <Cell>Three</Cell>
         </Row>
         <Row>
-          <Cell>
-            <Switch aria-label="Foo" />
-            <Switch aria-label="Bar" />
-          </Cell>
-          <Cell>
-            <Link>
-              <a href="https://google.com" target="_blank">
-                Google
-              </a>
-            </Link>
-          </Cell>
-          <Cell>Three</Cell>
-        </Row>
-        <Row>
-          <Cell>
-            <Switch aria-label="Foo" />
-          </Cell>
-          <Cell>
-            <Link>
-              <a href="https://yahoo.com" target="_blank">
-                Yahoo
-              </a>
-            </Link>
-          </Cell>
+          <Cell>One</Cell>
+          <Cell>Two</Cell>
           <Cell>Three</Cell>
         </Row>
       </TableBody>
     </TableView>
-    <input aria-label="Focusable after" placeholder="Focusable after" />
-  </Flex>
-);
+  ),
+  name: 'static with selection'
+};
 
-FocusableCells.story = {
+export const Dynamic = {
+  render: () => (
+    <TableView aria-label="TableView with dynamic contents" width={300} height={200}>
+      <TableHeader columns={columns}>{(column) => <Column>{column.name}</Column>}</TableHeader>
+      <TableBody items={items}>
+        {(item) => <Row key={item.foo}>{(key) => <Cell>{item[key]}</Cell>}</Row>}
+      </TableBody>
+    </TableView>
+  ),
+  name: 'dynamic'
+};
+
+export const DynamicWithSelection = {
+  render: () => (
+    <TableView
+      aria-label="TableView with dynamic contents"
+      selectionMode="multiple"
+      width={300}
+      height={200}
+      onSelectionChange={(s) => onSelectionChange([...s])}>
+      <TableHeader columns={columns}>{(column) => <Column>{column.name}</Column>}</TableHeader>
+      <TableBody items={items}>
+        {(item) => <Row key={item.foo}>{(key) => <Cell>{item[key]}</Cell>}</Row>}
+      </TableBody>
+    </TableView>
+  ),
+  name: 'dynamic with selection'
+};
+
+export const DynamicWithSingleSelection = {
+  render: () => (
+    <TableView
+      aria-label="TableView with dynamic contents"
+      selectionMode="single"
+      width={300}
+      height={200}
+      onSelectionChange={(s) => onSelectionChange([...s])}>
+      <TableHeader columns={columns}>{(column) => <Column>{column.name}</Column>}</TableHeader>
+      <TableBody items={items}>
+        {(item) => <Row key={item.foo}>{(key) => <Cell>{item[key]}</Cell>}</Row>}
+      </TableBody>
+    </TableView>
+  ),
+  name: 'dynamic with single selection'
+};
+
+export const DynamicWithDisabledSingleSelection = {
+  render: () => (
+    <TableView
+      disabledKeys={['Foo 1', 'Foo 3']}
+      aria-label="TableView with dynamic contents"
+      selectionMode="single"
+      width={300}
+      height={200}
+      onSelectionChange={(s) => onSelectionChange([...s])}>
+      <TableHeader columns={columns}>{(column) => <Column>{column.name}</Column>}</TableHeader>
+      <TableBody items={items}>
+        {(item) => <Row key={item.foo}>{(key) => <Cell>{item[key]}</Cell>}</Row>}
+      </TableBody>
+    </TableView>
+  ),
+  name: 'dynamic with disabled, single selection'
+};
+
+export const DynamicWithDisabledMultipleSelection = {
+  render: () => (
+    <TableView
+      disabledKeys={['Foo 1', 'Foo 3']}
+      aria-label="TableView with dynamic contents"
+      selectionMode="multiple"
+      width={300}
+      height={200}
+      onSelectionChange={(s) => onSelectionChange([...s])}>
+      <TableHeader columns={columns}>{(column) => <Column>{column.name}</Column>}</TableHeader>
+      <TableBody items={items}>
+        {(item) => <Row key={item.foo}>{(key) => <Cell>{item[key]}</Cell>}</Row>}
+      </TableBody>
+    </TableView>
+  ),
+  name: 'dynamic with disabled, multiple selection'
+};
+
+export const DynamicWithDisabledMultipleSelectionQuiet = {
+  render: () => (
+    <TableView
+      isQuiet
+      disabledKeys={['Foo 1', 'Foo 3']}
+      aria-label="TableView with dynamic contents"
+      selectionMode="multiple"
+      width={300}
+      height={200}
+      onSelectionChange={(s) => onSelectionChange([...s])}>
+      <TableHeader columns={columns}>{(column) => <Column>{column.name}</Column>}</TableHeader>
+      <TableBody items={items}>
+        {(item) => <Row key={item.foo}>{(key) => <Cell>{item[key]}</Cell>}</Row>}
+      </TableBody>
+    </TableView>
+  ),
+  name: 'dynamic with disabled, multiple selection, quiet'
+};
+
+export const DefaultSelectedKeysDynamicMultipleSelectionShowDivider = {
+  render: () => (
+    <TableView
+      defaultSelectedKeys={['Foo 1', 'Foo 3']}
+      onSelectionChange={(s) => onSelectionChange([...s])}
+      selectionMode="multiple"
+      aria-label="TableView with dynamic contents"
+      width={300}
+      height={200}>
+      <TableHeader columns={columns}>
+        {(column) => <Column showDivider>{column.name}</Column>}
+      </TableHeader>
+      <TableBody items={items}>
+        {(item) => <Row key={item.foo}>{(key) => <Cell>{item[key]}</Cell>}</Row>}
+      </TableBody>
+    </TableView>
+  ),
+  name: 'defaultSelectedKeys, dynamic, multiple selection, showDivider'
+};
+
+export const SelectedKeysDynamicMultipleSelectionQuietShowDider = {
+  render: () => (
+    <TableView
+      isQuiet
+      selectedKeys={['Foo 1', 'Foo 3']}
+      onSelectionChange={(s) => onSelectionChange([...s])}
+      selectionMode="multiple"
+      aria-label="TableView with dynamic contents"
+      width={300}
+      height={200}>
+      <TableHeader columns={columns}>
+        {(column) => <Column showDivider>{column.name}</Column>}
+      </TableHeader>
+      <TableBody items={items}>
+        {(item) => <Row key={item.foo}>{(key) => <Cell>{item[key]}</Cell>}</Row>}
+      </TableBody>
+    </TableView>
+  ),
+  name: 'selectedKeys, dynamic, multiple selection, quiet, showDider'
+};
+
+export const SwapSelectionMode = {
+  render: () => <ChangableSelectionMode />,
+  name: 'swap selection mode'
+};
+
+export const StaticWithNestedColumns = {
+  render: () => (
+    <TableView
+      aria-label="TableView with nested columns"
+      selectionMode="multiple"
+      width={500}
+      height={200}
+      onSelectionChange={(s) => onSelectionChange([...s])}>
+      <TableHeader>
+        <Column key="test">Test</Column>
+        <Column title="Group 1">
+          <Column key="foo">Foo</Column>
+          <Column key="bar">Bar</Column>
+        </Column>
+        <Column title="Group 2">
+          <Column key="baz">Baz</Column>
+        </Column>
+      </TableHeader>
+      <TableBody>
+        <Row>
+          <Cell>Test1</Cell>
+          <Cell>One</Cell>
+          <Cell>Two</Cell>
+          <Cell>Three</Cell>
+        </Row>
+        <Row>
+          <Cell>Test2</Cell>
+          <Cell>One</Cell>
+          <Cell>Two</Cell>
+          <Cell>Three</Cell>
+        </Row>
+      </TableBody>
+    </TableView>
+  ),
+  name: 'static with nested columns'
+};
+
+export const DynamicWithNestedColumns = {
+  render: () => (
+    <TableView
+      aria-label="TableView with nested columns"
+      selectionMode="multiple"
+      width={700}
+      height={300}
+      overflowMode="wrap"
+      onSelectionChange={(s) => onSelectionChange([...s])}>
+      <TableHeader columns={nestedColumns}>
+        {(column) => <Column childColumns={column.children}>{column.name}</Column>}
+      </TableHeader>
+      <TableBody items={items}>
+        {(item) => <Row key={item.foo}>{(key) => <Cell>{item[key]}</Cell>}</Row>}
+      </TableBody>
+    </TableView>
+  ),
+  name: 'dynamic with nested columns'
+};
+
+export const FocusableCells = {
+  render: () => (
+    <Flex direction="column">
+      <input aria-label="Focusable before" placeholder="Focusable before" />
+      <TableView
+        aria-label="TableView with focusable cells"
+        selectionMode="multiple"
+        width={450}
+        height={200}
+        onSelectionChange={(s) => onSelectionChange([...s])}>
+        <TableHeader>
+          <Column key="foo">Foo</Column>
+          <Column key="bar">Bar</Column>
+          <Column key="baz">baz</Column>
+        </TableHeader>
+        <TableBody>
+          <Row>
+            <Cell>
+              <Switch aria-label="Foo" />
+            </Cell>
+            <Cell>
+              <Link>
+                <a href="https://yahoo.com" target="_blank">
+                  Yahoo
+                </a>
+              </Link>
+            </Cell>
+            <Cell>Three</Cell>
+          </Row>
+          <Row>
+            <Cell>
+              <Switch aria-label="Foo" />
+              <Switch aria-label="Bar" />
+            </Cell>
+            <Cell>
+              <Link>
+                <a href="https://google.com" target="_blank">
+                  Google
+                </a>
+              </Link>
+            </Cell>
+            <Cell>Three</Cell>
+          </Row>
+          <Row>
+            <Cell>
+              <Switch aria-label="Foo" />
+            </Cell>
+            <Cell>
+              <Link>
+                <a href="https://yahoo.com" target="_blank">
+                  Yahoo
+                </a>
+              </Link>
+            </Cell>
+            <Cell>Three</Cell>
+          </Row>
+        </TableBody>
+      </TableView>
+      <input aria-label="Focusable after" placeholder="Focusable after" />
+    </Flex>
+  ),
   name: 'focusable cells'
 };
 
-export const ManyColumnsAndRows = () => (
-  <>
-    <input aria-label="Focusable before" placeholder="Focusable before" />
+export const ManyColumnsAndRows = {
+  render: () => (
+    <>
+      <input aria-label="Focusable before" placeholder="Focusable before" />
+      <TableView
+        aria-label="TableView with many columns and rows"
+        selectionMode="multiple"
+        width={700}
+        height={500}
+        onSelectionChange={(s) => onSelectionChange([...s])}>
+        <TableHeader columns={manyColunns}>
+          {(column) => <Column minWidth={100}>{column.name}</Column>}
+        </TableHeader>
+        <TableBody items={manyRows}>
+          {(item) => <Row key={item.foo}>{(key) => <Cell>{item[key]}</Cell>}</Row>}
+        </TableBody>
+      </TableView>
+      <input aria-label="Focusable after" placeholder="Focusable after" />
+    </>
+  ),
+  name: 'many columns and rows',
+  parameters: {
+    chromatic: {
+      disable: true
+    }
+  }
+};
+
+export const IsQuietManyColumnsAndRows = {
+  render: () => (
     <TableView
-      aria-label="TableView with many columns and rows"
+      aria-label="Quiet TableView with many columns and rows"
       selectionMode="multiple"
       width={700}
       height={500}
+      isQuiet
       onSelectionChange={(s) => onSelectionChange([...s])}>
       <TableHeader columns={manyColunns}>
         {(column) => <Column minWidth={100}>{column.name}</Column>}
       </TableHeader>
       <TableBody items={manyRows}>
-        {(item) => (
-          <Row key={item.foo}>{(key) => <Cell>{item[key]}</Cell>}</Row>
-        )}
+        {(item) => <Row key={item.foo}>{(key) => <Cell>{item[key]}</Cell>}</Row>}
       </TableBody>
     </TableView>
-    <input aria-label="Focusable after" placeholder="Focusable after" />
-  </>
-);
-
-ManyColumnsAndRows.story = {
-  name: 'many columns and rows',
-  parameters: {chromatic: {disable: true}}
-};
-
-export const IsQuietManyColumnsAndRows = () => (
-  <TableView
-    aria-label="Quiet TableView with many columns and rows"
-    selectionMode="multiple"
-    width={700}
-    height={500}
-    isQuiet
-    onSelectionChange={(s) => onSelectionChange([...s])}>
-    <TableHeader columns={manyColunns}>
-      {(column) => <Column minWidth={100}>{column.name}</Column>}
-    </TableHeader>
-    <TableBody items={manyRows}>
-      {(item) => <Row key={item.foo}>{(key) => <Cell>{item[key]}</Cell>}</Row>}
-    </TableBody>
-  </TableView>
-);
-
-IsQuietManyColumnsAndRows.story = {
+  ),
   name: 'isQuiet, many columns and rows',
-  parameters: {chromatic: {disable: true}}
+  parameters: {
+    chromatic: {
+      disable: true
+    }
+  }
 };
 
-export const ShouldFillCellWidth = () => (
-  <TableView
-    aria-label="TableView with filled cells"
-    selectionMode="multiple"
-    width={500}
-    height={200}
-    onSelectionChange={(s) => onSelectionChange([...s])}>
-    <TableHeader>
-      <Column>File Name</Column>
-      <Column align="center">Type</Column>
-      <Column align="end">Size</Column>
-      <Column>Description</Column>
-    </TableHeader>
-    <TableBody>
-      <Row>
-        <Cell>2018 Proposal</Cell>
-        <Cell>PDF</Cell>
-        <Cell>214 KB</Cell>
-        <Cell>
-          very very very very very very long long long long long description
-        </Cell>
-      </Row>
-      <Row>
-        <Cell>
-          <View width="100%" backgroundColor="gray-200">
-            100%
-          </View>
-        </Cell>
-        <Cell>
-          <View
-            UNSAFE_style={{
-              margin: 'auto',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap'
-            }}
-            width="100%"
-            backgroundColor="gray-200">
-            100%
-          </View>
-        </Cell>
-        <Cell>
-          <View
-            UNSAFE_style={{
-              marginInlineStart: 'auto',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap'
-            }}
-            width="100%"
-            backgroundColor="gray-200">
-            100%
-          </View>
-        </Cell>
-        <Cell>
-          <View
-            UNSAFE_style={{
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap'
-            }}
-            width="100%"
-            backgroundColor="gray-200">
-            very very very very very very long long long long long description
-          </View>
-        </Cell>
-      </Row>
-      <Row>
-        <Cell>
-          <View
-            UNSAFE_style={{
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap'
-            }}
-            width="50%"
-            backgroundColor="gray-200">
-            50% div
-          </View>
-        </Cell>
-        <Cell>
-          <View
-            UNSAFE_style={{
-              margin: 'auto',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap'
-            }}
-            width="70%"
-            backgroundColor="gray-200">
-            70% div
-          </View>
-        </Cell>
-        <Cell>
-          <View
-            UNSAFE_style={{
-              float: 'right',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap'
-            }}
-            width="70%"
-            backgroundColor="gray-200">
-            70% div
-          </View>
-        </Cell>
-        <Cell>
-          <View
-            UNSAFE_style={{
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap'
-            }}
-            width="70%"
-            backgroundColor="gray-200">
-            very very very very very very long long long long long description
-          </View>
-        </Cell>
-      </Row>
-      <Row>
-        <Cell>
-          <span
-            style={{backgroundColor: 'var(--spectrum-global-color-gray-200'}}>
-            span child
-          </span>
-        </Cell>
-        <Cell>
-          <span
-            style={{backgroundColor: 'var(--spectrum-global-color-gray-200'}}>
-            span child
-          </span>
-        </Cell>
-        <Cell>
-          <span
-            style={{backgroundColor: 'var(--spectrum-global-color-gray-200'}}>
-            span child
-          </span>
-        </Cell>
-        <Cell>
-          <span
-            style={{backgroundColor: 'var(--spectrum-global-color-gray-200'}}>
-            very very very very very very long long long long long description
-          </span>
-        </Cell>
-      </Row>
-    </TableBody>
-  </TableView>
-);
-
-ShouldFillCellWidth.story = {
+export const ShouldFillCellWidth = {
+  render: () => (
+    <TableView
+      aria-label="TableView with filled cells"
+      selectionMode="multiple"
+      width={500}
+      height={200}
+      onSelectionChange={(s) => onSelectionChange([...s])}>
+      <TableHeader>
+        <Column>File Name</Column>
+        <Column align="center">Type</Column>
+        <Column align="end">Size</Column>
+        <Column>Description</Column>
+      </TableHeader>
+      <TableBody>
+        <Row>
+          <Cell>2018 Proposal</Cell>
+          <Cell>PDF</Cell>
+          <Cell>214 KB</Cell>
+          <Cell>very very very very very very long long long long long description</Cell>
+        </Row>
+        <Row>
+          <Cell>
+            <View width="100%" backgroundColor="gray-200">
+              100%
+            </View>
+          </Cell>
+          <Cell>
+            <View
+              UNSAFE_style={{
+                margin: 'auto',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap'
+              }}
+              width="100%"
+              backgroundColor="gray-200">
+              100%
+            </View>
+          </Cell>
+          <Cell>
+            <View
+              UNSAFE_style={{
+                marginInlineStart: 'auto',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap'
+              }}
+              width="100%"
+              backgroundColor="gray-200">
+              100%
+            </View>
+          </Cell>
+          <Cell>
+            <View
+              UNSAFE_style={{
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap'
+              }}
+              width="100%"
+              backgroundColor="gray-200">
+              very very very very very very long long long long long description
+            </View>
+          </Cell>
+        </Row>
+        <Row>
+          <Cell>
+            <View
+              UNSAFE_style={{
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap'
+              }}
+              width="50%"
+              backgroundColor="gray-200">
+              50% div
+            </View>
+          </Cell>
+          <Cell>
+            <View
+              UNSAFE_style={{
+                margin: 'auto',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap'
+              }}
+              width="70%"
+              backgroundColor="gray-200">
+              70% div
+            </View>
+          </Cell>
+          <Cell>
+            <View
+              UNSAFE_style={{
+                float: 'right',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap'
+              }}
+              width="70%"
+              backgroundColor="gray-200">
+              70% div
+            </View>
+          </Cell>
+          <Cell>
+            <View
+              UNSAFE_style={{
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap'
+              }}
+              width="70%"
+              backgroundColor="gray-200">
+              very very very very very very long long long long long description
+            </View>
+          </Cell>
+        </Row>
+        <Row>
+          <Cell>
+            <span
+              style={{
+                backgroundColor: 'var(--spectrum-global-color-gray-200'
+              }}>
+              span child
+            </span>
+          </Cell>
+          <Cell>
+            <span
+              style={{
+                backgroundColor: 'var(--spectrum-global-color-gray-200'
+              }}>
+              span child
+            </span>
+          </Cell>
+          <Cell>
+            <span
+              style={{
+                backgroundColor: 'var(--spectrum-global-color-gray-200'
+              }}>
+              span child
+            </span>
+          </Cell>
+          <Cell>
+            <span
+              style={{
+                backgroundColor: 'var(--spectrum-global-color-gray-200'
+              }}>
+              very very very very very very long long long long long description
+            </span>
+          </Cell>
+        </Row>
+      </TableBody>
+    </TableView>
+  ),
   name: 'should fill cell width'
 };
 
-export const ColumnWidthsAndDividers = () => (
-  <TableView
-    aria-label="TableView with column widths and dividers"
-    selectionMode="multiple"
-    width={500}
-    height={200}
-    onSelectionChange={(s) => onSelectionChange([...s])}>
-    <TableHeader>
-      <Column width={250} showDivider>
-        File Name
-      </Column>
-      <Column>Type</Column>
-      <Column align="end">Size</Column>
-    </TableHeader>
-    <TableBody>
-      <Row>
-        <Cell>2018 Proposal</Cell>
-        <Cell>PDF</Cell>
-        <Cell>214 KB</Cell>
-      </Row>
-      <Row>
-        <Cell>Budget</Cell>
-        <Cell>XLS</Cell>
-        <Cell>120 KB</Cell>
-      </Row>
-    </TableBody>
-  </TableView>
-);
-
-ColumnWidthsAndDividers.story = {
+export const ColumnWidthsAndDividers = {
+  render: () => (
+    <TableView
+      aria-label="TableView with column widths and dividers"
+      selectionMode="multiple"
+      width={500}
+      height={200}
+      onSelectionChange={(s) => onSelectionChange([...s])}>
+      <TableHeader>
+        <Column width={250} showDivider>
+          File Name
+        </Column>
+        <Column>Type</Column>
+        <Column align="end">Size</Column>
+      </TableHeader>
+      <TableBody>
+        <Row>
+          <Cell>2018 Proposal</Cell>
+          <Cell>PDF</Cell>
+          <Cell>214 KB</Cell>
+        </Row>
+        <Row>
+          <Cell>Budget</Cell>
+          <Cell>XLS</Cell>
+          <Cell>120 KB</Cell>
+        </Row>
+      </TableBody>
+    </TableView>
+  ),
   name: 'column widths and dividers'
 };
 
-export const IsQuietColumnWidthsAndDividers = () => (
-  <TableView
-    aria-label="Quiet TableView with column widths and dividers"
-    selectionMode="multiple"
-    width={500}
-    height={200}
-    isQuiet
-    onSelectionChange={(s) => onSelectionChange([...s])}>
-    <TableHeader>
-      <Column width={250} showDivider>
-        File Name
-      </Column>
-      <Column>Type</Column>
-      <Column align="end">Size</Column>
-    </TableHeader>
-    <TableBody>
-      <Row>
-        <Cell>2018 Proposal</Cell>
-        <Cell>PDF</Cell>
-        <Cell>214 KB</Cell>
-      </Row>
-      <Row>
-        <Cell>Budget</Cell>
-        <Cell>XLS</Cell>
-        <Cell>120 KB</Cell>
-      </Row>
-    </TableBody>
-  </TableView>
-);
-
-IsQuietColumnWidthsAndDividers.story = {
+export const IsQuietColumnWidthsAndDividers = {
+  render: () => (
+    <TableView
+      aria-label="Quiet TableView with column widths and dividers"
+      selectionMode="multiple"
+      width={500}
+      height={200}
+      isQuiet
+      onSelectionChange={(s) => onSelectionChange([...s])}>
+      <TableHeader>
+        <Column width={250} showDivider>
+          File Name
+        </Column>
+        <Column>Type</Column>
+        <Column align="end">Size</Column>
+      </TableHeader>
+      <TableBody>
+        <Row>
+          <Cell>2018 Proposal</Cell>
+          <Cell>PDF</Cell>
+          <Cell>214 KB</Cell>
+        </Row>
+        <Row>
+          <Cell>Budget</Cell>
+          <Cell>XLS</Cell>
+          <Cell>120 KB</Cell>
+        </Row>
+      </TableBody>
+    </TableView>
+  ),
   name: 'isQuiet, column widths and dividers'
 };
 
-export const DensityCompact = () => (
-  <TableView
-    aria-label="TableView with custom row height"
-    selectionMode="multiple"
-    width={500}
-    height={200}
-    isQuiet
-    density="compact"
-    onSelectionChange={(s) => onSelectionChange([...s])}>
-    <TableHeader>
-      <Column width={250} showDivider>
-        File Name
-      </Column>
-      <Column>Type</Column>
-      <Column align="end">Size</Column>
-    </TableHeader>
-    <TableBody>
-      <Row>
-        <Cell>2018 Proposal</Cell>
-        <Cell>PDF</Cell>
-        <Cell>214 KB</Cell>
-      </Row>
-      <Row>
-        <Cell>Budget</Cell>
-        <Cell>XLS</Cell>
-        <Cell>120 KB</Cell>
-      </Row>
-    </TableBody>
-  </TableView>
-);
-
-DensityCompact.story = {
+export const DensityCompact = {
+  render: () => (
+    <TableView
+      aria-label="TableView with custom row height"
+      selectionMode="multiple"
+      width={500}
+      height={200}
+      isQuiet
+      density="compact"
+      onSelectionChange={(s) => onSelectionChange([...s])}>
+      <TableHeader>
+        <Column width={250} showDivider>
+          File Name
+        </Column>
+        <Column>Type</Column>
+        <Column align="end">Size</Column>
+      </TableHeader>
+      <TableBody>
+        <Row>
+          <Cell>2018 Proposal</Cell>
+          <Cell>PDF</Cell>
+          <Cell>214 KB</Cell>
+        </Row>
+        <Row>
+          <Cell>Budget</Cell>
+          <Cell>XLS</Cell>
+          <Cell>120 KB</Cell>
+        </Row>
+      </TableBody>
+    </TableView>
+  ),
   name: 'density="compact"'
 };
 
-export const DensitySpacious = () => (
-  <TableView
-    aria-label="TableView with custom row height"
-    selectionMode="multiple"
-    width={500}
-    height={200}
-    isQuiet
-    density="spacious"
-    onSelectionChange={(s) => onSelectionChange([...s])}>
-    <TableHeader>
-      <Column width={250} showDivider>
-        File Name
-      </Column>
-      <Column>Type</Column>
-      <Column align="end">Size</Column>
-    </TableHeader>
-    <TableBody>
-      <Row>
-        <Cell>2018 Proposal</Cell>
-        <Cell>PDF</Cell>
-        <Cell>214 KB</Cell>
-      </Row>
-      <Row>
-        <Cell>Budget</Cell>
-        <Cell>XLS</Cell>
-        <Cell>120 KB</Cell>
-      </Row>
-    </TableBody>
-  </TableView>
-);
-
-DensitySpacious.story = {
+export const DensitySpacious = {
+  render: () => (
+    <TableView
+      aria-label="TableView with custom row height"
+      selectionMode="multiple"
+      width={500}
+      height={200}
+      isQuiet
+      density="spacious"
+      onSelectionChange={(s) => onSelectionChange([...s])}>
+      <TableHeader>
+        <Column width={250} showDivider>
+          File Name
+        </Column>
+        <Column>Type</Column>
+        <Column align="end">Size</Column>
+      </TableHeader>
+      <TableBody>
+        <Row>
+          <Cell>2018 Proposal</Cell>
+          <Cell>PDF</Cell>
+          <Cell>214 KB</Cell>
+        </Row>
+        <Row>
+          <Cell>Budget</Cell>
+          <Cell>XLS</Cell>
+          <Cell>120 KB</Cell>
+        </Row>
+      </TableBody>
+    </TableView>
+  ),
   name: 'density="spacious"'
 };
 
-export const OverflowModeWrap = () => (
-  <TableView
-    aria-label="TableView with variable row heights"
-    selectionMode="multiple"
-    width={500}
-    height={300}
-    isQuiet
-    overflowMode="wrap"
-    onSelectionChange={(s) => onSelectionChange([...s])}>
-    <TableHeader>
-      <Column width={250} showDivider>
-        File Name
-      </Column>
-      <Column>Type</Column>
-      <Column align="end">Size</Column>
-    </TableHeader>
-    <TableBody>
-      <Row>
-        <Cell>
-          2018 Proposal with very very very very very very long long long long
-          long filename
-        </Cell>
-        <Cell>PDF</Cell>
-        <Cell>214 KB</Cell>
-      </Row>
-      <Row>
-        <Cell>Budget</Cell>
-        <Cell>XLS</Cell>
-        <Cell>120 KB</Cell>
-      </Row>
-    </TableBody>
-  </TableView>
-);
-
-OverflowModeWrap.story = {
+export const OverflowModeWrap = {
+  render: () => (
+    <TableView
+      aria-label="TableView with variable row heights"
+      selectionMode="multiple"
+      width={500}
+      height={300}
+      isQuiet
+      overflowMode="wrap"
+      onSelectionChange={(s) => onSelectionChange([...s])}>
+      <TableHeader>
+        <Column width={250} showDivider>
+          File Name
+        </Column>
+        <Column>Type</Column>
+        <Column align="end">Size</Column>
+      </TableHeader>
+      <TableBody>
+        <Row>
+          <Cell>
+            2018 Proposal with very very very very very very long long long long long filename
+          </Cell>
+          <Cell>PDF</Cell>
+          <Cell>214 KB</Cell>
+        </Row>
+        <Row>
+          <Cell>Budget</Cell>
+          <Cell>XLS</Cell>
+          <Cell>120 KB</Cell>
+        </Row>
+      </TableBody>
+    </TableView>
+  ),
   name: 'overflowMode="wrap"'
 };
 
-export const OverflowModeWrapDensityCompact = () => (
-  <TableView
-    aria-label="TableView with variable row heights"
-    selectionMode="multiple"
-    width={500}
-    height={300}
-    isQuiet
-    overflowMode="wrap"
-    density="compact"
-    onSelectionChange={(s) => onSelectionChange([...s])}>
-    <TableHeader>
-      <Column width={250} showDivider>
-        File Name
-      </Column>
-      <Column>Type</Column>
-      <Column align="end">Size</Column>
-    </TableHeader>
-    <TableBody>
-      <Row>
-        <Cell>
-          2018 Proposal with very very very very very very long long long long
-          long filename
-        </Cell>
-        <Cell>PDF</Cell>
-        <Cell>214 KB</Cell>
-      </Row>
-      <Row>
-        <Cell>Budget</Cell>
-        <Cell>XLS</Cell>
-        <Cell>120 KB</Cell>
-      </Row>
-    </TableBody>
-  </TableView>
-);
-
-OverflowModeWrapDensityCompact.story = {
+export const OverflowModeWrapDensityCompact = {
+  render: () => (
+    <TableView
+      aria-label="TableView with variable row heights"
+      selectionMode="multiple"
+      width={500}
+      height={300}
+      isQuiet
+      overflowMode="wrap"
+      density="compact"
+      onSelectionChange={(s) => onSelectionChange([...s])}>
+      <TableHeader>
+        <Column width={250} showDivider>
+          File Name
+        </Column>
+        <Column>Type</Column>
+        <Column align="end">Size</Column>
+      </TableHeader>
+      <TableBody>
+        <Row>
+          <Cell>
+            2018 Proposal with very very very very very very long long long long long filename
+          </Cell>
+          <Cell>PDF</Cell>
+          <Cell>214 KB</Cell>
+        </Row>
+        <Row>
+          <Cell>Budget</Cell>
+          <Cell>XLS</Cell>
+          <Cell>120 KB</Cell>
+        </Row>
+      </TableBody>
+    </TableView>
+  ),
   name: 'overflowMode="wrap", density="compact"'
 };
 
-export const OverflowModeWrapDensitySpacious = () => (
-  <TableView
-    aria-label="TableView with variable row heights"
-    selectionMode="multiple"
-    width={500}
-    height={300}
-    isQuiet
-    overflowMode="wrap"
-    density="spacious"
-    onSelectionChange={(s) => onSelectionChange([...s])}>
-    <TableHeader>
-      <Column width={250} showDivider>
-        File Name
-      </Column>
-      <Column>Type</Column>
-      <Column align="end">Size</Column>
-    </TableHeader>
-    <TableBody>
-      <Row>
-        <Cell>
-          2018 Proposal with very very very very very very long long long long
-          long filename
-        </Cell>
-        <Cell>PDF</Cell>
-        <Cell>214 KB</Cell>
-      </Row>
-      <Row>
-        <Cell>Budget</Cell>
-        <Cell>XLS</Cell>
-        <Cell>120 KB</Cell>
-      </Row>
-    </TableBody>
-  </TableView>
-);
-
-OverflowModeWrapDensitySpacious.story = {
+export const OverflowModeWrapDensitySpacious = {
+  render: () => (
+    <TableView
+      aria-label="TableView with variable row heights"
+      selectionMode="multiple"
+      width={500}
+      height={300}
+      isQuiet
+      overflowMode="wrap"
+      density="spacious"
+      onSelectionChange={(s) => onSelectionChange([...s])}>
+      <TableHeader>
+        <Column width={250} showDivider>
+          File Name
+        </Column>
+        <Column>Type</Column>
+        <Column align="end">Size</Column>
+      </TableHeader>
+      <TableBody>
+        <Row>
+          <Cell>
+            2018 Proposal with very very very very very very long long long long long filename
+          </Cell>
+          <Cell>PDF</Cell>
+          <Cell>214 KB</Cell>
+        </Row>
+        <Row>
+          <Cell>Budget</Cell>
+          <Cell>XLS</Cell>
+          <Cell>120 KB</Cell>
+        </Row>
+      </TableBody>
+    </TableView>
+  ),
   name: 'overflowMode="wrap", density="spacious"'
 };
 
-export const CustomIsRowHeaderLabeling = () => (
-  <TableView
-    aria-label="TableView with custom row header labeling"
-    selectionMode="multiple"
-    width={500}
-    height={200}
-    isQuiet
-    onSelectionChange={(s) => onSelectionChange([...s])}>
-    <TableHeader>
-      <Column isRowHeader>First Name</Column>
-      <Column isRowHeader>Last Name</Column>
-      <Column>Birthday</Column>
-    </TableHeader>
-    <TableBody>
-      <Row>
-        <Cell>Sam</Cell>
-        <Cell>Smith</Cell>
-        <Cell>May 3</Cell>
-      </Row>
-      <Row>
-        <Cell>Julia</Cell>
-        <Cell>Jones</Cell>
-        <Cell>February 10</Cell>
-      </Row>
-    </TableBody>
-  </TableView>
-);
-
-CustomIsRowHeaderLabeling.story = {
+export const CustomIsRowHeaderLabeling = {
+  render: () => (
+    <TableView
+      aria-label="TableView with custom row header labeling"
+      selectionMode="multiple"
+      width={500}
+      height={200}
+      isQuiet
+      onSelectionChange={(s) => onSelectionChange([...s])}>
+      <TableHeader>
+        <Column isRowHeader>First Name</Column>
+        <Column isRowHeader>Last Name</Column>
+        <Column>Birthday</Column>
+      </TableHeader>
+      <TableBody>
+        <Row>
+          <Cell>Sam</Cell>
+          <Cell>Smith</Cell>
+          <Cell>May 3</Cell>
+        </Row>
+        <Row>
+          <Cell>Julia</Cell>
+          <Cell>Jones</Cell>
+          <Cell>February 10</Cell>
+        </Row>
+      </TableBody>
+    </TableView>
+  ),
   name: 'custom isRowHeader labeling'
 };
 
-export const Crud = () => <CRUDExample />;
-
-Crud.story = {
+export const Crud = {
+  render: () => <CRUDExample />,
   name: 'CRUD'
 };
 
-export const _HidingColumns = () => <HidingColumns />;
-
-_HidingColumns.story = {
+export const _HidingColumns = {
+  render: () => <HidingColumns />,
   name: 'hiding columns'
 };
 
-export const IsLoading = () => (
-  <TableView aria-label="TableView loading" width={700} height={200}>
-    <TableHeader columns={manyColunns}>
-      {(column) => <Column minWidth={100}>{column.name}</Column>}
-    </TableHeader>
-    <TableBody items={[]} loadingState="loading">
-      {(item) => <Row key={item.foo}>{(key) => <Cell>{item[key]}</Cell>}</Row>}
-    </TableBody>
-  </TableView>
-);
-
-IsLoading.story = {
+export const IsLoading = {
+  render: () => (
+    <TableView aria-label="TableView loading" width={700} height={200}>
+      <TableHeader columns={manyColunns}>
+        {(column) => <Column minWidth={100}>{column.name}</Column>}
+      </TableHeader>
+      <TableBody items={[]} loadingState="loading">
+        {(item) => <Row key={item.foo}>{(key) => <Cell>{item[key]}</Cell>}</Row>}
+      </TableBody>
+    </TableView>
+  ),
   name: 'isLoading'
 };
 
-export const IsLoadingMore = () => (
-  <TableView aria-label="TableView loading more" width={700} height={200}>
-    <TableHeader columns={columns}>
-      {(column) => <Column minWidth={100}>{column.name}</Column>}
-    </TableHeader>
-    <TableBody items={items} loadingState="loadingMore">
-      {(item) => <Row key={item.foo}>{(key) => <Cell>{item[key]}</Cell>}</Row>}
-    </TableBody>
-  </TableView>
-);
-
-IsLoadingMore.story = {
+export const IsLoadingMore = {
+  render: () => (
+    <TableView aria-label="TableView loading more" width={700} height={200}>
+      <TableHeader columns={columns}>
+        {(column) => <Column minWidth={100}>{column.name}</Column>}
+      </TableHeader>
+      <TableBody items={items} loadingState="loadingMore">
+        {(item) => <Row key={item.foo}>{(key) => <Cell>{item[key]}</Cell>}</Row>}
+      </TableBody>
+    </TableView>
+  ),
   name: 'isLoading more'
 };
 
-export const Filtering = () => (
-  <TableView aria-label="Table filtering" width={700} height={200}>
-    <TableHeader columns={columns}>
-      {(column) => <Column minWidth={100}>{column.name}</Column>}
-    </TableHeader>
-    <TableBody items={items} loadingState="filtering">
-      {(item) => <Row key={item.foo}>{(key) => <Cell>{item[key]}</Cell>}</Row>}
-    </TableBody>
-  </TableView>
-);
-
-Filtering.story = {
+export const Filtering = {
+  render: () => (
+    <TableView aria-label="Table filtering" width={700} height={200}>
+      <TableHeader columns={columns}>
+        {(column) => <Column minWidth={100}>{column.name}</Column>}
+      </TableHeader>
+      <TableBody items={items} loadingState="filtering">
+        {(item) => <Row key={item.foo}>{(key) => <Cell>{item[key]}</Cell>}</Row>}
+      </TableBody>
+    </TableView>
+  ),
   name: 'filtering'
 };
 
-export const RenderEmptyState = () => (
-  <TableView
-    aria-label="TableView with empty state"
-    width={700}
-    height={400}
-    isQuiet
-    renderEmptyState={renderEmptyState}>
-    <TableHeader columns={manyColunns}>
-      {(column) => <Column minWidth={100}>{column.name}</Column>}
-    </TableHeader>
-    <TableBody>{[]}</TableBody>
-  </TableView>
-);
-
-RenderEmptyState.story = {
+export const RenderEmptyState = {
+  render: () => (
+    <TableView
+      aria-label="TableView with empty state"
+      width={700}
+      height={400}
+      isQuiet
+      renderEmptyState={renderEmptyState}>
+      <TableHeader columns={manyColunns}>
+        {(column) => <Column minWidth={100}>{column.name}</Column>}
+      </TableHeader>
+      <TableBody>{[]}</TableBody>
+    </TableView>
+  ),
   name: 'renderEmptyState'
 };
 
-export const AsyncLoading = () => <AsyncLoadingExample />;
-
-AsyncLoading.story = {
+export const AsyncLoading = {
+  render: () => <AsyncLoadingExample />,
   name: 'async loading',
-  parameters: {chromatic: {disable: true}}
+  parameters: {
+    chromatic: {
+      disable: true
+    }
+  }
 };
 
-export const HideHeader = () => (
-  <TableView
-    aria-label="TableView with static contents"
-    width={350}
-    height={200}>
-    <TableHeader>
-      <Column key="foo">Foo</Column>
-      <Column key="addAction" hideHeader>
-        Add Info
-      </Column>
-      <Column key="deleteAction" hideHeader showDivider>
-        Delete Item
-      </Column>
-      <Column key="bar">Bar</Column>
-      <Column key="baz">Baz</Column>
-    </TableHeader>
-    <TableBody>
-      <Row>
-        <Cell>One</Cell>
-        <Cell>
-          <ActionButton isQuiet aria-label="Add Info">
-            <Add />
-          </ActionButton>
-        </Cell>
-        <Cell>
-          <ActionButton isQuiet aria-label="Delete">
-            <Delete />
-          </ActionButton>
-        </Cell>
-        <Cell>Two</Cell>
-        <Cell>Three</Cell>
-      </Row>
-      <Row>
-        <Cell>One</Cell>
-        <Cell>
-          <ActionButton isQuiet aria-label="Add Info">
-            <Add />
-          </ActionButton>
-        </Cell>
-        <Cell>
-          <ActionButton isQuiet aria-label="Delete">
-            <Delete />
-          </ActionButton>
-        </Cell>
-        <Cell>Two</Cell>
-        <Cell>Three</Cell>
-      </Row>
-      <Row>
-        <Cell>One</Cell>
-        <Cell>
-          <ActionButton isQuiet aria-label="Add Info">
-            <Add />
-          </ActionButton>
-        </Cell>
-        <Cell>
-          <ActionButton isQuiet aria-label="Delete">
-            <Delete />
-          </ActionButton>
-        </Cell>
-        <Cell>Two</Cell>
-        <Cell>Three</Cell>
-      </Row>
-      <Row>
-        <Cell>One</Cell>
-        <Cell>
-          <ActionButton isQuiet aria-label="Add Info">
-            <Add />
-          </ActionButton>
-        </Cell>
-        <Cell>
-          <ActionButton isQuiet aria-label="Delete">
-            <Delete />
-          </ActionButton>
-        </Cell>
-        <Cell>Two</Cell>
-        <Cell>Three</Cell>
-      </Row>
-      <Row>
-        <Cell>One</Cell>
-        <Cell>
-          <ActionButton isQuiet aria-label="Add Info">
-            <Add />
-          </ActionButton>
-        </Cell>
-        <Cell>
-          <ActionButton isQuiet aria-label="Delete">
-            <Delete />
-          </ActionButton>
-        </Cell>
-        <Cell>Two</Cell>
-        <Cell>Three</Cell>
-      </Row>
-      <Row>
-        <Cell>One</Cell>
-        <Cell>
-          <ActionButton isQuiet aria-label="Add Info">
-            <Add />
-          </ActionButton>
-        </Cell>
-        <Cell>
-          <ActionButton isQuiet aria-label="Delete">
-            <Delete />
-          </ActionButton>
-        </Cell>
-        <Cell>Two</Cell>
-        <Cell>Three</Cell>
-      </Row>
-    </TableBody>
-  </TableView>
-);
-
-HideHeader.story = {
+export const HideHeader = {
+  render: () => (
+    <TableView aria-label="TableView with static contents" width={350} height={200}>
+      <TableHeader>
+        <Column key="foo">Foo</Column>
+        <Column key="addAction" hideHeader>
+          Add Info
+        </Column>
+        <Column key="deleteAction" hideHeader showDivider>
+          Delete Item
+        </Column>
+        <Column key="bar">Bar</Column>
+        <Column key="baz">Baz</Column>
+      </TableHeader>
+      <TableBody>
+        <Row>
+          <Cell>One</Cell>
+          <Cell>
+            <ActionButton isQuiet aria-label="Add Info">
+              <Add />
+            </ActionButton>
+          </Cell>
+          <Cell>
+            <ActionButton isQuiet aria-label="Delete">
+              <Delete />
+            </ActionButton>
+          </Cell>
+          <Cell>Two</Cell>
+          <Cell>Three</Cell>
+        </Row>
+        <Row>
+          <Cell>One</Cell>
+          <Cell>
+            <ActionButton isQuiet aria-label="Add Info">
+              <Add />
+            </ActionButton>
+          </Cell>
+          <Cell>
+            <ActionButton isQuiet aria-label="Delete">
+              <Delete />
+            </ActionButton>
+          </Cell>
+          <Cell>Two</Cell>
+          <Cell>Three</Cell>
+        </Row>
+        <Row>
+          <Cell>One</Cell>
+          <Cell>
+            <ActionButton isQuiet aria-label="Add Info">
+              <Add />
+            </ActionButton>
+          </Cell>
+          <Cell>
+            <ActionButton isQuiet aria-label="Delete">
+              <Delete />
+            </ActionButton>
+          </Cell>
+          <Cell>Two</Cell>
+          <Cell>Three</Cell>
+        </Row>
+        <Row>
+          <Cell>One</Cell>
+          <Cell>
+            <ActionButton isQuiet aria-label="Add Info">
+              <Add />
+            </ActionButton>
+          </Cell>
+          <Cell>
+            <ActionButton isQuiet aria-label="Delete">
+              <Delete />
+            </ActionButton>
+          </Cell>
+          <Cell>Two</Cell>
+          <Cell>Three</Cell>
+        </Row>
+        <Row>
+          <Cell>One</Cell>
+          <Cell>
+            <ActionButton isQuiet aria-label="Add Info">
+              <Add />
+            </ActionButton>
+          </Cell>
+          <Cell>
+            <ActionButton isQuiet aria-label="Delete">
+              <Delete />
+            </ActionButton>
+          </Cell>
+          <Cell>Two</Cell>
+          <Cell>Three</Cell>
+        </Row>
+        <Row>
+          <Cell>One</Cell>
+          <Cell>
+            <ActionButton isQuiet aria-label="Add Info">
+              <Add />
+            </ActionButton>
+          </Cell>
+          <Cell>
+            <ActionButton isQuiet aria-label="Delete">
+              <Delete />
+            </ActionButton>
+          </Cell>
+          <Cell>Two</Cell>
+          <Cell>Three</Cell>
+        </Row>
+      </TableBody>
+    </TableView>
+  ),
   name: 'hideHeader'
 };
 
-export const AsyncClientSideFilterLoading = () => <ProjectListTable />;
-
-AsyncClientSideFilterLoading.story = {
+export const AsyncClientSideFilterLoading = {
+  render: () => <ProjectListTable />,
   name: 'async client side filter loading',
-  parameters: {chromatic: {disable: true}}
+  parameters: {
+    chromatic: {
+      disable: true
+    }
+  }
 };
 
-export const AsyncServerSideFilterLoading = () => <AsyncServerFilterTable />;
-
-AsyncServerSideFilterLoading.story = {
+export const AsyncServerSideFilterLoading = {
+  render: () => <AsyncServerFilterTable />,
   name: 'async server side filter loading',
-  parameters: {chromatic: {disable: true}}
+  parameters: {
+    chromatic: {
+      disable: true
+    }
+  }
 };
 
-export const LoadsMoreOnScrollWhenContentSizeHeightRectHeight2 = () => (
-  <AsyncServerFilterTable height={500} />
-);
-
-LoadsMoreOnScrollWhenContentSizeHeightRectHeight2.story = {
+export const LoadsMoreOnScrollWhenContentSizeHeightRectHeight2 = {
+  render: () => <AsyncServerFilterTable height={500} />,
   name: 'loads more on scroll when contentSize.height < rect.height * 2',
-  parameters: {chromatic: {disable: true}}
+  parameters: {
+    chromatic: {
+      disable: true
+    }
+  }
 };
 
-export const WithDialogTrigger = () => (
-  <TableView
-    aria-label="TableView with static contents"
-    selectionMode="multiple"
-    width={300}
-    height={200}
-    onSelectionChange={(s) => onSelectionChange([...s])}>
-    <TableHeader>
-      <Column key="foo">Foo</Column>
-      <Column key="bar">Bar</Column>
-      <Column key="baz">Baz</Column>
-    </TableHeader>
-    <TableBody>
-      <Row>
-        <Cell>One</Cell>
-        <Cell>Two</Cell>
-        <Cell>
-          <DialogTrigger>
-            <ActionButton aria-label="Add">
-              <Add />
-            </ActionButton>
-            {(close) => (
-              <Dialog>
-                <Heading>The Heading</Heading>
-                <Divider />
-                <Content>
-                  <TextField label="Last Words" />
-                </Content>
-                <ButtonGroup>
-                  <Button variant="secondary" onPress={close}>
-                    Cancel
-                  </Button>
-                  <Button variant="cta" onPress={close}>
-                    Confirm
-                  </Button>
-                </ButtonGroup>
-              </Dialog>
-            )}
-          </DialogTrigger>
-        </Cell>
-      </Row>
-    </TableBody>
-  </TableView>
-);
-
-WithDialogTrigger.story = {
+export const WithDialogTrigger = {
+  render: () => (
+    <TableView
+      aria-label="TableView with static contents"
+      selectionMode="multiple"
+      width={300}
+      height={200}
+      onSelectionChange={(s) => onSelectionChange([...s])}>
+      <TableHeader>
+        <Column key="foo">Foo</Column>
+        <Column key="bar">Bar</Column>
+        <Column key="baz">Baz</Column>
+      </TableHeader>
+      <TableBody>
+        <Row>
+          <Cell>One</Cell>
+          <Cell>Two</Cell>
+          <Cell>
+            <DialogTrigger>
+              <ActionButton aria-label="Add">
+                <Add />
+              </ActionButton>
+              {(close) => (
+                <Dialog>
+                  <Heading>The Heading</Heading>
+                  <Divider />
+                  <Content>
+                    <TextField label="Last Words" />
+                  </Content>
+                  <ButtonGroup>
+                    <Button variant="secondary" onPress={close}>
+                      Cancel
+                    </Button>
+                    <Button variant="cta" onPress={close}>
+                      Confirm
+                    </Button>
+                  </ButtonGroup>
+                </Dialog>
+              )}
+            </DialogTrigger>
+          </Cell>
+        </Row>
+      </TableBody>
+    </TableView>
+  ),
   name: 'with dialog trigger'
 };
 
@@ -1230,40 +1274,43 @@ function AsyncLoadingExample() {
       title: string
     }
   }
-
   let list = useAsyncList<Item>({
     getKey: (item) => item.data.id,
+
     async load({signal, cursor}) {
       let url = new URL('https://www.reddit.com/r/news.json');
+
       if (cursor) {
         url.searchParams.append('after', cursor);
       }
 
-      let res = await fetch(url.toString(), {signal});
+      let res = await fetch(url.toString(), {
+        signal
+      });
       let json = await res.json();
-      return {items: json.data.children, cursor: json.data.after};
+      return {
+        items: json.data.children,
+        cursor: json.data.after
+      };
     },
+
     async sort({items, sortDescriptor}) {
       return {
         items: items.slice().sort((a, b) => {
-          let cmp =
-            a.data[sortDescriptor.column] < b.data[sortDescriptor.column]
-              ? -1
-              : 1;
+          let cmp = a.data[sortDescriptor.column] < b.data[sortDescriptor.column] ? -1 : 1;
+
           if (sortDescriptor.direction === 'descending') {
             cmp *= -1;
           }
+
           return cmp;
         })
       };
     }
   });
-
   return (
     <div>
-      <ActionButton
-        marginBottom={10}
-        onPress={() => list.remove(list.items[0].data.id)}>
+      <ActionButton marginBottom={10} onPress={() => list.remove(list.items[0].data.id)}>
         Remove first item
       </ActionButton>
       <TableView
@@ -1290,10 +1337,7 @@ function AsyncLoadingExample() {
             Comments
           </Column>
         </TableHeader>
-        <TableBody
-          items={list.items}
-          loadingState={list.loadingState}
-          onLoadMore={list.loadMore}>
+        <TableBody items={list.items} loadingState={list.loadingState} onLoadMore={list.loadMore}>
           {(item) => (
             <Row key={item.data.id}>
               {(key) =>
@@ -1375,19 +1419,23 @@ function ProjectListTable() {
     name: string,
     ownerName: string
   }
-
-  let {contains} = useFilter({sensitivity: 'base'});
+  let {contains} = useFilter({
+    sensitivity: 'base'
+  });
   let [filterText, setFilterText] = React.useState('');
   let list = useAsyncList<Item>({
     async load() {
       let projects = await getCollectionItems();
-      return {items: projects};
+      return {
+        items: projects
+      };
     }
   });
   let filteredItems = React.useMemo(
     () => list.items.filter((item) => contains(item.name, filterText)),
     [list.items, filterText, contains]
   );
+
   const onChange = (value) => {
     setFilterText(value);
   };
@@ -1417,9 +1465,7 @@ function ProjectListTable() {
             }}
           </TableHeader>
           <TableBody items={filteredItems} loadingState={list.loadingState}>
-            {(item) => (
-              <Row key={item.id}>{(key) => <Cell>{item[key]}</Cell>}</Row>
-            )}
+            {(item) => <Row key={item.id}>{(key) => <Cell>{item[key]}</Cell>}</Row>}
           </TableBody>
         </TableView>
       </View>
@@ -1433,7 +1479,6 @@ function AsyncServerFilterTable(props) {
     height: string,
     mass: string
   }
-
   let columns = [
     {
       name: 'Name',
@@ -1449,20 +1494,18 @@ function AsyncServerFilterTable(props) {
       key: 'mass'
     }
   ];
-
   let list = useAsyncList<Item>({
     getKey: (item) => item.name,
+
     async load({signal, cursor, filterText}) {
       if (cursor) {
         cursor = cursor.replace(/^http:\/\//i, 'https://');
       }
 
-      let res = await fetch(
-        cursor || `https://swapi.dev/api/people/?search=${filterText}`,
-        {signal}
-      );
+      let res = await fetch(cursor || `https://swapi.dev/api/people/?search=${filterText}`, {
+        signal
+      });
       let json = await res.json();
-
       return {
         items: json.results,
         cursor: json.next
@@ -1499,13 +1542,8 @@ function AsyncServerFilterTable(props) {
             return <Column {...columnProps}>{name}</Column>;
           }}
         </TableHeader>
-        <TableBody
-          items={list.items}
-          loadingState={list.loadingState}
-          onLoadMore={list.loadMore}>
-          {(item) => (
-            <Row key={item.name}>{(key) => <Cell>{item[key]}</Cell>}</Row>
-          )}
+        <TableBody items={list.items} loadingState={list.loadingState} onLoadMore={list.loadMore}>
+          {(item) => <Row key={item.name}>{(key) => <Cell>{item[key]}</Cell>}</Row>}
         </TableBody>
       </TableView>
     </div>
@@ -1514,10 +1552,7 @@ function AsyncServerFilterTable(props) {
 
 function ChangableSelectionMode() {
   let [selectionMode, setSelectionMode] = useState('none' as SelectionMode);
-  let [selectedKeys, setSelectedKeys] = React.useState(
-    new Set([]) as 'all' | Iterable<Key>
-  );
-
+  let [selectedKeys, setSelectedKeys] = React.useState(new Set([]) as 'all' | Iterable<Key>);
   return (
     <Flex direction="column" flexGrow={1} maxWidth="size-6000">
       <RadioGroup
@@ -1536,13 +1571,9 @@ function ChangableSelectionMode() {
         width="100%"
         height="100%"
         onSelectionChange={setSelectedKeys}>
-        <TableHeader columns={columns}>
-          {(column) => <Column>{column.name}</Column>}
-        </TableHeader>
+        <TableHeader columns={columns}>{(column) => <Column>{column.name}</Column>}</TableHeader>
         <TableBody items={items}>
-          {(item) => (
-            <Row key={item.foo}>{(key) => <Cell>{item[key]}</Cell>}</Row>
-          )}
+          {(item) => <Row key={item.foo}>{(key) => <Cell>{item[key]}</Cell>}</Row>}
         </TableBody>
       </TableView>
     </Flex>

@@ -9,18 +9,15 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import {FocusScope} from '../';
 import {Meta, Story} from '@storybook/react';
 import React, {ReactNode, useState} from 'react';
 import ReactDOM from 'react-dom';
 
 const dialogsRoot = 'dialogsRoot';
-
 interface StoryProps {
   usePortal: boolean
 }
-
 const meta: Meta<StoryProps> = {
   title: 'FocusScope',
   component: FocusScope
@@ -30,20 +27,16 @@ export default meta;
 
 const Template = (): Story<StoryProps> => ({usePortal}) => <Example usePortal={usePortal} />;
 
-function MaybePortal({children, usePortal}: { children: ReactNode, usePortal: boolean}) {
+function MaybePortal({children, usePortal}: { children: ReactNode, usePortal: boolean }) {
   if (!usePortal) {
     return <>{children}</>;
   }
 
-  return ReactDOM.createPortal(
-    <>{children}</>,
-    document.getElementById(dialogsRoot)
-  );
+  return ReactDOM.createPortal(<>{children}</>, document.getElementById(dialogsRoot));
 }
 
-function NestedDialog({onClose, usePortal}: {onClose: VoidFunction, usePortal: boolean}) {
+function NestedDialog({onClose, usePortal}: { onClose: VoidFunction, usePortal: boolean }) {
   let [open, setOpen] = useState(false);
-
   return (
     <MaybePortal usePortal={usePortal}>
       <FocusScope contain restoreFocus autoFocus>
@@ -71,7 +64,6 @@ function NestedDialog({onClose, usePortal}: {onClose: VoidFunction, usePortal: b
 
 function Example({usePortal}: StoryProps) {
   let [open, setOpen] = useState(false);
-
   return (
     <div>
       <input />
@@ -88,7 +80,11 @@ function Example({usePortal}: StoryProps) {
 }
 
 export const KeyboardNavigation = Template().bind({});
-KeyboardNavigation.args = {usePortal: false};
+KeyboardNavigation.args = {
+  usePortal: false
+};
 
 export const KeyboardNavigationInsidePortal = Template().bind({});
-KeyboardNavigationInsidePortal.args = {usePortal: true};
+KeyboardNavigationInsidePortal.args = {
+  usePortal: true
+};

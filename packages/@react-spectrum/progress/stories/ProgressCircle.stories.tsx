@@ -9,7 +9,6 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import {number, withKnobs} from '@storybook/addon-knobs';
 import {ProgressCircle} from '../';
 import React, {CSSProperties} from 'react';
@@ -33,101 +32,116 @@ const grayedBoxStyle: CSSProperties = {
 export default {
   title: 'Progress/ProgressCircle',
   decorators: [withKnobs],
-
   parameters: {
-    providerSwitcher: {status: 'positive'}
+    providerSwitcher: {
+      status: 'positive'
+    }
   }
 };
 
 export const Default = () => render();
-
-export const Value50 = () => {
-  const value = number('Value', 50, sliderOptions);
-  return render({value});
-};
-
-Value50.story = {
+export const Value50 = {
+  render: () => {
+    const value = number('Value', 50, sliderOptions);
+    return render({
+      value
+    });
+  },
   name: 'value: 50'
 };
 
-export const Value100 = () => {
-  const value = number('Value', 100, sliderOptions);
-  return render({value});
-};
-
-Value100.story = {
+export const Value100 = {
+  render: () => {
+    const value = number('Value', 100, sliderOptions);
+    return render({
+      value
+    });
+  },
   name: 'value: 100'
 };
 
-export const SizeS = () => {
-  const value = number('Value', 32, sliderOptions);
-  return render({value, size: 'S'});
-};
-
-SizeS.story = {
+export const SizeS = {
+  render: () => {
+    const value = number('Value', 32, sliderOptions);
+    return render({
+      value,
+      size: 'S'
+    });
+  },
   name: 'size: S'
 };
 
-export const SizeL = () => {
-  const value = number('Value', 32, sliderOptions);
-  return render({value, size: 'L'});
-};
-
-SizeL.story = {
+export const SizeL = {
+  render: () => {
+    const value = number('Value', 32, sliderOptions);
+    return render({
+      value,
+      size: 'L'
+    });
+  },
   name: 'size: L'
 };
 
-export const VariantOverBackground = () => {
-  const value = number('Value', 32, sliderOptions);
-  return (
-    <div style={grayedBoxStyle}>
-      {render({value, variant: 'overBackground'})}
-    </div>
-  );
-};
-
-VariantOverBackground.story = {
+export const VariantOverBackground = {
+  render: () => {
+    const value = number('Value', 32, sliderOptions);
+    return (
+      <div style={grayedBoxStyle}>
+        {render({
+          value,
+          variant: 'overBackground'
+        })}
+      </div>
+    );
+  },
   name: 'variant: overBackground'
 };
 
-export const UsingRawValuesForMinValueMaxValueAndValue = () =>
-  render({
-    labelPosition: 'top',
-    maxValue: 2147483648,
-    value: 715827883
-  });
-
-UsingRawValuesForMinValueMaxValueAndValue.story = {
+export const UsingRawValuesForMinValueMaxValueAndValue = {
+  render: () =>
+    render({
+      labelPosition: 'top',
+      maxValue: 2147483648,
+      value: 715827883
+    }),
   name: 'Using raw values for minValue, maxValue, and value'
 };
 
-export const IsIndeterminateTrue = () => render({isIndeterminate: true});
-
-IsIndeterminateTrue.story = {
+export const IsIndeterminateTrue = {
+  render: () =>
+    render({
+      isIndeterminate: true
+    }),
   name: 'isIndeterminate: true'
 };
 
-export const IsIndeterminateTrueSizeS = () =>
-  render({isIndeterminate: true, size: 'S'});
-
-IsIndeterminateTrueSizeS.story = {
+export const IsIndeterminateTrueSizeS = {
+  render: () =>
+    render({
+      isIndeterminate: true,
+      size: 'S'
+    }),
   name: 'isIndeterminate: true, size: S'
 };
 
-export const IsIndeterminateTrueSizeL = () =>
-  render({isIndeterminate: true, size: 'L'});
-
-IsIndeterminateTrueSizeL.story = {
+export const IsIndeterminateTrueSizeL = {
+  render: () =>
+    render({
+      isIndeterminate: true,
+      size: 'L'
+    }),
   name: 'isIndeterminate: true, size: L'
 };
 
-export const IsIndeterminateTrueVariantOverBackground = () => (
-  <div style={grayedBoxStyle}>
-    {render({isIndeterminate: true, variant: 'overBackground'})}
-  </div>
-);
-
-IsIndeterminateTrueVariantOverBackground.story = {
+export const IsIndeterminateTrueVariantOverBackground = {
+  render: () => (
+    <div style={grayedBoxStyle}>
+      {render({
+        isIndeterminate: true,
+        variant: 'overBackground'
+      })}
+    </div>
+  ),
   name: 'isIndeterminate: true, variant: overBackground'
 };
 

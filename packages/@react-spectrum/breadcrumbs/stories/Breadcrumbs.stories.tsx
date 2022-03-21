@@ -9,190 +9,44 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
-import {action} from '@storybook/addon-actions';
 import {Breadcrumbs} from '../';
-// import {Heading} from '@react-spectrum/text';
+
 import {Item} from '@react-stately/collections';
 import React from 'react';
 
-let styles = {
-  width: '100vw'
-};
 const CenterDecorator = (storyFn) => (
-  <div style={styles}>
+  <div style={{width: '100vw'}}>
     <div>{storyFn()}</div>
   </div>
 );
 
 export default {
   title: 'Breadcrumbs',
-  decorators: [CenterDecorator],
-
-  parameters: {
-    providerSwitcher: {status: 'negative'}
-  }
-};
-
-export const DefaultWith3Items = () => render();
-
-DefaultWith3Items.story = {
-  name: 'Default (with 3 items)'
-};
-
-export const DefaultWith7Items = () => renderMany({});
-
-DefaultWith7Items.story = {
-  name: 'Default (with 7 items)'
-};
-
-export const IsMultiline = () => render({isMultiline: true});
-
-IsMultiline.story = {
-  name: 'isMultiline'
-};
-
-export const SizeS = () => render({size: 'S'});
-
-SizeS.story = {
-  name: 'size: S'
-};
-
-export const SizeSIsMultiline = () => render({size: 'S', isMultiline: true});
-
-SizeSIsMultiline.story = {
-  name: 'size: S, isMultiline'
-};
-
-export const SizeM = () => render({size: 'M'});
-
-SizeM.story = {
-  name: 'size: M'
-};
-
-export const SizeMIsMultiline = () => render({size: 'M', isMultiline: true});
-
-SizeMIsMultiline.story = {
-  name: 'size: M, isMultiline'
-};
-
-export const Truncated = () => (
-  <div style={{width: '120px'}}>{render({})}</div>
-);
-
-Truncated.story = {
-  name: 'truncated'
-};
-
-export const TruncatedIsMultiline = () => (
-  <div style={{width: '100px'}}>{render({isMultiline: true})}</div>
-);
-
-TruncatedIsMultiline.story = {
-  name: 'truncated, isMultiline'
-};
-
-export const ManyItemsShowRootTrue = () => renderMany({showRoot: true});
-
-ManyItemsShowRootTrue.story = {
-  name: 'many items, showRoot: true'
-};
-
-export const ManyItemsIsMultiline = () => renderMany({isMultiline: true});
-
-ManyItemsIsMultiline.story = {
-  name: 'many items, isMultiline'
-};
-
-export const ManyItemsIsMultilineShowRootTrue = () =>
-  renderMany({maxVisibleItems: 'auto', isMultiline: true, showRoot: true});
-
-ManyItemsIsMultilineShowRootTrue.story = {
-  name: 'many items, isMultiline, showRoot: true'
-};
-
-export const IsDisabledTrue = () => render({isDisabled: true});
-
-IsDisabledTrue.story = {
-  name: 'isDisabled: true'
-};
-
-export const IsDisabledTrueIsMultiline = () =>
-  render({isDisabled: true, isMultiline: true});
-
-IsDisabledTrueIsMultiline.story = {
-  name: 'isDisabled: true, isMultiline'
-};
-
-export const Resizeable = () => (
-  <div
-    style={{
-      minWidth: '100px',
-      width: '300px',
-      padding: '10px',
-      resize: 'horizontal',
-      overflow: 'auto',
-      backgroundColor: 'var(--spectrum-global-color-gray-50)'
-    }}>
-    {renderMany({})}
-  </div>
-);
-
-Resizeable.story = {
-  name: 'resizeable'
-};
-
-export const OnlyOneItem = () => (
-  <Breadcrumbs>
-    <Item>Root</Item>
-  </Breadcrumbs>
-);
-
-OnlyOneItem.story = {
-  name: 'Only one item'
-};
-
-export const OnlyOneItemIsMultiline = () => (
-  <Breadcrumbs isMultiline>
-    <Item>Root</Item>
-  </Breadcrumbs>
-);
-
-OnlyOneItemIsMultiline.story = {
-  name: 'Only one item, isMultiline'
-};
-
-function render(props = {}) {
-  return (
-    <Breadcrumbs {...props} onAction={action('onAction')}>
+  component: Breadcrumbs,
+  render: (props) => (
+    <Breadcrumbs {...props}>
       <Item key="Folder 1">The quick brown fox jumps over</Item>
       <Item key="Folder 2">My Documents</Item>
       <Item key="Folder 3">Kangaroos jump high</Item>
     </Breadcrumbs>
-  );
-}
+  ),
+  decorators: [CenterDecorator],
+  parameters: {
+    providerSwitcher: {
+      status: 'negative'
+    }
+  },
+  argTypes: {onAction: {action: 'onAction'}}
+};
 
-// function renderHeading(props = {}) {
-//   return (
-//     <Breadcrumbs {...props} onAction={action('onAction')}>
-//       <Item key="Folder 1">
-//         The quick brown fox jumps over
-//       </Item>
-//       <Item key="Folder 2">
-//         My Documents
-//       </Item>
-//       <Item key="Folder 3">
-//         <Heading level={1}>
-//           Kangaroos jump high
-//         </Heading>
-//       </Item>
-//     </Breadcrumbs>
-//   );
-// }
+export const DefaultWith3Items = {
+  name: 'Default (with 3 items)'
+};
 
-function renderMany(props = {}) {
-  return (
-    <Breadcrumbs {...props} onAction={action('onAction')}>
+export const ManyItems = {
+  name: 'Default (with 7 items)',
+  render: (props) => (
+    <Breadcrumbs {...props}>
       <Item key="Folder 1">The quick brown fox jumps over</Item>
       <Item key="Folder 2">My Documents</Item>
       <Item key="Folder 3">Kangaroos jump high</Item>
@@ -201,5 +55,123 @@ function renderMany(props = {}) {
       <Item key="Folder 6">Wattle trees</Item>
       <Item key="Folder 7">April 7</Item>
     </Breadcrumbs>
-  );
-}
+  )
+};
+
+export const IsMultiline = {
+  name: 'isMultiline',
+  args: {isMultiline: true}
+};
+
+export const SizeS = {
+  name: 'size: S',
+  args: {size: 'S'}
+};
+
+export const SizeSIsMultiline = {
+  name: 'size: S, isMultiline',
+  args: {
+    size: 'S',
+    isMultiline: true
+  }
+};
+
+export const SizeM = {
+  name: 'size: M',
+  args: {size: 'M'}
+};
+
+export const SizeMIsMultiline = {
+  name: 'size: M, isMultiline',
+  args: {
+    size: 'M',
+    isMultiline: true
+  }
+};
+
+export const Truncated = {
+  name: 'truncated',
+  decorator: (Story) => (
+    <div style={{width: '120px'}}>
+      <Story />
+    </div>
+  )
+};
+
+export const TruncatedIsMultiline = {
+  name: 'truncated, isMultiline',
+  decorator: (Story) => (
+    <div style={{width: '100px'}}>
+      <Story />
+    </div>
+  )
+};
+
+export const ManyItemsShowRootTrue = {
+  ...ManyItems,
+  name: 'many items, showRoot: true',
+  args: {showRoot: true}
+};
+
+export const ManyItemsIsMultiline = {
+  ...ManyItems,
+  name: 'many items, isMultiline',
+  args: {isMultiline: true}
+};
+
+export const ManyItemsIsMultilineShowRootTrue = {
+  ...ManyItems,
+  name: 'many items, isMultiline, showRoot: true',
+  args: {
+    maxVisibleItems: 'auto',
+    isMultiline: true,
+    showRoot: true
+  }
+};
+
+export const IsDisabledTrue = {
+  name: 'isDisabled: true',
+  args: {isDisabled: true}
+};
+
+export const IsDisabledTrueIsMultiline = {
+  ...IsDisabledTrue,
+  ...IsMultiline,
+  name: 'isDisabled: true, isMultiline'
+};
+
+export const Resizeable = {
+  ...ManyItems,
+  name: 'resizeable',
+  decorator: (Story) => (
+    <div
+      style={{
+        minWidth: '100px',
+        width: '300px',
+        padding: '10px',
+        resize: 'horizontal',
+        overflow: 'auto',
+        backgroundColor: 'var(--spectrum-global-color-gray-50)'
+      }}>
+      <Story />
+    </div>
+  )
+};
+
+export const OnlyOneItem = {
+  name: 'Only one item',
+  render: () => (
+    <Breadcrumbs>
+      <Item>Root</Item>
+    </Breadcrumbs>
+  )
+};
+
+export const OnlyOneItemIsMultiline = {
+  name: 'Only one item, isMultiline',
+  render: () => (
+    <Breadcrumbs isMultiline>
+      <Item>Root</Item>
+    </Breadcrumbs>
+  )
+};

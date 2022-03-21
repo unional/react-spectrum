@@ -9,54 +9,44 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import {DialogContainerExample, MenuExample} from './DialogContainerExamples';
 import React from 'react';
 
 export default {
   title: 'DialogContainer',
-
   parameters: {
-    providerSwitcher: {status: 'notice'}
-  }
+    providerSwitcher: {
+      status: 'notice'
+    }
+  },
+  render: (props) => <DialogContainerExample {...props} />
 };
 
-export const Default = () => <DialogContainerExample />;
-
-Default.story = {
+export const Default = {
   name: 'default'
 };
 
-export const InAMenu = () => <MenuExample />;
-
-InAMenu.story = {
-  name: 'in a menu'
+export const InAMenu = {
+  name: 'in a menu',
+  render: (props) => <MenuExample {...props} />
 };
 
-export const TypeFullscreen = () => <MenuExample type="fullscreen" />;
-
-TypeFullscreen.story = {
-  name: 'type: fullscreen'
+export const TypeFullscreen = {
+  name: 'type: fullscreen',
+  args: {type: 'fullscreen'}
 };
 
-export const TypeFullscreenTakeover = () => (
-  <MenuExample type="fullscreenTakeover" />
-);
-
-TypeFullscreenTakeover.story = {
-  name: 'type: fullscreenTakeover'
+export const TypeFullscreenTakeover = {
+  name: 'type: fullscreenTakeover',
+  args: {type: 'fullscreenTakeover'}
 };
 
-export const IsDismissable = () => <MenuExample isDismissable />;
-
-IsDismissable.story = {
-  name: 'isDismissable'
+export const IsDismissable = {
+  name: 'isDismissable',
+  args: {isDismissable: true}
 };
 
-export const IsKeyboardDismissDisabled = () => (
-  <MenuExample isKeyboardDismissDisabled />
-);
-
-IsKeyboardDismissDisabled.story = {
-  name: 'isKeyboardDismissDisabled'
+export const IsKeyboardDismissDisabled = {
+  name: 'isKeyboardDismissDisabled',
+  args: {isKeyboardDismissDisabled: true}
 };

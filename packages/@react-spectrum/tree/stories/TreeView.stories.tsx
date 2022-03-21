@@ -9,33 +9,54 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import {Item, Section, Tree} from '../src';
 import React from 'react';
-
 interface ItemType {
   name: string,
   children?: ItemType[]
 }
-
 let items: ItemType[] = [
   {
     name: 'Animals',
-    children: [{name: 'Aardvark'}, {name: 'Kangaroo'}, {name: 'Snake'}]
+    children: [
+      {
+        name: 'Aardvark'
+      },
+      {
+        name: 'Kangaroo'
+      },
+      {
+        name: 'Snake'
+      }
+    ]
   },
   {
     name: 'People',
     children: [
-      {name: 'Danni'},
-      {name: 'Devon'},
-      {name: 'Ross', children: [{name: 'Tests'}]}
+      {
+        name: 'Danni'
+      },
+      {
+        name: 'Devon'
+      },
+      {
+        name: 'Ross',
+        children: [
+          {
+            name: 'Tests'
+          }
+        ]
+      }
     ]
   }
 ];
 
 let longList: ItemType[] = [];
+
 for (let i = 0; i < 1000; i++) {
-  longList.push({name: 'Item ' + i});
+  longList.push({
+    name: 'Item ' + i
+  });
 }
 
 export default {
@@ -51,7 +72,6 @@ export const Default = () => (
     )}
   </Tree>
 );
-
 export const Sections = () => (
   <Tree items={items}>
     {(item) => (
@@ -65,7 +85,6 @@ export const Sections = () => (
     )}
   </Tree>
 );
-
 export const Static = () => (
   <Tree>
     <Item>One</Item>
@@ -78,36 +97,31 @@ export const Static = () => (
     </Item>
   </Tree>
 );
-
-export const StaticSections = () => (
-  <Tree>
-    <Section title="Section 1">
-      <Item>One</Item>
-      <Item>Two</Item>
-      <Item>Three</Item>
-    </Section>
-    <Section title="Section 2">
-      <Item>One</Item>
-      <Item>Two</Item>
-      <Item>Three</Item>
-    </Section>
-  </Tree>
-);
-
-StaticSections.story = {
+export const StaticSections = {
+  render: () => (
+    <Tree>
+      <Section title="Section 1">
+        <Item>One</Item>
+        <Item>Two</Item>
+        <Item>Three</Item>
+      </Section>
+      <Section title="Section 2">
+        <Item>One</Item>
+        <Item>Two</Item>
+        <Item>Three</Item>
+      </Section>
+    </Tree>
+  ),
   name: 'Static sections'
 };
 
-export const LongList = () => (
-  <div>
-    <input />
-    <Tree items={longList}>
-      {(item) => <Item key={item.name}>{item.name}</Item>}
-    </Tree>
-    <input />
-  </div>
-);
-
-LongList.story = {
+export const LongList = {
+  render: () => (
+    <div>
+      <input />
+      <Tree items={longList}>{(item) => <Item key={item.name}>{item.name}</Item>}</Tree>
+      <input />
+    </div>
+  ),
   name: 'Long list'
 };

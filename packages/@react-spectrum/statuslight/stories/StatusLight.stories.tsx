@@ -9,100 +9,128 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import React from 'react';
 import {StatusLight} from '../';
 
 export default {
   title: 'StatusLight',
-
   parameters: {
-    providerSwitcher: {status: 'positive'}
+    providerSwitcher: {
+      status: 'positive'
+    }
   }
 };
 
-export const VariantCelery = () => render({variant: 'celery'});
-
-VariantCelery.story = {
+export const VariantCelery = {
+  render: () =>
+    render({
+      variant: 'celery'
+    }),
   name: 'variant: celery'
 };
 
-export const VariantYellow = () => render({variant: 'yellow'});
-
-VariantYellow.story = {
+export const VariantYellow = {
+  render: () =>
+    render({
+      variant: 'yellow'
+    }),
   name: 'variant: yellow'
 };
 
-export const VariantFuchsia = () => render({variant: 'fuchsia'});
-
-VariantFuchsia.story = {
+export const VariantFuchsia = {
+  render: () =>
+    render({
+      variant: 'fuchsia'
+    }),
   name: 'variant: fuchsia'
 };
 
-export const VariantIndigo = () => render({variant: 'indigo'});
-
-VariantIndigo.story = {
+export const VariantIndigo = {
+  render: () =>
+    render({
+      variant: 'indigo'
+    }),
   name: 'variant: indigo'
 };
 
-export const VariantSeafoam = () => render({variant: 'seafoam'});
-
-VariantSeafoam.story = {
+export const VariantSeafoam = {
+  render: () =>
+    render({
+      variant: 'seafoam'
+    }),
   name: 'variant: seafoam'
 };
 
-export const VariantChartreuse = () => render({variant: 'chartreuse'});
-
-VariantChartreuse.story = {
+export const VariantChartreuse = {
+  render: () =>
+    render({
+      variant: 'chartreuse'
+    }),
   name: 'variant: chartreuse'
 };
 
-export const VariantMagenta = () => render({variant: 'magenta'});
-
-VariantMagenta.story = {
+export const VariantMagenta = {
+  render: () =>
+    render({
+      variant: 'magenta'
+    }),
   name: 'variant: magenta'
 };
 
-export const VariantPurple = () => render({variant: 'purple'});
-
-VariantPurple.story = {
+export const VariantPurple = {
+  render: () =>
+    render({
+      variant: 'purple'
+    }),
   name: 'variant: purple'
 };
 
-export const VariantNeutral = () => render({variant: 'neutral'});
-
-VariantNeutral.story = {
+export const VariantNeutral = {
+  render: () =>
+    render({
+      variant: 'neutral'
+    }),
   name: 'variant: neutral'
 };
 
-export const VariantInfo = () => render({variant: 'info'});
-
-VariantInfo.story = {
+export const VariantInfo = {
+  render: () =>
+    render({
+      variant: 'info'
+    }),
   name: 'variant: info'
 };
 
-export const VariantPositive = () => render({variant: 'positive'});
-
-VariantPositive.story = {
+export const VariantPositive = {
+  render: () =>
+    render({
+      variant: 'positive'
+    }),
   name: 'variant: positive'
 };
 
-export const VariantNotice = () => render({variant: 'notice'});
-
-VariantNotice.story = {
+export const VariantNotice = {
+  render: () =>
+    render({
+      variant: 'notice'
+    }),
   name: 'variant: notice'
 };
 
-export const VariantNegative = () => render({variant: 'negative'});
-
-VariantNegative.story = {
+export const VariantNegative = {
+  render: () =>
+    render({
+      variant: 'negative'
+    }),
   name: 'variant: negative'
 };
 
-export const IsDisabledTrue = () =>
-  render({variant: 'positive', isDisabled: true});
-
-IsDisabledTrue.story = {
+export const IsDisabledTrue = {
+  render: () =>
+    render({
+      variant: 'positive',
+      isDisabled: true
+    }),
   name: 'isDisabled: true'
 };
 

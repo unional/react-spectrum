@@ -20,20 +20,18 @@ export default {
   title: 'useHover'
 };
 
-export const HoverDisabling = () => <App />;
-
-HoverDisabling.story = {
+export const HoverDisabling = {
+  render: () => <App />,
   name: 'hover disabling'
 };
 
 function Button(props: AriaButtonProps) {
   let {children, isDisabled} = props;
-
   let buttonRef = useRef();
-
   let {buttonProps} = useButton(props, buttonRef);
-  let {hoverProps, isHovered} = useHover({isDisabled});
-
+  let {hoverProps, isHovered} = useHover({
+    isDisabled
+  });
   return (
     <button
       className={classNames(

@@ -9,7 +9,6 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import {action} from '@storybook/addon-actions';
 import {Color} from '@react-types/color';
 import {ColorField} from '../';
@@ -20,186 +19,169 @@ import {View} from '@react-spectrum/view';
 import {VisuallyHidden} from '@react-aria/visually-hidden';
 
 export default {
-  title: 'ColorField'
+  title: 'ColorField',
+  component: ColorField
 };
 
-export const Default = () => render();
-export const HasDefaultValue = () => render({defaultValue: '#abcdef'});
-
-HasDefaultValue.story = {
-  name: 'has default value'
+export const Default = {
+  name: 'default'
 };
 
-export const Value = () =>
-  render({
-    value: '#FF00AA',
-    onChange: action('change')
-  });
-
-Value.story = {
-  name: 'value'
+export const DefaultValue = {
+  name: 'has default value',
+  args: {defaultValue: '#abcdef'}
 };
 
-export const IsQuiet = () => render({isQuiet: true});
-
-IsQuiet.story = {
-  name: 'isQuiet'
+export const Value = {
+  name: 'value',
+  args: {value: '#FF00AA'},
+  argTypes: {onChange: {action: 'change'}}
 };
 
-export const IsReadOnly = () =>
-  render({isReadOnly: true, defaultValue: '#abcdef'});
-
-IsReadOnly.story = {
-  name: 'isReadOnly'
+export const IsQuiet = {
+  name: 'isQuiet',
+  args: {isQuiet: true}
 };
 
-export const IsDisabled = () =>
-  render({isDisabled: true, defaultValue: '#abcdef'});
-
-IsDisabled.story = {
-  name: 'isDisabled'
+export const IsReadOnly = {
+  ...DefaultValue,
+  name: 'isReadOnly',
+  args: {isReadOnly: true}
 };
 
-export const ValidationStateValid = () => render({validationState: 'valid'});
-
-ValidationStateValid.story = {
-  name: 'validationState valid'
+export const IsDisabled = {
+  ...DefaultValue,
+  name: 'isDisabled',
+  args: {isDisabled: true}
 };
 
-export const ValidationStateInvalid = () =>
-  render({validationState: 'invalid'});
-
-ValidationStateInvalid.story = {
-  name: 'validationState invalid'
+export const ValidationStateValid = {
+  name: 'validationState valid',
+  args: {validationState: 'valid'}
 };
 
-export const RequiredLabelOptional = () => (
-  <Flex direction="column" gap="size-100">
-    {render({isRequired: 'true'})}
-    {render({isRequired: 'true', necessityIndicator: 'label'})}
-    {render({necessityIndicator: 'label'})}
-  </Flex>
-);
-
-RequiredLabelOptional.story = {
-  name: 'required, label, optional'
+export const ValidationStateInvalid = {
+  name: 'validationState invalid',
+  args: {validationState: 'invalid'}
 };
 
-export const WithPlaceholder = () =>
-  render({placeholder: 'Enter a hex color'});
-
-WithPlaceholder.story = {
-  name: 'with placeholder'
+export const RequiredLabelOptional = {
+  name: 'required, label, optional',
+  decorator: (Story) => (
+    <Flex direction="column" gap="size-100">
+      <Story isRequired />
+      <Story isRequired necessityIndicator="label" />
+      <Story necessityIndicator="label" />
+    </Flex>
+  )
 };
 
-export const Step16 = () => render({step: 16});
-
-Step16.story = {
-  name: 'step = 16'
+export const WithPlaceholder = {
+  name: 'with placeholder',
+  args: {placeholder: 'Enter a hex color'}
 };
 
-export const ControlledValue = () => (
-  <ControlledColorField value="#FF00AA" onChange={action('change')} />
-);
+export const Step16 = {
+  name: 'step = 16',
+  args: {step: 16}
+};
 
-ControlledValue.story = {
+export const ControlledValue = {
+  render: () => <ControlledColorField value="#FF00AA" />,
   name: 'controlled value'
 };
 
-export const Autofocus = () => render({autoFocus: true});
-
-Autofocus.story = {
-  name: 'autofocus'
+export const Autofocus = {
+  name: 'autofocus',
+  args: {autoFocus: true}
 };
 
-export const Placeholder = () => render({placeholder: '#e73623'});
-
-Placeholder.story = {
-  name: 'placeholder'
+export const Placeholder = {
+  name: 'placeholder',
+  args: {placeholder: '#e73623'}
 };
 
-export const LabelSide = () => render({labelPosition: 'side'});
-
-LabelSide.story = {
-  name: 'label side'
+export const LabelSide = {
+  name: 'label side',
+  args: {labelPosition: 'side'}
 };
 
-export const NoVisibleLabel = () =>
-  renderNoLabel({isRequired: true, 'aria-label': 'Primary Color'});
-
-NoVisibleLabel.story = {
-  name: 'no visible label'
+export const NoVisibleLabel = {
+  name: 'no visible label',
+  args: {
+    isRequired: true,
+    'aria-label': 'Primary Color'
+  }
 };
 
-export const AriaLabelledby = () => (
-  <>
-    <label htmlFor="colorfield" id="label">
-      Primary Color
-    </label>
-    {renderNoLabel({
-      isRequired: true,
-      id: 'colorfield',
-      'aria-labelledby': 'label'
-    })}
-  </>
-);
-
-AriaLabelledby.story = {
+export const AriaLabelledby = {
+  ...NoVisibleLabel,
+  decorator: (Story) => (
+    <>
+      <label htmlFor="colorfield" id="label">
+        Primary Color
+      </label>
+      <Story isRequired id="colorfield" aria-labelledby="label" />
+    </>
+  ),
   name: 'aria-labelledby'
 };
 
-export const CustomWidth = () => render({width: 'size-3000'});
-
-CustomWidth.story = {
-  name: 'custom width'
+export const CustomWidth = {
+  name: 'custom width',
+  args: {width: 'size-3000'}
 };
 
-export const CustomWidthNoVisibleLabel = () =>
-  renderNoLabel({
+export const CustomWidthNoVisibleLabel = {
+  ...NoVisibleLabel,
+  name: 'custom width no visible label',
+  args: {
     width: 'size-3000',
     isRequired: true,
     'aria-label': 'Primary Color'
-  });
-
-CustomWidthNoVisibleLabel.story = {
-  name: 'custom width no visible label'
+  }
 };
 
-export const CustomWidthLabelPositionSide = () =>
-  render({width: 'size-3000', labelPosition: 'side'});
-
-CustomWidthLabelPositionSide.story = {
-  name: 'custom width, labelPosition=side'
+export const CustomWidthLabelPositionSide = {
+  name: 'custom width, labelPosition=side',
+  args: {
+    width: 'size-3000',
+    labelPosition: 'side'
+  }
 };
 
-export const CustomWidth10PxForMinWidth = () => (
-  <Flex direction="column" gap="size-100">
-    {render({width: '10px'})}
-    <div style={{width: '10px'}}>{render()}</div>
-  </Flex>
-);
-
-CustomWidth10PxForMinWidth.story = {
-  name: 'custom width, 10px for min-width'
+export const CustomWidth10PxForMinWidth = {
+  name: 'custom width, 10px for min-width',
+  decorator: (Story) => (
+    <Flex direction="column" gap="size-100">
+      <Story width="10px" />
+      <div style={{width: '10px'}}>
+        <Story width="10px" />
+      </div>
+    </Flex>
+  ),
 };
 
 function ControlledColorField(props: any = {}) {
   let [color, setColor] = useState(props.value || null);
+
   let onChange = (color: Color) => {
     setColor(color);
+
     if (props.onChange) {
       props.onChange(color);
     }
   };
-  let style = color ? {backgroundColor: color.toString('rgb')} : {};
+
+  let style = color
+    ? {
+      backgroundColor: color.toString('rgb')
+    }
+    : {};
   let id = useId();
   return (
     <Flex direction="row" gap="size-100" alignItems="end">
-      <ColorField
-        id={id}
-        label="Primary Color"
-        onChange={onChange}
-        value={color} />
+      <ColorField id={id} label="Primary Color" onChange={onChange} value={color} />
       <View width="size-400" height="size-400" UNSAFE_style={style}>
         <VisuallyHidden>
           <output htmlFor={id} aria-live="off">
@@ -209,14 +191,4 @@ function ControlledColorField(props: any = {}) {
       </View>
     </Flex>
   );
-}
-
-function render(props: any = {}) {
-  return (
-    <ColorField label="Primary Color" onChange={action('change')} {...props} />
-  );
-}
-
-function renderNoLabel(props: any = {}) {
-  return <ColorField {...props} onChange={action('onChange')} />;
 }

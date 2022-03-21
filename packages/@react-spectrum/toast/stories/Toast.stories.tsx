@@ -9,7 +9,6 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import {action} from '@storybook/addon-actions';
 import {Button} from '@react-spectrum/button';
 import React from 'react';
@@ -22,83 +21,90 @@ export default {
 };
 
 export const Default = () =>
-  render({onClose: action('onClose')}, 'Toast is done.');
-export const VariantInfo = () =>
   render(
-    {variant: 'info', onClose: action('onClose')},
-    'Toast is happening.'
+    {
+      onClose: action('onClose')
+    },
+    'Toast is done.'
   );
-
-VariantInfo.story = {
+export const VariantInfo = {
+  render: () =>
+    render(
+      {
+        variant: 'info',
+        onClose: action('onClose')
+      },
+      'Toast is happening.'
+    ),
   name: 'variant = info'
 };
 
-export const VariantPositive = () =>
-  render(
-    {variant: 'positive', onClose: action('onClose')},
-    'Toast is perfect.'
-  );
-
-VariantPositive.story = {
+export const VariantPositive = {
+  render: () =>
+    render(
+      {
+        variant: 'positive',
+        onClose: action('onClose')
+      },
+      'Toast is perfect.'
+    ),
   name: 'variant = positive'
 };
 
-export const VariantNegative = () =>
-  render(
-    {variant: 'negative', onClose: action('onClose')},
-    'Toast is not done.'
-  );
-
-VariantNegative.story = {
+export const VariantNegative = {
+  render: () =>
+    render(
+      {
+        variant: 'negative',
+        onClose: action('onClose')
+      },
+      'Toast is not done.'
+    ),
   name: 'variant = Negative'
 };
 
-export const Actionable = () =>
-  render(
-    {
-      actionLabel: 'Undo',
-      onAction: action('onAction'),
-      onClose: action('onClose')
-    },
-    'Untoast the toast'
-  );
-
-Actionable.story = {
+export const Actionable = {
+  render: () =>
+    render(
+      {
+        actionLabel: 'Undo',
+        onAction: action('onAction'),
+        onClose: action('onClose')
+      },
+      'Untoast the toast'
+    ),
   name: 'actionable'
 };
 
-export const ActionTriggersClose = () =>
-  render(
-    {
-      actionLabel: 'Undo',
-      onAction: action('onAction'),
-      shouldCloseOnAction: true,
-      onClose: action('onClose')
-    },
-    'Close on untoasting of the toast'
-  );
-
-ActionTriggersClose.story = {
+export const ActionTriggersClose = {
+  render: () =>
+    render(
+      {
+        actionLabel: 'Undo',
+        onAction: action('onAction'),
+        shouldCloseOnAction: true,
+        onClose: action('onClose')
+      },
+      'Close on untoasting of the toast'
+    ),
   name: 'action triggers close'
 };
 
-export const AddViaProvider = () => (
-  <ToastProvider>
-    <RenderProvider />
-  </ToastProvider>
-);
-
-AddViaProvider.story = {
+export const AddViaProvider = {
+  render: () => (
+    <ToastProvider>
+      <RenderProvider />
+    </ToastProvider>
+  ),
   name: 'add via provider'
 };
 
-export const AddViaProviderWithTimers = () => (
-  <ToastProvider>
-    <RenderProviderTimers />
-  </ToastProvider>
-);
-
-AddViaProviderWithTimers.story = {
+export const AddViaProviderWithTimers = {
+  render: () => (
+    <ToastProvider>
+      <RenderProviderTimers />
+    </ToastProvider>
+  ),
   name: 'add via provider with timers'
 };
 
@@ -108,7 +114,6 @@ function render(props: ToastProps = {}, message: String) {
 
 function RenderProvider() {
   let toastContext = useToastProvider();
-
   return (
     <div>
       <Button
@@ -140,7 +145,9 @@ function RenderProvider() {
       </Button>
       <Button
         onPress={() =>
-          toastContext.info('Toast is info', {onClose: action('onClose')})
+          toastContext.info('Toast is info', {
+            onClose: action('onClose')
+          })
         }
         variant="cta">
         Show info Toast
@@ -151,7 +158,6 @@ function RenderProvider() {
 
 function RenderProviderTimers() {
   let toastContext = useToastProvider();
-
   return (
     <div>
       <Button

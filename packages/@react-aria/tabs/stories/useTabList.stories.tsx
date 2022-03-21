@@ -9,7 +9,6 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import {Item} from '@react-stately/collections';
 import React from 'react';
 import {Tabs} from './example';
@@ -21,8 +20,12 @@ const meta = {
 export default meta;
 
 let lotsOfItems: any[] = [];
+
 for (let i = 0; i < 50; i++) {
-  lotsOfItems.push({name: 'Item ' + i, contents: 'Contents ' + i});
+  lotsOfItems.push({
+    name: 'Item ' + i,
+    contents: 'Contents ' + i
+  });
 }
 
 const Template = () => () => (

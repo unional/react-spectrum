@@ -24,11 +24,22 @@ export default {
   title: 'SearchWithin'
 };
 
-function render(props: Omit<SpectrumSearchWithinProps, 'children'> = {}, searchFieldProps: SearchFieldProps = {}, pickerProps: Omit<SpectrumPickerProps<object>, 'children'> = {}) {
+function render(
+  props: Omit<SpectrumSearchWithinProps, 'children'> = {},
+  searchFieldProps: SearchFieldProps = {},
+  pickerProps: Omit<SpectrumPickerProps<object>, 'children'> = {}
+) {
   return (
     <SearchWithin label="Search" {...props}>
-      <SearchField placeholder="Search" {...searchFieldProps} onChange={action('change')} onSubmit={action('submit')} />
-      <Picker defaultSelectedKey="all" {...pickerProps} onSelectionChange={action('selectionChange')}>
+      <SearchField
+        placeholder="Search"
+        {...searchFieldProps}
+        onChange={action('change')}
+        onSubmit={action('submit')} />
+      <Picker
+        defaultSelectedKey="all"
+        {...pickerProps}
+        onSelectionChange={action('selectionChange')}>
         <Item key="all">All</Item>
         <Item key="campaigns">Campaigns</Item>
         <Item key="audiences">Audiences</Item>
@@ -38,28 +49,44 @@ function render(props: Omit<SpectrumSearchWithinProps, 'children'> = {}, searchF
   );
 }
 
-function renderReverse(props: Omit<SpectrumSearchWithinProps, 'children'> = {}, searchFieldProps: SearchFieldProps = {}, pickerProps: Omit<SpectrumPickerProps<object>, 'children'> = {}) {
+function renderReverse(
+  props: Omit<SpectrumSearchWithinProps, 'children'> = {},
+  searchFieldProps: SearchFieldProps = {},
+  pickerProps: Omit<SpectrumPickerProps<object>, 'children'> = {}
+) {
   return (
     <SearchWithin label="Search" {...props}>
-      <Picker defaultSelectedKey="all" {...pickerProps} onSelectionChange={action('selectionChange')}>
+      <Picker
+        defaultSelectedKey="all"
+        {...pickerProps}
+        onSelectionChange={action('selectionChange')}>
         <Item key="all">All</Item>
         <Item key="campaigns">Campaigns</Item>
         <Item key="audiences">Audiences</Item>
         <Item key="tags">Tags</Item>
       </Picker>
-      <SearchField placeholder="Search" {...searchFieldProps} onChange={action('change')} onSubmit={action('submit')} />
+      <SearchField
+        placeholder="Search"
+        {...searchFieldProps}
+        onChange={action('change')}
+        onSubmit={action('submit')} />
     </SearchWithin>
   );
 }
 
 function ResizeSearchWithinApp(props) {
   const [state, setState] = useState(true);
-
   return (
     <Flex direction="column" gap="size-200" alignItems="start">
-      <div style={{width: state ? '300px' : '400px'}}>
+      <div
+        style={{
+          width: state ? '300px' : '400px'
+        }}>
         <SearchWithin label="Search" {...props} width="100%">
-          <SearchField placeholder="Search" onChange={action('change')} onSubmit={action('submit')} />
+          <SearchField
+            placeholder="Search"
+            onChange={action('change')}
+            onSubmit={action('submit')} />
           <Picker defaultSelectedKey="all" onSelectionChange={action('selectionChange')}>
             <Item key="all">All</Item>
             <Item key="campaigns">Campaigns</Item>
@@ -74,58 +101,169 @@ function ResizeSearchWithinApp(props) {
 }
 
 export const Default = () => render({});
+export const ValueControlled = {
+  render: () =>
+    render(
+      {},
+      {
+        value: 'Controlled'
+      }
+    ),
+  name: 'value (controlled) '
+};
 
-export const ValueControlled = () => render({}, {value: 'Controlled'});
-ValueControlled.storyName = 'value (controlled) ';
+export const isDisabled = {
+  render: () =>
+    render({
+      isDisabled: true
+    }),
+  name: 'isDisabled: true'
+};
 
-export const isDisabled = () => render({isDisabled: true});
-isDisabled.storyName = 'isDisabled: true';
+export const isRequired = {
+  render: () =>
+    render({
+      isRequired: true
+    }),
+  name: 'isRequired: true'
+};
 
-export const isRequired = () => render({isRequired: true});
-isRequired.storyName = 'isRequired: true';
+export const isReadOnly = {
+  render: () =>
+    render(
+      {},
+      {
+        isReadOnly: true,
+        value: 'Read Only'
+      }
+    ),
+  name: 'isReadOnly: true'
+};
 
-export const isReadOnly = () => render({}, {isReadOnly: true, value: 'Read Only'});
-isReadOnly.storyName = 'isReadOnly: true';
+export const searchfieldDefaultValue = {
+  render: () =>
+    render(
+      {},
+      {
+        defaultValue: 'Default Value'
+      }
+    ),
+  name: 'Default value for Searchfield'
+};
 
-export const searchfieldDefaultValue = () => render({}, {defaultValue: 'Default Value'});
-searchfieldDefaultValue.storyName = 'Default value for Searchfield';
+export const pickerDefaultValue = {
+  render: () =>
+    render(
+      {},
+      {},
+      {
+        defaultSelectedKey: 'tags'
+      }
+    ),
+  name: 'Default value for Picker'
+};
 
-export const pickerDefaultValue = () => render({}, {}, {defaultSelectedKey: 'tags'});
-pickerDefaultValue.storyName = 'Default value for Picker';
+export const isRequiredNecessityIndicatorLabel = {
+  render: () =>
+    render({
+      isRequired: true,
+      necessityIndicator: 'label'
+    }),
+  name: 'isRequired: true, necessityIndicator "label"'
+};
 
-export const isRequiredNecessityIndicatorLabel = () => render({isRequired: true, necessityIndicator: 'label'});
-isRequiredNecessityIndicatorLabel.storyName = 'isRequired: true, necessityIndicator "label"';
+export const isRequiredFalse_necessityIndicator = {
+  render: () =>
+    render({
+      isRequired: false,
+      necessityIndicator: 'label'
+    }),
+  name: 'isRequired: false, necessityIndicator "label"'
+};
 
-export const isRequiredFalse_necessityIndicator = () => render({isRequired: false, necessityIndicator: 'label'});
-isRequiredFalse_necessityIndicator.storyName = 'isRequired: false, necessityIndicator "label"';
+export const InputValidationSateInvalid = {
+  render: () =>
+    render(
+      {},
+      {
+        validationState: 'invalid'
+      }
+    ),
+  name: 'input validationState: invalid'
+};
 
-export const InputValidationSateInvalid = () => render({}, {validationState: 'invalid'});
-InputValidationSateInvalid.storyName = 'input validationState: invalid';
+export const PickerValidationSateInvalid = {
+  render: () =>
+    render(
+      {},
+      {},
+      {
+        validationState: 'invalid'
+      }
+    ),
+  name: 'picker validationState: invalid'
+};
 
-export const PickerValidationSateInvalid = () => render({}, {}, {validationState: 'invalid'});
-PickerValidationSateInvalid.storyName = 'picker validationState: invalid';
+export const PickerDisabled = () =>
+  render(
+    {},
+    {},
+    {
+      isDisabled: true
+    }
+  );
+export const CustomWidth300 = {
+  render: () =>
+    render({
+      width: 300
+    }),
+  name: 'Custom width: 300'
+};
 
-export const PickerDisabled = () => render({}, {}, {isDisabled: true});
+export const CustomWidth30 = {
+  render: () =>
+    render({
+      width: 30
+    }),
+  name: 'Custom width: 30'
+};
 
-export const CustomWidth300 = () => render({width: 300});
-CustomWidth300.storyName = 'Custom width: 300';
+export const LabelPositionSide = {
+  render: () =>
+    render({
+      labelPosition: 'side'
+    }),
+  name: 'labelPosition: side'
+};
 
-export const CustomWidth30 = () => render({width: 30});
-CustomWidth30.storyName = 'Custom width: 30';
+export const NoLabel = () =>
+  render({
+    label: undefined,
+    'aria-label': 'Aria Label'
+  });
+export const AutoFocusSearchField = {
+  render: () =>
+    render(
+      {},
+      {
+        autoFocus: true
+      }
+    ),
+  name: 'autoFocus: true on SearchField'
+};
 
-export const LabelPositionSide = () => render({labelPosition: 'side'});
-LabelPositionSide.storyName = 'labelPosition: side';
-
-export const NoLabel = () => render({label: undefined, 'aria-label': 'Aria Label'});
-
-export const AutoFocusSearchField = () => render({}, {autoFocus: true});
-AutoFocusSearchField.storyName = 'autoFocus: true on SearchField';
-
-export const AutoFocusPicker = () => render({}, {}, {autoFocus: true});
-AutoFocusPicker.storyName = 'autoFocus: true on Picker';
+export const AutoFocusPicker = {
+  render: () =>
+    render(
+      {},
+      {},
+      {
+        autoFocus: true
+      }
+    ),
+  name: 'autoFocus: true on Picker'
+};
 
 export const ReverseChildrenOrder = () => renderReverse({});
-
 export const ResizeSearchWithin = () => <ResizeSearchWithinApp />;
-
 export const ResizeSearchWithinNoLabel = () => <ResizeSearchWithinApp label={null} />;

@@ -9,7 +9,6 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import Icon3DMaterials from '../3DMaterials';
 import Add from '../Add';
 import Alert from '../Alert';
@@ -20,50 +19,63 @@ export default {
   title: 'Icons/Workflow',
 };
 
-export const IconAddWithSizes = () => renderIconSizes(Add, { 'aria-label': 'Add' });
-
-IconAddWithSizes.story = {
+export const IconAddWithSizes = {
+  render: () =>
+    renderIconSizes(Add, {
+      'aria-label': 'Add',
+    }),
   name: 'icon: Add with sizes',
 };
 
-export const IconBellWithSizes = () => renderIconSizes(Bell, { 'aria-label': 'Bell' });
-
-IconBellWithSizes.story = {
+export const IconBellWithSizes = {
+  render: () =>
+    renderIconSizes(Bell, {
+      'aria-label': 'Bell',
+    }),
   name: 'icon: Bell with sizes',
 };
 
-export const Icon3DMaterialsWithSizes = () =>
-  renderIconSizes(Icon3DMaterials, { 'aria-label': '3D Materials' });
-
-Icon3DMaterialsWithSizes.story = {
+export const Icon3DMaterialsWithSizes = {
+  render: () =>
+    renderIconSizes(Icon3DMaterials, {
+      'aria-label': '3D Materials',
+    }),
   name: 'icon: _3DMaterials with sizes',
 };
 
-export const IconAlertNegative = () =>
-  renderIconSizes(Alert, { 'aria-label': 'Alert', color: 'negative' });
-
-IconAlertNegative.story = {
+export const IconAlertNegative = {
+  render: () =>
+    renderIconSizes(Alert, {
+      'aria-label': 'Alert',
+      color: 'negative',
+    }),
   name: 'icon: Alert negative',
 };
 
-export const IconAlertInformative = () =>
-  renderIconSizes(Alert, { 'aria-label': 'Alert', color: 'informative' });
-
-IconAlertInformative.story = {
+export const IconAlertInformative = {
+  render: () =>
+    renderIconSizes(Alert, {
+      'aria-label': 'Alert',
+      color: 'informative',
+    }),
   name: 'icon: Alert informative',
 };
 
-export const IconAlertPositive = () =>
-  renderIconSizes(Alert, { 'aria-label': 'Alert', color: 'positive' });
-
-IconAlertPositive.story = {
+export const IconAlertPositive = {
+  render: () =>
+    renderIconSizes(Alert, {
+      'aria-label': 'Alert',
+      color: 'positive',
+    }),
   name: 'icon: Alert positive',
 };
 
-export const IconAlertNotice = () =>
-  renderIconSizes(Alert, { 'aria-label': 'Alert', color: 'notice' });
-
-IconAlertNotice.story = {
+export const IconAlertNotice = {
+  render: () =>
+    renderIconSizes(Alert, {
+      'aria-label': 'Alert',
+      color: 'notice',
+    }),
   name: 'icon: Alert notice',
 };
 

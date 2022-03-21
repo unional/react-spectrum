@@ -9,50 +9,50 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
-import {action} from '@storybook/addon-actions';
 import {LogicButton} from '../';
 import React from 'react';
 
+let actions = {
+  onPress: {action: 'press'},
+  onPressStart: {action: 'pressstart'},
+  onPressEnd: {action: 'pressend'}
+};
+
 export default {
   title: 'Button/LogicButton',
-
-  parameters: {
-    providerSwitcher: {status: 'positive'}
-  }
-};
-
-export const LogicVariantAnd = () => render({variant: 'and', label: 'and'});
-
-LogicVariantAnd.story = {
-  name: 'logic variant: and'
-};
-
-export const LogicVariantOr = () => render({variant: 'or', label: 'or'});
-
-LogicVariantOr.story = {
-  name: 'logic variant: or'
-};
-
-function render(props: any = {}) {
-  return (
+  render: (props) => (
     <div>
-      <LogicButton
-        onPress={action('press')}
-        onPressStart={action('pressstart')}
-        onPressEnd={action('pressend')}
-        {...props}>
+      <LogicButton {...props}>
         Default
       </LogicButton>
       <LogicButton
         marginStart="10px"
-        onPress={action('press')}
-        onPressStart={action('pressstart')}
-        onPressEnd={action('pressend')}
         isDisabled
         {...props}>
         Disabled
       </LogicButton>
     </div>
-  );
-}
+  ),
+  parameters: {
+    providerSwitcher: {
+      status: 'positive'
+    }
+  },
+  argTypes: {...actions}
+};
+
+export const LogicVariantAnd = {
+  name: 'logic variant: and',
+  args: {
+    variant: 'and',
+    label: 'and'
+  }
+};
+
+export const LogicVariantOr = {
+  name: 'logic variant: or',
+  args: {
+    variant: 'or',
+    label: 'or'
+  }
+};

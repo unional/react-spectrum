@@ -9,124 +9,164 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
-import {action} from '@storybook/addon-actions';
-import {CalendarDate, CalendarDateTime, getLocalTimeZone, parseZonedDateTime, today} from '@internationalized/date';
+import {
+  CalendarDate,
+  CalendarDateTime,
+  getLocalTimeZone,
+  parseZonedDateTime,
+  today
+} from '@internationalized/date';
 import {Flex} from '@react-spectrum/layout';
 import {RangeCalendar} from '../';
 import React, {useState} from 'react';
 import {TimeField} from '@react-spectrum/datepicker';
 
 export default {
-  title: 'Date and Time/RangeCalendar'
+  title: 'Date and Time/RangeCalendar',
+  component: RangeCalendar
 };
 
-export const Default = () => render();
-export const DefaultValue = () => render({defaultValue: {start: new CalendarDate(2019, 6, 5), end: new CalendarDate(2019, 6, 10)}});
-
-DefaultValue.story = {
-  name: 'defaultValue'
+export const Default = {
+  name: 'default'
 };
 
-export const ControlledValue = () => render({value: {start: new CalendarDate(2019, 6, 5), end: new CalendarDate(2019, 6, 10)}});
-
-ControlledValue.story = {
-  name: 'controlled value'
+export const DefaultValue = {
+  name: 'defaultValue',
+  args: {
+    defaultValue: {
+      start: new CalendarDate(2019, 6, 5),
+      end: new CalendarDate(2019, 6, 10)
+    }
+  }
 };
 
-export const WithTime = () => <RangeCalendarWithTime />;
-
-WithTime.story = {
-  name: 'with time'
+export const ControlledValue = {
+  name: 'controlled value',
+  args: {
+    value: {
+      start: new CalendarDate(2019, 6, 5),
+      end: new CalendarDate(2019, 6, 10)
+    }
+  }
 };
 
-export const WithZonedTime = () => <RangeCalendarWithZonedTime />;
-
-WithZonedTime.story = {
-  name: 'with zoned time'
+export const WithTime = {
+  name: 'with time',
+  render: (props) => <RangeCalendarWithTime {...props} />
 };
 
-export const MinValueTodayMaxValue1WeekFromNow = () => render({minValue: today(getLocalTimeZone()), maxValue: today(getLocalTimeZone()).add({weeks: 1})});
-
-MinValueTodayMaxValue1WeekFromNow.story = {
-  name: 'minValue: today, maxValue: 1 week from now'
+export const WithZonedTime = {
+  name: 'with zoned time',
+  render: (props) => <RangeCalendarWithZonedTime {...props} />
 };
 
-export const DefaultValueMinValueMaxValue = () => render({defaultValue: {start: new CalendarDate(2019, 6, 10), end: new CalendarDate(2019, 6, 12)}, minValue: new CalendarDate(2019, 6, 5), maxValue: new CalendarDate(2019, 6, 20)});
-
-DefaultValueMinValueMaxValue.story = {
-  name: 'defaultValue + minValue + maxValue'
+export const MinValueTodayMaxValue1WeekFromNow = {
+  name: 'minValue: today, maxValue: 1 week from now',
+  args: {
+    minValue: today(getLocalTimeZone()),
+    maxValue: today(getLocalTimeZone()).add({
+      weeks: 1
+    })
+  }
 };
 
-export const IsDisabled = () => render({defaultValue: {start: new CalendarDate(2019, 6, 5), end: new CalendarDate(2019, 6, 10)}, isDisabled: true});
-
-IsDisabled.story = {
-  name: 'isDisabled'
+export const DefaultValueMinValueMaxValue = {
+  ...DefaultValue,
+  name: 'defaultValue + minValue + maxValue',
+  args: {
+    minValue: new CalendarDate(2019, 6, 5),
+    maxValue: new CalendarDate(2019, 6, 20)
+  }
 };
 
-export const IsReadOnly = () => render({defaultValue: {start: new CalendarDate(2019, 6, 5), end: new CalendarDate(2019, 6, 10)}, isReadOnly: true});
-
-IsReadOnly.story = {
-  name: 'isReadOnly'
+export const IsDisabled = {
+  ...DefaultValue,
+  name: 'isDisabled',
+  args: {
+    isDisabled: true
+  }
 };
 
-export const AutoFocus = () => render({defaultValue: {start: new CalendarDate(2019, 6, 5), end: new CalendarDate(2019, 6, 10)}, autoFocus: true});
-
-AutoFocus.story = {
-  name: 'autoFocus'
+export const IsReadOnly = {
+  ...DefaultValue,
+  name: 'isReadOnly',
+  args: {isReadOnly: true}
 };
 
-export const VisibleMonths2 = () => render({visibleMonths: 2});
-
-VisibleMonths2.story = {
-  name: 'visibleMonths: 2'
+export const AutoFocus = {
+  ...DefaultValue,
+  name: 'autoFocus',
+  args: {autoFocus: true}
 };
 
-export const VisibleMonths3 = () => render({visibleMonths: 3});
-
-VisibleMonths3.story = {
-  name: 'visibleMonths: 3'
+export const VisibleMonths2 = {
+  name: 'visibleMonths: 2',
+  args: {visibleMonths: 2}
 };
 
-export const MinValueTodayVisibleMonths3 = () => render({minValue: today(getLocalTimeZone()), visibleMonths: 3});
-
-MinValueTodayVisibleMonths3.story = {
-  name: 'minValue: today, visibleMonths: 3'
+export const VisibleMonths3 = {
+  name: 'visibleMonths: 3',
+  args: {visibleMonths: 3}
 };
 
-export const DefaultValueVisibleMonths3 = () => render({visibleMonths: 3, defaultValue: {start: new CalendarDate(2021, 10, 5), end: new CalendarDate(2021, 12, 10)}});
-
-DefaultValueVisibleMonths3.story = {
-  name: 'defaultValue, visibleMonths: 3'
+export const MinValueTodayVisibleMonths3 = {
+  name: 'minValue: today, visibleMonths: 3',
+  args: {
+    minValue: today(getLocalTimeZone()),
+    visibleMonths: 3
+  }
 };
 
-function render(props = {}) {
-  return <RangeCalendar onChange={action('change')} {...props} />;
-}
+export const DefaultValueVisibleMonths3 = {
+  name: 'defaultValue, visibleMonths: 3',
+  args: {
+    visibleMonths: 3,
+    defaultValue: {
+      start: new CalendarDate(2021, 10, 5),
+      end: new CalendarDate(2021, 12, 10)
+    }
+  }
+};
 
 function RangeCalendarWithTime() {
-  let [value, setValue] = useState({start: new CalendarDateTime(2019, 6, 5, 8), end: new CalendarDateTime(2019, 6, 10, 12)});
-
+  let [value, setValue] = useState({
+    start: new CalendarDateTime(2019, 6, 5, 8),
+    end: new CalendarDateTime(2019, 6, 10, 12)
+  });
   return (
     <Flex direction="column">
       <RangeCalendar value={value} onChange={setValue} />
       <Flex gap="size-100">
-        <TimeField label="Start time" value={value.start} onChange={v => setValue({...value, start: v})} />
-        <TimeField label="End time" value={value.end} onChange={v => setValue({...value, end: v})} />
+        <TimeField
+          label="Start time"
+          value={value.start}
+          onChange={(v) => setValue({...value, start: v})} />
+        <TimeField
+          label="End time"
+          value={value.end}
+          onChange={(v) => setValue({...value, end: v})} />
       </Flex>
     </Flex>
   );
 }
 
 function RangeCalendarWithZonedTime() {
-  let [value, setValue] = useState({start: parseZonedDateTime('2021-03-10T00:45-05:00[America/New_York]'), end: parseZonedDateTime('2021-03-26T18:05-07:00[America/Los_Angeles]')});
-
+  let [value, setValue] = useState({
+    start: parseZonedDateTime('2021-03-10T00:45-05:00[America/New_York]'),
+    end: parseZonedDateTime('2021-03-26T18:05-07:00[America/Los_Angeles]')
+  });
   return (
     <Flex direction="column">
       <RangeCalendar value={value} onChange={setValue} />
       <Flex gap="size-100">
-        <TimeField label="Start time" value={value.start} onChange={v => setValue({...value, start: v})} />
-        <TimeField label="End time" value={value.end} onChange={v => setValue({...value, end: v})} />
+        <TimeField
+          label="Start time"
+          value={value.start}
+          onChange={(v) => setValue({...value, start: v})} />
+        <TimeField
+          label="End time"
+          value={value.end}
+          onChange={(v) => setValue({...value, end: v})} />
       </Flex>
     </Flex>
   );

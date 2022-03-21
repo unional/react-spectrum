@@ -9,7 +9,6 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import {number, withKnobs} from '@storybook/addon-knobs';
 import {ProgressBar} from '../';
 import React, {CSSProperties} from 'react';
@@ -38,257 +37,299 @@ const grayedBoxStyle: CSSProperties = {
 export default {
   title: 'Progress/ProgressBar',
   decorators: [withKnobs],
-
   parameters: {
-    providerSwitcher: {status: 'positive'}
+    providerSwitcher: {
+      status: 'positive'
+    }
   }
 };
 
 export const Default = () => render();
-export const Value50 = () => render({value: 50});
-
-Value50.story = {
+export const Value50 = {
+  render: () =>
+    render({
+      value: 50
+    }),
   name: 'value: 50'
 };
 
-export const Value100 = () => render({value: 100});
-
-Value100.story = {
+export const Value100 = {
+  render: () =>
+    render({
+      value: 100
+    }),
   name: 'value: 100'
 };
 
-export const SizeS = () => {
-  const value = number('Value', 50, sliderOptions);
-  return render({value, size: 'S'});
-};
-
-SizeS.story = {
+export const SizeS = {
+  render: () => {
+    const value = number('Value', 50, sliderOptions);
+    return render({
+      value,
+      size: 'S'
+    });
+  },
   name: 'size: S'
 };
 
-export const ShowValueLabelTrue = () => {
-  const value = number('Value', 32, sliderOptions);
-  return render({showValueLabel: true, value});
-};
-
-ShowValueLabelTrue.story = {
+export const ShowValueLabelTrue = {
+  render: () => {
+    const value = number('Value', 32, sliderOptions);
+    return render({
+      showValueLabel: true,
+      value
+    });
+  },
   name: 'showValueLabel: true'
 };
 
-export const ShowValueLabelFalse = () => {
-  const value = number('Value', 32, sliderOptions);
-  return render({showValueLabel: false, value});
-};
-
-ShowValueLabelFalse.story = {
+export const ShowValueLabelFalse = {
+  render: () => {
+    const value = number('Value', 32, sliderOptions);
+    return render({
+      showValueLabel: false,
+      value
+    });
+  },
   name: 'showValueLabel: false'
 };
 
-export const ValueLabel1Of4 = () => render({value: 25, valueLabel: '1 of 4'});
-
-ValueLabel1Of4.story = {
+export const ValueLabel1Of4 = {
+  render: () =>
+    render({
+      value: 25,
+      valueLabel: '1 of 4'
+    }),
   name: 'valueLabel: 1 of 4'
 };
 
-export const UsingNumberFormatOptionsWithCurrencyStyle = () => {
-  const value = number('Value', 60, sliderOptions);
-  return render({
-    showValueLabel: true,
-    value,
-    formatOptions
-  });
-};
-
-UsingNumberFormatOptionsWithCurrencyStyle.story = {
+export const UsingNumberFormatOptionsWithCurrencyStyle = {
+  render: () => {
+    const value = number('Value', 60, sliderOptions);
+    return render({
+      showValueLabel: true,
+      value,
+      formatOptions
+    });
+  },
   name: 'Using number formatOptions with currency style'
 };
 
-export const NoVisibleLabel = () => {
-  const value = number('Value', 32, sliderOptions);
-  return render({label: null, 'aria-label': 'Loading…', value});
-};
-
-NoVisibleLabel.story = {
+export const NoVisibleLabel = {
+  render: () => {
+    const value = number('Value', 32, sliderOptions);
+    return render({
+      label: null,
+      'aria-label': 'Loading…',
+      value
+    });
+  },
   name: 'no visible label'
 };
 
-export const LabelPositionSide = () => {
-  const value = number('Value', 32, sliderOptions);
-  return render({value, labelPosition: 'side'});
-};
-
-LabelPositionSide.story = {
+export const LabelPositionSide = {
+  render: () => {
+    const value = number('Value', 32, sliderOptions);
+    return render({
+      value,
+      labelPosition: 'side'
+    });
+  },
   name: 'labelPosition: side'
 };
 
-export const LabelPositionTop = () => {
-  const value = number('Value', 32, sliderOptions);
-  return render({value, labelPosition: 'top'});
-};
-
-LabelPositionTop.story = {
+export const LabelPositionTop = {
+  render: () => {
+    const value = number('Value', 32, sliderOptions);
+    return render({
+      value,
+      labelPosition: 'top'
+    });
+  },
   name: 'labelPosition: top'
 };
 
-export const LongLabel = () => {
-  const value = number('Value', 32, sliderOptions);
-  return render({
-    value,
-    label: 'Super long progress bar label. Sample label copy. Loading...'
-  });
-};
-
-LongLabel.story = {
+export const LongLabel = {
+  render: () => {
+    const value = number('Value', 32, sliderOptions);
+    return render({
+      value,
+      label: 'Super long progress bar label. Sample label copy. Loading...'
+    });
+  },
   name: 'long label'
 };
 
-export const LongLabelLabelPositionSide = () => {
-  const value = number('Value', 32, sliderOptions);
-  return render({
-    value,
-    labelPosition: 'side',
-    label: 'Super long progress bar label. Sample label copy. Loading...'
-  });
-};
-
-LongLabelLabelPositionSide.story = {
+export const LongLabelLabelPositionSide = {
+  render: () => {
+    const value = number('Value', 32, sliderOptions);
+    return render({
+      value,
+      labelPosition: 'side',
+      label: 'Super long progress bar label. Sample label copy. Loading...'
+    });
+  },
   name: 'long label, labelPosition: side'
 };
 
-export const IsIndeterminateTrue = () => {
-  const value = number('Value', 32, sliderOptions);
-  return render({isIndeterminate: true, value});
-};
-
-IsIndeterminateTrue.story = {
+export const IsIndeterminateTrue = {
+  render: () => {
+    const value = number('Value', 32, sliderOptions);
+    return render({
+      isIndeterminate: true,
+      value
+    });
+  },
   name: 'isIndeterminate: true'
 };
 
-export const IsIndeterminateTrueSizeS = () =>
-  render({isIndeterminate: true, size: 'S'});
-
-IsIndeterminateTrueSizeS.story = {
+export const IsIndeterminateTrueSizeS = {
+  render: () =>
+    render({
+      isIndeterminate: true,
+      size: 'S'
+    }),
   name: 'isIndeterminate: true, size: S'
 };
 
-export const VariantOverBackground = () => {
-  const value = number('Value', 32, sliderOptions);
-  return (
-    <div style={grayedBoxStyle}>
-      {render({variant: 'overBackground', value})}
-    </div>
-  );
-};
-
-VariantOverBackground.story = {
+export const VariantOverBackground = {
+  render: () => {
+    const value = number('Value', 32, sliderOptions);
+    return (
+      <div style={grayedBoxStyle}>
+        {render({
+          variant: 'overBackground',
+          value
+        })}
+      </div>
+    );
+  },
   name: 'variant: overBackground'
 };
 
-export const ParentWidth100 = () => (
-  <span style={{width: '100%'}}>{render()}</span>
-);
-
-ParentWidth100.story = {
+export const ParentWidth100 = {
+  render: () => (
+    <span
+      style={{
+        width: '100%'
+      }}>
+      {render()}
+    </span>
+  ),
   name: 'parent width 100%'
 };
 
-export const ParentWidth100Px = () => (
-  <span style={{width: '100px'}}>{render()}</span>
-);
-
-ParentWidth100Px.story = {
+export const ParentWidth100Px = {
+  render: () => (
+    <span
+      style={{
+        width: '100px'
+      }}>
+      {render()}
+    </span>
+  ),
   name: 'parent width 100px'
 };
 
-export const Width300Px = () => render({width: '300px', value: 100});
-
-Width300Px.story = {
+export const Width300Px = {
+  render: () =>
+    render({
+      width: '300px',
+      value: 100
+    }),
   name: 'width: 300px'
 };
 
-export const Width300PxIsIndeterminateTrue = () =>
-  render({width: '300px', isIndeterminate: true});
-
-Width300PxIsIndeterminateTrue.story = {
+export const Width300PxIsIndeterminateTrue = {
+  render: () =>
+    render({
+      width: '300px',
+      isIndeterminate: true
+    }),
   name: 'width: 300px, isIndeterminate: true'
 };
 
-export const Width300PxLabelPositionSide = () =>
-  render({width: '300px', labelPosition: 'side'});
-
-Width300PxLabelPositionSide.story = {
+export const Width300PxLabelPositionSide = {
+  render: () =>
+    render({
+      width: '300px',
+      labelPosition: 'side'
+    }),
   name: 'width: 300px, labelPosition: side'
 };
 
-export const Width300PxLabelPositionSideIsIndeterminateTrue = () =>
-  render({width: '300px', labelPosition: 'side', isIndeterminate: true});
-
-Width300PxLabelPositionSideIsIndeterminateTrue.story = {
+export const Width300PxLabelPositionSideIsIndeterminateTrue = {
+  render: () =>
+    render({
+      width: '300px',
+      labelPosition: 'side',
+      isIndeterminate: true
+    }),
   name: 'width: 300px, labelPosition: side, isIndeterminate: true'
 };
 
-export const Width30Px = () => render({width: '30px'});
-
-Width30Px.story = {
+export const Width30Px = {
+  render: () =>
+    render({
+      width: '30px'
+    }),
   name: 'width: 30px'
 };
 
-export const Width30PxSizeS = () => render({width: '30px', size: 'S'});
-
-Width30PxSizeS.story = {
+export const Width30PxSizeS = {
+  render: () =>
+    render({
+      width: '30px',
+      size: 'S'
+    }),
   name: 'width: 30px, size: S'
 };
 
-export const Width30PxLabelPositionSideLongLabel = () =>
-  render({
-    width: '30px',
-    labelPosition: 'side',
-    label: 'Super long progress bar label. Sample label copy. Loading...'
-  });
-
-Width30PxLabelPositionSideLongLabel.story = {
+export const Width30PxLabelPositionSideLongLabel = {
+  render: () =>
+    render({
+      width: '30px',
+      labelPosition: 'side',
+      label: 'Super long progress bar label. Sample label copy. Loading...'
+    }),
   name: 'width: 30px, labelPosition: side, long label'
 };
 
-export const Width30PxLabelPositionSideIsIndeterminateTrueLongLabelButtonOnRight = () => (
-  <>
-    {render({
-      width: '30px',
-      labelPosition: 'side',
-      isIndeterminate: true,
-      label: 'Super long progress bar label. Sample label copy. Loading...'
-    })}
-    <button>Confirm</button>
-  </>
-);
-
-Width30PxLabelPositionSideIsIndeterminateTrueLongLabelButtonOnRight.story = {
-  name:
-    'width: 30px, labelPosition: side, isIndeterminate: true, long label, button on right'
+export const Width30PxLabelPositionSideIsIndeterminateTrueLongLabelButtonOnRight = {
+  render: () => (
+    <>
+      {render({
+        width: '30px',
+        labelPosition: 'side',
+        isIndeterminate: true,
+        label: 'Super long progress bar label. Sample label copy. Loading...'
+      })}
+      <button>Confirm</button>
+    </>
+  ),
+  name: 'width: 30px, labelPosition: side, isIndeterminate: true, long label, button on right'
 };
 
-export const UsingRawValuesForMinValueMaxValueAndValue = () =>
-  render({
-    showValueLabel: true,
-    labelPosition: 'top',
-    maxValue: 2147483648,
-    value: 715827883
-  });
-
-UsingRawValuesForMinValueMaxValueAndValue.story = {
+export const UsingRawValuesForMinValueMaxValueAndValue = {
+  render: () =>
+    render({
+      showValueLabel: true,
+      labelPosition: 'top',
+      maxValue: 2147483648,
+      value: 715827883
+    }),
   name: 'Using raw values for minValue, maxValue, and value'
 };
 
-export const UsingRawValuesWithNumberFormatter = () =>
-  render({
-    showValueLabel: true,
-    labelPosition: 'top',
-    maxValue: 2147483648,
-    value: 715827883,
-    formatOptions
-  });
-
-UsingRawValuesWithNumberFormatter.story = {
+export const UsingRawValuesWithNumberFormatter = {
+  render: () =>
+    render({
+      showValueLabel: true,
+      labelPosition: 'top',
+      maxValue: 2147483648,
+      value: 715827883,
+      formatOptions
+    }),
   name: 'Using raw values with number formatter'
 };
 

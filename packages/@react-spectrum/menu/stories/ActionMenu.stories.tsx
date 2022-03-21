@@ -9,7 +9,6 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import {action} from '@storybook/addon-actions';
 import {ActionMenu} from '..';
 import {Alignment} from '@react-types/shared';
@@ -36,6 +35,7 @@ const Template = <T extends object>(): Story<SpectrumActionMenuProps<T>> => (arg
 );
 
 type Direction = 'bottom' | 'top' | 'left' | 'right' | 'start' | 'end';
+
 const directionItems = [
   {
     key: 'bottom',
@@ -60,7 +60,9 @@ const directionItems = [
   {
     key: 'end',
     label: 'End'
-  }];
+  }
+];
+
 const alignItems = [
   {
     key: 'start',
@@ -73,11 +75,11 @@ const alignItems = [
 ];
 
 function isOfDirection(key: string): key is Direction {
-  return directionItems.map(e => e.key).includes(key);
+  return directionItems.map((e) => e.key).includes(key);
 }
 
 function isOfAlignment(key: string): key is Alignment {
-  return alignItems.map(e => e.key).includes(key);
+  return alignItems.map((e) => e.key).includes(key);
 }
 
 function DirectionAlignment() {
@@ -96,40 +98,57 @@ function DirectionAlignment() {
     }
   };
 
-  return (<Flex alignItems="end" gap={10} wrap>
-    <Picker label="Align" items={alignItems} selectedKey={align} onSelectionChange={handleAlignChange}>
-      {(item) => <Item key={item.key}>{item.label}</Item>}
-    </Picker>
-    <Picker label="Direction" items={directionItems} selectedKey={direction} onSelectionChange={handleDirectionChange}>
-      {(item) => <Item key={item.key}>{item.label}</Item>}
-    </Picker>
-    <ActionMenu 
-      onAction={action('action')} 
-      align={align} 
-      direction={direction}>
-      <Item key="one">One</Item>
-      <Item key="two">Two</Item>
-      <Item key="three">Three</Item>
-    </ActionMenu>
-  </Flex>);
+  return (
+    <Flex alignItems="end" gap={10} wrap>
+      <Picker
+        label="Align"
+        items={alignItems}
+        selectedKey={align}
+        onSelectionChange={handleAlignChange}>
+        {(item) => <Item key={item.key}>{item.label}</Item>}
+      </Picker>
+      <Picker
+        label="Direction"
+        items={directionItems}
+        selectedKey={direction}
+        onSelectionChange={handleDirectionChange}>
+        {(item) => <Item key={item.key}>{item.label}</Item>}
+      </Picker>
+      <ActionMenu onAction={action('action')} align={align} direction={direction}>
+        <Item key="one">One</Item>
+        <Item key="two">Two</Item>
+        <Item key="three">Three</Item>
+      </ActionMenu>
+    </Flex>
+  );
 }
 
 export const Default = Template().bind({});
 Default.args = {};
 
 export const AriaLabel = Template().bind({});
-AriaLabel.args = {'aria-label': 'Some more actions'};
+AriaLabel.args = {
+  'aria-label': 'Some more actions'
+};
 
 export const DOMId = Template().bind({});
-DOMId.args = {id: 'my-action-menu'};
+DOMId.args = {
+  id: 'my-action-menu'
+};
 
 export const Quiet = Template().bind({});
-Quiet.args = {isQuiet: true};
+Quiet.args = {
+  isQuiet: true
+};
 
 export const Disabled = Template().bind({});
-Disabled.args = {isDisabled: true};
+Disabled.args = {
+  isDisabled: true
+};
 
 export const AutoFocus = Template().bind({});
-AutoFocus.args = {autoFocus: true};
+AutoFocus.args = {
+  autoFocus: true
+};
 
 export const DirectionAlign = () => <DirectionAlignment />;

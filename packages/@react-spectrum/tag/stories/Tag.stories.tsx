@@ -9,7 +9,6 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import {action} from '@storybook/addon-actions';
 import Camera from '@spectrum-icons/workflow/Camera';
 import React from 'react';
@@ -19,95 +18,93 @@ export default {
   title: 'Tag'
 };
 
-export const Default = () => render({}, 'Cool tag');
-
-Default.story = {
+export const Default = {
+  render: () => render({}, 'Cool tag'),
   name: 'default'
 };
 
-export const Disabled = () => render({isDisabled: true}, 'Cool tag');
-
-Disabled.story = {
+export const Disabled = {
+  render: () =>
+    render(
+      {
+        isDisabled: true
+      },
+      'Cool tag'
+    ),
   name: 'disabled'
 };
 
-export const Icon = () =>
-  render(
-    {
-      icon: <Camera />
-    },
-    'Cool tag'
-  );
-
-Icon.story = {
+export const Icon = {
+  render: () =>
+    render(
+      {
+        icon: <Camera />
+      },
+      'Cool tag'
+    ),
   name: 'icon'
 };
 
-export const Removable = () =>
-  render(
-    {
-      onRemove: action('onRemove'),
-      isRemovable: true
-    },
-    'Cool tag'
-  );
-
-Removable.story = {
+export const Removable = {
+  render: () =>
+    render(
+      {
+        onRemove: action('onRemove'),
+        isRemovable: true
+      },
+      'Cool tag'
+    ),
   name: 'removable'
 };
 
-export const Invalid = () =>
-  render(
-    {
-      validationState: 'invalid'
-    },
-    'Cool tag'
-  );
-
-Invalid.story = {
+export const Invalid = {
+  render: () =>
+    render(
+      {
+        validationState: 'invalid'
+      },
+      'Cool tag'
+    ),
   name: 'invalid'
 };
 
-export const InvalidRemovable = () =>
-  render(
-    {
-      validationState: 'invalid',
-      onRemove: action('onRemove'),
-      isRemovable: true
-    },
-    'Cool tag'
-  );
-
-InvalidRemovable.story = {
+export const InvalidRemovable = {
+  render: () =>
+    render(
+      {
+        validationState: 'invalid',
+        onRemove: action('onRemove'),
+        isRemovable: true
+      },
+      'Cool tag'
+    ),
   name: 'invalid, removable'
 };
 
-export const IconRemovable = () =>
-  render(
-    {
-      icon: <Camera />,
-      onRemove: action('onRemove'),
-      isRemovable: true
-    },
-    'Cool tag'
-  );
-
-IconRemovable.story = {
+export const IconRemovable = {
+  render: () =>
+    render(
+      {
+        icon: <Camera />,
+        onRemove: action('onRemove'),
+        isRemovable: true
+      },
+      'Cool tag'
+    ),
   name: 'icon, removable'
 };
 
-export const DisabledIconRemovable = () =>
-  render(
-    {
-      isDisabled: true,
-      icon: <Camera />,
-      onRemove: action('onRemove'),
-      isRemovable: true
-    },
-    'Cool tag'
-  );
-
-DisabledIconRemovable.story = {
+export const DisabledIconRemovable = {
+  render: () =>
+    render(
+      {
+        isDisabled: true,
+        icon: <Camera />,
+        onRemove: action('onRemove'),
+        isRemovable: true
+      },
+      'Cool tag'
+    ),
   name: 'disabled, icon, removable'
 };
 

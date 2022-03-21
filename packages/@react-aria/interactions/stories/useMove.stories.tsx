@@ -11,7 +11,6 @@
  */
 
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
-
 import {action} from '@storybook/addon-actions';
 import {clamp} from '@react-aria/utils';
 import {Flex} from '@react-spectrum/layout';
@@ -19,8 +18,10 @@ import React, {useRef, useState} from 'react';
 import {useMove} from '../';
 
 function useClampedMove(props) {
-  let currentPosition = useRef<{ x?: number, y?: number }>();
-
+  let currentPosition = useRef<{
+    x?: number,
+    y?: number
+  }>();
   let {
     getCurrentState,
     onMoveTo,
@@ -29,12 +30,12 @@ function useClampedMove(props) {
     reverseX = false,
     reverseY = false
   } = props;
-
   let {moveProps} = useMove({
     onMoveStart(e) {
       currentPosition.current = null;
       onMoveStart?.(e);
     },
+
     onMove({deltaX, deltaY, pointerType}) {
       if (currentPosition.current == null) {
         currentPosition.current = getCurrentState();
@@ -42,34 +43,46 @@ function useClampedMove(props) {
 
       currentPosition.current.x += reverseX ? -deltaX : deltaX;
       currentPosition.current.y += reverseY ? -deltaY : deltaY;
-      onMoveTo({pointerType, x: currentPosition.current.x, y: currentPosition.current.y});
+      onMoveTo({
+        pointerType,
+        x: currentPosition.current.x,
+        y: currentPosition.current.y
+      });
     },
+
     onMoveEnd
   });
-
   return moveProps;
 }
 
 function Ball1D() {
-  let [state, setState] = useState({x: 0, color: 'black'});
-
+  let [state, setState] = useState({
+    x: 0,
+    color: 'black'
+  });
   let props = useClampedMove({
     linear: 'horizontal',
     reverseY: true,
+
     onMoveStart() {
       setState((state) => ({...state, color: 'red'}));
     },
+
     onMoveTo({x}) {
       setState((state) => ({...state, x: clamp(x, 0, 200 - 30), y: 0}));
     },
+
     getCurrentState() {
-      return {x: state.x, y: 0};
+      return {
+        x: state.x,
+        y: 0
+      };
     },
+
     onMoveEnd() {
       setState((state) => ({...state, color: 'black'}));
     }
   });
-
   return (
     <div
       style={{
@@ -104,14 +117,15 @@ export const Log = () => {
     onMoveStart(e) {
       action('onMoveStart')(JSON.stringify(e));
     },
+
     onMove(e) {
       action('onMove')(JSON.stringify(e));
     },
+
     onMoveEnd(e) {
       action('onMoveEnd')(JSON.stringify(e));
     }
   });
-
   return (
     <div
       {...moveProps}
@@ -125,121 +139,136 @@ export const Log = () => {
   );
 };
 
-export const _Ball1D = () => (
-  <Flex direction="column" gap="size-1000">
-    <Ball1D />
-    <Ball1D />
-  </Flex>
-);
-
-_Ball1D.story = {
+export const _Ball1D = {
+  render: () => (
+    <Flex direction="column" gap="size-1000">
+      <Ball1D />
+      <Ball1D />
+    </Flex>
+  ),
   name: 'Ball 1D'
 };
 
-export const Ball2D = () => {
-  let [state, setState] = useState({x: 0, y: 0, color: 'black'});
+export const Ball2D = {
+  render: () => {
+    let [state, setState] = useState({
+      x: 0,
+      y: 0,
+      color: 'black'
+    });
+    let props = useClampedMove({
+      onMoveStart() {
+        setState((state) => ({...state, color: 'red'}));
+      },
 
-  let props = useClampedMove({
-    onMoveStart() {
-      setState((state) => ({...state, color: 'red'}));
-    },
-    onMoveTo({x, y}) {
-      setState((state) => ({...state, x: clamp(x, 0, 200 - 30), y: clamp(y, 0, 200 - 30)}));
-    },
-    getCurrentState() {
-      return {x: state.x, y: state.y};
-    },
-    onMoveEnd() {
-      setState((state) => ({...state, color: 'black'}));
-    }
-  });
+      onMoveTo({x, y}) {
+        setState((state) => ({...state, x: clamp(x, 0, 200 - 30), y: clamp(y, 0, 200 - 30)}));
+      },
 
-  return (
-    <div
-      style={{
-        width: '200px',
-        height: '200px',
-        background: 'white',
-        border: '1px solid black',
-        position: 'relative',
-        touchAction: 'none'
-      }}>
+      getCurrentState() {
+        return {
+          x: state.x,
+          y: state.y
+        };
+      },
+
+      onMoveEnd() {
+        setState((state) => ({...state, color: 'black'}));
+      }
+    });
+    return (
       <div
-        tabIndex={0}
-        {...props}
         style={{
-          width: '30px',
-          height: '30px',
-          borderRadius: '100%',
-          position: 'absolute',
-          left: state.x + 'px',
-          top: state.y + 'px',
-          background: state.color
-        }} />
-    </div>
-  );
-};
-
-Ball2D.story = {
+          width: '200px',
+          height: '200px',
+          background: 'white',
+          border: '1px solid black',
+          position: 'relative',
+          touchAction: 'none'
+        }}>
+        <div
+          tabIndex={0}
+          {...props}
+          style={{
+            width: '30px',
+            height: '30px',
+            borderRadius: '100%',
+            position: 'absolute',
+            left: state.x + 'px',
+            top: state.y + 'px',
+            background: state.color
+          }} />
+      </div>
+    );
+  },
   name: 'Ball 2D'
 };
 
-export const BallNested = () => {
-  let [ballState, setBallState] = useState({x: 0, y: 0, color: 'black'});
-  let [boxState, setBoxState] = useState({x: 100, y: 100, color: 'grey'});
+export const BallNested = {
+  render: () => {
+    let [ballState, setBallState] = useState({
+      x: 0,
+      y: 0,
+      color: 'black'
+    });
+    let [boxState, setBoxState] = useState({
+      x: 100,
+      y: 100,
+      color: 'grey'
+    });
+    let {moveProps: ballProps} = useMove({
+      onMoveStart() {
+        setBallState((state) => ({...state, color: 'red'}));
+      },
 
-  let {moveProps: ballProps} = useMove({
-    onMoveStart() {
-      setBallState((state) => ({...state, color: 'red'}));
-    },
-    onMove(e) {
-      setBallState((state) => ({...state, x: state.x + e.deltaX, y: state.y + e.deltaY}));
-    },
-    onMoveEnd() {
-      setBallState((state) => ({...state, color: 'black'}));
-    }
-  });
-  let {moveProps: boxProps} = useMove({
-    onMoveStart() {
-      setBoxState((state) => ({...state, color: 'orange'}));
-    },
-    onMove(e) {
-      setBoxState((state) => ({...state, x: state.x + e.deltaX, y: state.y + e.deltaY}));
-    },
-    onMoveEnd() {
-      setBoxState((state) => ({...state, color: 'grey'}));
-    }
-  });
+      onMove(e) {
+        setBallState((state) => ({...state, x: state.x + e.deltaX, y: state.y + e.deltaY}));
+      },
 
-  return (
-    <div
-      tabIndex={0}
-      {...boxProps}
-      style={{
-        width: '100px',
-        height: '100px',
-        touchAction: 'none',
-        position: 'absolute',
-        left: boxState.x + 'px',
-        top: boxState.y + 'px',
-        background: boxState.color
-      }}>
+      onMoveEnd() {
+        setBallState((state) => ({...state, color: 'black'}));
+      }
+    });
+    let {moveProps: boxProps} = useMove({
+      onMoveStart() {
+        setBoxState((state) => ({...state, color: 'orange'}));
+      },
+
+      onMove(e) {
+        setBoxState((state) => ({...state, x: state.x + e.deltaX, y: state.y + e.deltaY}));
+      },
+
+      onMoveEnd() {
+        setBoxState((state) => ({...state, color: 'grey'}));
+      }
+    });
+    return (
       <div
         tabIndex={0}
-        {...ballProps}
+        {...boxProps}
         style={{
-          width: '30px',
-          height: '30px',
-          borderRadius: '100%',
+          width: '100px',
+          height: '100px',
+          touchAction: 'none',
           position: 'absolute',
-          left: ballState.x + 'px',
-          top: ballState.y + 'px',
-          background: ballState.color
-        }} />
-    </div>
-  );
-};
-
-BallNested.story = {
+          left: boxState.x + 'px',
+          top: boxState.y + 'px',
+          background: boxState.color
+        }}>
+        <div
+          tabIndex={0}
+          {...ballProps}
+          style={{
+            width: '30px',
+            height: '30px',
+            borderRadius: '100%',
+            position: 'absolute',
+            left: ballState.x + 'px',
+            top: ballState.y + 'px',
+            background: ballState.color
+          }} />
+      </div>
+    );
+  },
   name: 'Ball nested'
 };

@@ -9,7 +9,6 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import {action} from '@storybook/addon-actions';
 import {Checkbox, CheckboxGroup} from '../';
 import React from 'react';
@@ -17,141 +16,169 @@ import {SpectrumCheckboxGroupProps} from '@react-types/checkbox';
 
 export default {
   title: 'CheckboxGroup',
-
+  render: (props) => (
+    <CheckboxGroup label="Pets" {...props}>
+      <Checkbox value="dogs" {...checkboxProps[0]}>
+        Dogs
+      </Checkbox>
+      <Checkbox value="cats" {...checkboxProps[1]}>
+        Cats
+      </Checkbox>
+      <Checkbox value="dragons" {...checkboxProps[2]}>
+        Dragons
+      </Checkbox>
+    </CheckboxGroup>
+  ),
   parameters: {
-    providerSwitcher: {status: 'positive'}
-  }
+    providerSwitcher: {
+      status: 'positive'
+    }
+  },
+  argTypes: {onAction: {action: 'onAction'}}
 };
 
-export const Default = () => render();
-export const DefaultValueDragons = () => render({defaultValue: ['dragons']});
-
-DefaultValueDragons.story = {
-  name: 'defaultValue: dragons'
+export const Default = {
+  name: 'default'
 };
 
-export const ControlledDragons = () => render({value: ['dragons']});
-
-ControlledDragons.story = {
-  name: 'controlled: dragons'
+export const DefaultValueDragons = {
+  name: 'defaultValue: dragons',
+  args: {defaultValue: ['dragons']}
 };
 
-export const LabelPositionSide = () => render({labelPosition: 'side'});
-
-LabelPositionSide.story = {
-  name: 'labelPosition: side'
+export const ControlledDragons = {
+  name: 'controlled: dragons',
+  args: {value: ['dragons']}
 };
 
-export const LabelAlignEnd = () => render({labelAlign: 'end'});
-
-LabelAlignEnd.story = {
-  name: 'labelAlign: end'
+export const LabelPositionSide = {
+  name: 'labelPosition: side',
+  args: {labelPosition: 'side'}
 };
 
-export const Horizontal = () => render({orientation: 'horizontal'});
-
-Horizontal.story = {
-  name: 'horizontal'
+export const LabelAlignEnd = {
+  name: 'labelAlign: end',
+  args: {labelAlign: 'end'}
 };
 
-export const HorizontalLabelPositionSide = () =>
-  render({orientation: 'horizontal', labelPosition: 'side'});
+export const Horizontal = {
+  name: 'horizontal',
+  args: {orientation: 'horizontal'}
+};
 
-HorizontalLabelPositionSide.story = {
+export const HorizontalLabelPositionSide = {
+  ...Horizontal,
+  ...LabelPositionSide,
   name: 'horizontal, labelPosition: side'
 };
 
-export const HorizontalLabelAlignEnd = () =>
-  render({orientation: 'horizontal', labelAlign: 'end'});
-
-HorizontalLabelAlignEnd.story = {
+export const HorizontalLabelAlignEnd = {
+  ...Horizontal,
+  ...LabelAlignEnd,
   name: 'horizontal, labelAlign: end'
 };
 
-export const IsDisabled = () => render({isDisabled: true});
-
-IsDisabled.story = {
-  name: 'isDisabled'
+export const IsDisabled = {
+  name: 'isDisabled',
+  args: {isDisabled: true}
 };
 
-export const IsDisabledOnOneCheckbox = () =>
-  render({}, [{}, {isDisabled: true}, {}]);
-
-IsDisabledOnOneCheckbox.story = {
+export const IsDisabledOnOneCheckbox = {
+  render: () =>
+    render({}, [
+      {},
+      {
+        isDisabled: true
+      },
+      {}
+    ]),
   name: 'isDisabled on one checkbox'
 };
 
-export const IsDisabledOnOneCheckboxHorizontal = () =>
-  render({orientation: 'horizontal'}, [{}, {isDisabled: true}, {}]);
-
-IsDisabledOnOneCheckboxHorizontal.story = {
+export const IsDisabledOnOneCheckboxHorizontal = {
+  render: () =>
+    render(
+      {
+        orientation: 'horizontal'
+      },
+      [
+        {},
+        {
+          isDisabled: true
+        },
+        {}
+      ]
+    ),
   name: 'isDisabled on one checkbox horizontal'
 };
 
-export const IsRequired = () => render({isRequired: true});
-
-IsRequired.story = {
-  name: 'isRequired'
+export const IsRequired = {
+  name: 'isRequired',
+  args: {isRequired: true}
 };
 
-export const IsRequiredNecessityIndicatorLabel = () =>
-  render({isRequired: true, necessityIndicator: 'label'});
-
-IsRequiredNecessityIndicatorLabel.story = {
-  name: 'isRequired, necessityIndicator: label'
+export const IsRequiredNecessityIndicatorLabel = {
+  ...IsRequired,
+  name: 'isRequired, necessityIndicator: label',
+  args: {necessityIndicator: 'label'}
 };
 
-export const NecessityIndicatorLabelLabelPositionSide = () =>
-  render({necessityIndicator: 'label', labelPosition: 'side'});
-
-NecessityIndicatorLabelLabelPositionSide.story = {
-  name: 'necessityIndicator: label, labelPosition: side'
+export const NecessityIndicatorLabelLabelPositionSide = {
+  ...LabelPositionSide,
+  name: 'necessityIndicator: label, labelPosition: side',
+  args: {necessityIndicator: 'label'}
 };
 
-export const IsReadOnly = () => render({isReadOnly: true});
-
-IsReadOnly.story = {
-  name: 'isReadOnly'
+export const IsReadOnly = {
+  name: 'isReadOnly',
+  args: {isReadOnly: true}
 };
 
-export const IsEmphasized = () => render({isEmphasized: true});
-
-IsEmphasized.story = {
-  name: 'isEmphasized'
+export const IsEmphasized = {
+  name: 'isEmphasized',
+  args: {isEmphasized: true}
 };
 
-export const ValidationStateInvalid = () =>
-  render({validationState: 'invalid'});
-
-ValidationStateInvalid.story = {
-  name: 'validationState: "invalid"'
+export const ValidationStateInvalid = {
+  name: 'validationState: "invalid"',
+  args: {validationState: 'invalid'}
 };
 
-export const ValidationStateInvalidOnOneCheckbox = () =>
-  render({}, [{}, {validationState: 'invalid'}, {}]);
-
-ValidationStateInvalidOnOneCheckbox.story = {
+export const ValidationStateInvalidOnOneCheckbox = {
+  render: () =>
+    render({}, [
+      {},
+      {
+        validationState: 'invalid'
+      },
+      {}
+    ]),
   name: 'validationState: "invalid" on one checkbox'
 };
 
-export const NoVisibleLabel = () =>
-  render({label: null, 'aria-label': 'Pets'});
-
-NoVisibleLabel.story = {
-  name: 'no visible label'
+export const NoVisibleLabel = {
+  name: 'no visible label',
+  args: {
+    label: null,
+    'aria-label': 'Pets'
+  }
 };
 
-export const AutoFocusOnOneCheckbox = () =>
-  render({}, [{}, {autoFocus: true}, {}]);
-
-AutoFocusOnOneCheckbox.story = {
+export const AutoFocusOnOneCheckbox = {
+  render: () =>
+    render({}, [
+      {},
+      {
+        autoFocus: true
+      },
+      {}
+    ]),
   name: 'autoFocus on one checkbox'
 };
 
-export const FormName = () => render({name: 'pets'});
-
-FormName.story = {
-  name: 'form name'
+export const FormName = {
+  name: 'form name',
+  args: {name: 'pets'}
 };
 
 function render(

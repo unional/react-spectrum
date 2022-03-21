@@ -9,7 +9,6 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import {ColorThumb} from '../src/ColorThumb';
 import {parseColor} from '@react-stately/color';
 import React from 'react';
@@ -18,43 +17,27 @@ export default {
   title: 'ColorThumb'
 };
 
-export const Default = () => <ColorThumb value={parseColor('#f00')} />;
-
-Default.story = {
+export const Default = {
+  render: () => <ColorThumb value={parseColor('#f00')} />,
   name: 'default'
 };
 
-export const Focused = () => (
-  <ColorThumb value={parseColor('#f00')} isFocused />
-);
-
-Focused.story = {
+export const Focused = {
+  render: () => <ColorThumb value={parseColor('#f00')} isFocused />,
   name: 'focused'
 };
 
-export const FocusedDragging = () => (
-  <ColorThumb value={parseColor('#f00')} isFocused isDragging />
-);
-
-FocusedDragging.story = {
+export const FocusedDragging = {
+  render: () => <ColorThumb value={parseColor('#f00')} isFocused isDragging />,
   name: 'focused, dragging'
 };
 
-export const FocusedDraggingAlpha = () => (
-  <ColorThumb
-    value={parseColor('hsla(0, 100%, 100%, 0)')}
-    isFocused
-    isDragging />
-);
-
-FocusedDraggingAlpha.story = {
+export const FocusedDraggingAlpha = {
+  render: () => <ColorThumb value={parseColor('hsla(0, 100%, 100%, 0)')} isFocused isDragging />,
   name: 'focused, dragging, alpha'
 };
 
-export const Disabled = () => (
-  <ColorThumb value={parseColor('#f00')} isDisabled />
-);
-
-Disabled.story = {
+export const Disabled = {
+  render: () => <ColorThumb value={parseColor('#f00')} isDisabled />,
   name: 'disabled'
 };

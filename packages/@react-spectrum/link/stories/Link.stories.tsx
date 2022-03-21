@@ -9,114 +9,90 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import {action} from '@storybook/addon-actions';
 import {Link} from '../';
 import React from 'react';
 
+let actions = {
+  onPress: {action: 'press'},
+  onPressStart: {action: 'pressstart'},
+  onPressEnd: {action: 'pressend'}
+};
+
 export default {
   title: 'Link',
-
   parameters: {
-    providerSwitcher: {status: 'notice'}
-  }
+    providerSwitcher: {
+      status: 'notice'
+    }
+  },
+  argTypes: {...actions}
 };
 
-export const Default = () =>
-  render({
-    onPress: action('press'),
-    onPressStart: action('pressstart'),
-    onPressEnd: action('pressend')
-  });
-export const VariantSecondary = () =>
-  render({
-    variant: 'secondary',
-    onPress: action('press'),
-    onPressStart: action('pressstart'),
-    onPressEnd: action('pressend')
-  });
-
-VariantSecondary.story = {
-  name: 'variant: secondary'
+export const Default = {
+  name: 'Default'
 };
 
-export const VariantOverBackground = () => (
-  <div
-    style={{
-      backgroundColor: 'rgb(15, 121, 125)',
-      color: 'rgb(15, 121, 125)',
-      padding: '15px 20px',
-      display: 'inline-block'
-    }}>
-    {render({
-      variant: 'overBackground',
-      onPress: action('press'),
-      onPressStart: action('pressstart'),
-      onPressEnd: action('pressend')
-    })}
-  </div>
-);
-
-VariantOverBackground.story = {
-  name: 'variant: overBackground'
+export const VariantSecondary = {
+  name: 'variant: secondary',
+  args: {variant: 'secondary'}
 };
 
-export const IsQuietTrue = () =>
-  render({
-    isQuiet: true,
-    onPress: action('press'),
-    onPressStart: action('pressstart'),
-    onPressEnd: action('pressend')
-  });
-
-IsQuietTrue.story = {
-  name: 'isQuiet: true'
+export const VariantOverBackground = {
+  name: 'variant: overBackground',
+  decorator: (Story) => (
+    <div
+      style={{
+        backgroundColor: 'rgb(15, 121, 125)',
+        color: 'rgb(15, 121, 125)',
+        padding: '15px 20px',
+        display: 'inline-block'
+      }}>
+      <Story />
+    </div>
+  ),
+  args: {variant: 'overBackground'}
 };
 
-export const IsQuietTrueVariantSecondary = () =>
-  render({
-    isQuiet: true,
-    variant: 'secondary',
-    onPress: action('press'),
-    onPressStart: action('pressstart'),
-    onPressEnd: action('pressend')
-  });
+export const IsQuiet = {
+  name: 'isQuiet: true',
+  args: {isQuiet: true}
+};
 
-IsQuietTrueVariantSecondary.story = {
+export const IsQuietTrueVariantSecondary = {
+  ...IsQuiet,
+  ...VariantSecondary,
   name: 'isQuiet: true, variant: secondary'
 };
 
-export const ChildrenA = () =>
-  renderWithChildren({
-    onPress: action('press'),
-    onPressStart: action('pressstart'),
-    onPressEnd: action('pressend')
-  });
-
-ChildrenA.story = {
+export const ChildrenA = {
+  render: () =>
+    renderWithChildren({
+      onPress: action('press'),
+      onPressStart: action('pressstart'),
+      onPressEnd: action('pressend')
+    }),
   name: 'children: a'
 };
 
-export const OnPress = () =>
-  render({
-    onPress: action('press'),
-    onPressStart: action('pressstart'),
-    onPressEnd: action('pressend')
-  });
-
-OnPress.story = {
+export const OnPress = {
+  render: () =>
+    render({
+      onPress: action('press'),
+      onPressStart: action('pressstart'),
+      onPressEnd: action('pressend')
+    }),
   name: 'onPress'
 };
 
-export const OnClick = () =>
-  render({
-    onClick: action('deprecatedOnClick'),
-    onPress: action('press'),
-    onPressStart: action('pressstart'),
-    onPressEnd: action('pressend')
-  });
-
-OnClick.story = {
+export const OnClick = {
+  render: () =>
+    render({
+      onClick: action('deprecatedOnClick'),
+      onPress: action('press'),
+      onPressStart: action('pressstart'),
+      onPressEnd: action('pressend')
+    }),
   name: 'onClick'
 };
 

@@ -9,48 +9,13 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import {Accordion, Item} from '../src';
 import React from 'react';
 
 export default {
-  title: 'Accordion'
-};
-
-export const Default = () => render({});
-
-Default.story = {
-  name: 'default'
-};
-
-export const DisabledKeysFilesShared = () =>
-  render({disabledKeys: ['files', 'shared']});
-
-DisabledKeysFilesShared.story = {
-  name: 'disabledKeys: files, shared'
-};
-
-export const DefaultExpandedKeysFiles = () =>
-  render({
-    defaultExpandedKeys: ['files']
-  });
-
-DefaultExpandedKeysFiles.story = {
-  name: 'defaultExpandedKeys: files'
-};
-
-export const DisabledKeysFilesSharedDefaultExpandedKeysFiles = () =>
-  render({
-    defaultExpandedKeys: ['files'],
-    disabledKeys: ['files', 'shared']
-  });
-
-DisabledKeysFilesSharedDefaultExpandedKeysFiles.story = {
-  name: 'disabledKeys: files, shared, defaultExpandedKeys: files'
-};
-
-function render(props = {}) {
-  return (
+  title: 'Accordion',
+  component: Accordion,
+  render: (props) => (
     <Accordion {...props}>
       <Item key="files" title="Your files">
         files
@@ -62,5 +27,31 @@ function render(props = {}) {
         last
       </Item>
     </Accordion>
-  );
-}
+  )
+};
+
+export const Default = {
+  name: 'default'
+};
+
+export const DisabledKeysFilesShared = {
+  name: 'disabledKeys: files, shared',
+  args: {
+    disabledKeys: ['files', 'shared']
+  }
+};
+
+export const DefaultExpandedKeysFiles = {
+  name: 'defaultExpandedKeys: files',
+  args: {
+    defaultExpandedKeys: ['files']
+  }
+};
+
+export const DisabledKeysFilesSharedDefaultExpandedKeysFiles = {
+  name: 'disabledKeys: files, shared, defaultExpandedKeys: files',
+  args: {
+    defaultExpandedKeys: ['files'],
+    disabledKeys: ['files', 'shared']
+  }
+};

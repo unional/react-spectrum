@@ -33,242 +33,246 @@ export default {
   title: 'ListView'
 };
 
-export const Default = () => (
-  <ListView width="250px">
-    <Item textValue="row 1">row 1</Item>
-    <Item textValue="row 2">row 2</Item>
-    <Item textValue="row 3">row 3</Item>
-  </ListView>
-);
-
-Default.story = {
+export const Default = {
+  render: () => (
+    <ListView width="250px">
+      <Item textValue="row 1">row 1</Item>
+      <Item textValue="row 2">row 2</Item>
+      <Item textValue="row 3">row 3</Item>
+    </ListView>
+  ),
   name: 'default'
 };
 
-export const IsQuiet = () => (
-  <ListView width="250px" isQuiet>
-    <Item textValue="row 1">row 1</Item>
-    <Item textValue="row 2">row 2</Item>
-    <Item textValue="row 3">row 3</Item>
-  </ListView>
-);
-
-IsQuiet.story = {
+export const IsQuiet = {
+  render: () => (
+    <ListView width="250px" isQuiet>
+      <Item textValue="row 1">row 1</Item>
+      <Item textValue="row 2">row 2</Item>
+      <Item textValue="row 3">row 3</Item>
+    </ListView>
+  ),
   name: 'isQuiet'
 };
 
-export const WithButtons = () => (
-  <ListView width="300px">
-    <Item textValue="row 1">
-      <Content>row 1</Content>
-      <ActionButton>Button 1</ActionButton>
-    </Item>
-    <Item textValue="row 2">
-      <Content>row 2</Content>
-      <ActionButton>Button 1</ActionButton>
-    </Item>
-    <Item textValue="row 3">
-      <Content>row 3</Content>
-      <ActionButton>Button 1</ActionButton>
-    </Item>
-  </ListView>
-);
-
-WithButtons.story = {
+export const WithButtons = {
+  render: () => (
+    <ListView width="300px">
+      <Item textValue="row 1">
+        <Content>row 1</Content>
+        <ActionButton>Button 1</ActionButton>
+      </Item>
+      <Item textValue="row 2">
+        <Content>row 2</Content>
+        <ActionButton>Button 1</ActionButton>
+      </Item>
+      <Item textValue="row 3">
+        <Content>row 3</Content>
+        <ActionButton>Button 1</ActionButton>
+      </Item>
+    </ListView>
+  ),
   name: 'with buttons'
 };
 
-export const DynamicItems = () => {
-  const items = [
-    {key: 'a'},
-    {key: 'b'},
-    {key: 'c'},
-    {key: 'd'},
-    {key: 'e'},
-    {key: 'f'},
-    {key: 'g'},
-    {key: 'h'},
-    {key: 'i'},
-    {key: 'j'},
-    {key: 'k'},
-    {key: 'l'},
-    {key: 'm'},
-    {key: 'n'}
-  ];
-  return (
-    <ListView items={items} width="300px" height="250px">
-      {(item) => (
-        <Item key={item.key} textValue={`Item ${item.key}`}>
-          <Content>
-            <Flex alignItems="center" gap="10px">
-              <View flexGrow={1}>Item {item.key}</View> {/* TODO */}
-              <ActionButton>
-                <Add />
-              </ActionButton>
-              <MenuTrigger>
+export const DynamicItems = {
+  render: () => {
+    const items = [
+      {
+        key: 'a'
+      },
+      {
+        key: 'b'
+      },
+      {
+        key: 'c'
+      },
+      {
+        key: 'd'
+      },
+      {
+        key: 'e'
+      },
+      {
+        key: 'f'
+      },
+      {
+        key: 'g'
+      },
+      {
+        key: 'h'
+      },
+      {
+        key: 'i'
+      },
+      {
+        key: 'j'
+      },
+      {
+        key: 'k'
+      },
+      {
+        key: 'l'
+      },
+      {
+        key: 'm'
+      },
+      {
+        key: 'n'
+      }
+    ];
+    return (
+      <ListView items={items} width="300px" height="250px">
+        {(item) => (
+          <Item key={item.key} textValue={`Item ${item.key}`}>
+            <Content>
+              <Flex alignItems="center" gap="10px">
+                <View flexGrow={1}>Item {item.key}</View> {/* TODO */}
                 <ActionButton>
-                  <MoreSmall />
+                  <Add />
                 </ActionButton>
-                <Menu>
-                  <Item>
-                    <Edit />
-                    <Text>Edit</Text>
-                  </Item>
-                  <Item>
-                    <Delete />
-                    <Text>Delete</Text>
-                  </Item>
-                </Menu>
-              </MenuTrigger>
-            </Flex>
-          </Content>
-        </Item>
-      )}
-    </ListView>
-  );
-};
-
-DynamicItems.story = {
+                <MenuTrigger>
+                  <ActionButton>
+                    <MoreSmall />
+                  </ActionButton>
+                  <Menu>
+                    <Item>
+                      <Edit />
+                      <Text>Edit</Text>
+                    </Item>
+                    <Item>
+                      <Delete />
+                      <Text>Delete</Text>
+                    </Item>
+                  </Menu>
+                </MenuTrigger>
+              </Flex>
+            </Content>
+          </Item>
+        )}
+      </ListView>
+    );
+  },
   name: 'dynamic items'
 };
 
-export const EmptyList = () => (
-  <ListView width="300px" height="300px" renderEmptyState={renderEmptyState}>
-    {[]}
-  </ListView>
-);
-
-EmptyList.story = {
+export const EmptyList = {
+  render: () => (
+    <ListView width="300px" height="300px" renderEmptyState={renderEmptyState}>
+      {[]}
+    </ListView>
+  ),
   name: 'empty list'
 };
 
-export const Loading = () => (
-  <ListView width="300px" height="300px" loadingState="loading">
-    {[]}
-  </ListView>
-);
-
-Loading.story = {
+export const Loading = {
+  render: () => (
+    <ListView width="300px" height="300px" loadingState="loading">
+      {[]}
+    </ListView>
+  ),
   name: 'loading'
 };
 
-export const DensityCompact = () => (
-  <ListView width="250px" density="compact">
-    <Item textValue="row 1">row 1</Item>
-    <Item textValue="row 2">row 2</Item>
-    <Item textValue="row 3">row 3</Item>
-  </ListView>
-);
-
-DensityCompact.story = {
+export const DensityCompact = {
+  render: () => (
+    <ListView width="250px" density="compact">
+      <Item textValue="row 1">row 1</Item>
+      <Item textValue="row 2">row 2</Item>
+      <Item textValue="row 3">row 3</Item>
+    </ListView>
+  ),
   name: 'density: compact'
 };
 
-export const DensitySpacious = () => (
-  <ListView width="250px" density="spacious">
-    <Item textValue="row 1">row 1</Item>
-    <Item textValue="row 2">row 2</Item>
-    <Item textValue="row 3">row 3</Item>
-  </ListView>
-);
-
-DensitySpacious.story = {
+export const DensitySpacious = {
+  render: () => (
+    <ListView width="250px" density="spacious">
+      <Item textValue="row 1">row 1</Item>
+      <Item textValue="row 2">row 2</Item>
+      <Item textValue="row 3">row 3</Item>
+    </ListView>
+  ),
   name: 'density: spacious'
 };
 
-export const SelectionNone = () => <Example selectionMode="none" />;
-
-SelectionNone.story = {
+export const SelectionNone = {
+  render: () => <Example selectionMode="none" />,
   name: 'selection: none'
 };
 
-export const SelectionSingleCheckbox = () => <Example selectionMode="single" />;
-
-SelectionSingleCheckbox.story = {
+export const SelectionSingleCheckbox = {
+  render: () => <Example selectionMode="single" />,
   name: 'selection: single, checkbox'
 };
 
-export const SelectionSingleCheckboxDisabled = () => (
-  <Example selectionMode="single" disabledKeys={['row1']} />
-);
-
-SelectionSingleCheckboxDisabled.story = {
+export const SelectionSingleCheckboxDisabled = {
+  render: () => <Example selectionMode="single" disabledKeys={['row1']} />,
   name: 'selection: single, checkbox, disabled'
 };
 
-export const SelectionMultipleCheckbox = () => (
-  <Example selectionMode="multiple" />
-);
-
-SelectionMultipleCheckbox.story = {
+export const SelectionMultipleCheckbox = {
+  render: () => <Example selectionMode="multiple" />,
   name: 'selection: multiple, checkbox'
 };
 
-export const ParentLinkExample = () => <Example2 selectionMode="multiple" />;
-
-ParentLinkExample.story = {
+export const ParentLinkExample = {
+  render: () => <Example2 selectionMode="multiple" />,
   name: 'parent link example'
 };
 
-export const ActionsActionButton = () =>
-  renderActionsExample((props) => (
-    <ActionButton {...props}>
-      <Copy />
-    </ActionButton>
-  ));
-
-ActionsActionButton.story = {
+export const ActionsActionButton = {
+  render: () =>
+    renderActionsExample((props) => (
+      <ActionButton {...props}>
+        <Copy />
+      </ActionButton>
+    )),
   name: 'actions: ActionButton'
 };
 
-export const ActionsActionGroup = () =>
-  renderActionsExample((props) => (
-    <ActionGroup buttonLabelBehavior="hide" {...props}>
-      <Item key="add">
-        <Add />
-        <Text>Add</Text>
-      </Item>
-      <Item key="delete">
-        <Delete />
-        <Text>Delete</Text>
-      </Item>
-    </ActionGroup>
-  ));
-
-ActionsActionGroup.story = {
+export const ActionsActionGroup = {
+  render: () =>
+    renderActionsExample((props) => (
+      <ActionGroup buttonLabelBehavior="hide" {...props}>
+        <Item key="add">
+          <Add />
+          <Text>Add</Text>
+        </Item>
+        <Item key="delete">
+          <Delete />
+          <Text>Delete</Text>
+        </Item>
+      </ActionGroup>
+    )),
   name: 'actions: ActionGroup'
 };
 
-export const ActionsActionMenu = () =>
-  renderActionsExample((props) => (
-    <ActionMenu {...props}>
-      <Item key="add">
-        <Add />
-        <Text>Add</Text>
-      </Item>
-      <Item key="delete">
-        <Delete />
-        <Text>Delete</Text>
-      </Item>
-    </ActionMenu>
-  ));
-
-ActionsActionMenu.story = {
+export const ActionsActionMenu = {
+  render: () =>
+    renderActionsExample((props) => (
+      <ActionMenu {...props}>
+        <Item key="add">
+          <Add />
+          <Text>Add</Text>
+        </Item>
+        <Item key="delete">
+          <Delete />
+          <Text>Delete</Text>
+        </Item>
+      </ActionMenu>
+    )),
   name: 'actions: ActionMenu'
 };
 
-export const DynamicItemsRenderEmptyState = () => <EmptyTest />;
-
-DynamicItemsRenderEmptyState.story = {
+export const DynamicItemsRenderEmptyState = {
+  render: () => <EmptyTest />,
   name: 'dynamic items + renderEmptyState'
 };
 
 function Example(props?) {
   return (
-    <ListView
-      width="250px"
-      onSelectionChange={action('onSelectionChange')}
-      {...props}>
+    <ListView width="250px" onSelectionChange={action('onSelectionChange')} {...props}>
       <Item key="folder1" hasChildItems>
         <Content>folder 1</Content>
       </Item>
@@ -287,10 +291,7 @@ function Example(props?) {
 
 function Example2(props?) {
   return (
-    <ListView
-      width="250px"
-      onSelectionChange={action('onSelectionChange')}
-      {...props}>
+    <ListView width="250px" onSelectionChange={action('onSelectionChange')} {...props}>
       <Item key="folder1" hasChildItems>
         <Link>folder 1</Link>
       </Item>
@@ -318,37 +319,50 @@ function renderActionsExample(renderActions, props?) {
         <Folder />
         <Link>folder 1</Link>
         <Text slot="description">description for folder 1</Text>
-        {renderActions({onPress: action('actionPress')})}
+        {renderActions({
+          onPress: action('actionPress')
+        })}
       </Item>
       <Item key="b" textValue="row 1">
         <Text>row 1</Text>
         <Text slot="description">description for row 1</Text>
-        {renderActions({onPress: action('actionPress')})}
+        {renderActions({
+          onPress: action('actionPress')
+        })}
       </Item>
       <Item key="c" textValue="row 2">
         <Text>row 2</Text>
         <Text slot="description">description for row 2</Text>
-        {renderActions({onPress: action('actionPress')})}
+        {renderActions({
+          onPress: action('actionPress')
+        })}
       </Item>
       <Item key="d" textValue="row 3">
         <Text>row 3</Text>
         <Text slot="description">description for row 3</Text>
-        {renderActions({onPress: action('actionPress')})}
+        {renderActions({
+          onPress: action('actionPress')
+        })}
       </Item>
     </ListView>
   );
 }
 
 let i = 0;
+
 function EmptyTest() {
   const [items, setItems] = useState([]);
   const [divProps, setDivProps] = useState({});
-
   useEffect(() => {
     let newItems = [];
+
     for (i = 0; i < 20; i++) {
-      newItems.push({key: i, name: `Item ${i}`});
+      newItems.push({
+        key: i,
+        name: `Item ${i}`
+      });
     }
+
     setItems(newItems);
   }, []);
 
@@ -358,6 +372,7 @@ function EmptyTest() {
       <Heading>No items</Heading>
     </IllustratedMessage>
   );
+
   let hasDivProps = Object.keys(divProps).length > 0;
   return (
     <div>
@@ -375,7 +390,10 @@ function EmptyTest() {
             )}
           </ListView>
         </div>
-        <div style={{paddingLeft: '10px'}}>
+        <div
+          style={{
+            paddingLeft: '10px'
+          }}>
           <ActionButton
             isDisabled={hasDivProps}
             onPress={() =>
@@ -395,7 +413,10 @@ function EmptyTest() {
             <ActionButton
               onPress={() => {
                 let newArr = [...items];
-                newArr.push({key: i++, name: `Item ${i}`});
+                newArr.push({
+                  key: i++,
+                  name: `Item ${i}`
+                });
                 setItems(newArr);
               }}>
               Add 1

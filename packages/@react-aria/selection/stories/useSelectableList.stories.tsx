@@ -40,7 +40,12 @@ function SelectableList(
         if (node.hasChildNodes) {
           return (
             <>
-              <div style={{textTransform: 'uppercase'}}>{node.rendered}</div>
+              <div
+                style={{
+                  textTransform: 'uppercase'
+                }}>
+                {node.rendered}
+              </div>
               <ul
                 key={node.key}
                 style={{
@@ -70,7 +75,6 @@ function SelectableItem(props: { state: ListState<any>, node: Node<any> }) {
     isVirtualized: false,
     ref
   });
-
   const isFocused = node.key === state.selectionManager.focusedKey;
   return (
     <li
@@ -114,42 +118,38 @@ export default {
   title: 'useSelectableList'
 };
 
-export const StaticUlStaticSubUl = () => (
-  <SelectableList isSubUlRelativelyPositioned={false} isUlRelativelyPositioned={false}>
-    {options}
-  </SelectableList>
-);
-
-StaticUlStaticSubUl.story = {
+export const StaticUlStaticSubUl = {
+  render: () => (
+    <SelectableList isSubUlRelativelyPositioned={false} isUlRelativelyPositioned={false}>
+      {options}
+    </SelectableList>
+  ),
   name: 'Static ul, static sub ul'
 };
 
-export const StaticUlRelativeSubUl = () => (
-  <SelectableList isSubUlRelativelyPositioned isUlRelativelyPositioned={false}>
-    {options}
-  </SelectableList>
-);
-
-StaticUlRelativeSubUl.story = {
+export const StaticUlRelativeSubUl = {
+  render: () => (
+    <SelectableList isSubUlRelativelyPositioned isUlRelativelyPositioned={false}>
+      {options}
+    </SelectableList>
+  ),
   name: 'Static ul, relative sub ul'
 };
 
-export const RelativeUlStaticSubUl = () => (
-  <SelectableList isSubUlRelativelyPositioned={false} isUlRelativelyPositioned>
-    {options}
-  </SelectableList>
-);
-
-RelativeUlStaticSubUl.story = {
+export const RelativeUlStaticSubUl = {
+  render: () => (
+    <SelectableList isSubUlRelativelyPositioned={false} isUlRelativelyPositioned>
+      {options}
+    </SelectableList>
+  ),
   name: 'Relative ul, static sub ul'
 };
 
-export const RelativeUlRelativeSubUl = () => (
-  <SelectableList isSubUlRelativelyPositioned isUlRelativelyPositioned>
-    {options}
-  </SelectableList>
-);
-
-RelativeUlRelativeSubUl.story = {
+export const RelativeUlRelativeSubUl = {
+  render: () => (
+    <SelectableList isSubUlRelativelyPositioned isUlRelativelyPositioned>
+      {options}
+    </SelectableList>
+  ),
   name: 'Relative ul, relative sub ul'
 };

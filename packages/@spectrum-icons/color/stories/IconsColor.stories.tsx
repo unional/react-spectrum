@@ -9,7 +9,6 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import CalendarCheckColor from '../CalendarCheckColor';
 import React from 'react';
 
@@ -17,10 +16,11 @@ export default {
   title: 'Icons/Color',
 };
 
-export const ColorIconWithSizes = () =>
-  renderIconSizes(CalendarCheckColor, { 'aria-label': 'Adobe Analytics Color' });
-
-ColorIconWithSizes.story = {
+export const ColorIconWithSizes = {
+  render: () =>
+    renderIconSizes(CalendarCheckColor, {
+      'aria-label': 'Adobe Analytics Color',
+    }),
   name: 'Color icon with sizes',
 };
 

@@ -9,42 +9,39 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import {action} from '@storybook/addon-actions';
 import {Example} from './Example';
 import React from 'react';
 import {useViewportSize} from '@react-aria/utils';
 
 export default {
-  title: 'ActionBar'
+  title: 'ActionBar',
+  component: Example,
+  argTypes: {
+    onAction: {action: 'onAction'}
+  }
 };
 
-export const Default = () => <Example onAction={action('onAction')} />;
-
-Default.story = {
+export const Default = {
   name: 'default'
 };
 
-export const IsEmphasized = () => (
-  <Example isEmphasized onAction={action('onAction')} />
-);
-
-IsEmphasized.story = {
-  name: 'isEmphasized'
+export const IsEmphasized = {
+  name: 'isEmphasized',
+  args: {isEmphasized: true}
 };
 
-export const FullWidth = () => {
-  let viewport = useViewportSize();
-  return (
-    <Example
-      isEmphasized
-      tableWidth="100vw"
-      containerHeight={viewport.height}
-      isQuiet
-      onAction={action('onAction')} />
-  );
-};
-
-FullWidth.story = {
-  name: 'full width'
+export const FullWidth = {
+  name: 'full width',
+  render: () => {
+    let viewport = useViewportSize();
+    return (
+      <Example
+        isEmphasized
+        tableWidth="100vw"
+        containerHeight={viewport.height}
+        isQuiet
+        onAction={action('onAction')} />
+    );
+  }
 };

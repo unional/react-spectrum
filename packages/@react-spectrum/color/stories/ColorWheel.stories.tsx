@@ -9,7 +9,6 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import {action} from '@storybook/addon-actions';
 import {ColorWheel} from '../';
 import {Flex} from '@adobe/react-spectrum';
@@ -20,65 +19,54 @@ export default {
   title: 'ColorWheel'
 };
 
-export const Default = () => (
-  <ColorWheel defaultValue="hsl(0, 100%, 50%)')" onChange={action('change')} />
-);
-
-Default.story = {
+export const Default = {
+  render: () => <ColorWheel defaultValue="hsl(0, 100%, 50%)')" onChange={action('change')} />,
   name: 'default'
 };
 
-export const Disabled = () => (
-  <ColorWheel isDisabled defaultValue="hsl(0, 100%, 50%)" />
-);
-
-Disabled.story = {
+export const Disabled = {
+  render: () => <ColorWheel isDisabled defaultValue="hsl(0, 100%, 50%)" />,
   name: 'disabled'
 };
 
-export const Step = () => (
-  <ColorWheel step={6} defaultValue="hsl(0, 100%, 50%)" />
-);
-
-Step.story = {
+export const Step = {
+  render: () => <ColorWheel step={6} defaultValue="hsl(0, 100%, 50%)" />,
   name: 'step'
 };
 
-export const CustomSize = () => {
-  let [size, setSize] = useState('size-2400');
-  return (
-    <Flex direction="column" alignItems="center" gap="size-200">
-      <Flex direction="row">
-        <button onClick={() => setSize('size-2400')}>size-2400</button>
-        <button onClick={() => setSize('size-5000')}>size-5000</button>
-        <button onClick={() => setSize('50vh')}>50vh</button>
+export const CustomSize = {
+  render: () => {
+    let [size, setSize] = useState('size-2400');
+    return (
+      <Flex direction="column" alignItems="center" gap="size-200">
+        <Flex direction="row">
+          <button onClick={() => setSize('size-2400')}>size-2400</button>
+          <button onClick={() => setSize('size-5000')}>size-5000</button>
+          <button onClick={() => setSize('50vh')}>50vh</button>
+        </Flex>
+        <ColorWheel defaultValue="hsl(0, 100%, 50%)" size={size} />
       </Flex>
-      <ColorWheel defaultValue="hsl(0, 100%, 50%)" size={size} />
-    </Flex>
-  );
-};
-
-CustomSize.story = {
+    );
+  },
   name: 'custom size'
 };
 
-export const Controlled = () => {
-  let [color, setColor] = useState(parseColor('hsl(0, 100%, 50%)'));
-  let colorCSS = color.toString('css');
-  return (
-    <Flex gap={'size-500'} direction="row" alignItems="center">
-      <ColorWheel onChange={setColor} value={color} />
-      <div
-        style={{
-          width: '50px',
-          height: '50px',
-          backgroundColor: colorCSS,
-          border: '1px solid black'
-        }} />
-    </Flex>
-  );
-};
-
-Controlled.story = {
+export const Controlled = {
+  render: () => {
+    let [color, setColor] = useState(parseColor('hsl(0, 100%, 50%)'));
+    let colorCSS = color.toString('css');
+    return (
+      <Flex gap={'size-500'} direction="row" alignItems="center">
+        <ColorWheel onChange={setColor} value={color} />
+        <div
+          style={{
+            width: '50px',
+            height: '50px',
+            backgroundColor: colorCSS,
+            border: '1px solid black'
+          }} />
+      </Flex>
+    );
+  },
   name: 'controlled'
 };

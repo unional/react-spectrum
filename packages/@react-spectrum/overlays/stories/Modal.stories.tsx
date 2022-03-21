@@ -9,7 +9,6 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import {ActionButton, Button} from '@react-spectrum/button';
 import {ButtonGroup} from '@react-spectrum/buttongroup';
 import {Content} from '@react-spectrum/view';
@@ -21,27 +20,25 @@ import React, {Fragment, useState} from 'react';
 
 export default {
   title: 'Modal',
-
   parameters: {
-    providerSwitcher: {status: 'notice'}
+    providerSwitcher: {
+      status: 'notice'
+    }
   }
 };
 
-export const Default = () => <ModalExample />;
-
-Default.story = {
+export const Default = {
+  render: () => <ModalExample />,
   name: 'default'
 };
 
-export const _UnmountingTrigger = () => <UnmountingTrigger />;
-
-_UnmountingTrigger.story = {
+export const _UnmountingTrigger = {
+  render: () => <UnmountingTrigger />,
   name: 'unmounting trigger'
 };
 
 function ModalExample() {
   let [isOpen, setOpen] = useState(false);
-
   return (
     <Fragment>
       <ActionButton onPress={() => setOpen(true)}>Open modal</ActionButton>
@@ -70,15 +67,11 @@ function UnmountingTrigger() {
   let openModal = () => {
     setPopoverOpen(false);
     setModalOpen(true);
-  };
+  }; // Ideally this would be a menu, but we don't have those implemented yet...
 
-  // Ideally this would be a menu, but we don't have those implemented yet...
   return (
     <Fragment>
-      <DialogTrigger
-        type="popover"
-        isOpen={isPopoverOpen}
-        onOpenChange={setPopoverOpen}>
+      <DialogTrigger type="popover" isOpen={isPopoverOpen} onOpenChange={setPopoverOpen}>
         <ActionButton>Open popover</ActionButton>
         <Dialog>
           <Heading>Title</Heading>

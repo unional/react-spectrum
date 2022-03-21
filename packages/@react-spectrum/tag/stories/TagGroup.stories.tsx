@@ -9,7 +9,6 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import {action} from '@storybook/addon-actions';
 import React, {useState} from 'react';
 import {Tag, TagGroup} from '../src';
@@ -18,42 +17,37 @@ export default {
   title: 'TagGroup'
 };
 
-export const Default = () => render({});
-
-Default.story = {
+export const Default = {
+  render: () => render({}),
   name: 'default'
 };
 
-export const OnRemove = () =>
-  renderWithRemovableTags({
-    onRemove: action('onRemove')
-  });
-
-OnRemove.story = {
+export const OnRemove = {
+  render: () =>
+    renderWithRemovableTags({
+      onRemove: action('onRemove')
+    }),
   name: 'onRemove'
 };
 
-export const IsDisabled = () =>
-  render({
-    isDisabled: true
-  });
-
-IsDisabled.story = {
+export const IsDisabled = {
+  render: () =>
+    render({
+      isDisabled: true
+    }),
   name: 'is Disabled'
 };
 
-export const IsReadOnly = () =>
-  renderWithRemovableTags({
-    isReadOnly: true
-  });
-
-IsReadOnly.story = {
+export const IsReadOnly = {
+  render: () =>
+    renderWithRemovableTags({
+      isReadOnly: true
+    }),
   name: 'isReadOnly'
 };
 
-export const _WithAnnouncing = () => <WithAnnouncing />;
-
-_WithAnnouncing.story = {
+export const _WithAnnouncing = {
+  render: () => <WithAnnouncing />,
   name: 'with announcing'
 };
 
@@ -86,10 +80,11 @@ function WithAnnouncing() {
       setTags([...tags, 'New Tag']);
     }
   }
+
   return (
     <React.Fragment>
       {/*
-        // @ts-ignore */}
+       // @ts-ignore */}
       <TagGroup onKeyDown={handleKeyDown}>
         {tags.map((t, index) => (
           <Tag key={index}>{t}</Tag>

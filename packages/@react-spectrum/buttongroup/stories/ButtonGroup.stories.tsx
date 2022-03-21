@@ -9,119 +9,12 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import {action} from '@storybook/addon-actions';
 import Bell from '@spectrum-icons/workflow/Bell';
 import {Button} from '@react-spectrum/button';
 import {ButtonGroup} from '../';
 import React, {useState} from 'react';
 import {Text} from '@react-spectrum/text';
-
-export default {
-  title: 'ButtonGroup'
-};
-
-export const Default = () => render({});
-
-Default.story = {
-  name: 'default'
-};
-
-export const IsDisabled = () => render({isDisabled: true});
-
-IsDisabled.story = {
-  name: 'isDisabled'
-};
-
-export const OrientationVertical = () => render({orientation: 'vertical'});
-
-OrientationVertical.story = {
-  name: 'orientation: vertical'
-};
-
-export const OrientationVerticalAlignEnd = () =>
-  render({orientation: 'vertical', align: 'end'});
-
-OrientationVerticalAlignEnd.story = {
-  name: 'orientation: vertical, align: end'
-};
-
-export const IsDisabledOrientationVertical = () =>
-  render({isDisabled: true, orientation: 'vertical'});
-
-IsDisabledOrientationVertical.story = {
-  name: 'isDisabled, orientation: vertical'
-};
-
-export const AlignEnd = () => render({align: 'end'});
-
-AlignEnd.story = {
-  name: 'align: end'
-};
-
-export const AlignCenter = () => render({align: 'center'});
-
-AlignCenter.story = {
-  name: 'align: center'
-};
-
-export const AlignCenterOrientationVertical = () =>
-  render({align: 'center', orientation: 'vertical'});
-
-AlignCenterOrientationVertical.story = {
-  name: 'align: center, orientation: vertical'
-};
-
-export const ResizeableContainer = () => (
-  <div
-    style={{
-      minWidth: '100px',
-      padding: '10px',
-      resize: 'horizontal',
-      overflow: 'auto',
-      backgroundColor: 'var(--spectrum-global-color-gray-50)'
-    }}>
-    {render({})}
-  </div>
-);
-
-ResizeableContainer.story = {
-  name: 'resizeable container'
-};
-
-export const ConstantContainerChangingSiblings = () => <ExpandingSibling />;
-
-ConstantContainerChangingSiblings.story = {
-  name: 'constant container, changing siblings'
-};
-
-function render(props) {
-  return <Component {...props} />;
-}
-
-let ExpandingSibling = (props = {}) => {
-  let [isExpanded, setIsExpanded] = useState(false);
-  return (
-    <div
-      style={{
-        display: 'flex',
-        flexWrap: 'nowrap',
-        width: '1000px',
-        overflow: 'hidden',
-        padding: '10px',
-        backgroundColor: 'var(--spectrum-global-color-gray-50)'
-      }}>
-      <div style={{paddingRight: isExpanded ? '200px' : '10px'}}>
-        <Button
-          variant="secondary"
-          onPress={() => setIsExpanded((prev) => !prev)}>
-          {isExpanded ? 'Shrink' : 'Expand'}
-        </Button>
-      </div>
-      {render(props)}
-    </div>
-  );
-};
 
 let Component = (props) => {
   let [show, setShow] = useState(false);
@@ -146,4 +39,104 @@ let Component = (props) => {
       </Button>
     </ButtonGroup>
   );
+};
+
+
+let ExpandingSibling = (Story) => {
+  let [isExpanded, setIsExpanded] = useState(false);
+  return (
+    <div
+      style={{
+        display: 'flex',
+        flexWrap: 'nowrap',
+        width: '1000px',
+        overflow: 'hidden',
+        padding: '10px',
+        backgroundColor: 'var(--spectrum-global-color-gray-50)'
+      }}>
+      <div
+        style={{
+          paddingRight: isExpanded ? '200px' : '10px'
+        }}>
+        <Button variant="secondary" onPress={() => setIsExpanded((prev) => !prev)}>
+          {isExpanded ? 'Shrink' : 'Expand'}
+        </Button>
+      </div>
+      <Story />
+    </div>
+  );
+};
+
+export default {
+  title: 'ButtonGroup',
+  component: Component
+};
+
+export const Default = {
+  name: 'default'
+};
+
+export const IsDisabled = {
+  name: 'isDisabled',
+  args: {isDisabled: true}
+};
+
+export const OrientationVertical = {
+  name: 'orientation: vertical',
+  args: {orientation: 'vertical'}
+};
+
+export const OrientationVerticalAlignEnd = {
+  name: 'orientation: vertical, align: end',
+  args: {
+    orientation: 'vertical',
+    align: 'end'
+  }
+};
+
+export const IsDisabledOrientationVertical = {
+  name: 'isDisabled, orientation: vertical',
+  args: {
+    isDisabled: true,
+    orientation: 'vertical'
+  }
+};
+
+export const AlignEnd = {
+  name: 'align: end',
+  args: {align: 'end'}
+};
+
+export const AlignCenter = {
+  name: 'align: center',
+  args: {align: 'center'}
+};
+
+export const AlignCenterOrientationVertical = {
+  name: 'align: center, orientation: vertical',
+  args: {
+    align: 'center',
+    orientation: 'vertical'
+  }
+};
+
+export const ResizeableContainer = {
+  name: 'resizeable container',
+  decorator: (Story) => (
+    <div
+      style={{
+        minWidth: '100px',
+        padding: '10px',
+        resize: 'horizontal',
+        overflow: 'auto',
+        backgroundColor: 'var(--spectrum-global-color-gray-50)'
+      }}>
+      <Story />
+    </div>
+  )
+};
+
+export const ConstantContainerChangingSiblings = {
+  name: 'constant container, changing siblings',
+  decorator: (Story) => <ExpandingSibling story={Story} />
 };

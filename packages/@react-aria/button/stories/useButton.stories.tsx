@@ -9,7 +9,6 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import {AriaButtonProps} from '@react-types/button';
 import React, {useRef} from 'react';
 import {useButton} from '../';
@@ -18,27 +17,25 @@ export default {
   title: 'useButton'
 };
 
-export const InputTypeButton = () => <InputButton />;
-
-InputTypeButton.story = {
+export const InputTypeButton = {
+  render: () => <InputButton />,
   name: 'input type button'
 };
-
 interface InputButtonProps extends AriaButtonProps<'input'> {
   value?: string
 }
 
 function InputButton(props: InputButtonProps) {
   let {value = 'Test'} = props;
-
   let ref = useRef();
   let {buttonProps, isPressed} = useButton({...props, elementType: 'input'}, ref);
-
   return (
     <input
       ref={ref}
       value={value}
-      style={{background: isPressed ? 'darkred' : 'red'}}
+      style={{
+        background: isPressed ? 'darkred' : 'red'
+      }}
       {...buttonProps} />
   );
 }

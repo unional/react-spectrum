@@ -13,6 +13,9 @@ module.exports = {
     './custom-addons/provider/register',
     './theme.register'
   ],
+  features: {
+    previewCsfV3: true,
+  },
   typescript: {
     check: false,
     reactDocgen: false
