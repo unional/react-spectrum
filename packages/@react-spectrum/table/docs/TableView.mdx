@@ -12,7 +12,7 @@ export default Layout;
 
 import docs from 'docs:@react-spectrum/table';
 import tableTypes from 'docs:@react-types/table/src/index.d.ts';
-import {HeaderInfo, PropTable, PageDescription} from '@react-spectrum/docs';
+import {HeaderInfo, PropTable, PageDescription, VersionBadge} from '@react-spectrum/docs';
 import {Keyboard} from '@react-spectrum/text';
 import packageData from '@react-spectrum/table/package.json';
 
@@ -505,11 +505,13 @@ This behavior is slightly different in the highlight selection style, where sing
 </Flex>
 ```
 
-### Action bar
+### Action bar <VersionBadge version="alpha" style={{marginLeft: 4, verticalAlign: 'bottom'}} />
 
-An [ActionBar](ActionBar.html) can be used when a user needs to perform actions on one or more rows at the same time.
+An ActionBar can be used when a user needs to perform actions on one or more rows at the same time.
 
-```tsx example
+```tsx example keepIndividualImports
+import {ActionBar, ActionBarContainer, Item} from '@react-spectrum/actionbar';
+
 function Example() {
   let columns = [
     {name: 'Name', uid: 'name'},

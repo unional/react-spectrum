@@ -365,11 +365,13 @@ This behavior is slightly different in the highlight selection style, where sing
 </Flex>
 ```
 
-### Action bar
+### Action bar <VersionBadge version="alpha" style={{marginLeft: 4, verticalAlign: 'bottom'}} />
 
-An [ActionBar](ActionBar.html) can be used when a user needs to perform actions on one or more items at the same time.
+An ActionBar can be used when a user needs to perform actions on one or more items at the same time.
 
-```tsx example
+```tsx example keepIndividualImports
+import {ActionBar, ActionBarContainer, Item} from '@react-spectrum/actionbar';
+
 function Example() {
   let items = [
     {key: 0, name: 'Adobe Photoshop'},
