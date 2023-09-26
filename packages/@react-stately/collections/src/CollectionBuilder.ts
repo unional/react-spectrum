@@ -35,7 +35,7 @@ export class CollectionBuilder<T extends object> {
         throw new Error('props.children was a function but props.items is missing');
       }
 
-      for (let item of props.items) {
+      for (let item of items) {
         yield* this.getFullNode({
           value: item
         }, {renderer: children});
@@ -43,7 +43,7 @@ export class CollectionBuilder<T extends object> {
     } else {
       let items: CollectionElement<T>[] = [];
       React.Children.forEach(children, child => {
-        items.push(child);
+        items.push(child!);
       });
 
       let index = 0;
@@ -115,7 +115,7 @@ export class CollectionBuilder<T extends object> {
       }
 
       let childNodes = type.getCollectionNode(element.props, this.context) as Generator<PartialNode<T>, void, Node<T>[]>;
-      let index = partialNode.index;
+      let index = partialNode.index!;
       let result = childNodes.next();
       while (!result.done && result.value) {
         let childNode = result.value;
@@ -124,7 +124,7 @@ export class CollectionBuilder<T extends object> {
 
         let nodeKey = childNode.key;
         if (!nodeKey) {
-          nodeKey = childNode.element ? null : this.getKey(element as CollectionElement<T>, partialNode, state, parentKey);
+          nodeKey = childNode.element ? undefined : this.getKey(element as CollectionElement<T>, partialNode, state, parentKey);
         }
 
         let nodes = this.getFullNode({
@@ -132,19 +132,19 @@ export class CollectionBuilder<T extends object> {
           key: nodeKey,
           index,
           wrapper: compose(partialNode.wrapper, childNode.wrapper)
-        }, this.getChildState(state, childNode), parentKey ? `${parentKey}${element.key}` : element.key, parentNode);
+        }, this.getChildState(state, childNode), parentKey ? `${parentKey}${element.key}` : element.key!, parentNode);
 
         let children = [...nodes];
         for (let node of children) {
           // Cache the node based on its value
-          node.value = childNode.value || partialNode.value;
+          node.value = (childNode.value || partialNode.value) ?? null;
           if (node.value) {
             this.cache.set(node.value, node);
           }
 
           // The partial node may have specified a type for the child in order to specify a constraint.
           // Verify that the full node that was built recursively matches this type.
-          if (partialNode.type && node.type !== partialNode.type) {
+          if (partialNode.type && node.type !== partialNode.type && parentNode) {
             throw new Error(`Unsupported type <${capitalize(node.type)}> in <${capitalize(parentNode.type)}>. Only <${capitalize(partialNode.type)}> is supported.`);
           }
 
@@ -166,26 +166,26 @@ export class CollectionBuilder<T extends object> {
     // Create full node
     let builder = this;
     let node: Node<T> = {
-      type: partialNode.type,
+      type: partialNode.type!,
       props: partialNode.props,
       key: partialNode.key,
       parentKey: parentNode ? parentNode.key : null,
-      value: partialNode.value,
+      value: partialNode.value!,
       level: parentNode ? parentNode.level + 1 : 0,
       index: partialNode.index,
       rendered: partialNode.rendered,
-      textValue: partialNode.textValue,
+      textValue: partialNode.textValue!,
       'aria-label': partialNode['aria-label'],
       wrapper: partialNode.wrapper,
       shouldInvalidate: partialNode.shouldInvalidate,
-      hasChildNodes: partialNode.hasChildNodes,
+      hasChildNodes: partialNode.hasChildNodes!,
       childNodes: iterable(function *() {
         if (!partialNode.hasChildNodes) {
           return;
         }
 
         let index = 0;
-        for (let child of partialNode.childNodes()) {
+        for (let child of partialNode.childNodes!()) {
           // Ensure child keys are globally unique by prepending the parent node's key
           if (child.key != null) {
             // TODO: Remove this line entirely and enforce that users always provide unique keys.
@@ -211,8 +211,8 @@ export class CollectionBuilder<T extends object> {
 
 // Wraps an iterator function as an iterable object, and caches the results.
 function iterable<T>(iterator: () => IterableIterator<Node<T>>): Iterable<Node<T>> {
-  let cache = [];
-  let iterable = null;
+  let cache: Node<T>[] = [];
+  let iterable: IterableIterator<Node<T>> | null = null;
   return {
     *[Symbol.iterator]() {
       for (let item of cache) {
@@ -232,7 +232,7 @@ function iterable<T>(iterator: () => IterableIterator<Node<T>>): Iterable<Node<T
 }
 
 type Wrapper = (element: ReactElement) => ReactElement;
-function compose(outer: Wrapper | void, inner: Wrapper | void): Wrapper {
+function compose(outer?: Wrapper | void, inner?: Wrapper | void): Wrapper | undefined {
   if (outer && inner) {
     return (element) => outer(inner(element));
   }
@@ -244,6 +244,8 @@ function compose(outer: Wrapper | void, inner: Wrapper | void): Wrapper {
   if (inner) {
     return inner;
   }
+
+  return undefined;
 }
 
 function capitalize(str: string) {

@@ -42,7 +42,7 @@ export function getNthItem<T>(iterable: Iterable<T>, index: number): T | undefin
 }
 
 export function getLastItem<T>(iterable: Iterable<T>): T | undefined {
-  let lastItem = undefined;
+  let lastItem: T | undefined = undefined;
   for (let value of iterable) {
     lastItem = value;
   }
@@ -53,7 +53,7 @@ export function getLastItem<T>(iterable: Iterable<T>): T | undefined {
 export function compareNodeOrder<T>(collection: Collection<Node<T>>, a: Node<T>, b: Node<T>) {
   // If the two nodes have the same parent, compare their indices.
   if (a.parentKey === b.parentKey) {
-    return a.index - b.index;
+    return a.index! - b.index!;
   }
 
   // Otherwise, collect all of the ancestors from each node, and find the first one that doesn't match starting from the root.
@@ -66,7 +66,7 @@ export function compareNodeOrder<T>(collection: Collection<Node<T>>, a: Node<T>,
     // Compare the indices of two children within the common ancestor.
     a = aAncestors[firstNonMatchingAncestor];
     b = bAncestors[firstNonMatchingAncestor];
-    return a.index - b.index;
+    return a.index! - b.index!;
   }
 
   // If there isn't a non matching ancestor, we might be in a case where one of the nodes is the ancestor of the other.
@@ -81,10 +81,14 @@ export function compareNodeOrder<T>(collection: Collection<Node<T>>, a: Node<T>,
 }
 
 function getAncestors<T>(collection: Collection<Node<T>>, node: Node<T>): Node<T>[] {
-  let parents = [];
+  let parents: Node<T>[] = [];
 
   while (node?.parentKey != null) {
-    node = collection.getItem(node.parentKey);
+    let parent = collection.getItem(node.parentKey);
+    if (!parent) {
+      throw new Error('Parent node not found');
+    }
+    node = parent;
     parents.unshift(node);
   }
 

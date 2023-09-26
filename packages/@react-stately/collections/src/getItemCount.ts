@@ -16,12 +16,12 @@ import {getChildNodes} from './getChildNodes';
 const cache = new WeakMap<Iterable<unknown>, number>();
 
 export function getItemCount<T>(collection: Collection<Node<T>>): number {
-  let count = cache.get(collection);
-  if (count != null) {
-    return count;
+  let itemCount = cache.get(collection);
+  if (itemCount != null) {
+    return itemCount;
   }
 
-  count = 0;
+  let count = 0;
   let countItems = (items: Iterable<Node<T>>) => {
     for (let item of items) {
       if (item.type === 'section') {

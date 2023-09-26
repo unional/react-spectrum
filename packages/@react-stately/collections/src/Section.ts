@@ -11,10 +11,10 @@
  */
 
 import {PartialNode} from './types';
-import React, {ReactElement} from 'react';
+import React, {ReactNode} from 'react';
 import {SectionProps} from '@react-types/shared';
 
-function Section<T>(props: SectionProps<T>): ReactElement { // eslint-disable-line @typescript-eslint/no-unused-vars
+function Section<T>(props: SectionProps<T>): ReactNode { // eslint-disable-line @typescript-eslint/no-unused-vars
   return null;
 }
 

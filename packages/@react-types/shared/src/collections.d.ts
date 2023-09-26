@@ -56,7 +56,7 @@ export type CollectionElement<T> = SectionElement<T> | ItemElement<T>;
 export type CollectionChildren<T> = CollectionElement<T> | CollectionElement<T>[] | ((item: T) => CollectionElement<T>);
 export interface CollectionBase<T> {
   /** The contents of the collection. */
-  children: CollectionChildren<T>,
+  children?: CollectionChildren<T>,
   /** Item objects in the collection. */
   items?: Iterable<T>,
   /** The item keys that are disabled. These items cannot be selected, focused, or otherwise interacted with. */
