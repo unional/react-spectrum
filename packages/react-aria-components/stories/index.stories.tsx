@@ -11,7 +11,7 @@
  */
 
 import {action} from '@storybook/addon-actions';
-import {Button, Calendar, CalendarCell, CalendarGrid, Cell, Checkbox, Column, ColumnResizer, DateField, DateInput, DatePicker, DateRangePicker, DateSegment, Dialog, DialogTrigger, DropZone, FileTrigger, Group, Header, Heading, Input, Keyboard, Label, Link, ListBox, ListBoxItem, ListBoxProps, Menu, MenuItem, MenuTrigger, Modal, ModalOverlay, NumberField, OverlayArrow, Popover, Radio, RadioGroup, RangeCalendar, ResizableTableContainer, Row, SearchField, Section, Select, SelectValue, Separator, Slider, SliderOutput, SliderThumb, SliderTrack, Switch, Tab, Table, TableBody, TableHeader, TabList, TabPanel, Tabs, TabsProps, Tag, TagGroup, TagList, Text, TextField, TimeField, ToggleButton, Toolbar, Tooltip, TooltipTrigger, useDragAndDrop} from 'react-aria-components';
+import {Button, Calendar, CalendarCell, CalendarGrid, Cell, Checkbox, Column, ColumnResizer, DateField, DateInput, DatePicker, DateRangePicker, DateSegment, Dialog, DialogTrigger, DropZone, FileTrigger, Group, Header, Heading, Input, Keyboard, Label, Link, ListBox, ListBoxItem, ListBoxProps, Menu, MenuItem, MenuTrigger, Modal, ModalOverlay, NumberField, OverlayArrow, Popover, Radio, RadioGroup, RangeCalendar, ResizableTableContainer, Row, SearchField, Section, Select, SelectValue, Separator, Slider, SliderOutput, SliderThumb, SliderTrack, Switch, Tab, Table, TableBody, TableHeader, TabList, TabPanel, Tabs, TabsProps, Tag, TagGroup, TagList, Text, TextField, TimeField, ToggleButton, Toolbar, useDragAndDrop} from 'react-aria-components';
 import {classNames} from '@react-spectrum/utils';
 import clsx from 'clsx';
 import {FocusRing, isTextDropItem, mergeProps, useButton, useClipboard, useDrag} from 'react-aria';
@@ -440,28 +440,6 @@ SliderCSS.argTypes = {
   }
 };
 
-export const TooltipExample = () => (
-  <TooltipTrigger>
-    <Button>Tooltip trigger</Button>
-    <Tooltip
-      offset={5}
-      style={{
-        background: 'Canvas',
-        color: 'CanvasText',
-        border: '1px solid gray',
-        padding: 5,
-        borderRadius: 4
-      }}>
-      <OverlayArrow style={{transform: 'translateX(-50%)'}}>
-        <svg width="8" height="8" style={{display: 'block'}}>
-          <path d="M0 0,L4 4,L8 0" fill="white" strokeWidth={1} stroke="gray" />
-        </svg>
-      </OverlayArrow>
-      I am a tooltip
-    </Tooltip>
-  </TooltipTrigger>
-);
-
 export const PopoverExample = () => (
   <DialogTrigger>
     <Button>Open popover</Button>
@@ -491,50 +469,6 @@ export const PopoverExample = () => (
         )}
       </Dialog>
     </Popover>
-  </DialogTrigger>
-);
-
-export const ModalExample = () => (
-  <DialogTrigger>
-    <Button>Open modal</Button>
-    <ModalOverlay
-      style={{
-        position: 'fixed',
-        zIndex: 100,
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0,
-        background: 'rgba(0, 0, 0, 0.5)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}>
-      <Modal
-        style={{
-          background: 'Canvas',
-          color: 'CanvasText',
-          border: '1px solid gray',
-          padding: 30
-        }}>
-        <Dialog>
-          {({close}) => (
-            <form style={{display: 'flex', flexDirection: 'column'}}>
-              <Heading slot="title" style={{marginTop: 0}}>Sign up</Heading>
-              <label>
-                First Name: <input placeholder="John" />
-              </label>
-              <label>
-                Last Name: <input placeholder="Smith" />
-              </label>
-              <Button onPress={close} style={{marginTop: 10}}>
-                Submit
-              </Button>
-            </form>
-          )}
-        </Dialog>
-      </Modal>
-    </ModalOverlay>
   </DialogTrigger>
 );
 
