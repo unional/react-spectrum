@@ -1,10 +1,10 @@
 import fs from 'fs';
 import got from 'got';
 
-export const copyIndexFile = async (template, destination, components, includesAll = false) => {
+export const copyIndexFile = async (starter, destination, components, includesAll = false) => {
   // Copy index file from github, then filter out components that aren't selected
-  // TODO: Before merging, update to https://api.github.com/repos/adobe/react-spectrum/contents/packages/react-aria-components/scripts/create-react-aria-components/templates
-  let res = await got(`https://raw.githubusercontent.com/adobe/react-spectrum/create-react-aria-components/packages/react-aria-components/scripts/create-react-aria-components/templates/${template}/index.ts`).catch((e) => e);
+  // TODO: Before merging, update to https://api.github.com/repos/adobe/react-spectrum/contents/packages/react-aria-components/scripts/create-react-aria-components/starters
+  let res = await got(`https://raw.githubusercontent.com/adobe/react-spectrum/create-react-aria-components/packages/react-aria-components/scripts/create-react-aria-components/starters/${starter}/index.ts`).catch((e) => e);
   let indexFile = res.body;
   if (!includesAll) {
     // Remove any exports that aren't a selected component
