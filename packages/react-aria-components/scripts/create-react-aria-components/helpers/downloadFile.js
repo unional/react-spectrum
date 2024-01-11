@@ -12,6 +12,8 @@ export const downloadFile = (url, destination) => {
     });
     stream.on('error', error => {
       reject(`Failed to download ${url} - ${error}`);
+      console.log(error);
+      process.exit(1);
     });
   });
 };

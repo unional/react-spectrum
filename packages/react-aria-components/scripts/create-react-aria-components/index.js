@@ -2,7 +2,6 @@
 
 import chalk from 'chalk';
 import {copyComponents} from './helpers/copyComponents.js';
-import {copyIndexFile} from './helpers/copyIndexFile.js';
 import {copyRemainingFiles} from './helpers/copyRemainingFiles.js';
 import {copyStories} from './helpers/copyStories.js';
 import {exec} from 'child_process';
@@ -74,8 +73,6 @@ async function main() {
   await copyRemainingFiles(starter, projectName);
 
   if (action === 'Create a new library') {
-    await copyIndexFile(starter, projectName, selectedComponents, includesAll);
-
     console.log(
       `Creating a new component library in ${path.resolve()}/${projectName}.`
     );

@@ -13,10 +13,11 @@ export const copyComponents = async (
     destination = `${destination}/src/`;
   }
   let downloadPromises = [];
-
   await Promise.all(components.map(async (component) => {
-
-    let res = await got(`https://api.github.com/repos/adobe/react-spectrum/contents/starters/${starter}/src/${component}`).catch((e) => e);
+    let res = await got(`https://api.github.com/repos/adobe/react-spectrum/contents/starters/${starter}/src/${component}`).catch((e) => {
+      console.error(e);
+      process.exit(1);
+    });
     let files = JSON.parse(res.body).filter(file => file.type === 'file');
     downloadPromises.push(...files.map(file => downloadFile(file.download_url, `${destination}/${file.name}`)));
   }));
