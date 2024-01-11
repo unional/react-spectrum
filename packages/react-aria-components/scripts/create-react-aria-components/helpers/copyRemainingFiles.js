@@ -13,7 +13,7 @@ export const copyRemainingFiles = async (
   }
   let downloadPromises = [];
 
-  let res = await got('https://api.github.com/repos/adobe/react-spectrum/contents/starters?ref=create-react-aria-components').catch((e) => e);
+  let res = await got('https://api.github.com/repos/adobe/react-spectrum/contents/starters').catch((e) => e);
   let sha = JSON.parse(res.body).find(s => s.name === starter).sha;
 
   let trees = await got(`https://api.github.com/repos/adobe/react-spectrum/git/trees/${sha}?recursive=1`).catch((e) => e);
