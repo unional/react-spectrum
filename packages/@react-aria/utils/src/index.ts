@@ -11,11 +11,13 @@
  */
 export {useId, mergeIds, useSlotId} from './useId';
 export {chain} from './chain';
+export {getOwnerDocument, getOwnerWindow} from './domHelpers';
 export {mergeProps} from './mergeProps';
 export {mergeRefs} from './mergeRefs';
 export {filterDOMProps} from './filterDOMProps';
 export {focusWithoutScrolling} from './focusWithoutScrolling';
 export {getOffset} from './getOffset';
+export {openLink, getSyntheticLinkProps, RouterProvider, shouldClientNavigate, useRouter} from './openLink';
 export {runAfterTransition} from './runAfterTransition';
 export {useDrag1D} from './useDrag1D';
 export {useGlobalListeners} from './useGlobalListeners';
@@ -28,10 +30,12 @@ export {useSyncRef} from './useSyncRef';
 export {getScrollParent, isScrollable} from './getScrollParent';
 export {useViewportSize} from './useViewportSize';
 export {useDescription} from './useDescription';
-export {isMac, isIPhone, isIPad, isIOS, isAppleDevice, isWebKit, isChrome, isAndroid} from './platform';
+export {isMac, isIPhone, isIPad, isIOS, isAppleDevice, isWebKit, isChrome, isAndroid, isFirefox} from './platform';
 export {useEvent} from './useEvent';
 export {useValueEffect} from './useValueEffect';
 export {scrollIntoView, scrollIntoViewport} from './scrollIntoView';
 export {clamp, snapValueToStep} from '@react-stately/utils';
 export {isVirtualClick, isVirtualPointerEvent} from './isVirtualEvent';
 export {useEffectEvent} from './useEffectEvent';
+export {useDeepMemo} from './useDeepMemo';
+export {useFormReset} from './useFormReset';

@@ -17,9 +17,14 @@ const AUTOSCROLL_AREA_SIZE = 20;
 
 export function useAutoScroll(ref: RefObject<Element>) {
   let scrollableRef = useRef<Element>(null);
+  let scrollableX = useRef(true);
+  let scrollableY = useRef(true);
   useEffect(() => {
     if (ref.current) {
       scrollableRef.current = isScrollable(ref.current) ? ref.current : getScrollParent(ref.current);
+      let style = window.getComputedStyle(scrollableRef.current);
+      scrollableX.current = /(auto|scroll)/.test(style.overflowX);
+      scrollableY.current = /(auto|scroll)/.test(style.overflowY);
     }
   }, [ref]);
 
@@ -29,9 +34,23 @@ export function useAutoScroll(ref: RefObject<Element>) {
     dy: 0
   }).current;
 
+  useEffect(() => {
+    return () => {
+      if (state.timer) {
+        cancelAnimationFrame(state.timer);
+        state.timer = null;
+      }
+    };
+  // state will become a new object, so it's ok to use in the dependency array for unmount
+  }, [state]);
+
   let scroll = useCallback(() => {
-    scrollableRef.current.scrollLeft += state.dx;
-    scrollableRef.current.scrollTop += state.dy;
+    if (scrollableX.current) {
+      scrollableRef.current.scrollLeft += state.dx;
+    }
+    if (scrollableY.current) {
+      scrollableRef.current.scrollTop += state.dy;
+    }
 
     if (state.timer) {
       state.timer = requestAnimationFrame(scroll);

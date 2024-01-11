@@ -9,20 +9,22 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-import {AriaCheckboxGroupProps, AriaCheckboxProps, mergeProps, useCheckbox, useCheckboxGroup, useCheckboxGroupItem, useFocusRing, useHover, usePress, VisuallyHidden} from 'react-aria';
-import {CheckboxGroupState, useCheckboxGroupState, useToggleState, ValidationState} from 'react-stately';
-import {ContextValue, Provider, RenderProps, SlotProps, useContextProps, useRenderProps, useSlot} from './utils';
+import {AriaCheckboxGroupProps, AriaCheckboxProps, HoverEvents, mergeProps, useCheckbox, useCheckboxGroup, useCheckboxGroupItem, useFocusRing, useHover, VisuallyHidden} from 'react-aria';
+import {CheckboxGroupState, useCheckboxGroupState, useToggleState} from 'react-stately';
+import {ContextValue, forwardRefType, Provider, RACValidation, RenderProps, SlotProps, useContextProps, useRenderProps, useSlot} from './utils';
+import {FieldErrorContext} from './FieldError';
+import {filterDOMProps} from '@react-aria/utils';
 import {LabelContext} from './Label';
-import React, {createContext, ForwardedRef, forwardRef, useContext, useState} from 'react';
+import React, {createContext, ForwardedRef, forwardRef, useContext, useRef} from 'react';
 import {TextContext} from './Text';
 
-export interface CheckboxGroupProps extends Omit<AriaCheckboxGroupProps, 'children' | 'label' | 'description' | 'errorMessage'>, RenderProps<CheckboxGroupRenderProps>, SlotProps {}
-export interface CheckboxProps extends Omit<AriaCheckboxProps, 'children'>, RenderProps<CheckboxRenderProps>, SlotProps {}
+export interface CheckboxGroupProps extends Omit<AriaCheckboxGroupProps, 'children' | 'label' | 'description' | 'errorMessage' | 'validationState' | 'validationBehavior'>, RACValidation, RenderProps<CheckboxGroupRenderProps>, SlotProps {}
+export interface CheckboxProps extends Omit<AriaCheckboxProps, 'children' | 'validationState' | 'validationBehavior'>, HoverEvents, RACValidation, RenderProps<CheckboxRenderProps>, SlotProps {}
 
 export interface CheckboxGroupRenderProps {
   /**
    * Whether the checkbox group is disabled.
-   * @selector [aria-disabled]
+   * @selector [data-disabled]
    */
   isDisabled: boolean,
   /**
@@ -36,10 +38,14 @@ export interface CheckboxGroupRenderProps {
    */
   isRequired: boolean,
   /**
-   * The validation state of the checkbox group.
-   * @selector [data-validation-state="invalid" | "valid"]
+   * Whether the checkbox group is invalid.
+   * @selector [data-invalid]
    */
-  validationState: ValidationState
+  isInvalid: boolean,
+  /**
+   * State of the checkbox group.
+   */
+  state: CheckboxGroupState
 }
 
 export interface CheckboxRenderProps {
@@ -49,7 +55,7 @@ export interface CheckboxRenderProps {
    */
   isSelected: boolean,
   /**
-   * Whether the checkbox is selected.
+   * Whether the checkbox is indeterminate.
    * @selector [data-indeterminate]
    */
   isIndeterminate: boolean,
@@ -84,10 +90,10 @@ export interface CheckboxRenderProps {
    */
   isReadOnly: boolean,
   /**
-   * Whether the checkbox is valid or invalid.
-   * @selector [data-validation-state="valid | invalid"]
+   * Whether the checkbox invalid.
+   * @selector [data-invalid]
    */
-  validationState?: ValidationState,
+  isInvalid: boolean,
   /**
    * Whether the checkbox is required.
    * @selector [data-required]
@@ -96,15 +102,19 @@ export interface CheckboxRenderProps {
 }
 
 export const CheckboxGroupContext = createContext<ContextValue<CheckboxGroupProps, HTMLDivElement>>(null);
-const InternalCheckboxGroupContext = createContext<CheckboxGroupState | null>(null);
+export const CheckboxGroupStateContext = createContext<CheckboxGroupState | null>(null);
 
 function CheckboxGroup(props: CheckboxGroupProps, ref: ForwardedRef<HTMLDivElement>) {
   [props, ref] = useContextProps(props, ref, CheckboxGroupContext);
-  let state = useCheckboxGroupState(props);
-  let [labelRef, label] = useSlot();
-  let {groupProps, labelProps, descriptionProps, errorMessageProps} = useCheckboxGroup({
+  let state = useCheckboxGroupState({
     ...props,
-    label
+    validationBehavior: props.validationBehavior ?? 'native'
+  });
+  let [labelRef, label] = useSlot();
+  let {groupProps, labelProps, descriptionProps, errorMessageProps, ...validation} = useCheckboxGroup({
+    ...props,
+    label,
+    validationBehavior: props.validationBehavior ?? 'native'
   }, state);
 
   let renderProps = useRenderProps({
@@ -113,7 +123,8 @@ function CheckboxGroup(props: CheckboxGroupProps, ref: ForwardedRef<HTMLDivEleme
       isDisabled: state.isDisabled,
       isReadOnly: state.isReadOnly,
       isRequired: props.isRequired || false,
-      validationState: state.validationState
+      isInvalid: state.isInvalid,
+      state
     },
     defaultClassName: 'react-aria-CheckboxGroup'
   });
@@ -123,20 +134,22 @@ function CheckboxGroup(props: CheckboxGroupProps, ref: ForwardedRef<HTMLDivEleme
       {...groupProps}
       {...renderProps}
       ref={ref}
-      slot={props.slot}
+      slot={props.slot || undefined}
       data-readonly={state.isReadOnly || undefined}
       data-required={props.isRequired || undefined}
-      data-validation-state={state.validationState || undefined}>
+      data-invalid={state.isInvalid || undefined}
+      data-disabled={props.isDisabled || undefined}>
       <Provider
         values={[
-          [InternalCheckboxGroupContext, state],
-          [LabelContext, {...labelProps, ref: labelRef}],
+          [CheckboxGroupStateContext, state],
+          [LabelContext, {...labelProps, ref: labelRef, elementType: 'span'}],
           [TextContext, {
             slots: {
               description: descriptionProps,
               errorMessage: errorMessageProps
             }
-          }]
+          }],
+          [FieldErrorContext, validation]
         ]}>
         {renderProps.children}
       </Provider>
@@ -144,47 +157,37 @@ function CheckboxGroup(props: CheckboxGroupProps, ref: ForwardedRef<HTMLDivEleme
   );
 }
 
-export const CheckboxContext = createContext<ContextValue<CheckboxProps, HTMLInputElement>>(null);
+export const CheckboxContext = createContext<ContextValue<CheckboxProps, HTMLLabelElement>>(null);
 
-function Checkbox(props: CheckboxProps, ref: ForwardedRef<HTMLInputElement>) {
+function Checkbox(props: CheckboxProps, ref: ForwardedRef<HTMLLabelElement>) {
   [props, ref] = useContextProps(props, ref, CheckboxContext);
-  let groupState = useContext(InternalCheckboxGroupContext);
-  let {inputProps, isSelected, isDisabled, isReadOnly, isPressed: isPressedKeyboard} = groupState
+  let inputRef = useRef<HTMLInputElement>(null);
+  let groupState = useContext(CheckboxGroupStateContext);
+  let {labelProps, inputProps, isSelected, isDisabled, isReadOnly, isPressed, isInvalid} = groupState
     // eslint-disable-next-line react-hooks/rules-of-hooks
     ? useCheckboxGroupItem({
       ...props,
       // Value is optional for standalone checkboxes, but required for CheckboxGroup items;
       // it's passed explicitly here to avoid typescript error (requires ignore).
       // @ts-ignore
-      value: props.value
-    }, groupState, ref)
+      value: props.value,
+      // ReactNode type doesn't allow function children.
+      children: typeof props.children === 'function' ? true : props.children
+    }, groupState, inputRef)
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    : useCheckbox(props, useToggleState(props), ref);
+    : useCheckbox({
+      ...props,
+      children: typeof props.children === 'function' ? true : props.children,
+      validationBehavior: props.validationBehavior ?? 'native'
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    }, useToggleState(props), inputRef);
   let {isFocused, isFocusVisible, focusProps} = useFocusRing();
   let isInteractionDisabled = isDisabled || isReadOnly;
 
-  // Handle press state for full label. Keyboard press state is returned by useCheckbox
-  // since it is handled on the <input> element itself.
-  let [isPressed, setPressed] = useState(false);
-  let {pressProps} = usePress({
-    isDisabled: isInteractionDisabled,
-    onPressStart(e) {
-      if (e.pointerType !== 'keyboard') {
-        setPressed(true);
-      }
-    },
-    onPressEnd(e) {
-      if (e.pointerType !== 'keyboard') {
-        setPressed(false);
-      }
-    }
-  });
-
   let {hoverProps, isHovered} = useHover({
+    ...props,
     isDisabled: isInteractionDisabled
   });
-
-  let pressed = isInteractionDisabled ? false : (isPressed || isPressedKeyboard);
 
   let renderProps = useRenderProps({
     // TODO: should data attrs go on the label or on the <input>? useCheckbox passes them to the input...
@@ -193,33 +196,37 @@ function Checkbox(props: CheckboxProps, ref: ForwardedRef<HTMLInputElement>) {
     values: {
       isSelected,
       isIndeterminate: props.isIndeterminate || false,
-      isPressed: pressed,
+      isPressed,
       isHovered,
       isFocused,
       isFocusVisible,
       isDisabled,
       isReadOnly,
-      validationState: props.validationState || groupState?.validationState,
+      isInvalid,
       isRequired: props.isRequired || false
     }
   });
 
+  let DOMProps = filterDOMProps(props);
+  delete DOMProps.id;
+
   return (
     <label
-      {...mergeProps(pressProps, hoverProps, renderProps)}
-      slot={props.slot}
+      {...mergeProps(DOMProps, labelProps, hoverProps, renderProps)}
+      ref={ref}
+      slot={props.slot || undefined}
       data-selected={isSelected || undefined}
       data-indeterminate={props.isIndeterminate || undefined}
-      data-pressed={pressed || undefined}
+      data-pressed={isPressed || undefined}
       data-hovered={isHovered || undefined}
       data-focused={isFocused || undefined}
       data-focus-visible={isFocusVisible || undefined}
       data-disabled={isDisabled || undefined}
       data-readonly={isReadOnly || undefined}
-      data-validation-state={props.validationState || groupState?.validationState || undefined}
+      data-invalid={isInvalid || undefined}
       data-required={props.isRequired || undefined}>
-      <VisuallyHidden>
-        <input {...inputProps} {...focusProps} ref={ref} />
+      <VisuallyHidden elementType="span">
+        <input {...inputProps} {...focusProps} ref={inputRef} />
       </VisuallyHidden>
       {renderProps.children}
     </label>
@@ -230,11 +237,11 @@ function Checkbox(props: CheckboxProps, ref: ForwardedRef<HTMLInputElement>) {
  * A checkbox allows a user to select multiple items from a list of individual items, or
  * to mark one individual item as selected.
  */
-const _Checkbox = forwardRef(Checkbox);
+const _Checkbox = /*#__PURE__*/ (forwardRef as forwardRefType)(Checkbox);
 
 /**
  * A checkbox group allows a user to select multiple items from a list of options.
  */
-const _CheckboxGroup = forwardRef(CheckboxGroup);
+const _CheckboxGroup = /*#__PURE__*/ (forwardRef as forwardRefType)(CheckboxGroup);
 
 export {_Checkbox as Checkbox, _CheckboxGroup as CheckboxGroup};

@@ -12,12 +12,14 @@
  */
 
 import {action} from '@storybook/addon-actions';
+import {Avatar} from '@react-spectrum/avatar';
 import {ComponentMeta, ComponentStoryObj} from '@storybook/react';
 import Filter from '@spectrum-icons/workflow/Filter';
 import {Flex} from '@react-spectrum/layout';
 import {Item, SearchAutocomplete} from '@react-spectrum/autocomplete';
 import {mergeProps} from '@react-aria/utils';
 import React from 'react';
+import {Text} from '@react-spectrum/text';
 
 type SearchAutocompleteStory = ComponentStoryObj<typeof SearchAutocomplete>;
 
@@ -160,11 +162,24 @@ export default {
       options: ['focus', 'manual']
     },
     direction: {
-      control: 'select',
+      control: 'radio',
       options: ['top', 'bottom']
     },
+    align: {
+      control: 'radio',
+      options: ['start', 'end']
+    },
     width: {
-      control: 'text'
+      control: {
+        type: 'radio',
+        options: [null, '100px', '480px', 'size-4600']
+      }
+    },
+    menuWidth: {
+      control: {
+        type: 'radio',
+        options: [null, '100px', '480px', 'size-4600']
+      }
     }
   }
 } as ComponentMeta<typeof SearchAutocomplete>;
@@ -182,7 +197,7 @@ let items = [
 ];
 
 export const Default: SearchAutocompleteStory = {
-  storyName: 'static items'
+  name: 'static items'
 };
 
 export const Dynamic: SearchAutocompleteStory = {
@@ -192,13 +207,13 @@ export const Dynamic: SearchAutocompleteStory = {
       {(item: any) => <Item>{item.name}</Item>}
     </SearchAutocomplete>
   ),
-  storyName: 'dynamic items'
+  name: 'dynamic items'
 };
 
 export const NoItems: SearchAutocompleteStory = {
   ...Dynamic,
   args: {defaultItems: []},
-  storyName: 'no items'
+  name: 'no items'
 };
 
 export const MappedItems: SearchAutocompleteStory = {
@@ -211,7 +226,7 @@ export const MappedItems: SearchAutocompleteStory = {
       ))}
     </SearchAutocomplete>
   ),
-  storyName: 'with mapped items'
+  name: 'with mapped items'
 };
 
 
@@ -241,20 +256,44 @@ function CustomOnSubmit(props) {
 
 export const noVisibleLabel: SearchAutocompleteStory = {
   args: {label: undefined, 'aria-label': 'Search Autocomplete'},
-  storyName: 'No visible label'
+  name: 'No visible label'
 };
 
 export const customOnSubmit: SearchAutocompleteStory = {
   render: (args) => <CustomOnSubmit {...args} />,
-  storyName: 'custom onSubmit'
+  name: 'custom onSubmit'
 };
 
 export const iconFilter: SearchAutocompleteStory = {
   args: {icon: <Filter />},
-  storyName: 'icon: Filter'
+  name: 'icon: Filter'
 };
 
 export const iconNull: SearchAutocompleteStory = {
   args: {icon: null},
-  storyName: 'icon: null'
+  name: 'icon: null'
+};
+
+export const WithAvatars: SearchAutocompleteStory = {
+  args: {label: 'Search users'},
+  render: (args) => (
+    <SearchAutocomplete {...args}>
+      <Item textValue="User 1">
+        <Avatar src="https://i.imgur.com/kJOwAdv.png" />
+        <Text>User 1</Text>
+      </Item>
+      <Item textValue="User 2">
+        <Avatar src="https://i.imgur.com/kJOwAdv.png" />
+        <Text>User 2</Text>
+      </Item>
+      <Item textValue="User 3">
+        <Avatar src="https://i.imgur.com/kJOwAdv.png" />
+        <Text>User 3</Text>
+      </Item>
+      <Item textValue="User 4">
+        <Avatar src="https://i.imgur.com/kJOwAdv.png" />
+        <Text>User 4</Text>
+      </Item>
+    </SearchAutocomplete>
+  )
 };
