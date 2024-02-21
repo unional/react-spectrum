@@ -210,3 +210,53 @@ export const IgnoreRestoreFocus = {
 export const FocusableFirstInScope = {
   render: () => <FocusableFirstInScopeExample />
 };
+
+
+function FocusableInputFormExample(args) {
+  let [isOpen, setOpen] = React.useState(false);
+  let {contain, restoreFocus, autoFocus} = args;
+
+  return (
+    <>
+      <button onClick={() => setOpen(true)}>Open</button>
+      {isOpen && (
+        <>
+          <div style={{display: 'flex', flexDirection: 'column', marginBottom: '10px'}}>
+            <FocusScope contain={contain} restoreFocus={restoreFocus} autoFocus={autoFocus}>
+              <label htmlFor="first-input">First Input</label>
+              <input id="first-input" />
+              <label htmlFor="second-input">Second Input</label>
+              <input id="second-input" />
+            </FocusScope>
+          </div>
+          <div style={{display: 'flex', flexDirection: 'column'}}>
+            <label htmlFor="third-input">Third Input</label>
+            <input id="third-input" />
+          </div>
+          <button onClick={() => setOpen(false)}>Close</button>
+        </>
+      )}
+    </>
+  );
+}
+
+export const FocusableInputForm = {
+  name: 'FocusableInputForm',
+  render: (args) => <FocusableInputFormExample {...args} />,
+  args: {
+    contain: true,
+    restoreFocus: true,
+    autoFocus: true
+  },
+  argTypes: {
+    contain: {
+      control: 'boolean'
+    },
+    restoreFocus: {
+      control: 'boolean'
+    },
+    autoFocus: {
+      control: 'boolean'
+    }
+  }
+};
