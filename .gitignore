@@ -13,3 +13,7 @@ npm-debug.log
 public
 storybook-static
 test-reports.xml
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

@@ -49,7 +49,8 @@
     "bumpVersions": "node scripts/bumpVersions.js",
     "test:parcel": "jest --testMatch '**/*.parceltest.{ts,tsx}'",
     "blc:local": "npx git+ssh://git@github.com:ktabors/rsp-blc.git -u http://localhost:1234/",
-    "blc:prod": "npx git+ssh://git@github.com:ktabors/rsp-blc.git -u https://react-spectrum.adobe.com/"
+    "blc:prod": "npx git+ssh://git@github.com:ktabors/rsp-blc.git -u https://react-spectrum.adobe.com/",
+    "e2e": "yarn playwright test"
   },
   "workspaces": [
     "packages/react-stately",
@@ -81,6 +82,7 @@
     "@parcel/transformer-inline-string": "^2.12.0",
     "@parcel/transformer-svg-react": "^2.12.0",
     "@parcel/transformer-typescript-types": "^2.12.0",
+    "@playwright/test": "^1.43.1",
     "@spectrum-css/component-builder": "^1.0.0",
     "@spectrum-css/vars": "^2.3.0",
     "@storybook/addon-a11y": "^6.5.12",
@@ -100,6 +102,7 @@
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
     "@types/react": "^18.2.28",
+    "@types/node": "^20.12.7",
     "@types/storybook__react": "^5.2.1",
     "@typescript-eslint/eslint-plugin": "^6.7.5",
     "@typescript-eslint/parser": "^6.7.5",
